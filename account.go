@@ -1,19 +1,9 @@
 package models
 
 import (
-	"database/sql/driver"
 	"time"
 
 	"gorm.io/gorm"
-)
-
-type AccountType int
-
-const (
-	BasicType AccountType = iota + 1
-	AmbassadorType
-	FounderType
-	AdminType
 )
 
 type Account struct {
@@ -21,7 +11,6 @@ type Account struct {
 	CreatedAt                   time.Time               `json:"-"`
 	About                       string                  `gorm:"type:text" json:"about"`
 	AccountPlaceRoles           []AccountPlaceRole      `gorm:"foreignKey:AccountID" json:"accountPlaceRoles"`
-	AccountType                 AccountType             `gorm:"type:smallint" json:"accountType"`
 	AuthDetails                 []AuthenticationDetail  `gorm:"foreignKey:AccountID" json:"authDetails"`
 	Banner                      string                  `gorm:"type:text" json:"banner"`
 	ChatMemberships             []ChatMembership        `gorm:"foreignKey:AccountID" json:"chatMemberships"`
@@ -35,6 +24,7 @@ type Account struct {
 	FollowedBy                  []Follow                `gorm:"foreignkey:FollowerID" json:"followedBy"`
 	InfluenceScore              uint                    `json:"influenceScore"`
 	Interests                   *string                 `gorm:"type:jsonb" json:"interests"`
+	IsAdmin                     bool                    `json:"isAdmin"`
 	IsBusiness                  bool                    `json:"isBusiness"`
 	LastSeen                    *time.Time              `json:"-"`
 	LocationRatings             []AccountLocationRating `gorm:"foreignKey:AccountID" json:"locationRatings"`
@@ -59,7 +49,6 @@ type AccountPortable struct {
 	ID                uint                    `json:"id"`
 	About             string                  `json:"about"`
 	AccountPlaceRoles []AccountPlaceRole      `gorm:"foreignKey:AccountID" json:"accountPlaceRoles"`
-	AccountType       AccountType             `json:"accountType"`
 	Banner            string                  `json:"banner"`
 	ChatMemberships   []ChatMembership        `gorm:"foreignKey:AccountID" json:"chatMemberships"`
 	CurrencyID        *uint                   `json:"currencyId"`
@@ -67,6 +56,7 @@ type AccountPortable struct {
 	Email             string                  `json:"email"`
 	InfluenceScore    uint                    `json:"influenceScore"`
 	Interests         *string                 `gorm:"type:jsonb" json:"interests"`
+	IsAdmin           bool                    `json:"isAdmin"`
 	IsBusiness        bool                    `json:"isBusiness"`
 	LastSeen          *time.Time              `json:"-"`
 	LocationRatings   []AccountLocationRating `gorm:"foreignKey:AccountID" json:"locationRatings"`
@@ -85,41 +75,32 @@ type AccountPortable struct {
 }
 
 type AccountDTO struct {
-	ID          uint        `json:"id"`
-	About       string      `json:"about"`
-	AccountType AccountType `json:"accountType"`
-	IsBusiness  bool        `json:"isBusiness"`
-	Name        string      `json:"name"`
-	Nip05       string      `gorm:"default:NULL" json:"nip05"`
-	Npub        string      `json:"npub"`
-	Picture     string      `json:"picture"`
-	PubKey      string      `json:"pubKey"`
+	ID         uint   `json:"id"`
+	About      string `json:"about"`
+	IsAdmin    bool   `json:"isAdmin"`
+	IsBusiness bool   `json:"isBusiness"`
+	Name       string `json:"name"`
+	Nip05      string `gorm:"default:NULL" json:"nip05"`
+	Npub       string `json:"npub"`
+	Picture    string `json:"picture"`
+	PubKey     string `json:"pubKey"`
 }
 
 func (AccountDTO) TableName() string {
 	return "accounts"
 }
 
-func (at *AccountType) Scan(value interface{}) error {
-	*at = AccountType(value.(int64))
-	return nil
-}
-
-func (at AccountType) Value() (driver.Value, error) {
-	return int64(at), nil
-}
-
 func (a *Account) ToDTO() AccountDTO {
 	return AccountDTO{
-		ID:          a.ID,
-		About:       a.About,
-		AccountType: a.AccountType,
-		IsBusiness:  a.IsBusiness,
-		Name:        a.Name,
-		Nip05:       a.Nip05,
-		Npub:        a.Npub,
-		Picture:     a.Picture,
-		PubKey:      a.PubKey,
+		ID:         a.ID,
+		About:      a.About,
+		IsAdmin:    a.IsAdmin,
+		IsBusiness: a.IsBusiness,
+		Name:       a.Name,
+		Nip05:      a.Nip05,
+		Npub:       a.Npub,
+		Picture:    a.Picture,
+		PubKey:     a.PubKey,
 	}
 }
 
@@ -137,7 +118,6 @@ func (a *Account) ToPortableProfile(db *gorm.DB) (*AccountPortable, error) {
 	return &AccountPortable{
 		ID:                a.ID,
 		About:             a.About,
-		AccountType:       a.AccountType,
 		Banner:            a.Banner,
 		AccountPlaceRoles: a.AccountPlaceRoles,
 		ChatMemberships:   a.ChatMemberships,
@@ -146,6 +126,7 @@ func (a *Account) ToPortableProfile(db *gorm.DB) (*AccountPortable, error) {
 		Email:             a.Email,
 		InfluenceScore:    a.InfluenceScore,
 		Interests:         a.Interests,
+		IsAdmin:           a.IsAdmin,
 		IsBusiness:        a.IsBusiness,
 		Lud06:             a.Lud06,
 		Lud16:             a.Lud16,
