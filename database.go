@@ -22,6 +22,7 @@ var DatabaseModels = []interface{}{
 	Event{},
 	Experience{},
 	Follow{},
+	Interest{},
 	Location{},
 	LocationAccount{},
 	LocationNote{},
