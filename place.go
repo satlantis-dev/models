@@ -14,6 +14,13 @@ const (
 	PlaceLevelNeighborhood PlaceLevel = "neighborhood"
 )
 
+type BoundingBox struct {
+	MinLat float64 `json:"minLat"`
+	MaxLat float64 `json:"maxLat"`
+	MinLng float64 `json:"minLng"`
+	MaxLng float64 `json:"maxLng"`
+}
+
 type Place struct {
 	ID             uint                 `gorm:"primaryKey" json:"id"`
 	CreatedAt      time.Time            `json:"-"`
@@ -22,6 +29,7 @@ type Place struct {
 	AccountRoles   []AccountPlaceRole   `gorm:"foreignKey:PlaceID" json:"accountRoles"`
 	Active         bool                 `json:"active"`
 	Banner         string               `gorm:"type:text" json:"banner"`
+	BoundingBox    BoundingBox          `gorm:"type:jsonb" json:"boundingBox"`
 	CategoryScores []PlaceCategoryScore `gorm:"foreignKey:PlaceID" json:"categoryScores"`
 	CountryID      uint                 `gorm:"index" json:"countryId"`
 	Country        Country              `json:"country"`

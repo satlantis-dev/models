@@ -23,7 +23,7 @@ type Account struct {
 	Following                   []Follow                `gorm:"foreignkey:FollowerID" json:"following"`
 	FollowedBy                  []Follow                `gorm:"foreignkey:FollowerID" json:"followedBy"`
 	InfluenceScore              uint                    `json:"influenceScore"`
-	Interests                   *string                 `gorm:"type:jsonb" json:"interests"`
+	Interests                   []Interest              `gorm:"many2many:account_interests" json:"interests"`
 	IsAdmin                     bool                    `json:"isAdmin"`
 	IsBusiness                  bool                    `json:"isBusiness"`
 	LastSeen                    *time.Time              `json:"-"`
@@ -55,7 +55,7 @@ type AccountPortable struct {
 	DisplayName       string                  `json:"displayName"`
 	Email             string                  `json:"email"`
 	InfluenceScore    uint                    `json:"influenceScore"`
-	Interests         *string                 `gorm:"type:jsonb" json:"interests"`
+	Interests         []Interest              `gorm:"many2many:account_interests" json:"interests"`
 	IsAdmin           bool                    `json:"isAdmin"`
 	IsBusiness        bool                    `json:"isBusiness"`
 	LastSeen          *time.Time              `json:"-"`
