@@ -1,6 +1,9 @@
 package models
 
 import (
+	"database/sql/driver"
+	"encoding/json"
+	"fmt"
 	"time"
 
 	"github.com/lib/pq"
@@ -15,10 +18,23 @@ const (
 )
 
 type BoundingBox struct {
-	MinLat float64 `json:"minLat"`
-	MaxLat float64 `json:"maxLat"`
-	MinLng float64 `json:"minLng"`
-	MaxLng float64 `json:"maxLng"`
+	MinLat float64 `json:"minlat"`
+	MaxLat float64 `json:"maxlat"`
+	MinLng float64 `json:"minlng"`
+	MaxLng float64 `json:"maxlng"`
+}
+
+func (b *BoundingBox) Scan(value interface{}) error {
+	bytes, ok := value.([]byte)
+	if !ok {
+		return fmt.Errorf("type assertion to []byte failed")
+	}
+
+	return json.Unmarshal(bytes, &b)
+}
+
+func (b BoundingBox) Value() (driver.Value, error) {
+	return json.Marshal(b)
 }
 
 type Place struct {
