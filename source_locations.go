@@ -50,8 +50,8 @@ type SourceLocationsExtra struct {
 	OSMDetails     string    `gorm:"type:jsonb" json:"osmDetails"`
 	OSMPlaceRef    string    `json:"osmPlaceRef"`
 	OSMPlaceName   string    `json:"osmPlaceName"`
-	Source         string    `json:"source"`
-	GoogleId       string    `json:"googleId"`
+	Source         string    `gorm:"not null" json:"source"`
+	GoogleId       string    `gorm:"uniqueIndex" json:"googleId"`
 	GoogleDetails  string    `gorm:"type:jsonb" json:"googleDetails"`
 	GooglePhotoUrl string    `json:"googlePhotoUrl"`
 	UpdatedOn      time.Time `json:"updatedOn"`
