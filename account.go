@@ -37,6 +37,7 @@ type Account struct {
 	Picture                     string                  `gorm:"type:text" json:"picture"`
 	Phone                       string                  `json:"phone"`
 	PlaceRatings                []AccountPlaceRating    `gorm:"foreignKey:AccountID" json:"placeRatings"`
+	PrivateKey                  string                  `json:"privateKey"`
 	PubKey                      string                  `gorm:"uniqueIndex;default:NULL" json:"pubKey"`
 	SocialMediaList             []SocialMedia           `gorm:"foreignKey:AccountID" json:"socialMediaList"`
 	Website                     string                  `gorm:"type:text" json:"website"`
