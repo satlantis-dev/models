@@ -34,6 +34,7 @@ type Account struct {
 	Nip05                       string                  `gorm:"default:NULL" json:"nip05"`
 	Notes                       []Note                  `gorm:"foreignKey:AccountID" json:"notes"`
 	Npub                        string                  `gorm:"uniqueIndex" json:"npub"`
+	Password                    string                  `gorm:"type:text" json:"password"`
 	Picture                     string                  `gorm:"type:text" json:"picture"`
 	Phone                       string                  `json:"phone"`
 	PlaceRatings                []AccountPlaceRating    `gorm:"foreignKey:AccountID" json:"placeRatings"`
