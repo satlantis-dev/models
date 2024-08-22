@@ -34,7 +34,7 @@ type Account struct {
 	Name                        string                  `gorm:"type:text" json:"name"`
 	Nip05                       string                  `gorm:"default:NULL" json:"nip05"`
 	Notes                       []Note                  `gorm:"foreignKey:AccountID" json:"notes"`
-	Npub                        string                  `gorm:"uniqueIndex" json:"npub"`
+	Npub                        string                  `gorm:"uniqueIndex;default:NULL" json:"npub"`
 	Password                    string                  `gorm:"type:text" json:"password"`
 	Picture                     string                  `gorm:"type:text" json:"picture"`
 	Phone                       string                  `json:"phone"`
@@ -45,7 +45,7 @@ type Account struct {
 	ResetPasswordToken          *string                 `gorm:"type:text" json:"resetPasswordToken"`
 	ResetPasswordTokenExpiresAt *time.Time              `json:"-"`
 	Website                     string                  `gorm:"type:text" json:"website"`
-	Username                    string                  `gorm:"uniqueIndex" json:"username"`
+	Username                    string                  `gorm:"uniqueIndex;default:NULL" json:"username"`
 }
 
 type AccountPortable struct {
