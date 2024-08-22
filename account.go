@@ -28,6 +28,7 @@ type Account struct {
 	IsBusiness                  bool                    `json:"isBusiness"`
 	LastSeen                    *time.Time              `json:"-"`
 	LocationRatings             []AccountLocationRating `gorm:"foreignKey:AccountID" json:"locationRatings"`
+	Locations                   []LocationAccount       `gorm:"foreignKey:AccountID" json:"locations"`
 	Lud06                       string                  `gorm:"default:NULL" json:"lud06"`
 	Lud16                       string                  `gorm:"default:NULL" json:"lud16"`
 	Name                        string                  `gorm:"type:text" json:"name"`
@@ -41,10 +42,10 @@ type Account struct {
 	PrivateKey                  string                  `json:"privateKey"`
 	PubKey                      string                  `gorm:"uniqueIndex;default:NULL" json:"pubKey"`
 	SocialMediaList             []SocialMedia           `gorm:"foreignKey:AccountID" json:"socialMediaList"`
-	Website                     string                  `gorm:"type:text" json:"website"`
 	ResetPasswordToken          *string                 `gorm:"type:text" json:"resetPasswordToken"`
 	ResetPasswordTokenExpiresAt *time.Time              `json:"-"`
-	Locations                   []LocationAccount       `gorm:"foreignKey:AccountID" json:"locations"`
+	Website                     string                  `gorm:"type:text" json:"website"`
+	Username                    string                  `gorm:"uniqueIndex" json:"username"`
 }
 
 type AccountPortable struct {
