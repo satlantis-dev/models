@@ -13,7 +13,9 @@ type Interest struct {
 	UpdatedAt             time.Time      `json:"-"`
 	DeletedAt             *time.Time     `gorm:"index" json:"-,omitempty"`
 	Description           string         `gorm:"type:text" json:"description"`
-	RecommendationsByNpub pq.StringArray `gorm:"type:varchar[]" json:"recommendations_by_npub"`
-	RecommendationsById   pq.Int32Array  `gorm:"type:integer[]" json:"recommendations_by_id"`
+	RecommendationsByNpub pq.StringArray `gorm:"type:varchar[]" json:"recommendationsByNpub"`
+	RecommendationsById   pq.Int32Array  `gorm:"type:integer[]" json:"recommendationsById"`
+	AutofollowsByNpub     pq.StringArray `gorm:"type:varchar[]" json:"autofollowsByNpub"`
+	AutofollowsById       pq.Int32Array  `gorm:"type:integer[]" json:"autofollowsById"`
 	Hashtags              pq.StringArray `gorm:"type:varchar[]" json:"hashtags"`
 }
