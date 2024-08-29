@@ -27,52 +27,59 @@ type Account struct {
 	IsAdmin                     bool                    `json:"isAdmin"`
 	IsBusiness                  bool                    `json:"isBusiness"`
 	LastSeen                    *time.Time              `json:"-"`
+	LocationSetEventID          *uint                   `json:"locationSetEventId"`
+	LocationSetEvent            Event                   `gorm:"foreignKey:LocationSetEventID" json:"locationSetEvent"`
 	LocationRatings             []AccountLocationRating `gorm:"foreignKey:AccountID" json:"locationRatings"`
+	Locations                   []LocationAccount       `gorm:"foreignKey:AccountID" json:"locations"`
 	Lud06                       string                  `gorm:"default:NULL" json:"lud06"`
 	Lud16                       string                  `gorm:"default:NULL" json:"lud16"`
 	Name                        string                  `gorm:"type:text" json:"name"`
 	Nip05                       string                  `gorm:"default:NULL" json:"nip05"`
 	Notes                       []Note                  `gorm:"foreignKey:AccountID" json:"notes"`
-	Npub                        string                  `gorm:"uniqueIndex" json:"npub"`
+	Npub                        string                  `gorm:"uniqueIndex;default:NULL" json:"npub"`
+	Password                    string                  `gorm:"type:text" json:"password"`
 	Picture                     string                  `gorm:"type:text" json:"picture"`
 	Phone                       string                  `json:"phone"`
 	PlaceRatings                []AccountPlaceRating    `gorm:"foreignKey:AccountID" json:"placeRatings"`
 	PrivateKey                  string                  `json:"privateKey"`
 	PubKey                      string                  `gorm:"uniqueIndex;default:NULL" json:"pubKey"`
 	SocialMediaList             []SocialMedia           `gorm:"foreignKey:AccountID" json:"socialMediaList"`
-	Website                     string                  `gorm:"type:text" json:"website"`
 	ResetPasswordToken          *string                 `gorm:"type:text" json:"resetPasswordToken"`
 	ResetPasswordTokenExpiresAt *time.Time              `json:"-"`
-	Locations                   []LocationAccount       `gorm:"foreignKey:AccountID" json:"locations"`
+	Website                     string                  `gorm:"type:text" json:"website"`
+	Username                    string                  `gorm:"uniqueIndex;default:NULL" json:"username"`
 }
 
 type AccountPortable struct {
-	ID                uint                    `json:"id"`
-	About             string                  `json:"about"`
-	AccountPlaceRoles []AccountPlaceRole      `gorm:"foreignKey:AccountID" json:"accountPlaceRoles"`
-	Banner            string                  `json:"banner"`
-	ChatMemberships   []ChatMembership        `gorm:"foreignKey:AccountID" json:"chatMemberships"`
-	CurrencyID        *uint                   `json:"currencyId"`
-	DisplayName       string                  `json:"displayName"`
-	Email             string                  `json:"email"`
-	InfluenceScore    uint                    `json:"influenceScore"`
-	Interests         []Interest              `gorm:"many2many:account_interests" json:"interests"`
-	IsAdmin           bool                    `json:"isAdmin"`
-	IsBusiness        bool                    `json:"isBusiness"`
-	LastSeen          *time.Time              `json:"-"`
-	LocationRatings   []AccountLocationRating `gorm:"foreignKey:AccountID" json:"locationRatings"`
-	Lud06             string                  `gorm:"default:NULL" json:"lud06"`
-	Lud16             string                  `gorm:"default:NULL" json:"lud16"`
-	Name              string                  `json:"name"`
-	Nip05             string                  `gorm:"default:NULL" json:"nip05"`
-	Notes             []Note                  `gorm:"foreignKey:AccountID" json:"notes"`
-	Npub              string                  `json:"npub"`
-	Picture           string                  `json:"picture"`
-	PlaceRatings      []AccountPlaceRating    `gorm:"foreignKey:AccountID" json:"placeRatings"`
-	PubKey            string                  `json:"pubKey"`
-	Website           string                  `json:"website"`
-	Following         []AccountDTO            `json:"following"`
-	FollowedBy        []AccountDTO            `json:"followedBy"`
+	ID                 uint                    `json:"id"`
+	About              string                  `json:"about"`
+	AccountPlaceRoles  []AccountPlaceRole      `gorm:"foreignKey:AccountID" json:"accountPlaceRoles"`
+	Banner             string                  `json:"banner"`
+	ChatMemberships    []ChatMembership        `gorm:"foreignKey:AccountID" json:"chatMemberships"`
+	CurrencyID         *uint                   `json:"currencyId"`
+	DisplayName        string                  `json:"displayName"`
+	Email              string                  `json:"email"`
+	InfluenceScore     uint                    `json:"influenceScore"`
+	Interests          []Interest              `gorm:"many2many:account_interests" json:"interests"`
+	IsAdmin            bool                    `json:"isAdmin"`
+	IsBusiness         bool                    `json:"isBusiness"`
+	LastSeen           *time.Time              `json:"-"`
+	LocationSetEventID *uint                   `json:"locationSetEventId"`
+	LocationSetEvent   Event                   `gorm:"foreignKey:LocationSetEventID" json:"locationSetEvent"`
+	LocationRatings    []AccountLocationRating `gorm:"foreignKey:AccountID" json:"locationRatings"`
+	Locations          []LocationAccount       `gorm:"foreignKey:AccountID" json:"locations"`
+	Lud06              string                  `gorm:"default:NULL" json:"lud06"`
+	Lud16              string                  `gorm:"default:NULL" json:"lud16"`
+	Name               string                  `json:"name"`
+	Nip05              string                  `gorm:"default:NULL" json:"nip05"`
+	Notes              []Note                  `gorm:"foreignKey:AccountID" json:"notes"`
+	Npub               string                  `json:"npub"`
+	Picture            string                  `json:"picture"`
+	PlaceRatings       []AccountPlaceRating    `gorm:"foreignKey:AccountID" json:"placeRatings"`
+	PubKey             string                  `json:"pubKey"`
+	Website            string                  `json:"website"`
+	Following          []AccountDTO            `json:"following"`
+	FollowedBy         []AccountDTO            `json:"followedBy"`
 }
 
 type AccountDTO struct {
@@ -129,6 +136,8 @@ func (a *Account) ToPortableProfile(db *gorm.DB) (*AccountPortable, error) {
 		Interests:         a.Interests,
 		IsAdmin:           a.IsAdmin,
 		IsBusiness:        a.IsBusiness,
+		LocationSetEvent:  a.LocationSetEvent,
+		Locations:         a.Locations,
 		Lud06:             a.Lud06,
 		Lud16:             a.Lud16,
 		Name:              a.Name,
