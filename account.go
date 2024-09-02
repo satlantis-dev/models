@@ -25,6 +25,7 @@ type Account struct {
 	InfluenceScore              uint                    `json:"influenceScore"`
 	Interests                   []Interest              `gorm:"many2many:account_interests" json:"interests"`
 	IsAdmin                     bool                    `json:"isAdmin"`
+	IsBlacklisted               bool                    `json:"isBlacklisted"`
 	IsBusiness                  bool                    `json:"isBusiness"`
 	LastSeen                    *time.Time              `json:"-"`
 	LocationSetEventID          *uint                   `json:"locationSetEventId"`
