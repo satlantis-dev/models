@@ -13,6 +13,7 @@ type Account struct {
 	AccountPlaceRoles           []AccountPlaceRole      `gorm:"foreignKey:AccountID" json:"accountPlaceRoles"`
 	AuthDetails                 []AuthenticationDetail  `gorm:"foreignKey:AccountID" json:"authDetails"`
 	Banner                      string                  `gorm:"type:text" json:"banner"`
+	BusinessCategory            string                  `gorm:"default:NULL" json:"businessCategory"`
 	ChatMemberships             []ChatMembership        `gorm:"foreignKey:AccountID" json:"chatMemberships"`
 	CurrencyID                  *uint                   `gorm:"index" json:"currencyId"`
 	Currency                    Currency                `json:"currency"`
