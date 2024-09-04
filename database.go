@@ -57,6 +57,7 @@ var DatabaseModels = []interface{}{
 	Topic{},
 	VerificationToken{},
 	Weather{},
+	RestrictedUsername{},
 }
 
 func SetupDatabase(dbHost, dbUser, dbPassword, dbName string) (*gorm.DB, error) {
