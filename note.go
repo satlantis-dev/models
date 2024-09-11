@@ -32,7 +32,14 @@ type Note struct {
 	Descendants        []NoteWithClosure   `gorm:"-" json:"descendants"`
 	EventID            uint                `gorm:"index" json:"eventId"`
 	Event              Event               `json:"event"`
+	Kind               uint                `gorm:"index" json:"kind"`
+	NostrID            string              `gorm:"index" json:"nostrId"`
+	PubKey             string              `gorm:"type:text;index" json:"pubkey"`
+	Sig                string              `gorm:"type:text" json:"sig"`
+	Tags               string              `gorm:"type:jsonb" json:"tags"`
 	Type               NoteType            `json:"type"`
+	ReplyNoteID        *uint               `gorm:"index" json:"replyNoteId"`
+	ReplyNote          *Note               `json:"reply_note"`
 	RepostedNoteID     *uint               `gorm:"index" json:"repostedNoteId"`
 	RepostedNote       *Note               `json:"reposted_note"`
 	Reactions          []Reaction          `gorm:"foreignKey:NoteID" json:"reactions"`
