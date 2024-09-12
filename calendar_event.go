@@ -49,6 +49,7 @@ type CalendarEvent struct {
 	CreatedAt          *time.Time          `json:"createdAt"`
 	CalendarEventRSVPs []CalendarEventRSVP `gorm:"foreignKey:NoteID" json:"calendarEventRsvps"`
 	Content            *string             `gorm:"type:text" json:"content"`
+	DTag               string              `json:"dtag"`
 	Description        string              `gorm:"type:text" json:"description"`
 	End                time.Time           `json:"end"`
 	EndTzId            string              `json:"endTzId"`

@@ -38,8 +38,6 @@ type Note struct {
 	Sig                string              `gorm:"type:text" json:"sig"`
 	Tags               string              `gorm:"type:jsonb" json:"tags"`
 	Type               NoteType            `json:"type"`
-	ReplyNoteID        *uint               `gorm:"index" json:"replyNoteId"`
-	ReplyNote          *Note               `json:"reply_note"`
 	RepostedNoteID     *uint               `gorm:"index" json:"repostedNoteId"`
 	RepostedNote       *Note               `json:"reposted_note"`
 	Reactions          []Reaction          `gorm:"foreignKey:NoteID" json:"reactions"`

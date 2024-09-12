@@ -6,6 +6,7 @@ import (
 	"github.com/nbd-wtf/go-nostr"
 )
 
+// TODO: Remove this model once migrated over to PublicChatMembership
 type ChatMembership struct {
 	ID             uint       `gorm:"primaryKey" json:"id"`
 	CreatedAt      time.Time  `json:"-"`
@@ -18,6 +19,7 @@ type ChatMembership struct {
 	Note           Note       `json:"note"`
 }
 
+// TODO: Remove/move these models?
 type PublishNote struct {
 	ChatNoteID     uint         `json:"noteId"`
 	AccountID      uint         `json:"accountId"`
