@@ -12,7 +12,7 @@ const (
 	GalleryNote
 	PublicChatNote
 	PrivateChatNote
-	CalendarEventNote
+	CalendarEventNoteDEPRECATED
 	CalendarNote
 	Ping
 	ReactionNote

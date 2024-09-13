@@ -46,8 +46,9 @@ type CalendarEvent struct {
 	ID                 uint                `gorm:"primaryKey" json:"id"`
 	AccountID          uint                `gorm:"index" json:"accountId"`
 	Account            Account             `json:"account"`
+	Announcements      []CalendarEventNote `gorm:"foreignKey:CalendarEventID" json:"announcements"`
 	CreatedAt          *time.Time          `json:"createdAt"`
-	CalendarEventRSVPs []CalendarEventRSVP `gorm:"foreignKey:NoteID" json:"calendarEventRsvps"`
+	CalendarEventRSVPs []CalendarEventRSVP `gorm:"foreignKey:CalendarEventID" json:"calendarEventRsvps"`
 	Content            *string             `gorm:"type:text" json:"content"`
 	DTag               string              `json:"dtag"`
 	Description        string              `gorm:"type:text" json:"description"`
@@ -60,6 +61,7 @@ type CalendarEvent struct {
 	Location           string              `json:"location"`
 	Kind               uint                `gorm:"index" json:"kind"`
 	NostrID            string              `gorm:"index" json:"nostrId"`
+	Notes              []CalendarEventNote `gorm:"foreignKey:CalendarEventID" json:"notes"`
 	PubKey             string              `gorm:"type:text;index" json:"pubkey"`
 	Sig                string              `gorm:"type:text" json:"sig"`
 	Start              time.Time           `json:"start"`
