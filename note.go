@@ -36,7 +36,7 @@ type Note struct {
 	NostrID            string              `gorm:"index" json:"nostrId"`
 	PubKey             string              `gorm:"type:text;index" json:"pubkey"`
 	Sig                string              `gorm:"type:text" json:"sig"`
-	Tags               []Tag               `gorm:"type:jsonb" json:"tags"`
+	Tags               *[]Tag              `gorm:"type:jsonb" json:"tags"`
 	Type               NoteType            `json:"type"`
 	RepostedNoteID     *uint               `gorm:"index" json:"repostedNoteId"`
 	RepostedNote       *Note               `json:"reposted_note"`
