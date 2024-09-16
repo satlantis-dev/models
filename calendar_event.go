@@ -51,7 +51,6 @@ type CalendarEvent struct {
 	CalendarEventRSVPs []CalendarEventRSVP `gorm:"foreignKey:CalendarEventID" json:"calendarEventRsvps"`
 	Content            *string             `gorm:"type:text" json:"content"`
 	DTag               string              `json:"dtag"`
-	Description        string              `gorm:"type:text" json:"description"`
 	End                time.Time           `json:"end"`
 	EndTzId            string              `json:"endTzId"`
 	EventID            uint                `gorm:"index" json:"eventId"`
@@ -66,7 +65,6 @@ type CalendarEvent struct {
 	Sig                string              `gorm:"type:text" json:"sig"`
 	Start              time.Time           `json:"start"`
 	StartTzId          string              `json:"startTzId"`
-	StartTimezone      string              `json:"startTimezone"`
 	Summary            string              `json:"summary"`
 	Tags               string              `gorm:"type:jsonb" json:"tags"`
 	Title              string              `json:"title"`
