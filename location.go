@@ -88,14 +88,15 @@ type Location struct {
 	Lng                   float64           `json:"lng"`
 	LocationTags          []LocationTag     `gorm:"many2many:location_location_tags" json:"locationTags"`
 	OSMRef                string            `gorm:"uniqueIndex" json:"osmRef"`
-	GoogleID              string            `json:"googleId"`
-	PlaceID               uint              `gorm:"index" json:"placeId"`
 	EventID               *uint             `gorm:"index" json:"eventId"`
 	Event                 Event             `json:"event"`
+	GoogleID              string            `json:"googleId"`
+	Image                 string            `json:"image"`
 	Notes                 []LocationNote    `gorm:"foreignKey:LocationID" json:"notes"`
 	Score                 float64           `json:"score"`
 	Address               Address           `gorm:"type:jsonb" json:"address"`
 	Phone                 string            `json:"phone"`
+	PlaceID               uint              `gorm:"index" json:"placeId"`
 	BusinessStatus        BusinessStatus    `gorm:"type:text" json:"businessStatus"`
 	OpeningHours          OpeningHours      `gorm:"type:jsonb" json:"openingHours"`
 	PriceLevel            PriceLevel        `json:"priceLevel"`
