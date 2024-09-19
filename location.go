@@ -104,6 +104,7 @@ type Location struct {
 	GoogleMapsUrl         string            `json:"googleMapsUrl"`
 	WebsiteUrl            string            `json:"websiteUrl"`
 	IsClaimed             bool              `json:"isClaimed"`
+	Bio                   *string           `json:"bio"`
 }
 
 // LocationDTO
