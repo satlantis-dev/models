@@ -87,8 +87,8 @@ type Location struct {
 	Lat                   float64           `json:"lat"`
 	Lng                   float64           `json:"lng"`
 	LocationTags          []LocationTag     `gorm:"many2many:location_location_tags" json:"locationTags"`
-	OSMRef                string            `gorm:"uniqueIndex" json:"osmRef"`
-	GoogleID              string            `json:"googleId"`
+	OSMRef                string            `gorm:"uniqueIndex;not null" json:"osmRef"`
+	GoogleID              string            `gorm:"uniqueIndex;not null" json:"googleId"`
 	PlaceID               uint              `gorm:"index" json:"placeId"`
 	EventID               *uint             `gorm:"index" json:"eventId"`
 	Event                 Event             `json:"event"`
