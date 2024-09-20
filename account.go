@@ -61,6 +61,7 @@ type AccountPortable struct {
 	CurrencyID         *uint                   `json:"currencyId"`
 	DisplayName        string                  `json:"displayName"`
 	Email              string                  `json:"email"`
+	EmailVerified      bool                    `json:"emailVerified"`
 	InfluenceScore     uint                    `json:"influenceScore"`
 	Interests          []Interest              `gorm:"many2many:account_interests" json:"interests"`
 	IsAdmin            bool                    `json:"isAdmin"`
@@ -134,6 +135,7 @@ func (a *Account) ToPortableProfile(db *gorm.DB) (*AccountPortable, error) {
 		CurrencyID:        a.CurrencyID,
 		DisplayName:       a.DisplayName,
 		Email:             a.Email,
+		EmailVerified:     a.EmailVerified,
 		InfluenceScore:    a.InfluenceScore,
 		Interests:         a.Interests,
 		IsAdmin:           a.IsAdmin,

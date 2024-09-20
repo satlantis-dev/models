@@ -20,4 +20,5 @@ type LocationAccount struct {
 	Type            LocationAccountType `gorm:"not null" json:"type"`
 	ClaimCode       string              `gorm:"type:text" json:"claimCode"`
 	ClaimVerifiedAt *time.Time          `json:"-"`
+	ReferredBy      *string             `gorm:"type:text" json:"referredBy"`
 }
