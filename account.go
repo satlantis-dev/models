@@ -135,6 +135,7 @@ func (a *Account) ToPortableProfile(db *gorm.DB) (*AccountPortable, error) {
 		CurrencyID:        a.CurrencyID,
 		DisplayName:       a.DisplayName,
 		Email:             a.Email,
+		EmailVerified:     a.EmailVerified,
 		InfluenceScore:    a.InfluenceScore,
 		Interests:         a.Interests,
 		IsAdmin:           a.IsAdmin,
