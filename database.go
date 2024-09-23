@@ -49,6 +49,7 @@ var DatabaseModels = []interface{}{
 	RegionMetric{},
 	RegionTopicScore{},
 	Region{},
+	Relay{},
 	SocialMedia{},
 	SourceCountryStats{},
 	SourceNumbeo{},
