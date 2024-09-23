@@ -45,9 +45,10 @@ type Account struct {
 	PlaceRatings                []AccountPlaceRating    `gorm:"foreignKey:AccountID" json:"placeRatings"`
 	PrivateKey                  string                  `json:"privateKey"`
 	PubKey                      string                  `gorm:"uniqueIndex;default:NULL" json:"pubKey"`
-	SocialMediaList             []SocialMedia           `gorm:"foreignKey:AccountID" json:"socialMediaList"`
+	Relays                      []Relay                 `gorm:"foreignKey:AccountID" json:"relays"`
 	ResetPasswordToken          *string                 `gorm:"type:text" json:"resetPasswordToken"`
 	ResetPasswordTokenExpiresAt *time.Time              `json:"-"`
+	SocialMediaList             []SocialMedia           `gorm:"foreignKey:AccountID" json:"socialMediaList"`
 	Website                     string                  `gorm:"type:text" json:"website"`
 	Username                    string                  `gorm:"uniqueIndex;default:NULL" json:"username"`
 }
