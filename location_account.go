@@ -14,9 +14,10 @@ const (
 )
 
 type LocationAccount struct {
-	LocationID      uint                `gorm:"primaryKey" json:"locationId"`
-	Location        Location            `gorm:"foreignKey:LocationID" json:"location"`
-	AccountID       uint                `gorm:"primaryKey" json:"accountId"`
+	ID              uint                `gorm:"primaryKey" json:"id"`
+	LocationID      uint                `gorm:"index" json:"locationId"`
+	Location        Location            `json:"location"`
+	AccountID       uint                `gorm:"index" json:"accountId"`
 	Type            LocationAccountType `gorm:"not null" json:"type"`
 	ClaimCode       string              `gorm:"type:text" json:"claimCode"`
 	ClaimVerifiedAt *time.Time          `json:"-"`
