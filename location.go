@@ -106,6 +106,7 @@ type Location struct {
 	PriceLevel            PriceLevel        `json:"priceLevel"`
 	Score                 float64           `json:"score"`
 	WebsiteUrl            string            `json:"websiteUrl"`
+	Email                 string            `json:"email"`
 }
 
 // LocationDTO
@@ -118,6 +119,7 @@ type LocationDTO struct {
 	Lng          float64       `json:"lng"`
 	LocationTags []LocationTag `gorm:"many2many:location_location_tags" json:"locationTags"`
 	Name         string        `json:"name"`
+	Email        string        `json:"email"`
 	PlaceID      uint          `json:"placeId"`
 	Score        float64       `json:"score"`
 }
@@ -148,6 +150,7 @@ func (l Location) ToDTO(db *gorm.DB) (*LocationDTO, error) {
 		Lng:          l.Lng,
 		LocationTags: l.LocationTags,
 		Name:         l.Name,
+		Email:        l.Email,
 		PlaceID:      l.PlaceID,
 		Score:        l.Score,
 	}, nil
