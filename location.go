@@ -160,5 +160,6 @@ func (l Location) ToDTO(db *gorm.DB) (*LocationDTO, error) {
 		PlaceID:      l.PlaceID,
 		Score:        l.Score,
 		OSMRef:       l.OSMRef,
+		PlaceOSMRef:  place.OSMRef,
 	}, nil
 }
