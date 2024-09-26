@@ -122,6 +122,7 @@ type LocationDTO struct {
 	Email        string        `json:"email"`
 	PlaceID      uint          `json:"placeId"`
 	Score        float64       `json:"score"`
+	OSMRef       string        `json:"osmRef"`
 }
 
 func (l Location) ToDTO(db *gorm.DB) (*LocationDTO, error) {
@@ -153,5 +154,6 @@ func (l Location) ToDTO(db *gorm.DB) (*LocationDTO, error) {
 		Email:        l.Email,
 		PlaceID:      l.PlaceID,
 		Score:        l.Score,
+		OSMRef:       l.OSMRef,
 	}, nil
 }
