@@ -51,6 +51,7 @@ var DatabaseModels = []interface{}{
 	Region{},
 	Relay{},
 	SocialMedia{},
+	SourceBots{},
 	SourceCountryStats{},
 	SourceNumbeo{},
 	SourceRuleoflaw{},
