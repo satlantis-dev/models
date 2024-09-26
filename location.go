@@ -123,6 +123,7 @@ type LocationDTO struct {
 	PlaceID      uint          `json:"placeId"`
 	Score        float64       `json:"score"`
 	OSMRef       string        `json:"osmRef"`
+	PlaceOSMRef  string        `json:"placeOsmRef"`
 }
 
 func (l Location) ToDTO(db *gorm.DB) (*LocationDTO, error) {
@@ -141,6 +142,10 @@ func (l Location) ToDTO(db *gorm.DB) (*LocationDTO, error) {
 	for i, account := range accounts {
 		accountDTOs[i] = account.ToDTO()
 	}
+
+	// Get the place
+	var place Place
+	err = db.First(&place, l.PlaceID).Select("OSMRef").Error
 
 	return &LocationDTO{
 		ID:           l.ID,
