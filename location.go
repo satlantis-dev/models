@@ -125,6 +125,7 @@ type LocationDTO struct {
 	OSMRef       string        `json:"osmRef"`
 	PlaceOSMRef  string        `json:"placeOsmRef"`
 	OpeningHours OpeningHours  `json:"openingHours"`
+	Address      Address       `json:"address"`
 }
 
 func (l Location) ToDTO(db *gorm.DB) (*LocationDTO, error) {
@@ -163,5 +164,6 @@ func (l Location) ToDTO(db *gorm.DB) (*LocationDTO, error) {
 		OSMRef:       l.OSMRef,
 		PlaceOSMRef:  place.OSMRef,
 		OpeningHours: l.OpeningHours,
+		Address:      l.Address,
 	}, nil
 }
