@@ -31,7 +31,6 @@ type Note struct {
 	Content            *string             `gorm:"type:text" json:"content"`
 	Descendants        []NoteWithClosure   `gorm:"-" json:"descendants"`
 	EventID            uint                `gorm:"index" json:"eventId"`
-	Event              Event               `json:"event"`
 	Kind               uint                `gorm:"index" json:"kind"`
 	NostrID            string              `gorm:"index" json:"nostrId"`
 	PubKey             string              `gorm:"type:text;index" json:"pubkey"`
