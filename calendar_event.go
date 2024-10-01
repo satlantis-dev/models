@@ -2,51 +2,29 @@ package models
 
 import "time"
 
-type CalendarEventType int
+type CalendarEventType string
 
 const (
-	Conference CalendarEventType = iota + 1
-	Meetup
-	Hackathon
-	Concert
-	Workshop
-	Party
-	Play
-	Sports
-	Exhibition
-	Festival
-	Music
-	Other
+	Conference CalendarEventType = "conference"
+	Meetup     CalendarEventType = "meetup"
+	Hackathon  CalendarEventType = "hackathon"
+	Concert    CalendarEventType = "concert"
+	Workshop   CalendarEventType = "workshop"
+	Party      CalendarEventType = "party"
+	Play       CalendarEventType = "play"
+	Sports     CalendarEventType = "sports"
+	Exhibition CalendarEventType = "exhibition"
+	Festival   CalendarEventType = "festival"
+	Music      CalendarEventType = "music"
+	Other      CalendarEventType = "other"
 )
-
-func (c CalendarEventType) Hashtag() string {
-	names := [...]string{
-		"#conference",
-		"#meetup",
-		"#hackathon",
-		"#concert",
-		"#workshop",
-		"#party",
-		"#play",
-		"#sports",
-		"#exhibition",
-		"#festival",
-		"#music",
-		"#other",
-	}
-
-	if c < Conference || c > Other {
-		return "Unknown"
-	}
-
-	return names[c-1]
-}
 
 type CalendarEvent struct {
 	ID                 uint                `gorm:"primaryKey" json:"id"`
 	AccountID          uint                `gorm:"index" json:"accountId"`
 	Account            Account             `json:"account"`
 	Announcements      []CalendarEventNote `gorm:"foreignKey:CalendarEventID" json:"announcements"`
+	ATag               string              `json:"atag"`
 	CreatedAt          *time.Time          `json:"createdAt"`
 	CalendarEventRSVPs []CalendarEventRSVP `gorm:"foreignKey:CalendarEventID" json:"calendarEventRsvps"`
 	Content            *string             `gorm:"type:text" json:"content"`
