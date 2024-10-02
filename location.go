@@ -98,6 +98,7 @@ type Location struct {
 	Lng                   float64           `json:"lng"`
 	LocationTags          []LocationTag     `gorm:"many2many:location_location_tags" json:"locationTags"`
 	PlaceID               uint              `gorm:"index" json:"placeId"`
+	Place                 Place             `json:"place"`
 	Name                  string            `json:"name"`
 	Notes                 []LocationNote    `gorm:"foreignKey:LocationID" json:"notes"`
 	OpeningHours          OpeningHours      `gorm:"type:jsonb" json:"openingHours"`
@@ -111,21 +112,23 @@ type Location struct {
 
 // LocationDTO
 type LocationDTO struct {
-	ID           uint          `json:"id"`
-	Accounts     []AccountDTO  `json:"accounts"`
-	Bio          *string       `json:"bio"`
-	Image        string        `json:"image"`
-	Lat          float64       `json:"lat"`
-	Lng          float64       `json:"lng"`
-	LocationTags []LocationTag `gorm:"many2many:location_location_tags" json:"locationTags"`
-	Name         string        `json:"name"`
-	Email        string        `json:"email"`
-	PlaceID      uint          `json:"placeId"`
-	Score        float64       `json:"score"`
-	OSMRef       string        `json:"osmRef"`
-	PlaceOSMRef  string        `json:"placeOsmRef"`
-	OpeningHours OpeningHours  `json:"openingHours"`
-	Address      Address       `json:"address"`
+	ID                    uint          `json:"id"`
+	Accounts              []AccountDTO  `json:"accounts"`
+	Bio                   *string       `json:"bio"`
+	Image                 string        `json:"image"`
+	Lat                   float64       `json:"lat"`
+	Lng                   float64       `json:"lng"`
+	LocationTags          []LocationTag `gorm:"many2many:location_location_tags" json:"locationTags"`
+	Name                  string        `json:"name"`
+	Email                 string        `json:"email"`
+	PlaceID               uint          `json:"placeId"`
+	Score                 float64       `json:"score"`
+	OSMRef                string        `json:"osmRef"`
+	PlaceOSMRef           string        `json:"placeOsmRef"`
+	OpeningHours          OpeningHours  `json:"openingHours"`
+	Address               Address       `json:"address"`
+	GoogleRating          float64       `json:"googleRating"`
+	GoogleUserRatingCount int           `json:"googleUserRatingCount"`
 }
 
 func (l Location) ToDTO(db *gorm.DB) (*LocationDTO, error) {
@@ -150,20 +153,22 @@ func (l Location) ToDTO(db *gorm.DB) (*LocationDTO, error) {
 	_ = db.First(&place, l.PlaceID).Select("OSMRef").Error
 
 	return &LocationDTO{
-		ID:           l.ID,
-		Accounts:     accountDTOs,
-		Bio:          l.Bio,
-		Image:        l.Image,
-		Lat:          l.Lat,
-		Lng:          l.Lng,
-		LocationTags: l.LocationTags,
-		Name:         l.Name,
-		Email:        l.Email,
-		PlaceID:      l.PlaceID,
-		Score:        l.Score,
-		OSMRef:       l.OSMRef,
-		PlaceOSMRef:  place.OSMRef,
-		OpeningHours: l.OpeningHours,
-		Address:      l.Address,
+		ID:                    l.ID,
+		Accounts:              accountDTOs,
+		Bio:                   l.Bio,
+		Image:                 l.Image,
+		Lat:                   l.Lat,
+		Lng:                   l.Lng,
+		LocationTags:          l.LocationTags,
+		Name:                  l.Name,
+		Email:                 l.Email,
+		PlaceID:               l.PlaceID,
+		Score:                 l.Score,
+		OSMRef:                l.OSMRef,
+		PlaceOSMRef:           place.OSMRef,
+		OpeningHours:          l.OpeningHours,
+		Address:               l.Address,
+		GoogleRating:          l.GoogleRating,
+		GoogleUserRatingCount: l.GoogleUserRatingCount,
 	}, nil
 }
