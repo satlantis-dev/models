@@ -147,7 +147,7 @@ func (l Location) ToDTO(db *gorm.DB) (*LocationDTO, error) {
 
 	// Get the place
 	var place Place
-	err = db.First(&place, l.PlaceID).Select("OSMRef").Error
+	_ = db.First(&place, l.PlaceID).Select("OSMRef").Error
 
 	return &LocationDTO{
 		ID:           l.ID,
