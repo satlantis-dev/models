@@ -98,7 +98,6 @@ type Location struct {
 	Lng                   float64           `json:"lng"`
 	LocationTags          []LocationTag     `gorm:"many2many:location_location_tags" json:"locationTags"`
 	PlaceID               uint              `gorm:"index" json:"placeId"`
-	Place                 Place             `gorm:"foreignKey:PlaceID" json:"place"`
 	Name                  string            `json:"name"`
 	Notes                 []LocationNote    `gorm:"foreignKey:LocationID" json:"notes"`
 	OpeningHours          OpeningHours      `gorm:"type:jsonb" json:"openingHours"`
