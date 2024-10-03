@@ -4,7 +4,7 @@ import "time"
 
 type CalendarEventRSVP struct {
 	ID              uint      `gorm:"primaryKey" json:"id"`
-	AccountID       uint      `gorm:"index;not null" json:"accountId"`
+	AccountID       uint      `gorm:"index" json:"accountId"`
 	Account         Account   `json:"account"`
 	CreatedAt       time.Time `json:"createdAt"`
 	Content         string    `gorm:"type:text" json:"content"`
@@ -14,6 +14,6 @@ type CalendarEventRSVP struct {
 	PubKey          string    `gorm:"type:text;index" json:"pubkey"`
 	Sig             string    `gorm:"type:text" json:"sig"`
 	Tags            string    `gorm:"type:jsonb" json:"tags"`
-	CalendarEventID uint      `gorm:"index;not null" json:"calendarEventId"`
+	CalendarEventID uint      `gorm:"index" json:"calendarEventId"`
 	Status          string    `json:"status"`
 }
