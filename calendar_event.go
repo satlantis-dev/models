@@ -49,3 +49,8 @@ type CalendarEvent struct {
 	Type               CalendarEventType   `json:"type"`
 	URL                string              `json:"url"`
 }
+
+// Check if CalendarEventType matches a string
+func (c CalendarEventType) Matches(s string) bool {
+	return string(c) == s
+}

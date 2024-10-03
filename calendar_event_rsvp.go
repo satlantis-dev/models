@@ -15,6 +15,5 @@ type CalendarEventRSVP struct {
 	Sig             string    `gorm:"type:text" json:"sig"`
 	Tags            string    `gorm:"type:jsonb" json:"tags"`
 	CalendarEventID uint      `gorm:"index;not null" json:"calendarEventId"`
-	NoteID          uint      `gorm:"index;not null" json:"noteId"` // Deprecated
 	Status          string    `json:"status"`
 }
