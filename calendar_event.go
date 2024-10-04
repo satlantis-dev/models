@@ -54,3 +54,8 @@ type CalendarEvent struct {
 func (c CalendarEventType) Matches(s string) bool {
 	return string(c) == s
 }
+
+// Return string for CalendarEventType
+func (c CalendarEventType) String() string {
+	return string(c)
+}
