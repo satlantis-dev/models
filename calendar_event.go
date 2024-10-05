@@ -2,23 +2,6 @@ package models
 
 import "time"
 
-type CalendarEventType string
-
-const (
-	Conference CalendarEventType = "conference"
-	Meetup     CalendarEventType = "meetup"
-	Hackathon  CalendarEventType = "hackathon"
-	Concert    CalendarEventType = "concert"
-	Workshop   CalendarEventType = "workshop"
-	Party      CalendarEventType = "party"
-	Play       CalendarEventType = "play"
-	Sports     CalendarEventType = "sports"
-	Exhibition CalendarEventType = "exhibition"
-	Festival   CalendarEventType = "festival"
-	Music      CalendarEventType = "music"
-	Other      CalendarEventType = "other"
-)
-
 type CalendarEvent struct {
 	ID                 uint                `gorm:"primaryKey" json:"id"`
 	AccountID          uint                `gorm:"index" json:"accountId"`
@@ -46,16 +29,6 @@ type CalendarEvent struct {
 	Summary            string              `json:"summary"`
 	Tags               string              `gorm:"type:jsonb" json:"tags"`
 	Title              string              `json:"title"`
-	Type               CalendarEventType   `json:"type"`
+	Type               string              `json:"type"`
 	URL                string              `json:"url"`
-}
-
-// Check if CalendarEventType matches a string
-func (c CalendarEventType) Matches(s string) bool {
-	return string(c) == s
-}
-
-// Return string for CalendarEventType
-func (c CalendarEventType) String() string {
-	return string(c)
 }
