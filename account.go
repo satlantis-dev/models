@@ -98,6 +98,16 @@ type AccountDTO struct {
 	PubKey     string `json:"pubKey"`
 }
 
+type SearchAccountDTO struct {
+	ID             uint   `json:"id"`
+	Username       string `json:"username"`
+	DisplayName    string `json:"display_name"`
+	About          string `json:"about"`
+	Picture        string `json:"picture"`
+	Npub           string `json:"npub"`
+	FollowersCount int64  `json:"followers_count"`
+}
+
 func (AccountDTO) TableName() string {
 	return "accounts"
 }
@@ -176,6 +186,19 @@ func (a *Account) GetFollowingAccounts(db *gorm.DB, followerID uint) ([]AccountD
 	return accountDTOs, nil
 }
 
+func (a *Account) GetFollowersCount(db *gorm.DB, followingID uint) (int64, error) {
+	var count int64
+	err := db.Table("follows").Select("accounts.*").
+		Joins("join accounts on accounts.id = follows.follower_id").
+		Where("follows.following_id = ?", followingID).
+		Count(&count).Error
+	if err != nil {
+		return 0, err
+	}
+
+	return count, nil
+}
+
 func (a *Account) GetFollowedByAccounts(db *gorm.DB, followingID uint) ([]AccountDTO, error) {
 	var accounts []Account
 	err := db.Table("follows").Select("accounts.*").
@@ -193,4 +216,22 @@ func (a *Account) GetFollowedByAccounts(db *gorm.DB, followingID uint) ([]Accoun
 	}
 
 	return accountDTOs, nil
+}
+
+func (a *Account) ToSearchAccountDTO(db *gorm.DB) (*SearchAccountDTO, error) {
+	// Get the followers count
+	followersCount, err := a.GetFollowersCount(db, a.ID)
+	if err != nil {
+		return nil, err
+	}
+
+	return &SearchAccountDTO{
+		ID:             a.ID,
+		Username:       a.Username,
+		DisplayName:    a.DisplayName,
+		About:          a.About,
+		Picture:        a.Picture,
+		Npub:           a.Npub,
+		FollowersCount: followersCount,
+	}, nil
 }
