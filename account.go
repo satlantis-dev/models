@@ -188,7 +188,7 @@ func (a *Account) GetFollowingAccounts(db *gorm.DB, followerID uint) ([]AccountD
 
 func (a *Account) GetFollowersCount(db *gorm.DB, followingID uint) (int64, error) {
 	var count int64
-	err := db.Table("follows").Select("accounts.*").
+	err := db.Table("follows").
 		Joins("join accounts on accounts.id = follows.follower_id").
 		Where("follows.following_id = ?", followingID).
 		Count(&count).Error
