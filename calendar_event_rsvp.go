@@ -9,6 +9,7 @@ type CalendarEventRSVP struct {
 	CreatedAt       time.Time `json:"createdAt"`
 	Content         string    `gorm:"type:text" json:"content"`
 	EventID         uint      `gorm:"index" json:"eventId"`
+	Kind            uint      `gorm:"index" json:"kind"`
 	NostrID         string    `gorm:"index" json:"nostrId"`
 	PubKey          string    `gorm:"type:text;index" json:"pubkey"`
 	Sig             string    `gorm:"type:text" json:"sig"`
