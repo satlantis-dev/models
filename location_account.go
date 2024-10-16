@@ -18,7 +18,7 @@ type LocationAccount struct {
 	LocationID      uint                `gorm:"index" json:"locationId"`
 	Location        Location            `json:"location"`
 	AccountID       uint                `gorm:"index" json:"accountId"`
-	Account         Location            `json:"account"`
+	Account         Account             `json:"account"`
 	Type            LocationAccountType `gorm:"not null" json:"type"`
 	ClaimCode       string              `gorm:"type:text" json:"claimCode"`
 	ClaimVerifiedAt *time.Time          `json:"-"`
