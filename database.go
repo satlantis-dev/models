@@ -1,8 +1,10 @@
 package models
 
 import (
+	"errors"
 	"fmt"
 	"log"
+	"strings"
 	"time"
 
 	"gorm.io/driver/postgres"
@@ -80,6 +82,14 @@ func SetupDatabase(dbHost, dbUser, dbPassword, dbName string) (*gorm.DB, error) 
 
 	db, err := gorm.Open(postgres.Open(connectionString), &gorm.Config{})
 	if err != nil {
+		if strings.Contains(err.Error(), "failed to connect to") {
+			// Log the error for internal tracking
+			log.Println("DB connection error: ", err)
+
+			// Replace sensitive information and use specific error code for client so we know what happened
+			return nil, errors.New("internal Server Error - 25874")
+		}
+
 		return nil, err
 	}
 
