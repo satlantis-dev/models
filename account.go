@@ -19,14 +19,14 @@ type Account struct {
 	Currency                    Currency                `json:"currency"`
 	DisplayName                 string                  `gorm:"type:text" json:"displayName"`
 	Email                       string                  `gorm:"default:NULL" json:"email"`
-	EmailVerified               bool                    `json:"emailVerified"`
+	EmailVerified               bool                    `json:"-"`
 	Experiences                 []Experience            `gorm:"foreignKey:AccountID" json:"experiences"`
 	Following                   []Follow                `gorm:"foreignkey:FollowerID" json:"following"`
 	FollowedBy                  []Follow                `gorm:"foreignkey:FollowerID" json:"followedBy"`
 	InfluenceScore              uint                    `json:"influenceScore"`
 	Interests                   []Interest              `gorm:"many2many:account_interests" json:"interests"`
 	IsAdmin                     bool                    `json:"isAdmin"`
-	IsBlacklisted               bool                    `json:"isBlacklisted"`
+	IsBlacklisted               bool                    `json:"-"`
 	IsBusiness                  bool                    `json:"isBusiness"`
 	LastSeen                    *time.Time              `json:"-"`
 	LocationSetEventID          *uint                   `json:"locationSetEventId"`
@@ -39,14 +39,14 @@ type Account struct {
 	Nip05                       string                  `gorm:"default:NULL" json:"nip05"`
 	Notes                       []Note                  `gorm:"foreignKey:AccountID" json:"notes"`
 	Npub                        string                  `gorm:"uniqueIndex;default:NULL" json:"npub"`
-	Password                    string                  `gorm:"type:text" json:"password"`
+	Password                    string                  `gorm:"type:text" json:"-"`
 	Picture                     string                  `gorm:"type:text" json:"picture"`
 	Phone                       string                  `json:"phone"`
 	PlaceRatings                []AccountPlaceRating    `gorm:"foreignKey:AccountID" json:"placeRatings"`
-	PrivateKey                  string                  `json:"privateKey"`
+	PrivateKey                  string                  `json:"-"`
 	PubKey                      string                  `gorm:"uniqueIndex;default:NULL" json:"pubKey"`
 	Relays                      []Relay                 `gorm:"foreignKey:AccountID" json:"relays"`
-	ResetPasswordToken          *string                 `gorm:"type:text" json:"resetPasswordToken"`
+	ResetPasswordToken          *string                 `gorm:"type:text" json:"-"`
 	ResetPasswordTokenExpiresAt *time.Time              `json:"-"`
 	SocialMediaList             []SocialMedia           `gorm:"foreignKey:AccountID" json:"socialMediaList"`
 	Website                     string                  `gorm:"type:text" json:"website"`
