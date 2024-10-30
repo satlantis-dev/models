@@ -66,3 +66,44 @@ type NotePagination struct {
 	PaginationLimit   int  `json:"paginationLimit"`
 	PaginationNoteID  int  `json:"paginationNoteId"`
 }
+
+type NoteDTO struct {
+	ID             uint              `json:"id"`
+	AccountID      uint              `json:"accountId"`
+	Account        Account           `json:"account"`
+	CreatedAt      *time.Time        `json:"createdAt"`
+	Content        *string           `json:"content"`
+	Descendants    []NoteWithClosure `json:"descendants"`
+	EventID        uint              `json:"eventId"`
+	Kind           uint              `json:"kind"`
+	NostrID        string            `json:"nostrId"`
+	PubKey         string            `json:"pubkey"`
+	Sig            string            `json:"sig"`
+	Tags           *string           `json:"tags"`
+	Type           NoteType          `json:"type"`
+	RepostedNoteID *uint             `json:"repostedNoteId"`
+	RepostedNote   *Note             `json:"reposted_note"`
+	Reactions      []Reaction        `json:"reactions"`
+	Place          *Place            `json:"place"`
+}
+
+func (note *Note) ToDTO() NoteDTO {
+	return NoteDTO{
+		ID:             note.ID,
+		AccountID:      note.AccountID,
+		Account:        note.Account,
+		CreatedAt:      note.CreatedAt,
+		Content:        note.Content,
+		Descendants:    note.Descendants,
+		EventID:        note.EventID,
+		Kind:           note.Kind,
+		NostrID:        note.NostrID,
+		PubKey:         note.PubKey,
+		Sig:            note.Sig,
+		Tags:           note.Tags,
+		Type:           note.Type,
+		RepostedNoteID: note.RepostedNoteID,
+		RepostedNote:   note.RepostedNote,
+		Reactions:      note.Reactions,
+	}
+}
