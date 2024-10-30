@@ -7,9 +7,9 @@ import (
 )
 
 type SourceBots struct {
-	Name             string        `gorm:"primaryKey;" json:"name"`
-	Npub             string        `gorm:"uniqueIndex;" json:"npub"`
+	Npub             string        `gorm:"primaryKey;" json:"npub"`
 	Nsec             string        `gorm:"uniqueIndex;" json:"nsec"`
+	Name             string        `gorm:"not null;" json:"name"`
 	Type             string        `gorm:"not null;" json:"type"`
 	ScopeInterests   pq.Int32Array `gorm:"type:integer[]" json:"scopeInterests"`
 	ScopePlaces      pq.Int32Array `gorm:"type:integer[]" json:"scopePlaces"`
