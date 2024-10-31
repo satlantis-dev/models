@@ -129,6 +129,7 @@ type LocationDTO struct {
 	Address               Address       `json:"address"`
 	GoogleRating          float64       `json:"googleRating"`
 	GoogleUserRatingCount int           `json:"googleUserRatingCount"`
+	IsClaimed             bool          `json:"isClaimed"`
 }
 
 func (l Location) ToDTO(db *gorm.DB) (*LocationDTO, error) {
@@ -170,5 +171,6 @@ func (l Location) ToDTO(db *gorm.DB) (*LocationDTO, error) {
 		Address:               l.Address,
 		GoogleRating:          l.GoogleRating,
 		GoogleUserRatingCount: l.GoogleUserRatingCount,
+		IsClaimed:             l.IsClaimed,
 	}, nil
 }
