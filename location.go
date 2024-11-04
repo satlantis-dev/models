@@ -34,6 +34,7 @@ type Address struct {
 	Locality     string `json:"locality"`
 	PostalCode   string `json:"postalCode"`
 	Country      string `json:"country"`
+	Formatted    string `json:"formatted"`
 }
 
 func (a *Address) Scan(value interface{}) error {
