@@ -37,7 +37,7 @@ type Note struct {
 	Type           NoteType          `json:"type"`
 	RepostedNoteID *uint             `gorm:"index" json:"repostedNoteId"`
 	RepostedNote   *Note             `json:"reposted_note"`
-	Reactions      []Reaction        `gorm:"foreignKey:NoteID" json:"reactions"`
+	Reactions      []Reaction        `gorm:"foreignKey:NoteID" json:"reactions,omitempty"`
 }
 
 type NoteWithClosure struct {
@@ -83,7 +83,7 @@ type NoteDTO struct {
 	Type           NoteType          `json:"type"`
 	RepostedNoteID *uint             `json:"repostedNoteId"`
 	RepostedNote   *Note             `json:"reposted_note"`
-	Reactions      []Reaction        `json:"reactions"`
+	Reactions      []Reaction        `json:"reactions,omitempty"`
 	Place          *Place            `json:"place"`
 }
 
