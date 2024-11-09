@@ -6,7 +6,7 @@ type CalendarEvent struct {
 	ID                 uint                        `gorm:"primaryKey" json:"id"`
 	AccountID          uint                        `gorm:"index" json:"accountId"`
 	Account            Account                     `json:"account"`
-	Announcements      []CalendarEventAccouncement `gorm:"foreignKey:CalendarEventID" json:"announcements"`
+	Announcements      []CalendarEventAnnouncement `gorm:"foreignKey:CalendarEventID" json:"announcements"`
 	ATag               string                      `json:"atag"`
 	CreatedAt          *time.Time                  `json:"createdAt"`
 	CalendarEventRSVPs []CalendarEventRSVP         `json:"calendarEventRsvps"`

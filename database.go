@@ -13,7 +13,7 @@ var DatabaseModels = []interface{}{
 	Account{},
 	AccountPlaceRole{},
 	AuthenticationDetail{},
-	CalendarEventAccouncement{},
+	CalendarEventAnnouncement{},
 	CalendarEventNote{},
 	CalendarEventRSVP{},
 	CalendarEvent{},
