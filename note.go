@@ -28,7 +28,7 @@ type Note struct {
 	CreatedAt      *time.Time        `json:"createdAt"`
 	Content        *string           `gorm:"type:text" json:"content"`
 	Descendants    []NoteWithClosure `gorm:"-" json:"descendants"`
-	EventID        uint              `gorm:"index" json:"eventId"`
+	EventID        uint              `gorm:"index;unique" json:"eventId"`
 	Kind           uint              `gorm:"index" json:"kind"`
 	NostrID        string            `gorm:"index" json:"nostrId"`
 	PubKey         string            `gorm:"type:text;index" json:"pubkey"`
