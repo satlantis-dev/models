@@ -47,6 +47,16 @@ type NoteWithClosure struct {
 	DescendantID uint `gorm:"column:descendant_id" json:"descendantId"`
 }
 
+type FeedNote struct {
+	Note
+	Source          string  `json:"source"`
+	Score           float64 `json:"score"`
+	CommentCount    int     `json:"commentCount"`
+	ReactionCount   int     `json:"reactionCount"`
+	CommentedByUser bool    `json:"commentedByUser"`
+	ReactedByUser   bool    `json:"reactedByUser"`
+}
+
 type ChatNote struct {
 	ID        uint       `gorm:"primaryKey" json:"id"`
 	AccountID uint       `gorm:"index" json:"accountId"`
