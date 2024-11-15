@@ -8,7 +8,7 @@ type PublicChatMembership struct {
 	UpdatedAt           time.Time         `json:"-"`
 	DeletedAt           *time.Time        `gorm:"index" json:"-,omitempty"`
 	AccountID           uint              `gorm:"index" json:"accountId"`
-	Account             Account           `json:"account"`
+	Account             AccountDTO        `json:"account"`
 	LastReadNoteID      *uint             `json:"lastReadNoteId"`
 	PublicChatChannelID uint              `gorm:"index" json:"publicChatChannelId"`
 	PublicChatChannel   PublicChatChannel `json:"publicChatChannel"`

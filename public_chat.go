@@ -13,7 +13,7 @@ type ChatMembership struct {
 	UpdatedAt      time.Time  `json:"-"`
 	DeletedAt      *time.Time `gorm:"index" json:"-,omitempty"`
 	AccountID      uint       `gorm:"index" json:"accountId"`
-	Account        Account    `json:"account"`
+	Account        AccountDTO `json:"account"`
 	LastReadNoteID *uint      `json:"lastReadNoteId"`
 	NoteID         uint       `gorm:"index" json:"noteId"`
 	Note           Note       `json:"note"`

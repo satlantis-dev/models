@@ -7,7 +7,7 @@ import (
 type PublicChatMessage struct {
 	ID        uint              `gorm:"primaryKey" json:"id"`
 	AccountID uint              `gorm:"index" json:"accountId"`
-	Account   Account           `json:"account" gorm:"foreignKey:AccountID"`
+	Account   AccountDTO        `json:"account" gorm:"foreignKey:AccountID"`
 	ChannelID uint              `gorm:"index" json:"channelId"`
 	Channel   PublicChatChannel `json:"channel" gorm:"foreignKey:ChannelID"`
 	CreatedAt time.Time         `json:"createdAt"`
