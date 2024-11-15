@@ -11,7 +11,7 @@ type PlaceNote struct {
 	DeletedAt *time.Time `gorm:"index" json:"-,omitempty"`
 	PlaceID   uint       `gorm:"index" json:"placeId"`
 	NoteID    uint       `gorm:"index" json:"noteId"`
-	Note      Note       `json:"note"`
+	Note      FeedNote   `json:"note"`
 	Type      NoteType   `json:"type"`
 }
 
