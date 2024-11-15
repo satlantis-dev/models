@@ -24,7 +24,7 @@ const (
 type Note struct {
 	ID             uint              `gorm:"primaryKey" json:"id"`
 	AccountID      uint              `gorm:"index" json:"accountId"`
-	Account        Account           `json:"account"`
+	Account        AccountDTO        `json:"account"`
 	CreatedAt      *time.Time        `json:"createdAt"`
 	Content        *string           `gorm:"type:text" json:"content"`
 	Descendants    []NoteWithClosure `gorm:"-" json:"descendants"`
@@ -80,7 +80,7 @@ type NotePagination struct {
 type NoteDTO struct {
 	ID             uint              `json:"id"`
 	AccountID      uint              `json:"accountId"`
-	Account        Account           `json:"account"`
+	Account        AccountDTO        `json:"account"`
 	CreatedAt      *time.Time        `json:"createdAt"`
 	Content        *string           `json:"content"`
 	Descendants    []NoteWithClosure `json:"descendants"`
