@@ -22,22 +22,20 @@ const (
 )
 
 type Note struct {
-	ID             uint              `gorm:"primaryKey" json:"id"`
-	AccountID      uint              `gorm:"index" json:"accountId"`
-	Account        AccountDTO        `json:"account"`
-	CreatedAt      *time.Time        `json:"createdAt"`
-	Content        *string           `gorm:"type:text" json:"content"`
-	Descendants    []NoteWithClosure `gorm:"-" json:"descendants"`
-	EventID        uint              `gorm:"index;unique" json:"eventId"`
-	Kind           uint              `gorm:"index" json:"kind"`
-	NostrID        string            `gorm:"index" json:"nostrId"`
-	PubKey         string            `gorm:"type:text;index" json:"pubkey"`
-	Sig            string            `gorm:"type:text" json:"sig"`
-	Tags           *string           `gorm:"type:jsonb" json:"tags"`
-	Type           NoteType          `json:"type"`
-	RepostedNoteID *uint             `gorm:"index" json:"repostedNoteId"`
-	RepostedNote   *Note             `json:"reposted_note"`
-	Reactions      []Reaction        `gorm:"foreignKey:NoteID" json:"reactions,omitempty"`
+	ID             uint       `gorm:"primaryKey" json:"id"`
+	AccountID      uint       `gorm:"index" json:"accountId"`
+	Account        AccountDTO `json:"account"`
+	CreatedAt      *time.Time `json:"createdAt"`
+	Content        *string    `gorm:"type:text" json:"content"`
+	EventID        uint       `gorm:"index;unique" json:"eventId"`
+	Kind           uint       `gorm:"index" json:"kind"`
+	NostrID        string     `gorm:"index" json:"nostrId"`
+	PubKey         string     `gorm:"type:text;index" json:"pubkey"`
+	Sig            string     `gorm:"type:text" json:"sig"`
+	Tags           *string    `gorm:"type:jsonb" json:"tags"`
+	Type           NoteType   `json:"type"`
+	RepostedNoteID *uint      `gorm:"index" json:"repostedNoteId"`
+	RepostedNote   *Note      `json:"reposted_note"`
 }
 
 type NoteWithClosure struct {
@@ -78,42 +76,34 @@ type NotePagination struct {
 }
 
 type NoteDTO struct {
-	ID             uint              `json:"id"`
-	AccountID      uint              `json:"accountId"`
-	Account        AccountDTO        `json:"account"`
-	CreatedAt      *time.Time        `json:"createdAt"`
-	Content        *string           `json:"content"`
-	Descendants    []NoteWithClosure `json:"descendants"`
-	EventID        uint              `json:"eventId"`
-	Kind           uint              `json:"kind"`
-	NostrID        string            `json:"nostrId"`
-	PubKey         string            `json:"pubkey"`
-	Sig            string            `json:"sig"`
-	Tags           *string           `json:"tags"`
-	Type           NoteType          `json:"type"`
-	RepostedNoteID *uint             `json:"repostedNoteId"`
-	RepostedNote   *Note             `json:"reposted_note"`
-	Reactions      []Reaction        `json:"reactions,omitempty"`
-	Place          *Place            `json:"place"`
+	ID        uint       `json:"id"`
+	AccountID uint       `json:"accountId"`
+	Account   AccountDTO `json:"account"`
+	CreatedAt *time.Time `json:"createdAt"`
+	Content   *string    `json:"content"`
+	EventID   uint       `json:"eventId"`
+	Kind      uint       `json:"kind"`
+	NostrID   string     `json:"nostrId"`
+	PubKey    string     `json:"pubkey"`
+	Sig       string     `json:"sig"`
+	Tags      *string    `json:"tags"`
+	Type      NoteType   `json:"type"`
+	Place     *Place     `json:"place"`
 }
 
 func (note *Note) ToDTO() NoteDTO {
 	return NoteDTO{
-		ID:             note.ID,
-		AccountID:      note.AccountID,
-		Account:        note.Account,
-		CreatedAt:      note.CreatedAt,
-		Content:        note.Content,
-		Descendants:    note.Descendants,
-		EventID:        note.EventID,
-		Kind:           note.Kind,
-		NostrID:        note.NostrID,
-		PubKey:         note.PubKey,
-		Sig:            note.Sig,
-		Tags:           note.Tags,
-		Type:           note.Type,
-		RepostedNoteID: note.RepostedNoteID,
-		RepostedNote:   note.RepostedNote,
-		Reactions:      note.Reactions,
+		ID:        note.ID,
+		AccountID: note.AccountID,
+		Account:   note.Account,
+		CreatedAt: note.CreatedAt,
+		Content:   note.Content,
+		EventID:   note.EventID,
+		Kind:      note.Kind,
+		NostrID:   note.NostrID,
+		PubKey:    note.PubKey,
+		Sig:       note.Sig,
+		Tags:      note.Tags,
+		Type:      note.Type,
 	}
 }
