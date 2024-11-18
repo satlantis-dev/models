@@ -55,6 +55,7 @@ var DatabaseModels = []interface{}{
 	SocialMedia{},
 	SourceBots{},
 	SourceCountryStats{},
+	SourceGoogleAnalytics{},
 	SourceNumbeo{},
 	SourceRuleoflaw{},
 	SourceSpeedtest{},
