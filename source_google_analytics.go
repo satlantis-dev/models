@@ -9,9 +9,8 @@ type SourceGoogleAnalytics struct {
 	Active1DayUsers           int       `json:"active1DayUsers"`
 	Active28DayUsers          int       `json:"active28DayUsers"`
 	Active7DayUsers           int       `json:"active7DayUsers"`
-	ActiveUsers               int       `json:"activeUsers"`
 	AverageSessionDuration    float64   `json:"averageSessionDuration"`
-	EngagedSessions           float64   `json:"engagedSessions"`
+	EngagedSessions           int       `json:"engagedSessions"`
 	EngagementRate            float64   `json:"engagementRate"`
 	EventCount                int       `json:"eventCount"`
 	EventCountPerUser         float64   `json:"eventCountPerUser"`
