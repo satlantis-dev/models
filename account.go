@@ -93,10 +93,11 @@ type AccountDTO struct {
 	IsAdmin     bool   `json:"isAdmin"`
 	IsBusiness  bool   `json:"isBusiness"`
 	Name        string `json:"name"`
-	Nip05       string `gorm:"default:NULL" json:"nip05"`
+	Nip05       string `json:"nip05"`
 	Npub        string `json:"npub"`
 	Picture     string `json:"picture"`
 	PubKey      string `json:"pubKey"`
+	Username    string `json:"username"`
 }
 
 type SearchAccountDTO struct {
@@ -115,15 +116,17 @@ func (AccountDTO) TableName() string {
 
 func (a *Account) ToDTO() AccountDTO {
 	return AccountDTO{
-		ID:         a.ID,
-		About:      a.About,
-		IsAdmin:    a.IsAdmin,
-		IsBusiness: a.IsBusiness,
-		Name:       a.Name,
-		Nip05:      a.Nip05,
-		Npub:       a.Npub,
-		Picture:    a.Picture,
-		PubKey:     a.PubKey,
+		ID:          a.ID,
+		About:       a.About,
+		DisplayName: a.DisplayName,
+		IsAdmin:     a.IsAdmin,
+		IsBusiness:  a.IsBusiness,
+		Name:        a.Name,
+		Nip05:       a.Nip05,
+		Npub:        a.Npub,
+		Picture:     a.Picture,
+		PubKey:      a.PubKey,
+		Username:    a.Username,
 	}
 }
 
