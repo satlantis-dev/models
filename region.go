@@ -27,7 +27,7 @@ type Region struct {
 	OSMLevel       string                `json:"osmLevel"`
 	OSMType        OSMType               `json:"osmType"`
 	OSMRef         string                `gorm:"uniqueIndex" json:"osmRef"`
-	Places         []PlaceDTO            `gorm:"foreignKey:RegionID" json:"places"`
+	Places         []Place               `gorm:"foreignKey:RegionID" json:"places"`
 	Slug           string                `gorm:"type:text" json:"slug"` // Unique slug for the region navigation
 	Hashtags       pq.StringArray        `gorm:"type:varchar[]" json:"hashtags"`
 }
