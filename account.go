@@ -87,15 +87,16 @@ type AccountPortable struct {
 }
 
 type AccountDTO struct {
-	ID         uint   `json:"id"`
-	About      string `json:"about"`
-	IsAdmin    bool   `json:"isAdmin"`
-	IsBusiness bool   `json:"isBusiness"`
-	Name       string `json:"name"`
-	Nip05      string `gorm:"default:NULL" json:"nip05"`
-	Npub       string `json:"npub"`
-	Picture    string `json:"picture"`
-	PubKey     string `json:"pubKey"`
+	ID          uint   `json:"id"`
+	About       string `json:"about"`
+	DisplayName string `json:"displayName"`
+	IsAdmin     bool   `json:"isAdmin"`
+	IsBusiness  bool   `json:"isBusiness"`
+	Name        string `json:"name"`
+	Nip05       string `gorm:"default:NULL" json:"nip05"`
+	Npub        string `json:"npub"`
+	Picture     string `json:"picture"`
+	PubKey      string `json:"pubKey"`
 }
 
 type SearchAccountDTO struct {
