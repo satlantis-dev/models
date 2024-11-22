@@ -11,7 +11,7 @@ import (
 
 var DatabaseModels = []interface{}{
 	Account{},
-	AccountNoteTracking{},
+	AccountNoteTracker{},
 	AccountPlaceRole{},
 	AuthenticationDetail{},
 	CalendarEventAnnouncement{},
