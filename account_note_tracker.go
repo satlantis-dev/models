@@ -6,7 +6,7 @@ import (
 	"fmt"
 )
 
-type AccountNoteTracking struct {
+type AccountNoteTracker struct {
 	AccountID   uint       `gorm:"index;primaryKey" json:"accountId"`
 	Account     AccountDTO `gorm:"foreignKey:AccountID" json:"account"`
 	BloomFilter []byte     `json:"bloomFilter"`
@@ -20,11 +20,14 @@ func (fn *FeedNotes) Scan(value interface{}) error {
 		*fn = FeedNotes{}
 		return nil
 	}
-	bytes, ok := value.([]byte)
-	if !ok {
+	switch v := value.(type) {
+	case []byte:
+		return json.Unmarshal(v, fn)
+	case string:
+		return json.Unmarshal([]byte(v), fn)
+	default:
 		return fmt.Errorf("unsupported type: %T", value)
 	}
-	return json.Unmarshal(bytes, fn)
 }
 
 func (fn FeedNotes) Value() (driver.Value, error) {
