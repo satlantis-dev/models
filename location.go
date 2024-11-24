@@ -78,12 +78,27 @@ func (o OpeningHours) Value() (driver.Value, error) {
 	return json.Marshal(o)
 }
 
-type Rating struct {
+type ExternalRating struct {
 	Source string  `json:"source"`
 	Id     string  `json:"id"`
-	Value  float64 `json:"rating"`
+	Rating float64 `json:"rating"`
 	Count  int     `json:"count"`
 	Link   string  `json:"link"`
+}
+
+func (r *ExternalRating) Scan(value interface{}) error {
+	if value == nil {
+		return nil
+	}
+	b, ok := value.([]byte)
+	if !ok {
+		return fmt.Errorf("unsupported type: %T", value)
+	}
+	return json.Unmarshal(b, r)
+}
+
+func (r ExternalRating) Value() (driver.Value, error) {
+	return json.Marshal(r)
 }
 
 type Location struct {
@@ -115,8 +130,8 @@ type Location struct {
 	Phone                 string            `json:"phone"`
 	PriceLevel            PriceLevel        `json:"priceLevel"`
 	Score                 float64           `json:"score"`
-	TripadvisorRating     Rating            `gorm:"type:jsonb" json:"tripadvisorRating"`
-	GooglePlacesRating    Rating            `gorm:"type:jsonb" json:"googlePlacesRating"`
+	TripadvisorRating     ExternalRating    `gorm:"type:jsonb" json:"tripadvisorRating"`
+	GooglePlacesRating    ExternalRating    `gorm:"type:jsonb" json:"googlePlacesRating"`
 	WebsiteUrl            string            `json:"websiteUrl"`
 	Email                 string            `json:"email"`
 }
