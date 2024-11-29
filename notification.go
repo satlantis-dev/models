@@ -10,6 +10,7 @@ type Notification struct {
 	CreatorAccount     AccountDTO `gorm:"foreignKey:CreatorAccountID;references:ID" json:"creatorAccount"`
 	RecipientAccountID uint       `gorm:"index" json:"-"` // Account that will be notified
 	Type               string     `gorm:"type:varchar(255)" json:"type"`
+	Link               string     `gorm:"type:text" json:"link"`
 	Message            string     `gorm:"type:text" json:"message"`
 	IsRead             bool       `gorm:"default:false" json:"isRead"`
 	CreatedAt          time.Time  `json:"createdAt"`
