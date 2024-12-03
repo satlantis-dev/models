@@ -6,6 +6,7 @@ import (
 	"fmt"
 	"time"
 
+	"github.com/lib/pq"
 	"gorm.io/gorm"
 )
 
@@ -117,6 +118,7 @@ type Location struct {
 	GoogleRating          float64           `json:"googleRating"`
 	GoogleUserRatingCount int               `json:"googleUserRatingCount"`
 	Image                 string            `json:"image"`
+	Images                pq.StringArray    `gorm:"type:varchar[]" json:"images"`
 	IsClaimed             bool              `json:"isClaimed"`
 	Lat                   float64           `json:"lat"`
 	Lng                   float64           `json:"lng"`
@@ -138,25 +140,26 @@ type Location struct {
 
 // LocationDTO
 type LocationDTO struct {
-	ID                    uint          `json:"id"`
-	Accounts              []AccountDTO  `json:"accounts"`
-	Bio                   *string       `json:"bio"`
-	Image                 string        `json:"image"`
-	Lat                   float64       `json:"lat"`
-	Lng                   float64       `json:"lng"`
-	LocationTags          []LocationTag `gorm:"many2many:location_location_tags" json:"locationTags"`
-	Name                  string        `json:"name"`
-	Email                 string        `json:"email"`
-	PlaceID               uint          `json:"placeId"`
-	Score                 float64       `json:"score"`
-	OSMRef                string        `json:"osmRef"`
-	PlaceOSMRef           string        `json:"placeOsmRef"`
-	OpeningHours          OpeningHours  `json:"openingHours"`
-	Address               Address       `json:"address"`
-	GoogleRating          float64       `json:"googleRating"`
-	GoogleUserRatingCount int           `json:"googleUserRatingCount"`
-	IsClaimed             bool          `json:"isClaimed"`
-	GoogleMapsUrl         string        `json:"googleMapsUrl"`
+	ID                    uint           `json:"id"`
+	Accounts              []AccountDTO   `json:"accounts"`
+	Bio                   *string        `json:"bio"`
+	Image                 string         `json:"image"`
+	Lat                   float64        `json:"lat"`
+	Lng                   float64        `json:"lng"`
+	LocationTags          []LocationTag  `gorm:"many2many:location_location_tags" json:"locationTags"`
+	Name                  string         `json:"name"`
+	Email                 string         `json:"email"`
+	PlaceID               uint           `json:"placeId"`
+	Score                 float64        `json:"score"`
+	OSMRef                string         `json:"osmRef"`
+	PlaceOSMRef           string         `json:"placeOsmRef"`
+	OpeningHours          OpeningHours   `json:"openingHours"`
+	Address               Address        `json:"address"`
+	GoogleRating          float64        `json:"googleRating"`
+	GoogleUserRatingCount int            `json:"googleUserRatingCount"`
+	GooglePlacesRating    ExternalRating `json:"googlePlacesRating"`
+	IsClaimed             bool           `json:"isClaimed"`
+	GoogleMapsUrl         string         `json:"googleMapsUrl"`
 }
 
 func (l Location) ToDTO(db *gorm.DB) (*LocationDTO, error) {
@@ -198,6 +201,7 @@ func (l Location) ToDTO(db *gorm.DB) (*LocationDTO, error) {
 		Address:               l.Address,
 		GoogleRating:          l.GoogleRating,
 		GoogleUserRatingCount: l.GoogleUserRatingCount,
+		GooglePlacesRating:    l.GooglePlacesRating,
 		IsClaimed:             l.IsClaimed,
 		GoogleMapsUrl:         l.GoogleMapsUrl,
 	}, nil
