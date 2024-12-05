@@ -3,7 +3,7 @@ package models
 import "time"
 
 type NoteRanking struct {
-	NoteId      uint      `gorm:"primaryKey" json:"id"`
+	NoteId      uint      `gorm:"primaryKey" json:"noteId"`
 	Note        Note      `gorm:"foreignKey:NoteId" json:"note"`
 	Reactions   int       `json:"reactions"`
 	Replies     int       `json:"replies"`

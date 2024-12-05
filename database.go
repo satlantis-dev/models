@@ -35,6 +35,7 @@ var DatabaseModels = []interface{}{
 	MetricSource{},
 	Note{},
 	NoteClosure{},
+	NoteRanking{},
 	Notification{},
 	Place{},
 	PlaceCalendarEvent{},
