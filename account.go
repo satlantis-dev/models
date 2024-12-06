@@ -51,6 +51,7 @@ type Account struct {
 	SocialMediaList             []SocialMedia           `gorm:"foreignKey:AccountID" json:"socialMediaList"`
 	Website                     string                  `gorm:"type:text" json:"website"`
 	Username                    string                  `gorm:"uniqueIndex;default:NULL" json:"username"`
+	Level                       int                     `gorm:"default:0" json:"level"`
 }
 
 type AccountPortable struct {
