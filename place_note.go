@@ -12,6 +12,7 @@ type PlaceNote struct {
 	PlaceID   uint       `gorm:"index" json:"placeId"`
 	NoteID    uint       `gorm:"index" json:"noteId"`
 	Note      Note       `json:"note"`
+	Nsfw      bool       `json:"nsfw"`
 	Type      NoteType   `json:"type"`
 }
 
