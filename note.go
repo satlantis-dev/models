@@ -50,6 +50,7 @@ type FeedNote struct {
 	Source          string  `json:"source"`
 	Score           float64 `json:"score"`
 	CommentCount    int     `json:"commentCount"`
+	AllCommentCount int     `json:"allCommentCount"`
 	ReactionCount   int     `json:"reactionCount"`
 	CommentedByUser bool    `json:"commentedByUser"`
 	ReactedByUser   bool    `json:"reactedByUser"`
