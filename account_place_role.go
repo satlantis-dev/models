@@ -2,6 +2,8 @@ package models
 
 import (
 	"time"
+
+	"gorm.io/gorm"
 )
 
 type AccountPlaceRoleType int
@@ -22,5 +24,5 @@ type AccountPlaceRole struct {
 	Type              AccountPlaceRoleType `gorm:"not null" json:"type"`
 	CreatedAt         time.Time            `json:"-"`
 	UpdatedAt         time.Time            `json:"-"`
-	DeletedAt         *time.Time           `gorm:"index" json:"-,omitempty"`
+	DeletedAt         gorm.DeletedAt       `gorm:"index" json:"-,omitempty"`
 }
