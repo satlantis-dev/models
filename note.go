@@ -54,6 +54,7 @@ type FeedNote struct {
 	ReactionCount   int     `json:"reactionCount"`
 	CommentedByUser bool    `json:"commentedByUser"`
 	ReactedByUser   bool    `json:"reactedByUser"`
+	Place           *Place  `json:"place"`
 }
 
 type ChatNote struct {
