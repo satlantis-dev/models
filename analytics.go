@@ -42,7 +42,7 @@ type PlaceAnalytics struct {
 	Date                time.Time `gorm:"primaryKey;type:date" json:"date"`
 	PlaceID             uint      `gorm:"primaryKey" json:"placeId"`
 	Place               Place     `gorm:"foreignKey:PlaceID;references:ID"`
-	Views               int       `json:"views"`
+	PageViews           int       `json:"pageViews"`
 	Followers           int       `json:"followers"`
 	Unfollowers         int       `json:"unfollowers"`
 	NetFollowers        int       `json:"netFollowers"`
