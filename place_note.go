@@ -15,7 +15,7 @@ type PlaceNote struct {
 	Nsfw        bool       `json:"nsfw"`
 	Type        NoteType   `json:"type"`
 	OnSatlantis bool       `json:"onSatlantis"`
-	Score       float64    `json:"score"`
+	Score       float64    `gorm:"default:0" json:"score"`
 }
 
 type PlaceNoteWithClosure struct {
