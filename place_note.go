@@ -15,6 +15,7 @@ type PlaceNote struct {
 	Nsfw        bool       `json:"nsfw"`
 	Type        NoteType   `json:"type"`
 	OnSatlantis bool       `json:"onSatlantis"`
+	IsNews      bool       `json:"isNews"`
 	Reactions   int        `gorm:"default:0" json:"reactions"`
 	Replies     int        `gorm:"default:0" json:"replies"`
 	Score       float64    `gorm:"default:0" json:"score"`
