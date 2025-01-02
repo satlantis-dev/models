@@ -23,7 +23,7 @@ type Account struct {
 	Experiences                 []Experience            `gorm:"foreignKey:AccountID" json:"experiences"`
 	FirstSeen                   *time.Time              `json:"-"`
 	Following                   []Follow                `gorm:"foreignkey:FollowerID" json:"following"`
-	FollowedBy                  []Follow                `gorm:"foreignkey:FollowerID" json:"followedBy"`
+	FollowedBy                  []Follow                `gorm:"foreignkey:FollowingID" json:"followedBy"`
 	InfluenceScore              uint                    `json:"influenceScore"`
 	Interests                   []Interest              `gorm:"many2many:account_interests" json:"interests"`
 	IsAdmin                     bool                    `json:"isAdmin"`
