@@ -22,8 +22,8 @@ type Account struct {
 	EmailVerified               bool                    `json:"-"`
 	Experiences                 []Experience            `gorm:"foreignKey:AccountID" json:"experiences"`
 	FirstSeen                   *time.Time              `json:"-"`
-	Following                   []Follow                `gorm:"foreignkey:FollowerID" json:"following"`
-	FollowedBy                  []Follow                `gorm:"foreignkey:FollowingID" json:"followedBy"`
+	Following                   []Follow                `gorm:"foreignKey:FollowerID" json:"following"`
+	FollowedBy                  []Follow                `gorm:"foreignKey:FollowingID" json:"followedBy"`
 	InfluenceScore              uint                    `json:"influenceScore"`
 	Interests                   []Interest              `gorm:"many2many:account_interests" json:"interests"`
 	IsAdmin                     bool                    `json:"isAdmin"`
