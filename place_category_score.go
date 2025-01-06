@@ -9,6 +9,7 @@ type PlaceCategoryScore struct {
 	Category    Category          `json:"category"`
 	PlaceID     uint              `gorm:"primaryKey;autoIncrement:false" json:"-"`
 	Score       float64           `json:"score"`
+	Rank        uint              `json:"rank"`
 	TopicScores []PlaceTopicScore `gorm:"foreignKey:CategoryID,PlaceID;references:CategoryID,PlaceID" json:"topicScores"`
 	UpdatedAt   time.Time         `json:"-"`
 }
