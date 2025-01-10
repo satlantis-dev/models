@@ -35,6 +35,7 @@ type Metric struct {
 	Weight          float64        `json:"weight"`
 	IsScorable      bool           `json:"isScorable"`
 	Tags            pq.StringArray `gorm:"type:varchar[]" json:"tags"`
+	Order           *uint          `json:"order"`
 }
 
 type MetricDTO struct {
