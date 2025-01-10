@@ -44,6 +44,7 @@ type MetricDTO struct {
 	Category    Category `json:"category"`
 	Description string   `json:"description"`
 	Name        string   `json:"name"`
+	Order       uint     `json:"order"`
 	Prompt      string   `json:"prompt"`
 	Slug        string   `json:"slug"`
 	Suffix      string   `json:"suffix"`
