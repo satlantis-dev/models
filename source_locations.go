@@ -10,6 +10,24 @@ const (
 	OSMTypeWay      OSMType = "way"
 )
 
+type ReportType string
+
+const (
+	ReportTypeWrongInfo   ReportType = "wrong_info"
+	ReportTypeMissingInfo ReportType = "missing_info"
+	ReportTypeDuplicate   ReportType = "duplicate"
+	ReportTypeClosed      ReportType = "closed"
+	ReportTypeAdd         ReportType = "add"
+	ReportTypeRemove      ReportType = "remove"
+)
+
+type Report struct {
+	Type      ReportType `json:"reportType"`
+	AccountId uint       `json:"accountId"`
+	Comment   string     `json:"comment"`
+	CreatedAt time.Time  `json:"createdAt"`
+}
+
 // SourceLocationsOsm with Response as JSON object
 type SourceLocationsOsm struct {
 	OSMId              uint      `gorm:"primaryKey;type:uint" json:"osmId"`
@@ -32,6 +50,7 @@ type SourceLocationsOsm struct {
 	TripadvisorDetails string    `gorm:"type:jsonb" json:"tripadvisorDetails"`
 	UpdatedOn          time.Time `json:"updatedOn"`
 	Eligible           bool      `json:"eligible"`
+	Reports            []Report  `gorm:"type:jsonb" json:"reports"`
 }
 
 func (SourceLocationsOsm) TableName() string {
@@ -60,6 +79,7 @@ type SourceLocationsExtra struct {
 	TripadvisorDetails string    `gorm:"type:jsonb" json:"tripadvisorDetails"`
 	UpdatedOn          time.Time `json:"updatedOn"`
 	Eligible           bool      `json:"eligible"`
+	Reports            []Report  `gorm:"type:jsonb" json:"reports"`
 }
 
 func (SourceLocationsExtra) TableName() string {
@@ -87,4 +107,5 @@ type SourceLocations struct {
 	TripadvisorDetails string    `json:"tripadvisorDetails"`
 	UpdatedOn          time.Time `json:"updatedOn"`
 	Eligible           bool      `json:"eligible"`
+	Reports            []Report  `gorm:"type:jsonb" json:"reports"`
 }
