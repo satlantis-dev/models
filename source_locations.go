@@ -13,8 +13,8 @@ const (
 type ReportType string
 
 const (
-	ReportTypeWrongInfo   ReportType = "wrong_info"
-	ReportTypeMissingInfo ReportType = "missing_info"
+	ReportTypeWrongInfo   ReportType = "wrongInfo"
+	ReportTypeMissingInfo ReportType = "missingInfo"
 	ReportTypeDuplicate   ReportType = "duplicate"
 	ReportTypeClosed      ReportType = "closed"
 	ReportTypeAdd         ReportType = "add"
@@ -51,6 +51,7 @@ type SourceLocationsOsm struct {
 	UpdatedOn          time.Time `json:"updatedOn"`
 	Eligible           bool      `json:"eligible"`
 	Reports            []Report  `gorm:"type:jsonb" json:"reports"`
+	ReviewSummary      string    `json:"reviewSummary"`
 }
 
 func (SourceLocationsOsm) TableName() string {
@@ -80,6 +81,7 @@ type SourceLocationsExtra struct {
 	UpdatedOn          time.Time `json:"updatedOn"`
 	Eligible           bool      `json:"eligible"`
 	Reports            []Report  `gorm:"type:jsonb" json:"reports"`
+	ReviewSummary      string    `json:"reviewSummary"`
 }
 
 func (SourceLocationsExtra) TableName() string {
@@ -108,4 +110,5 @@ type SourceLocations struct {
 	UpdatedOn          time.Time `json:"updatedOn"`
 	Eligible           bool      `json:"eligible"`
 	Reports            []Report  `gorm:"type:jsonb" json:"reports"`
+	ReviewSummary      string    `json:"reviewSummary"`
 }
