@@ -28,6 +28,14 @@ type Report struct {
 	CreatedAt time.Time  `json:"createdAt"`
 }
 
+type Review struct {
+	Source string    `json:"source"`
+	Author string    `json:"author"`
+	Rating string    `json:"rating"`
+	Time   time.Time `json:"time"`
+	Text   string    `json:"text"`
+}
+
 // SourceLocationsOsm with Response as JSON object
 type SourceLocationsOsm struct {
 	OSMId              uint      `gorm:"primaryKey;type:uint" json:"osmId"`
@@ -52,6 +60,7 @@ type SourceLocationsOsm struct {
 	Eligible           bool      `json:"eligible"`
 	Reports            []Report  `gorm:"type:jsonb" json:"reports"`
 	ReviewSummary      string    `json:"reviewSummary"`
+	Reviews            []Review  `gorm:"type:jsonb" json:"reviews"`
 }
 
 func (SourceLocationsOsm) TableName() string {
@@ -82,6 +91,7 @@ type SourceLocationsExtra struct {
 	Eligible           bool      `json:"eligible"`
 	Reports            []Report  `gorm:"type:jsonb" json:"reports"`
 	ReviewSummary      string    `json:"reviewSummary"`
+	Reviews            []Review  `gorm:"type:jsonb" json:"reviews"`
 }
 
 func (SourceLocationsExtra) TableName() string {
@@ -111,4 +121,5 @@ type SourceLocations struct {
 	Eligible           bool      `json:"eligible"`
 	Reports            []Report  `gorm:"type:jsonb" json:"reports"`
 	ReviewSummary      string    `json:"reviewSummary"`
+	Reviews            []Review  `gorm:"type:jsonb" json:"reviews"`
 }
