@@ -31,7 +31,7 @@ type Report struct {
 type Review struct {
 	Source string    `json:"source"`
 	Author string    `json:"author"`
-	Rating string    `json:"rating"`
+	Rating float64   `json:"rating"`
 	Time   time.Time `json:"time"`
 	Text   string    `json:"text"`
 }
