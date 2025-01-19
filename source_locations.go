@@ -1,6 +1,11 @@
 package models
 
-import "time"
+import (
+	"database/sql/driver"
+	"encoding/json"
+	"fmt"
+	"time"
+)
 
 type OSMType string
 
@@ -9,6 +14,67 @@ const (
 	OSMTypeRelation OSMType = "relation"
 	OSMTypeWay      OSMType = "way"
 )
+
+type ReportType string
+
+const (
+	ReportTypeWrongInfo   ReportType = "wrongInfo"
+	ReportTypeMissingInfo ReportType = "missingInfo"
+	ReportTypeDuplicate   ReportType = "duplicate"
+	ReportTypeClosed      ReportType = "closed"
+	ReportTypeAdd         ReportType = "add"
+	ReportTypeRemove      ReportType = "remove"
+)
+
+type Report struct {
+	Type      ReportType `json:"reportType"`
+	AccountId uint       `json:"accountId"`
+	Comment   string     `json:"comment"`
+	CreatedAt time.Time  `json:"createdAt"`
+}
+
+type Reports []Report
+
+func (r *Reports) Scan(value interface{}) error {
+	if value == nil {
+		return nil
+	}
+	b, ok := value.([]byte)
+	if !ok {
+		return fmt.Errorf("unsupported type: %T", value)
+	}
+	return json.Unmarshal(b, r)
+}
+
+func (r Reports) Value() (driver.Value, error) {
+	return json.Marshal(r)
+}
+
+type Review struct {
+	Source string    `json:"source"`
+	Id     string    `json:"id"`
+	Author string    `json:"author"`
+	Rating float64   `json:"rating"`
+	Time   time.Time `json:"time"`
+	Text   string    `json:"text"`
+}
+
+type Reviews []Review
+
+func (r *Reviews) Scan(value interface{}) error {
+	if value == nil {
+		return nil
+	}
+	b, ok := value.([]byte)
+	if !ok {
+		return fmt.Errorf("unsupported type: %T", value)
+	}
+	return json.Unmarshal(b, r)
+}
+
+func (r Reviews) Value() (driver.Value, error) {
+	return json.Marshal(r)
+}
 
 // SourceLocationsOsm with Response as JSON object
 type SourceLocationsOsm struct {
@@ -32,6 +98,9 @@ type SourceLocationsOsm struct {
 	TripadvisorDetails string    `gorm:"type:jsonb" json:"tripadvisorDetails"`
 	UpdatedOn          time.Time `json:"updatedOn"`
 	Eligible           bool      `json:"eligible"`
+	Reports            Reports   `gorm:"type:jsonb" json:"reports"`
+	ReviewSummary      string    `json:"reviewSummary"`
+	Reviews            Reviews   `gorm:"type:jsonb" json:"reviews"`
 }
 
 func (SourceLocationsOsm) TableName() string {
@@ -60,6 +129,9 @@ type SourceLocationsExtra struct {
 	TripadvisorDetails string    `gorm:"type:jsonb" json:"tripadvisorDetails"`
 	UpdatedOn          time.Time `json:"updatedOn"`
 	Eligible           bool      `json:"eligible"`
+	Reports            Reports   `gorm:"type:jsonb" json:"reports"`
+	ReviewSummary      string    `json:"reviewSummary"`
+	Reviews            Reviews   `gorm:"type:jsonb" json:"reviews"`
 }
 
 func (SourceLocationsExtra) TableName() string {
@@ -87,4 +159,7 @@ type SourceLocations struct {
 	TripadvisorDetails string    `json:"tripadvisorDetails"`
 	UpdatedOn          time.Time `json:"updatedOn"`
 	Eligible           bool      `json:"eligible"`
+	Reports            Reports   `gorm:"type:jsonb" json:"reports"`
+	ReviewSummary      string    `json:"reviewSummary"`
+	Reviews            Reviews   `gorm:"type:jsonb" json:"reviews"`
 }
