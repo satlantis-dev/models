@@ -1,6 +1,11 @@
 package models
 
-import "time"
+import (
+	"database/sql/driver"
+	"encoding/json"
+	"fmt"
+	"time"
+)
 
 type OSMType string
 
@@ -28,6 +33,21 @@ type Report struct {
 	CreatedAt time.Time  `json:"createdAt"`
 }
 
+func (r *Report) Scan(value interface{}) error {
+	if value == nil {
+		return nil
+	}
+	b, ok := value.([]byte)
+	if !ok {
+		return fmt.Errorf("unsupported type: %T", value)
+	}
+	return json.Unmarshal(b, r)
+}
+
+func (r Report) Value() (driver.Value, error) {
+	return json.Marshal(r)
+}
+
 type Review struct {
 	Source string    `json:"source"`
 	Id     string    `json:"id"`
@@ -35,6 +55,21 @@ type Review struct {
 	Rating float64   `json:"rating"`
 	Time   time.Time `json:"time"`
 	Text   string    `json:"text"`
+}
+
+func (r *Review) Scan(value interface{}) error {
+	if value == nil {
+		return nil
+	}
+	b, ok := value.([]byte)
+	if !ok {
+		return fmt.Errorf("unsupported type: %T", value)
+	}
+	return json.Unmarshal(b, r)
+}
+
+func (r Review) Value() (driver.Value, error) {
+	return json.Marshal(r)
 }
 
 // SourceLocationsOsm with Response as JSON object
