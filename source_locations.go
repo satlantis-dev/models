@@ -30,6 +30,7 @@ type Report struct {
 
 type Review struct {
 	Source string    `json:"source"`
+	Id     string    `json:"id"`
 	Author string    `json:"author"`
 	Rating float64   `json:"rating"`
 	Time   time.Time `json:"time"`
