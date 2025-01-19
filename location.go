@@ -136,6 +136,7 @@ type Location struct {
 	GooglePlacesRating    ExternalRating    `gorm:"type:jsonb" json:"googlePlacesRating"`
 	WebsiteUrl            string            `json:"websiteUrl"`
 	Email                 string            `json:"email"`
+	ReviewSummary         string            `json:"reviewSummary"`
 }
 
 // LocationDTO
@@ -160,6 +161,7 @@ type LocationDTO struct {
 	GooglePlacesRating    ExternalRating `json:"googlePlacesRating"`
 	IsClaimed             bool           `json:"isClaimed"`
 	GoogleMapsUrl         string         `json:"googleMapsUrl"`
+	ReviewSummary         string         `json:"reviewSummary"`
 }
 
 func (l Location) ToDTO(db *gorm.DB) (*LocationDTO, error) {
@@ -204,5 +206,6 @@ func (l Location) ToDTO(db *gorm.DB) (*LocationDTO, error) {
 		GooglePlacesRating:    l.GooglePlacesRating,
 		IsClaimed:             l.IsClaimed,
 		GoogleMapsUrl:         l.GoogleMapsUrl,
+		ReviewSummary:         l.ReviewSummary,
 	}, nil
 }
