@@ -33,7 +33,9 @@ type Report struct {
 	CreatedAt time.Time  `json:"createdAt"`
 }
 
-func (r *Report) Scan(value interface{}) error {
+type Reports []Report
+
+func (r *Reports) Scan(value interface{}) error {
 	if value == nil {
 		return nil
 	}
@@ -44,7 +46,7 @@ func (r *Report) Scan(value interface{}) error {
 	return json.Unmarshal(b, r)
 }
 
-func (r Report) Value() (driver.Value, error) {
+func (r Reports) Value() (driver.Value, error) {
 	return json.Marshal(r)
 }
 
@@ -57,7 +59,9 @@ type Review struct {
 	Text   string    `json:"text"`
 }
 
-func (r *Review) Scan(value interface{}) error {
+type Reviews []Review
+
+func (r *Reviews) Scan(value interface{}) error {
 	if value == nil {
 		return nil
 	}
@@ -68,7 +72,7 @@ func (r *Review) Scan(value interface{}) error {
 	return json.Unmarshal(b, r)
 }
 
-func (r Review) Value() (driver.Value, error) {
+func (r Reviews) Value() (driver.Value, error) {
 	return json.Marshal(r)
 }
 
@@ -94,9 +98,9 @@ type SourceLocationsOsm struct {
 	TripadvisorDetails string    `gorm:"type:jsonb" json:"tripadvisorDetails"`
 	UpdatedOn          time.Time `json:"updatedOn"`
 	Eligible           bool      `json:"eligible"`
-	Reports            []Report  `gorm:"type:jsonb" json:"reports"`
+	Reports            Reports   `gorm:"type:jsonb" json:"reports"`
 	ReviewSummary      string    `json:"reviewSummary"`
-	Reviews            []Review  `gorm:"type:jsonb" json:"reviews"`
+	Reviews            Reviews   `gorm:"type:jsonb" json:"reviews"`
 }
 
 func (SourceLocationsOsm) TableName() string {
@@ -125,9 +129,9 @@ type SourceLocationsExtra struct {
 	TripadvisorDetails string    `gorm:"type:jsonb" json:"tripadvisorDetails"`
 	UpdatedOn          time.Time `json:"updatedOn"`
 	Eligible           bool      `json:"eligible"`
-	Reports            []Report  `gorm:"type:jsonb" json:"reports"`
+	Reports            Reports   `gorm:"type:jsonb" json:"reports"`
 	ReviewSummary      string    `json:"reviewSummary"`
-	Reviews            []Review  `gorm:"type:jsonb" json:"reviews"`
+	Reviews            Reviews   `gorm:"type:jsonb" json:"reviews"`
 }
 
 func (SourceLocationsExtra) TableName() string {
@@ -155,7 +159,7 @@ type SourceLocations struct {
 	TripadvisorDetails string    `json:"tripadvisorDetails"`
 	UpdatedOn          time.Time `json:"updatedOn"`
 	Eligible           bool      `json:"eligible"`
-	Reports            []Report  `gorm:"type:jsonb" json:"reports"`
+	Reports            Reports   `gorm:"type:jsonb" json:"reports"`
 	ReviewSummary      string    `json:"reviewSummary"`
-	Reviews            []Review  `gorm:"type:jsonb" json:"reviews"`
+	Reviews            Reviews   `gorm:"type:jsonb" json:"reviews"`
 }
