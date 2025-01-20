@@ -237,6 +237,8 @@ func (a *Account) ToSearchAccountDTO(db *gorm.DB) (*SearchAccountDTO, error) {
 		ID:             a.ID,
 		Username:       a.Username,
 		DisplayName:    a.DisplayName,
+		Name:           a.Name,
+		Nip05:          a.Nip05,
 		About:          a.About,
 		Picture:        a.Picture,
 		Npub:           a.Npub,
