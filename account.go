@@ -106,6 +106,8 @@ type SearchAccountDTO struct {
 	ID             uint   `json:"id"`
 	Username       string `json:"username"`
 	DisplayName    string `json:"display_name"`
+	Name           string `json:"name"`
+	Nip05          string `json:"nip05"`
 	About          string `json:"about"`
 	Picture        string `json:"picture"`
 	Npub           string `json:"npub"`
