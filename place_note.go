@@ -18,6 +18,7 @@ type PlaceNote struct {
 	IsNews      bool       `json:"isNews"`
 	Reactions   int        `gorm:"default:0" json:"reactions"`
 	Replies     int        `gorm:"default:0" json:"replies"`
+	AllReplies  int        `gorm:"default:0" json:"allReplies"`
 	Score       float64    `gorm:"default:0" json:"score"`
 }
 
