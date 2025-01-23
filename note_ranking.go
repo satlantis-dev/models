@@ -5,10 +5,11 @@ import "time"
 type NoteRanking struct {
 	NoteId      uint      `gorm:"primaryKey" json:"noteId"`
 	Note        Note      `gorm:"foreignKey:NoteId" json:"note"`
-	Reactions   int       `json:"reactions"`
-	Replies     int       `json:"replies"`
 	OnSatlantis bool      `json:"onSatlantis"`
 	Nsfw        bool      `json:"nsfw"`
-	Score       float64   `json:"score"`
+	Reactions   int       `gorm:"default:0" json:"reactions"`
+	Replies     int       `gorm:"default:0" json:"replies"`
+	AllReplies  int       `gorm:"default:0" json:"allReplies"`
+	Score       float64   `gorm:"default:0" json:"score"`
 	Timestamp   time.Time `json:"timestamp"`
 }
