@@ -28,6 +28,7 @@ type EventAnalytics struct {
 	Events          int       `json:"events"`
 	EventsSatlantis int       `json:"eventsSatlantis"`
 	UpcomingEvents  int       `json:"upcomingEvents"`
+	EventRsvps      int       `json:"eventRsvps"`
 }
 
 type EngagementAnalytics struct {
