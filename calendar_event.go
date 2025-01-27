@@ -31,4 +31,5 @@ type CalendarEvent struct {
 	Title              string                      `json:"title"`
 	Type               string                      `json:"type"`
 	URL                string                      `json:"url"`
+	Website            string                      `json:"website"`
 }
