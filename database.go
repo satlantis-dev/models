@@ -30,7 +30,7 @@ var DatabaseModels = []interface{}{
 	Follow{},
 	Interest{},
 	Location{},
-	LocationAccount{},
+	LocationClaim{},
 	LocationNote{},
 	LocationTag{},
 	Metric{},
