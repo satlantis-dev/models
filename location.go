@@ -6,6 +6,7 @@ import (
 	"fmt"
 	"time"
 
+	"github.com/lib/pq"
 	"gorm.io/gorm"
 )
 
@@ -106,7 +107,7 @@ type Location struct {
 	CreatedAt             time.Time              `json:"-"`
 	UpdatedAt             time.Time              `json:"-"`
 	DeletedAt             *time.Time             `gorm:"index" json:"-,omitempty"`
-	Accounts              []LocationAccount      `gorm:"foreignKey:LocationID" json:"accounts"`
+	Claim                 LocationClaim          `gorm:"foreignKey:LocationID" json:"claim"`
 	Address               Address                `gorm:"type:jsonb" json:"address"`
 	Bio                   *string                `json:"bio"`
 	BusinessStatus        BusinessStatus         `gorm:"type:text" json:"businessStatus"`
@@ -118,6 +119,7 @@ type Location struct {
 	UserRatingCount       int                    `json:"userRatingCount"`
 	Hook                  *string                `json:"hook"`
 	Image                 string                 `json:"image"`
+	Images                pq.StringArray         `gorm:"type:varchar[]" json:"images"`
 	IsClaimed             bool                   `json:"isClaimed"`
 	Lat                   float64                `json:"lat"`
 	Lng                   float64                `json:"lng"`
