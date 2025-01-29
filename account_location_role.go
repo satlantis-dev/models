@@ -20,7 +20,7 @@ type AccountLocationRole struct {
 	AccountID  uint                    `gorm:"index;primaryKey" json:"accountId"`
 	Account    AccountDTO              `gorm:"foreignKey:AccountID" json:"account"`
 	LocationID uint                    `gorm:"index;primaryKey" json:"locationId"`
-	Location   *Location               `gorm:"foreignKey:PlaceID" json:"location,omitempty"`
+	Location   *Location               `gorm:"foreignKey:LocationID" json:"location,omitempty"`
 	Type       AccountLocationRoleType `gorm:"not null" json:"type"`
 	CreatedAt  time.Time               `json:"-"`
 	UpdatedAt  time.Time               `json:"-"`
