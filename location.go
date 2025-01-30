@@ -117,7 +117,7 @@ type Location struct {
 	GoogleMapsUrl         string            `json:"googleMapsUrl"`
 	GoogleRating          float64           `json:"googleRating"`
 	GoogleUserRatingCount int               `json:"googleUserRatingCount"`
-	Hook                  string            `json:"hook"`
+	Hook                  *string           `json:"hook"`
 	Image                 string            `json:"image"`
 	Images                pq.StringArray    `gorm:"type:varchar[]" json:"images"`
 	IsClaimed             bool              `json:"isClaimed"`
@@ -151,7 +151,7 @@ type LocationDTO struct {
 	GoogleUserRatingCount int            `json:"googleUserRatingCount"`
 	GooglePlacesRating    ExternalRating `json:"googlePlacesRating"`
 	GoogleMapsUrl         string         `json:"googleMapsUrl"`
-	Hook                  string         `json:"hook"`
+	Hook                  *string        `json:"hook"`
 	Image                 string         `json:"image"`
 	IsClaimed             bool           `json:"isClaimed"`
 	Lat                   float64        `json:"lat"`
