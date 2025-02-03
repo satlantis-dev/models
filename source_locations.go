@@ -102,7 +102,7 @@ type SourceLocationsOsm struct {
 	ReviewSummary      string    `json:"reviewSummary"`
 	Reviews            Reviews   `gorm:"type:jsonb" json:"reviews"`
 	Bio                string    `json:"bio"`
-	Hook               string    `json:"hook"`
+	Hook               string    `gorm:"size:70" json:"hook"`
 }
 
 func (SourceLocationsOsm) TableName() string {
@@ -135,7 +135,7 @@ type SourceLocationsExtra struct {
 	ReviewSummary      string    `json:"reviewSummary"`
 	Reviews            Reviews   `gorm:"type:jsonb" json:"reviews"`
 	Bio                string    `json:"bio"`
-	Hook               string    `json:"hook"`
+	Hook               string    `gorm:"size:70" json:"hook"`
 }
 
 func (SourceLocationsExtra) TableName() string {
@@ -167,5 +167,5 @@ type SourceLocations struct {
 	ReviewSummary      string    `json:"reviewSummary"`
 	Reviews            Reviews   `gorm:"type:jsonb" json:"reviews"`
 	Bio                string    `json:"bio"`
-	Hook               string    `json:"hook"`
+	Hook               string    `gorm:"size:70" json:"hook"`
 }

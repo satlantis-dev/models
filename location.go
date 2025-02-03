@@ -151,7 +151,7 @@ type LocationDTO struct {
 	GoogleUserRatingCount int            `json:"googleUserRatingCount"`
 	GooglePlacesRating    ExternalRating `json:"googlePlacesRating"`
 	GoogleMapsUrl         string         `json:"googleMapsUrl"`
-	Hook                  *string        `json:"hook"`
+	Hook                  *string        `gorm:"size:70" json:"hook"`
 	Image                 string         `json:"image"`
 	IsClaimed             bool           `json:"isClaimed"`
 	Lat                   float64        `json:"lat"`
