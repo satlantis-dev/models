@@ -76,6 +76,31 @@ func (r Reviews) Value() (driver.Value, error) {
 	return json.Marshal(r)
 }
 
+type Photo struct {
+	Source string `json:"source"`
+	Id     string `json:"id"`
+	Width  int    `json:"width"`
+	Height int    `json:"height"`
+	Url    string `json:"url"`
+}
+
+type Photos []Photo
+
+func (p *Photos) Scan(value interface{}) error {
+	if value == nil {
+		return nil
+	}
+	b, ok := value.([]byte)
+	if !ok {
+		return fmt.Errorf("unsupported type: %T", value)
+	}
+	return json.Unmarshal(b, p)
+}
+
+func (p Photos) Value() (driver.Value, error) {
+	return json.Marshal(p)
+}
+
 // SourceLocationsOsm with Response as JSON object
 type SourceLocationsOsm struct {
 	OSMId              uint      `gorm:"primaryKey;type:uint" json:"osmId"`
@@ -101,6 +126,7 @@ type SourceLocationsOsm struct {
 	Reports            Reports   `gorm:"type:jsonb" json:"reports"`
 	ReviewSummary      string    `json:"reviewSummary"`
 	Reviews            Reviews   `gorm:"type:jsonb" json:"reviews"`
+	Photos             Photos    `gorm:"type:jsonb" json:"photos"`
 }
 
 func (SourceLocationsOsm) TableName() string {
@@ -132,6 +158,7 @@ type SourceLocationsExtra struct {
 	Reports            Reports   `gorm:"type:jsonb" json:"reports"`
 	ReviewSummary      string    `json:"reviewSummary"`
 	Reviews            Reviews   `gorm:"type:jsonb" json:"reviews"`
+	Photos             Photos    `gorm:"type:jsonb" json:"photos"`
 }
 
 func (SourceLocationsExtra) TableName() string {
@@ -162,4 +189,5 @@ type SourceLocations struct {
 	Reports            Reports   `gorm:"type:jsonb" json:"reports"`
 	ReviewSummary      string    `json:"reviewSummary"`
 	Reviews            Reviews   `gorm:"type:jsonb" json:"reviews"`
+	Photos             Photos    `gorm:"type:jsonb" json:"photos"`
 }
