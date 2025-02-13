@@ -4,7 +4,7 @@ import "time"
 
 type PlaceGalleryImage struct {
 	ID        uint      `gorm:"primaryKey" json:"id"`
-	PlaceID   uint      `json:"placeId"`
+	PlaceID   uint      `gorm:"index" json:"placeId"`
 	Place     *Place    `gorm:"foreignKey:PlaceID" json:"place,omitempty"`
 	Url       string    `json:"url"`
 	Caption   *string   `json:"caption"`
