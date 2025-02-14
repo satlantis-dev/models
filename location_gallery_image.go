@@ -15,10 +15,9 @@ const (
 type LocationGalleryImage struct {
 	ID         uint          `gorm:"primaryKey;autoIncrement" json:"id"`
 	LocationID uint          `gorm:"index" json:"locationId"`
-	Location   *Location     `gorm:"foreignKey:LocationID" json:"location,omitempty"`
 	Url        string        `json:"url"`
 	Caption    *string       `json:"caption"`
-	Category   ImageCategory `gorm:"type:string,default:general" json:"category"`
+	Category   ImageCategory `gorm:"type:string;default:'general'" json:"category"`
 	Source     string        `json:"source"`
 	CreatedAt  time.Time     `json:"-"`
 }

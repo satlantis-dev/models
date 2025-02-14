@@ -38,37 +38,38 @@ func (b BoundingBox) Value() (driver.Value, error) {
 }
 
 type Place struct {
-	ID             uint                 `gorm:"primaryKey" json:"id"`
-	CreatedAt      time.Time            `json:"-"`
-	UpdatedAt      time.Time            `json:"-"`
-	DeletedAt      *time.Time           `gorm:"index" json:"-,omitempty"`
-	AccountRoles   []AccountPlaceRole   `gorm:"foreignKey:PlaceID" json:"accountRoles"`
-	Active         bool                 `json:"active"`
-	Banner         string               `gorm:"type:text" json:"banner"`
-	BoundingBox    BoundingBox          `gorm:"type:jsonb" json:"boundingBox"`
-	CategoryScores []PlaceCategoryScore `gorm:"foreignKey:PlaceID" json:"categoryScores"`
-	CountryID      uint                 `gorm:"index" json:"countryId"`
-	Country        Country              `json:"country"`
-	Descendants    []PlaceWithClosure   `gorm:"-" json:"descendants"`
-	Description    string               `gorm:"type:text" json:"description"`
-	EventID        *uint                `gorm:"index" json:"eventId"`
-	Event          Event                `json:"event"`
-	Lat            float64              `json:"lat"`
-	Level          PlaceLevel           `gorm:"type:text" json:"level"`
-	Lng            float64              `json:"lng"`
-	Metrics        []PlaceMetric        `gorm:"foreignKey:PlaceID" json:"metrics"`
-	Name           string               `gorm:"index;type:text" json:"name"`
-	Notes          []PlaceNote          `gorm:"foreignKey:PlaceID" json:"notes"`
-	OSMID          *uint                `json:"osmId"`
-	OSMLevel       string               `json:"osmLevel"`
-	OSMType        OSMType              `json:"osmType"`
-	OSMRef         string               `gorm:"uniqueIndex" json:"osmRef"`
-	RegionID       *uint                `gorm:"index" json:"regionId"`
-	Region         Region               `gorm:"foreignKey:RegionID" json:"region"`
-	Slug           string               `gorm:"type:text" json:"slug"` // Unique slug for the place navigation
-	WeatherID      *uint                `gorm:"index" json:"weatherId"`
-	Weather        Weather              `gorm:"foreignKey:PlaceID" json:"weather"`
-	Hashtags       pq.StringArray       `gorm:"type:varchar[]" json:"hashtags"`
+	ID                 uint                 `gorm:"primaryKey" json:"id"`
+	CreatedAt          time.Time            `json:"-"`
+	UpdatedAt          time.Time            `json:"-"`
+	DeletedAt          *time.Time           `gorm:"index" json:"-,omitempty"`
+	AccountRoles       []AccountPlaceRole   `gorm:"foreignKey:PlaceID" json:"accountRoles"`
+	Active             bool                 `json:"active"`
+	Banner             string               `gorm:"type:text" json:"banner"`
+	BoundingBox        BoundingBox          `gorm:"type:jsonb" json:"boundingBox"`
+	CategoryScores     []PlaceCategoryScore `gorm:"foreignKey:PlaceID" json:"categoryScores"`
+	CountryID          uint                 `gorm:"index" json:"countryId"`
+	Country            Country              `json:"country"`
+	Descendants        []PlaceWithClosure   `gorm:"-" json:"descendants"`
+	Description        string               `gorm:"type:text" json:"description"`
+	EventID            *uint                `gorm:"index" json:"eventId"`
+	Event              Event                `json:"event"`
+	Lat                float64              `json:"lat"`
+	Level              PlaceLevel           `gorm:"type:text" json:"level"`
+	Lng                float64              `json:"lng"`
+	Metrics            []PlaceMetric        `gorm:"foreignKey:PlaceID" json:"metrics"`
+	Name               string               `gorm:"index;type:text" json:"name"`
+	Notes              []PlaceNote          `gorm:"foreignKey:PlaceID" json:"notes"`
+	OSMID              *uint                `json:"osmId"`
+	OSMLevel           string               `json:"osmLevel"`
+	OSMType            OSMType              `json:"osmType"`
+	OSMRef             string               `gorm:"uniqueIndex" json:"osmRef"`
+	PlaceGalleryImages []PlaceGalleryImage  `gorm:"foreignKey:PlaceID" json:"placeGalleryImages,omitempty"`
+	RegionID           *uint                `gorm:"index" json:"regionId"`
+	Region             Region               `gorm:"foreignKey:RegionID" json:"region"`
+	Slug               string               `gorm:"type:text" json:"slug"` // Unique slug for the place navigation
+	WeatherID          *uint                `gorm:"index" json:"weatherId"`
+	Weather            Weather              `gorm:"foreignKey:PlaceID" json:"weather"`
+	Hashtags           pq.StringArray       `gorm:"type:varchar[]" json:"hashtags"`
 }
 
 // Place With Closure
