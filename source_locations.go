@@ -84,7 +84,7 @@ type Photo struct {
 	Url    string `json:"url"`
 }
 
-type Photos []Photo
+type Photos []LocationGalleryImage
 
 func (p *Photos) Scan(value interface{}) error {
 	if value == nil {
