@@ -5,11 +5,12 @@ import "time"
 type ImageCategory string
 
 const (
-	ImageCategoryGeneral  ImageCategory = "general"
-	ImageCategoryMenu     ImageCategory = "menu"
-	ImageCategoryExterior ImageCategory = "exterior"
-	ImageCategoryInterior ImageCategory = "interior"
-	ImageCategoryFood     ImageCategory = "food"
+	ImageCategoryGeneral       ImageCategory = "general"
+	ImageCategoryExterior      ImageCategory = "exterior"
+	ImageCategoryInterior      ImageCategory = "interior"
+	ImageCategoryAmenities     ImageCategory = "amenities"
+	ImageCategoryFoodAndDrinks ImageCategory = "foodandrinks"
+	ImageCategoryMenu          ImageCategory = "menu"
 )
 
 type LocationGalleryImage struct {
@@ -18,6 +19,7 @@ type LocationGalleryImage struct {
 	Url        string        `gorm:"not null;unique" json:"url"`
 	Caption    *string       `json:"caption"`
 	Category   ImageCategory `gorm:"type:string;default:'general'" json:"category"`
+	Highlight  bool          `gorm:"default:false" json:"highlight"`
 	Source     string        `json:"source"`
 	CreatedAt  time.Time     `json:"-"`
 }
