@@ -144,33 +144,31 @@ type Location struct {
 
 // LocationDTO
 type LocationDTO struct {
-	ID              uint              `json:"id"`
-	Accounts        []LocationAccount `json:"accounts"`
-	Address         Address           `json:"address"`
-	Bio             *string           `json:"bio"`
-	Email           string            `json:"email"`
-	Rating          float64           `json:"Rating"`
-	UserRatingCount int               `json:"UserRatingCount"`
-	GoogleMapsUrl   string            `json:"googleMapsUrl"`
-	Hook            *string           `gorm:"size:70" json:"hook"`
-	Image           string            `json:"image"`
-	IsClaimed       bool              `json:"isClaimed"`
-	Lat             float64           `json:"lat"`
-	Lng             float64           `json:"lng"`
-	LocationTags    []LocationTag     `gorm:"many2many:location_location_tags" json:"locationTags"`
-	Name            string            `json:"name"`
-	OpeningHours    OpeningHours      `json:"openingHours"`
-	OSMRef          string            `json:"osmRef"`
-	PlaceID         uint              `json:"placeId"`
-	PlaceOSMRef     string            `json:"placeOsmRef"`
-	ReviewSummary   string            `json:"reviewSummary"`
+	ID              uint          `json:"id"`
+	Address         Address       `json:"address"`
+	Bio             *string       `json:"bio"`
+	Email           string        `json:"email"`
+	Rating          float64       `json:"Rating"`
+	UserRatingCount int           `json:"UserRatingCount"`
+	GoogleMapsUrl   string        `json:"googleMapsUrl"`
+	Hook            *string       `gorm:"size:70" json:"hook"`
+	Image           string        `json:"image"`
+	IsClaimed       bool          `json:"isClaimed"`
+	Lat             float64       `json:"lat"`
+	Lng             float64       `json:"lng"`
+	LocationTags    []LocationTag `gorm:"many2many:location_location_tags" json:"locationTags"`
+	Name            string        `json:"name"`
+	OpeningHours    OpeningHours  `json:"openingHours"`
+	OSMRef          string        `json:"osmRef"`
+	PlaceID         uint          `json:"placeId"`
+	PlaceOSMRef     string        `json:"placeOsmRef"`
+	ReviewSummary   string        `json:"reviewSummary"`
 }
 
 func (l Location) ToDTO(db *gorm.DB) (*LocationDTO, error) {
 
 	return &LocationDTO{
 		ID:              l.ID,
-		Accounts:        l.Accounts,
 		Address:         l.Address,
 		Bio:             l.Bio,
 		Email:           l.Email,
