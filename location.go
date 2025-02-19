@@ -6,6 +6,7 @@ import (
 	"fmt"
 	"time"
 
+	"github.com/lib/pq"
 	"gorm.io/gorm"
 )
 
@@ -106,10 +107,11 @@ type Location struct {
 	CreatedAt             time.Time              `json:"-"`
 	UpdatedAt             time.Time              `json:"-"`
 	DeletedAt             *time.Time             `gorm:"index" json:"-,omitempty"`
-	Accounts              []LocationAccount      `gorm:"foreignKey:LocationID" json:"accounts"`
+	AccountRoles          []AccountLocationRole  `gorm:"foreignKey:LocationID" json:"accountRoles"`
 	Address               Address                `gorm:"type:jsonb" json:"address"`
 	Bio                   *string                `json:"bio"`
 	BusinessStatus        BusinessStatus         `gorm:"type:text" json:"businessStatus"`
+	Claim                 LocationClaim          `gorm:"foreignKey:LocationID" json:"claim"`
 	EventID               *uint                  `gorm:"index" json:"eventId"`
 	Event                 Event                  `json:"event"`
 	GoogleID              string                 `gorm:"uniqueIndex;not null" json:"googleId"`
@@ -118,6 +120,7 @@ type Location struct {
 	GoogleUserRatingCount int                    `json:"googleUserRatingCount"`
 	Hook                  *string                `json:"hook"`
 	Image                 string                 `json:"image"`
+	Images                pq.StringArray         `gorm:"type:varchar[]" json:"images"`
 	IsClaimed             bool                   `json:"isClaimed"`
 	Lat                   float64                `json:"lat"`
 	Lng                   float64                `json:"lng"`
@@ -142,7 +145,6 @@ type Location struct {
 // LocationDTO
 type LocationDTO struct {
 	ID                    uint           `json:"id"`
-	Accounts              []AccountDTO   `json:"accounts"`
 	Address               Address        `json:"address"`
 	Bio                   *string        `json:"bio"`
 	Email                 string         `json:"email"`
@@ -166,21 +168,6 @@ type LocationDTO struct {
 }
 
 func (l Location) ToDTO(db *gorm.DB) (*LocationDTO, error) {
-	var accounts []Account
-	// Get the accounts
-	err := db.Table("location_accounts").Select("accounts.*").
-		Joins("join accounts on accounts.id = location_accounts.account_id").
-		Where("location_accounts.location_id = ?", l.ID).
-		Scan(&accounts).Error
-	if err != nil {
-		return nil, err
-	}
-
-	accountDTOs := make([]AccountDTO, len(accounts))
-
-	for i, account := range accounts {
-		accountDTOs[i] = account.ToDTO()
-	}
 
 	// Get the place
 	var place Place
@@ -188,7 +175,6 @@ func (l Location) ToDTO(db *gorm.DB) (*LocationDTO, error) {
 
 	return &LocationDTO{
 		ID:                    l.ID,
-		Accounts:              accountDTOs,
 		Address:               l.Address,
 		Bio:                   l.Bio,
 		Email:                 l.Email,
