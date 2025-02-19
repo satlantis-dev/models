@@ -33,7 +33,7 @@ type Account struct {
 	LastSeen                    *time.Time             `json:"-"`
 	LocationSetEventID          *uint                  `json:"locationSetEventId"`
 	LocationSetEvent            Event                  `gorm:"foreignKey:LocationSetEventID" json:"locationSetEvent"`
-	LocationClaims              []LocationClaim        `gorm:"foreignKey:AccountID" json:"locationClaims"`
+	LocationClaims              []LocationClaim        `gorm:"foreignKey:OwnerAccountID" json:"locationClaims"`
 	Lud06                       string                 `gorm:"default:NULL" json:"lud06"`
 	Lud16                       string                 `gorm:"default:NULL" json:"lud16"`
 	Name                        string                 `gorm:"type:text" json:"name"`
