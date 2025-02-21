@@ -3,6 +3,7 @@ package models
 type LocationCategory struct {
 	Name     string `gorm:"primaryKey" json:"name"`
 	Eligible bool   `gorm:"type:boolean" json:"eligible"`
+	Primary  bool   `gorm:"type:boolean" json:"primary"`
 }
 
 type LocationTag struct {
