@@ -86,6 +86,8 @@ type AccountPortable struct {
 	Website            string                  `json:"website"`
 	Following          []AccountDTO            `json:"following"`
 	FollowedBy         []AccountDTO            `json:"followedBy"`
+	FollowingCount     *int64                  `json:"followingCount"`
+	FollowersCount     *int64                  `json:"followersCount"`
 }
 
 type AccountDTO struct {
@@ -135,12 +137,26 @@ func (a *Account) ToDTO() AccountDTO {
 }
 
 func (a *Account) ToPortableProfile(db *gorm.DB) (*AccountPortable, error) {
+	// Get first 10 following
 	following, err := a.GetFollowingAccounts(db, a.ID)
 	if err != nil {
 		return nil, err
 	}
 
+	// Get following count total
+	followingCountTotal, err := a.GetFollowingCount(db, a.ID)
+	if err != nil {
+		return nil, err
+	}
+
+	// Get first 10 followed by
 	followedBy, err := a.GetFollowedByAccounts(db, a.ID)
+	if err != nil {
+		return nil, err
+	}
+
+	// Get followers count total
+	followersCountTotal, err := a.GetFollowersCount(db, a.ID)
 	if err != nil {
 		return nil, err
 	}
@@ -172,6 +188,8 @@ func (a *Account) ToPortableProfile(db *gorm.DB) (*AccountPortable, error) {
 		Website:           a.Website,
 		Following:         following,
 		FollowedBy:        followedBy,
+		FollowingCount:    &followingCountTotal,
+		FollowersCount:    &followersCountTotal,
 	}, nil
 }
 
@@ -180,6 +198,7 @@ func (a *Account) GetFollowingAccounts(db *gorm.DB, followerID uint) ([]AccountD
 	err := db.Table("follows").Select("accounts.*").
 		Joins("join accounts on accounts.id = follows.following_id").
 		Where("follows.follower_id = ?", followerID).
+		Limit(10).
 		Scan(&accounts).Error
 	if err != nil {
 		return nil, err
@@ -194,13 +213,20 @@ func (a *Account) GetFollowingAccounts(db *gorm.DB, followerID uint) ([]AccountD
 	return accountDTOs, nil
 }
 
-func (a *Account) GetFollowersCount(db *gorm.DB, followingID uint) (int64, error) {
+func (a *Account) GetFollowingCount(db *gorm.DB, userID uint) (int64, error) {
+	// Define count variable and run query
 	var count int64
-	err := db.Table("follows").
-		Joins("join accounts on accounts.id = follows.follower_id").
-		Where("follows.following_id = ?", followingID).
-		Count(&count).Error
-	if err != nil {
+	if err := db.Model(&Follow{}).Where("follows.follower_id = ?", userID).Count(&count).Error; err != nil {
+		return 0, err
+	}
+
+	return count, nil
+}
+
+func (a *Account) GetFollowersCount(db *gorm.DB, userID uint) (int64, error) {
+	// Define count variable and run query
+	var count int64
+	if err := db.Model(&Follow{}).Where("follows.follower_id = ?", userID).Count(&count).Error; err != nil {
 		return 0, err
 	}
 
@@ -212,6 +238,7 @@ func (a *Account) GetFollowedByAccounts(db *gorm.DB, followingID uint) ([]Accoun
 	err := db.Table("follows").Select("accounts.*").
 		Joins("join accounts on accounts.id = follows.follower_id").
 		Where("follows.following_id = ?", followingID).
+		Limit(10).
 		Scan(&accounts).Error
 	if err != nil {
 		return nil, err
