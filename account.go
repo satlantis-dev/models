@@ -226,7 +226,7 @@ func (a *Account) GetFollowingCount(db *gorm.DB, userID uint) (int64, error) {
 func (a *Account) GetFollowersCount(db *gorm.DB, userID uint) (int64, error) {
 	// Define count variable and run query
 	var count int64
-	if err := db.Model(&Follow{}).Where("follows.follower_id = ?", userID).Count(&count).Error; err != nil {
+	if err := db.Model(&Follow{}).Where("follows.following_id = ?", userID).Count(&count).Error; err != nil {
 		return 0, err
 	}
 
