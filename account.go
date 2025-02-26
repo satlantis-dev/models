@@ -137,7 +137,7 @@ func (a *Account) ToDTO() AccountDTO {
 }
 
 func (a *Account) ToPortableProfile(db *gorm.DB) (*AccountPortable, error) {
-	// Get first 10 following
+	// Get following accounts
 	following, err := a.GetFollowingAccounts(db, a.ID)
 	if err != nil {
 		return nil, err
@@ -155,7 +155,7 @@ func (a *Account) ToPortableProfile(db *gorm.DB) (*AccountPortable, error) {
 		return nil, err
 	}
 
-	// Get followers count total
+	// Get follower accounts
 	followersCountTotal, err := a.GetFollowersCount(db, a.ID)
 	if err != nil {
 		return nil, err
@@ -198,7 +198,6 @@ func (a *Account) GetFollowingAccounts(db *gorm.DB, followerID uint) ([]AccountD
 	err := db.Table("follows").Select("accounts.*").
 		Joins("join accounts on accounts.id = follows.following_id").
 		Where("follows.follower_id = ?", followerID).
-		Limit(10).
 		Scan(&accounts).Error
 	if err != nil {
 		return nil, err
@@ -238,7 +237,6 @@ func (a *Account) GetFollowedByAccounts(db *gorm.DB, followingID uint) ([]Accoun
 	err := db.Table("follows").Select("accounts.*").
 		Joins("join accounts on accounts.id = follows.follower_id").
 		Where("follows.following_id = ?", followingID).
-		Limit(10).
 		Scan(&accounts).Error
 	if err != nil {
 		return nil, err
