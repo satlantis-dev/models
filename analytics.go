@@ -33,6 +33,7 @@ type EventAnalytics struct {
 
 type EngagementAnalytics struct {
 	Date           time.Time `gorm:"primaryKey;type:date" json:"date"`
+	PlaceID        uint      `gorm:"primaryKey" json:"placeId"`
 	MediaNoteViews int       `json:"mediaNoteViews"`
 	MediaNotes     int       `json:"mediaNotes"`
 	Reactions      int       `json:"reactions"`
