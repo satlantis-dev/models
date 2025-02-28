@@ -141,54 +141,35 @@ type Location struct {
 
 // LocationDTO
 type LocationDTO struct {
-	ID                    uint           `json:"id"`
-	Accounts              []AccountDTO   `json:"accounts"`
-	Address               Address        `json:"address"`
-	Bio                   *string        `json:"bio"`
-	Email                 string         `json:"email"`
-	GoogleRating          float64        `json:"googleRating"`
-	GoogleUserRatingCount int            `json:"googleUserRatingCount"`
-	GooglePlacesRating    ExternalRating `json:"googlePlacesRating"`
-	GoogleMapsUrl         string         `json:"googleMapsUrl"`
-	Hook                  *string        `gorm:"size:70" json:"hook"`
-	Image                 string         `json:"image"`
-	IsClaimed             bool           `json:"isClaimed"`
-	Lat                   float64        `json:"lat"`
-	Lng                   float64        `json:"lng"`
-	LocationTags          []LocationTag  `gorm:"many2many:location_location_tags" json:"locationTags"`
-	Name                  string         `json:"name"`
-	OpeningHours          OpeningHours   `json:"openingHours"`
-	OSMRef                string         `json:"osmRef"`
-	PlaceID               uint           `json:"placeId"`
-	PlaceOSMRef           string         `json:"placeOsmRef"`
-	ReviewSummary         string         `json:"reviewSummary"`
-	Score                 float64        `json:"score"`
+	ID                    uint              `json:"id"`
+	Accounts              []LocationAccount `json:"accounts"`
+	Address               Address           `json:"address"`
+	Bio                   *string           `json:"bio"`
+	Email                 string            `json:"email"`
+	GoogleRating          float64           `json:"googleRating"`
+	GoogleUserRatingCount int               `json:"googleUserRatingCount"`
+	GooglePlacesRating    ExternalRating    `json:"googlePlacesRating"`
+	GoogleMapsUrl         string            `json:"googleMapsUrl"`
+	Hook                  *string           `json:"hook"`
+	Image                 string            `json:"image"`
+	IsClaimed             bool              `json:"isClaimed"`
+	Lat                   float64           `json:"lat"`
+	Lng                   float64           `json:"lng"`
+	LocationTags          []LocationTag     `json:"locationTags"`
+	Name                  string            `json:"name"`
+	OpeningHours          OpeningHours      `json:"openingHours"`
+	OSMRef                string            `json:"osmRef"`
+	PlaceID               uint              `json:"placeId"`
+	PlaceOSMRef           string            `json:"placeOsmRef"`
+	ReviewSummary         string            `json:"reviewSummary"`
+	Score                 float64           `json:"score"`
 }
 
 func (l Location) ToDTO(db *gorm.DB) (*LocationDTO, error) {
-	var accounts []Account
-	// Get the accounts
-	err := db.Table("location_accounts").Select("accounts.*").
-		Joins("join accounts on accounts.id = location_accounts.account_id").
-		Where("location_accounts.location_id = ?", l.ID).
-		Scan(&accounts).Error
-	if err != nil {
-		return nil, err
-	}
-
-	accountDTOs := make([]AccountDTO, len(accounts))
-
-	for i, account := range accounts {
-		accountDTOs[i] = account.ToDTO()
-	}
-
-	// Get the place
-	var place Place
-	_ = db.First(&place, l.PlaceID).Select("OSMRef").Error
 
 	return &LocationDTO{
 		ID:                    l.ID,
-		Accounts:              accountDTOs,
+		Accounts:              l.Accounts,
 		Address:               l.Address,
 		Bio:                   l.Bio,
 		Email:                 l.Email,
@@ -206,7 +187,7 @@ func (l Location) ToDTO(db *gorm.DB) (*LocationDTO, error) {
 		OSMRef:                l.OSMRef,
 		OpeningHours:          l.OpeningHours,
 		PlaceID:               l.PlaceID,
-		PlaceOSMRef:           place.OSMRef,
+		PlaceOSMRef:           l.Place.OSMRef,
 		ReviewSummary:         l.ReviewSummary,
 		Score:                 l.Score,
 	}, nil
