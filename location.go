@@ -114,8 +114,8 @@ type Location struct {
 	Event                 Event                  `json:"event"`
 	GoogleID              string                 `gorm:"uniqueIndex;not null" json:"googleId"`
 	GoogleMapsUrl         string                 `json:"googleMapsUrl"`
-	GoogleRating          float64                `json:"googleRating"`
-	GoogleUserRatingCount int                    `json:"googleUserRatingCount"`
+	Rating                float64                `json:"rating"`
+	UserRatingCount       int                    `json:"userRatingCount"`
 	Hook                  *string                `json:"hook"`
 	Image                 string                 `json:"image"`
 	IsClaimed             bool                   `json:"isClaimed"`
@@ -141,54 +141,50 @@ type Location struct {
 
 // LocationDTO
 type LocationDTO struct {
-	ID                    uint              `json:"id"`
-	Accounts              []LocationAccount `json:"accounts"`
-	Address               Address           `json:"address"`
-	Bio                   *string           `json:"bio"`
-	Email                 string            `json:"email"`
-	GoogleRating          float64           `json:"googleRating"`
-	GoogleUserRatingCount int               `json:"googleUserRatingCount"`
-	GooglePlacesRating    ExternalRating    `json:"googlePlacesRating"`
-	GoogleMapsUrl         string            `json:"googleMapsUrl"`
-	Hook                  *string           `json:"hook"`
-	Image                 string            `json:"image"`
-	IsClaimed             bool              `json:"isClaimed"`
-	Lat                   float64           `json:"lat"`
-	Lng                   float64           `json:"lng"`
-	LocationTags          []LocationTag     `json:"locationTags"`
-	Name                  string            `json:"name"`
-	OpeningHours          OpeningHours      `json:"openingHours"`
-	OSMRef                string            `json:"osmRef"`
-	PlaceID               uint              `json:"placeId"`
-	PlaceOSMRef           string            `json:"placeOsmRef"`
-	ReviewSummary         string            `json:"reviewSummary"`
-	Score                 float64           `json:"score"`
+	ID              uint              `json:"id"`
+	Accounts        []LocationAccount `json:"accounts"`
+	Address         Address           `json:"address"`
+	Bio             *string           `json:"bio"`
+	Email           string            `json:"email"`
+	Rating          float64           `json:"Rating"`
+	UserRatingCount int               `json:"UserRatingCount"`
+	GoogleMapsUrl   string            `json:"googleMapsUrl"`
+	Hook            *string           `gorm:"size:70" json:"hook"`
+	Image           string            `json:"image"`
+	IsClaimed       bool              `json:"isClaimed"`
+	Lat             float64           `json:"lat"`
+	Lng             float64           `json:"lng"`
+	LocationTags    []LocationTag     `gorm:"many2many:location_location_tags" json:"locationTags"`
+	Name            string            `json:"name"`
+	OpeningHours    OpeningHours      `json:"openingHours"`
+	OSMRef          string            `json:"osmRef"`
+	PlaceID         uint              `json:"placeId"`
+	PlaceOSMRef     string            `json:"placeOsmRef"`
+	ReviewSummary   string            `json:"reviewSummary"`
 }
 
 func (l Location) ToDTO(db *gorm.DB) (*LocationDTO, error) {
 
 	return &LocationDTO{
-		ID:                    l.ID,
-		Accounts:              l.Accounts,
-		Address:               l.Address,
-		Bio:                   l.Bio,
-		Email:                 l.Email,
-		GoogleRating:          l.GoogleRating,
-		GoogleUserRatingCount: l.GoogleUserRatingCount,
-		GooglePlacesRating:    l.GooglePlacesRating,
-		GoogleMapsUrl:         l.GoogleMapsUrl,
-		Hook:                  l.Hook,
-		Image:                 l.Image,
-		IsClaimed:             l.IsClaimed,
-		Lat:                   l.Lat,
-		Lng:                   l.Lng,
-		LocationTags:          l.LocationTags,
-		Name:                  l.Name,
-		OSMRef:                l.OSMRef,
-		OpeningHours:          l.OpeningHours,
-		PlaceID:               l.PlaceID,
-		PlaceOSMRef:           l.Place.OSMRef,
-		ReviewSummary:         l.ReviewSummary,
-		Score:                 l.Score,
+		ID:              l.ID,
+		Accounts:        l.Accounts,
+		Address:         l.Address,
+		Bio:             l.Bio,
+		Email:           l.Email,
+		Rating:          l.Rating,
+		UserRatingCount: l.UserRatingCount,
+		GoogleMapsUrl:   l.GoogleMapsUrl,
+		Hook:            l.Hook,
+		Image:           l.Image,
+		IsClaimed:       l.IsClaimed,
+		Lat:             l.Lat,
+		Lng:             l.Lng,
+		LocationTags:    l.LocationTags,
+		Name:            l.Name,
+		OSMRef:          l.OSMRef,
+		OpeningHours:    l.OpeningHours,
+		PlaceID:         l.PlaceID,
+		PlaceOSMRef:     l.Place.OSMRef,
+		ReviewSummary:   l.ReviewSummary,
 	}, nil
 }
