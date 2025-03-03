@@ -162,7 +162,6 @@ type LocationDTO struct {
 	PlaceID            uint              `json:"placeId"`
 	PlaceOSMRef        string            `json:"placeOsmRef"`
 	ReviewSummary      string            `json:"reviewSummary"`
-	Score              float64           `json:"score"`
 }
 
 func (l Location) ToDTO(db *gorm.DB) (*LocationDTO, error) {
@@ -189,6 +188,5 @@ func (l Location) ToDTO(db *gorm.DB) (*LocationDTO, error) {
 		PlaceID:            l.PlaceID,
 		PlaceOSMRef:        l.Place.OSMRef,
 		ReviewSummary:      l.ReviewSummary,
-		Score:              l.Score,
 	}, nil
 }
