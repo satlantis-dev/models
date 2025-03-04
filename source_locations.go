@@ -76,6 +76,14 @@ func (r Reviews) Value() (driver.Value, error) {
 	return json.Marshal(r)
 }
 
+type Photo struct {
+	Url      string `gorm:"not null;unique" json:"url"`
+	SourceID string `gorm:"not null;unique" json:"id"`
+	Source   string `json:"source"`
+	Width    *int   `json:"width"`
+	Height   *int   `json:"height"`
+}
+
 type Photos []Photo
 
 func (p *Photos) Scan(value interface{}) error {
