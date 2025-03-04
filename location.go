@@ -6,7 +6,6 @@ import (
 	"fmt"
 	"time"
 
-	"github.com/lib/pq"
 	"gorm.io/gorm"
 )
 
@@ -120,7 +119,6 @@ type Location struct {
 	UserRatingCount       int                    `json:"userRatingCount"`
 	Hook                  *string                `json:"hook"`
 	Image                 string                 `json:"image"`
-	Images                pq.StringArray         `gorm:"type:varchar[]" json:"images"`
 	IsClaimed             bool                   `json:"isClaimed"`
 	Lat                   float64                `json:"lat"`
 	Lng                   float64                `json:"lng"`
