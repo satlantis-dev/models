@@ -176,7 +176,6 @@ func (a *Account) ToPortableProfile(db *gorm.DB) (*AccountPortable, error) {
 		IsAdmin:              a.IsAdmin,
 		IsBusiness:           a.IsBusiness,
 		LocationSetEvent:     a.LocationSetEvent,
-		Locations:            a.Locations,
 		Lud06:                a.Lud06,
 		Lud16:                a.Lud16,
 		Name:                 a.Name,
@@ -188,6 +187,8 @@ func (a *Account) ToPortableProfile(db *gorm.DB) (*AccountPortable, error) {
 		Website:              a.Website,
 		Following:            following,
 		FollowedBy:           followedBy,
+		FollowingCount:       &followingCountTotal,
+		FollowersCount:       &followersCountTotal,
 	}, nil
 }
 
