@@ -76,15 +76,7 @@ func (r Reviews) Value() (driver.Value, error) {
 	return json.Marshal(r)
 }
 
-type Photo struct {
-	Source string `json:"source"`
-	Id     string `json:"id"`
-	Width  int    `json:"width"`
-	Height int    `json:"height"`
-	Url    string `json:"url"`
-}
-
-type Photos []LocationGalleryImage
+type Photos []Photo
 
 func (p *Photos) Scan(value interface{}) error {
 	if value == nil {
