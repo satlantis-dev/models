@@ -21,5 +21,5 @@ type LocationGalleryImage struct {
 	Category   ImageCategory `gorm:"type:string;default:'general'" json:"category"`
 	Highlight  bool          `gorm:"default:false" json:"highlight"`
 	Source     string        `json:"source"`
-	CreatedAt  time.Time     `json:"-"`
+	CreatedAt  time.Time     `json:"created_at"`
 }

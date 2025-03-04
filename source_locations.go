@@ -77,14 +77,14 @@ func (r Reviews) Value() (driver.Value, error) {
 }
 
 type Photo struct {
-	Source string `json:"source"`
-	Id     string `json:"id"`
-	Width  int    `json:"width"`
-	Height int    `json:"height"`
-	Url    string `json:"url"`
+	Url      string `gorm:"not null;unique" json:"url"`
+	SourceID string `gorm:"not null;unique" json:"id"`
+	Source   string `json:"source"`
+	Width    *int   `json:"width"`
+	Height   *int   `json:"height"`
 }
 
-type Photos []LocationGalleryImage
+type Photos []Photo
 
 func (p *Photos) Scan(value interface{}) error {
 	if value == nil {

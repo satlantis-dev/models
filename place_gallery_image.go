@@ -8,5 +8,5 @@ type PlaceGalleryImage struct {
 	Url       string    `gorm:"not null;unique" json:"url"`
 	Caption   *string   `json:"caption"`
 	Source    string    `json:"source"`
-	CreatedAt time.Time `json:"-"`
+	CreatedAt time.Time `json:"created_at"`
 }
