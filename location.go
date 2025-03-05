@@ -49,8 +49,13 @@ func (a *Address) Scan(value interface{}) error {
 
 	return json.Unmarshal(b, a)
 }
+
 func (a Address) Value() (driver.Value, error) {
-	return json.Marshal(a)
+	b, err := json.Marshal(a)
+	if err != nil {
+		return nil, err
+	}
+	return string(b), nil
 }
 
 type OpeningHours struct {
