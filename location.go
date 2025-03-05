@@ -163,6 +163,10 @@ type LocationDTO struct {
 	ReviewSummary   string        `json:"reviewSummary"`
 }
 
+func (LocationDTO) TableName() string {
+	return "locations"
+}
+
 func (l Location) ToDTO(db *gorm.DB) (*LocationDTO, error) {
 
 	return &LocationDTO{
