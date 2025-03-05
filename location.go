@@ -80,7 +80,11 @@ func (o *OpeningHours) Scan(value interface{}) error {
 }
 
 func (o OpeningHours) Value() (driver.Value, error) {
-	return json.Marshal(o)
+	b, err := json.Marshal(o)
+	if err != nil {
+		return nil, err
+	}
+	return string(b), nil
 }
 
 type ExternalRating struct {
@@ -103,7 +107,11 @@ func (r *ExternalRating) Scan(value interface{}) error {
 }
 
 func (r ExternalRating) Value() (driver.Value, error) {
-	return json.Marshal(r)
+	b, err := json.Marshal(r)
+	if err != nil {
+		return nil, err
+	}
+	return string(b), nil
 }
 
 type Location struct {
@@ -133,13 +141,13 @@ type Location struct {
 	Place                 Place                  `json:"place"`
 	Name                  string                 `json:"name"`
 	Notes                 []LocationNote         `gorm:"foreignKey:LocationID" json:"notes"`
-	OpeningHours          OpeningHours           `gorm:"type:jsonb" json:"openingHours"`
+	OpeningHours          OpeningHours           `gorm:"type:jsonb;serializer:json" json:"openingHours"`
 	OSMRef                string                 `gorm:"uniqueIndex;not null" json:"osmRef"`
 	Phone                 string                 `json:"phone"`
 	PriceLevel            PriceLevel             `json:"priceLevel"`
 	Score                 float64                `json:"score"`
-	TripadvisorRating     ExternalRating         `gorm:"type:jsonb" json:"tripadvisorRating"`
-	GooglePlacesRating    ExternalRating         `gorm:"type:jsonb" json:"googlePlacesRating"`
+	TripadvisorRating     ExternalRating         `gorm:"type:jsonb;serializer:json" json:"tripadvisorRating"`
+	GooglePlacesRating    ExternalRating         `gorm:"type:jsonb;serializer:json" json:"googlePlacesRating"`
 	WebsiteUrl            string                 `json:"websiteUrl"`
 	Email                 string                 `json:"email"`
 	ReviewSummary         string                 `json:"reviewSummary"`
@@ -154,12 +162,12 @@ type LocationDTO struct {
 	Rating          float64       `json:"Rating"`
 	UserRatingCount int           `json:"UserRatingCount"`
 	GoogleMapsUrl   string        `json:"googleMapsUrl"`
-	Hook            *string       `gorm:"size:70" json:"hook"`
+	Hook            *string       `json:"hook"`
 	Image           string        `json:"image"`
 	IsClaimed       bool          `json:"isClaimed"`
 	Lat             float64       `json:"lat"`
 	Lng             float64       `json:"lng"`
-	LocationTags    []LocationTag `gorm:"many2many:location_location_tags" json:"locationTags"`
+	LocationTags    []LocationTag `json:"locationTags"`
 	Name            string        `json:"name"`
 	OpeningHours    OpeningHours  `json:"openingHours"`
 	OSMRef          string        `json:"osmRef"`
