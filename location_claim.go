@@ -6,7 +6,7 @@ import (
 
 type LocationClaim struct {
 	LocationID        uint        `gorm:"index;primaryKey" json:"locationId"`
-	Location          LocationDTO `json:"location"`
+	Location          LocationDTO `gorm:"foreignKey:LocationID" json:"location"`
 	OwnerAccountID    uint        `gorm:"index" json:"ownerAccountId"`
 	OwnerAccount      AccountDTO  `gorm:"foreignKey:OwnerAccountID" json:"ownerAccount"`
 	BusinessAccountID *uint       `gorm:"index" json:"businessAccountId,omitempty"`
