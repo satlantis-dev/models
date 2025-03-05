@@ -156,7 +156,7 @@ type Location struct {
 // LocationDTO
 type LocationDTO struct {
 	ID              uint          `json:"id"`
-	Address         Address       `json:"address"`
+	Address         Address       `gorm:"type:jsonb;serializer:json" json:"address"`
 	Bio             *string       `json:"bio"`
 	Email           string        `json:"email"`
 	Rating          float64       `json:"Rating"`
@@ -167,9 +167,9 @@ type LocationDTO struct {
 	IsClaimed       bool          `json:"isClaimed"`
 	Lat             float64       `json:"lat"`
 	Lng             float64       `json:"lng"`
-	LocationTags    []LocationTag `json:"locationTags"`
+	LocationTags    []LocationTag `gorm:"many2many:location_location_tags" json:"locationTags"`
 	Name            string        `json:"name"`
-	OpeningHours    OpeningHours  `json:"openingHours"`
+	OpeningHours    OpeningHours  `gorm:"type:jsonb;serializer:json" json:"openingHours"`
 	OSMRef          string        `json:"osmRef"`
 	PlaceID         uint          `json:"placeId"`
 	PlaceOSMRef     string        `json:"placeOsmRef"`
