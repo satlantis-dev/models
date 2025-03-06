@@ -31,8 +31,6 @@ type Account struct {
 	IsBlacklisted               bool                   `json:"-"`
 	IsBusiness                  bool                   `json:"isBusiness"`
 	LastSeen                    *time.Time             `json:"-"`
-	LocationSetEventID          *uint                  `json:"locationSetEventId"`
-	LocationSetEvent            Event                  `gorm:"foreignKey:LocationSetEventID" json:"locationSetEvent"`
 	LocationClaims              []LocationClaim        `gorm:"foreignKey:OwnerAccountID" json:"locationClaims"`
 	Lud06                       string                 `gorm:"default:NULL" json:"lud06"`
 	Lud16                       string                 `gorm:"default:NULL" json:"lud16"`
@@ -175,7 +173,6 @@ func (a *Account) ToPortableProfile(db *gorm.DB) (*AccountPortable, error) {
 		Interests:            a.Interests,
 		IsAdmin:              a.IsAdmin,
 		IsBusiness:           a.IsBusiness,
-		LocationSetEvent:     a.LocationSetEvent,
 		Lud06:                a.Lud06,
 		Lud16:                a.Lud16,
 		Name:                 a.Name,
