@@ -181,7 +181,7 @@ type Location struct {
 	WebsiteUrl            string                 `json:"websiteUrl"`
 	Email                 string                 `json:"email"`
 	ReviewSummary         string                 `json:"reviewSummary"`
-	Socials               Socials                `json:"socials"`
+	Socials               Socials                `gorm:"type:jsonb;serializer:json" json:"socials"`
 }
 
 // LocationDTO
