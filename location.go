@@ -124,8 +124,6 @@ type Location struct {
 	Bio                   *string                `json:"bio"`
 	BusinessStatus        BusinessStatus         `gorm:"type:text" json:"businessStatus"`
 	Claim                 LocationClaim          `gorm:"foreignKey:LocationID" json:"claim"`
-	EventID               *uint                  `gorm:"index" json:"eventId"`
-	Event                 Event                  `json:"event"`
 	GoogleID              string                 `gorm:"uniqueIndex;not null" json:"googleId"`
 	GoogleMapsUrl         string                 `json:"googleMapsUrl"`
 	Rating                float64                `json:"rating"`
