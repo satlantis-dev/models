@@ -114,6 +114,31 @@ func (r ExternalRating) Value() (driver.Value, error) {
 	return string(b), nil
 }
 
+type Social struct {
+	App    string `json:"app"`
+	Handle string `json:"handle"`
+	Link   string `json:"link"`
+}
+
+func (s *Social) Scan(value interface{}) error {
+	if value == nil {
+		return nil
+	}
+	b, ok := value.([]byte)
+	if !ok {
+		return fmt.Errorf("unsupported type: %T", value)
+	}
+	return json.Unmarshal(b, s)
+}
+
+func (s Social) Value() (driver.Value, error) {
+	b, err := json.Marshal(s)
+	if err != nil {
+		return nil, err
+	}
+	return string(b), nil
+}
+
 type Location struct {
 	ID                    uint                   `gorm:"primaryKey" json:"id"`
 	CreatedAt             time.Time              `json:"-"`
@@ -151,6 +176,7 @@ type Location struct {
 	WebsiteUrl            string                 `json:"websiteUrl"`
 	Email                 string                 `json:"email"`
 	ReviewSummary         string                 `json:"reviewSummary"`
+	Socials               []Social               `json:"socials"`
 }
 
 // LocationDTO
