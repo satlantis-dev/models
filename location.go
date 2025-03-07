@@ -114,6 +114,36 @@ func (r ExternalRating) Value() (driver.Value, error) {
 	return string(b), nil
 }
 
+type Socials struct {
+	Facebook  *string `json:"facebook,omitempty"`  // username -> "https://facebook.com/<username>"
+	Instagram *string `json:"instagram,omitempty"` // username -> "https://instagram.com/<username>"
+	Line      *string `json:"line,omitempty"`      // business id -> "https://page.line.me/<business id>"
+	Telegram  *string `json:"telegram,omitempty"`  // username -> "https://t.me/<username>"
+	TikTok    *string `json:"tiktok,omitempty"`    // username -> "https://www.tiktok.com/@<username>"
+	WhatsApp  *string `json:"whatsapp,omitempty"`  // intl phone number -> "https://wa.me/<intl phone number>"
+	X         *string `json:"x,omitempty"`         // username -> "https://x.com/<username>"
+	YouTube   *string `json:"youtube,omitempty"`   // username -> "https://youtube.com/@<username>"
+}
+
+func (s *Socials) Scan(value interface{}) error {
+	if value == nil {
+		return nil
+	}
+	b, ok := value.([]byte)
+	if !ok {
+		return fmt.Errorf("unsupported type: %T", value)
+	}
+	return json.Unmarshal(b, s)
+}
+
+func (s Socials) Value() (driver.Value, error) {
+	b, err := json.Marshal(s)
+	if err != nil {
+		return nil, err
+	}
+	return string(b), nil
+}
+
 type Location struct {
 	ID                    uint                   `gorm:"primaryKey" json:"id"`
 	CreatedAt             time.Time              `json:"-"`
@@ -151,6 +181,7 @@ type Location struct {
 	WebsiteUrl            string                 `json:"websiteUrl"`
 	Email                 string                 `json:"email"`
 	ReviewSummary         string                 `json:"reviewSummary"`
+	Socials               Socials                `gorm:"type:jsonb;serializer:json" json:"socials"`
 }
 
 // LocationDTO
