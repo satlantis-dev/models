@@ -190,8 +190,8 @@ type LocationDTO struct {
 	Address         Address       `gorm:"type:jsonb;serializer:json" json:"address"`
 	Bio             *string       `json:"bio"`
 	Email           string        `json:"email"`
-	Rating          float64       `json:"Rating"`
-	UserRatingCount int           `json:"UserRatingCount"`
+	Rating          float64       `json:"rating"`
+	UserRatingCount int           `json:"userRatingCount"`
 	GoogleMapsUrl   string        `json:"googleMapsUrl"`
 	Hook            *string       `json:"hook"`
 	Image           string        `json:"image"`
