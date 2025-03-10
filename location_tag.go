@@ -1,9 +1,12 @@
 package models
 
+import "github.com/lib/pq"
+
 type LocationCategory struct {
-	Name     string `gorm:"primaryKey" json:"name"`
-	Eligible bool   `gorm:"type:boolean" json:"eligible"`
-	Primary  bool   `gorm:"type:boolean" json:"primary"`
+	Name       string         `gorm:"primaryKey" json:"name"`
+	Eligible   bool           `gorm:"type:boolean" json:"eligible"`
+	Primary    bool           `gorm:"type:boolean" json:"primary"`
+	Highlights pq.StringArray `gorm:"type:text[]" json:"highlights"`
 }
 
 type LocationTag struct {
