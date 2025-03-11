@@ -124,9 +124,9 @@ type SourceLocationsOsm struct {
 	UpdatedOn          time.Time        `json:"updatedOn"`
 	Eligible           bool             `json:"eligible"`
 	Reports            Reports          `gorm:"type:jsonb" json:"reports"`
+	Reviews            Reviews          `gorm:"type:jsonb" json:"reviews"`
 	ReviewSummary      string           `json:"reviewSummary"`
 	ReviewHighlights   ReviewHighlights `gorm:"type:jsonb;serializer:json" json:"reviewHighlights"`
-	Reviews            Reviews          `gorm:"type:jsonb" json:"reviews"`
 	Bio                string           `json:"bio"`
 	Hook               string           `gorm:"size:70" json:"hook"`
 	Photos             Photos           `gorm:"type:jsonb" json:"photos"`
@@ -159,9 +159,9 @@ type SourceLocationsExtra struct {
 	UpdatedOn          time.Time        `json:"updatedOn"`
 	Eligible           bool             `json:"eligible"`
 	Reports            Reports          `gorm:"type:jsonb" json:"reports"`
+	Reviews            Reviews          `gorm:"type:jsonb" json:"reviews"`
 	ReviewSummary      string           `json:"reviewSummary"`
 	ReviewHighlights   ReviewHighlights `gorm:"type:jsonb;serializer:json" json:"reviewHighlights"`
-	Reviews            Reviews          `gorm:"type:jsonb" json:"reviews"`
 	Bio                string           `json:"bio"`
 	Hook               string           `gorm:"size:70" json:"hook"`
 	Photos             Photos           `gorm:"type:jsonb" json:"photos"`
@@ -193,8 +193,8 @@ type SourceLocations struct {
 	UpdatedOn          time.Time        `json:"updatedOn"`
 	Eligible           bool             `json:"eligible"`
 	Reports            Reports          `gorm:"type:jsonb" json:"reports"`
-	ReviewSummary      string           `json:"reviewSummary"`
 	Reviews            Reviews          `gorm:"type:jsonb" json:"reviews"`
+	ReviewSummary      string           `json:"reviewSummary"`
 	ReviewHighlights   ReviewHighlights `gorm:"type:jsonb;serializer:json" json:"reviewHighlights"`
 	Bio                string           `json:"bio"`
 	Hook               string           `gorm:"size:70" json:"hook"`
