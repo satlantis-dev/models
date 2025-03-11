@@ -119,12 +119,12 @@ type ReviewHighlights struct {
 	Cleanliness   *string `json:"cleanliness,omitempty"`
 	Experience    *string `json:"experience,omitempty"`
 	Facilities    *string `json:"facilities,omitempty"`
-	FoodAndDrinks *string `json:"foodAndDrinks,omitempty"`
+	FoodAndDrinks *string `json:"food_and_drinks,omitempty"`
 	Location      *string `json:"location,omitempty"`
 	Music         *string `json:"music,omitempty"`
 	Rooms         *string `json:"rooms,omitempty"`
 	Service       *string `json:"service,omitempty"`
-	ValueForMoney *string `json:"valueForMoney,omitempty"`
+	ValueForMoney *string `json:"value_for_money,omitempty"`
 	Vibe          *string `json:"vibe,omitempty"`
 }
 
