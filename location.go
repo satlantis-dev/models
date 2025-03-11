@@ -117,6 +117,8 @@ func (r ExternalRating) Value() (driver.Value, error) {
 type ReviewHighlights struct {
 	Amenities     *string `json:"amenities,omitempty"`
 	Cleanliness   *string `json:"cleanliness,omitempty"`
+	Experience    *string `json:"experience,omitempty"`
+	Facilities    *string `json:"facilities,omitempty"`
 	FoodAndDrinks *string `json:"foodAndDrinks,omitempty"`
 	Location      *string `json:"location,omitempty"`
 	Music         *string `json:"music,omitempty"`
