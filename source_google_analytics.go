@@ -15,6 +15,7 @@ type SourceGoogleAnalytics struct {
 	EventCount                int       `json:"eventCount"`
 	EventCountPerUser         float64   `json:"eventCountPerUser"`
 	EventsPerSession          float64   `json:"eventsPerSession"`
+	MediaNoteViews            int       `json:"mediaNoteViews"`
 	NewUsers                  int       `json:"newUsers"`
 	TotalUsers                int       `json:"totalUsers"`
 	ScreenPageViews           int       `json:"screenPageViews"`
