@@ -82,6 +82,7 @@ var DatabaseModels = []interface{}{
 	EventAnalytics{},
 	MerchantAnalytics{},
 	PlaceAnalytics{},
+	Device{},
 }
 
 func SetupDatabase(dbHost, dbUser, dbPassword, dbName string) (*gorm.DB, error) {
