@@ -15,6 +15,7 @@ const (
 	EventInterest
 	ActivityInterest
 	FoodInterest
+	ContentInterest
 )
 
 type Interest struct {
@@ -31,5 +32,5 @@ type Interest struct {
 	Hashtags              pq.StringArray     `gorm:"type:varchar[]" json:"hashtags"`
 	LocationTags          []LocationTag      `gorm:"many2many:interest_location_tags" json:"locationTags"`
 	PrimaryCategory       InterestCategory   `json:"primaryCategory"`
-	OtherCategories       []InterestCategory `gorm:"type:integer[]" json:"otherCategories"`
+	Categories            []InterestCategory `gorm:"type:integer[]" json:"categories"`
 }
