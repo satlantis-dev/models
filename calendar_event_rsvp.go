@@ -19,4 +19,5 @@ type CalendarEventRSVP struct {
 	NotificationWeekSent bool      `gorm:"default:false"`
 	NotificationDaySent  bool      `gorm:"default:false"`
 	NotificationHourSent bool      `gorm:"default:false"`
+	IsSatlantisCreated   bool      `gorm:"default:false"`
 }
