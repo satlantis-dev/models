@@ -10,12 +10,10 @@ type InterestCategory int
 
 const (
 	GeneralInterest InterestCategory = iota + 1
-	PeopleInterest
 	LocationInterest
-	EventInterest
 	ActivityInterest
 	FoodInterest
-	ContentInterest
+	NicheInterest
 )
 
 type Interest struct {
@@ -31,6 +29,8 @@ type Interest struct {
 	AutofollowsById       pq.Int32Array    `gorm:"type:integer[]" json:"autofollowsById"`
 	Hashtags              pq.StringArray   `gorm:"type:varchar[]" json:"hashtags"`
 	LocationTags          []LocationTag    `gorm:"many2many:interest_location_tags" json:"locationTags"`
-	PrimaryCategory       InterestCategory `json:"primaryCategory"`
-	Categories            pq.Int32Array    `gorm:"type:integer[]" json:"categories"`
+	Category              InterestCategory `json:"category"`
+	ContentUse            bool             `json:"contentUse"`
+	LocationUse           bool             `json:"locationUse"`
+	PeopleUse             bool             `json:"peopleUse"`
 }
