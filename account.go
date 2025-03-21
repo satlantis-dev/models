@@ -51,6 +51,8 @@ type Account struct {
 	Website                     string                 `gorm:"type:text" json:"website"`
 	Username                    string                 `gorm:"uniqueIndex;default:NULL" json:"username"`
 	Level                       int                    `gorm:"index;default:0" json:"level"`
+	FollowingCount              *int64                 `json:"followingCount"`
+	FollowersCount              *int64                 `json:"followersCount"`
 }
 
 type AccountPortable struct {
@@ -88,17 +90,21 @@ type AccountPortable struct {
 }
 
 type AccountDTO struct {
-	ID          uint   `json:"id"`
-	About       string `json:"about"`
-	DisplayName string `json:"displayName"`
-	IsAdmin     bool   `json:"isAdmin"`
-	IsBusiness  bool   `json:"isBusiness"`
-	Name        string `json:"name"`
-	Nip05       string `json:"nip05"`
-	Npub        string `json:"npub"`
-	Picture     string `json:"picture"`
-	PubKey      string `json:"pubKey"`
-	Username    string `json:"username"`
+	ID             uint   `json:"id"`
+	About          string `json:"about"`
+	DisplayName    string `json:"displayName"`
+	Banner         string `json:"banner"`
+	IsAdmin        bool   `json:"isAdmin"`
+	IsBusiness     bool   `json:"isBusiness"`
+	Name           string `json:"name"`
+	Nip05          string `json:"nip05"`
+	Npub           string `json:"npub"`
+	Picture        string `json:"picture"`
+	PubKey         string `json:"pubKey"`
+	Username       string `json:"username"`
+	Website        string `json:"website"`
+	FollowingCount *int64 `json:"followingCount"`
+	FollowersCount *int64 `json:"followersCount"`
 }
 
 type SearchAccountDTO struct {
@@ -119,17 +125,20 @@ func (AccountDTO) TableName() string {
 
 func (a *Account) ToDTO() AccountDTO {
 	return AccountDTO{
-		ID:          a.ID,
-		About:       a.About,
-		DisplayName: a.DisplayName,
-		IsAdmin:     a.IsAdmin,
-		IsBusiness:  a.IsBusiness,
-		Name:        a.Name,
-		Nip05:       a.Nip05,
-		Npub:        a.Npub,
-		Picture:     a.Picture,
-		PubKey:      a.PubKey,
-		Username:    a.Username,
+		ID:             a.ID,
+		About:          a.About,
+		DisplayName:    a.DisplayName,
+		Banner:         a.Banner,
+		IsAdmin:        a.IsAdmin,
+		IsBusiness:     a.IsBusiness,
+		Name:           a.Name,
+		Nip05:          a.Nip05,
+		Npub:           a.Npub,
+		Picture:        a.Picture,
+		PubKey:         a.PubKey,
+		Username:       a.Username,
+		FollowersCount: a.FollowersCount,
+		FollowingCount: a.FollowingCount,
 	}
 }
 
