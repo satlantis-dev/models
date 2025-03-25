@@ -198,6 +198,48 @@ func (a *Account) ToPortableProfile(db *gorm.DB) (*AccountPortable, error) {
 	}, nil
 }
 
+func (a *Account) ToPortableProfileMin(db *gorm.DB) (*AccountPortable, error) {
+	// Get following count total
+	followingCountTotal, err := a.GetFollowingCount(db, a.ID)
+	if err != nil {
+		return nil, err
+	}
+
+	// Get follower accounts
+	followersCountTotal, err := a.GetFollowersCount(db, a.ID)
+	if err != nil {
+		return nil, err
+	}
+
+	return &AccountPortable{
+		ID:                   a.ID,
+		About:                a.About,
+		Banner:               a.Banner,
+		AccountPlaceRoles:    a.AccountPlaceRoles,
+		AccountLocationRoles: a.AccountLocationRoles,
+		ChatMemberships:      a.ChatMemberships,
+		CurrencyID:           a.CurrencyID,
+		DisplayName:          a.DisplayName,
+		Email:                a.Email,
+		EmailVerified:        a.EmailVerified,
+		InfluenceScore:       a.InfluenceScore,
+		Interests:            a.Interests,
+		IsAdmin:              a.IsAdmin,
+		IsBusiness:           a.IsBusiness,
+		Lud06:                a.Lud06,
+		Lud16:                a.Lud16,
+		Name:                 a.Name,
+		Nip05:                a.Nip05,
+		Notes:                a.Notes,
+		Npub:                 a.Npub,
+		Picture:              a.Picture,
+		PubKey:               a.PubKey,
+		Website:              a.Website,
+		FollowingCount:       &followingCountTotal,
+		FollowersCount:       &followersCountTotal,
+	}, nil
+}
+
 func (a *Account) GetFollowingAccounts(db *gorm.DB, followerID uint) ([]AccountDTO, error) {
 	var accounts []Account
 	err := db.Table("follows").Select("accounts.*").
