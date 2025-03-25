@@ -28,7 +28,7 @@ type Account struct {
 	InfluenceScore              uint                   `json:"influenceScore"`
 	Interests                   []Interest             `gorm:"many2many:account_interests" json:"interests"`
 	IsAdmin                     bool                   `json:"isAdmin"`
-	IsBlacklisted               bool                   `json:"-"`
+	IsBlacklisted               bool                   `json:"isBlacklisted"`
 	IsBusiness                  bool                   `json:"isBusiness"`
 	LastSeen                    *time.Time             `json:"-"`
 	LocationClaims              []LocationClaim        `gorm:"foreignKey:OwnerAccountID" json:"locationClaims"`
@@ -69,6 +69,7 @@ type AccountPortable struct {
 	InfluenceScore       uint                  `json:"influenceScore"`
 	Interests            []Interest            `gorm:"many2many:account_interests" json:"interests"`
 	IsAdmin              bool                  `json:"isAdmin"`
+	IsBlacklisted        bool                  `json:"isBlacklisted"`
 	IsBusiness           bool                  `json:"isBusiness"`
 	LastSeen             *time.Time            `json:"-"`
 	LocationSetEventID   *uint                 `json:"locationSetEventId"`
@@ -95,6 +96,7 @@ type AccountDTO struct {
 	DisplayName    string `json:"displayName"`
 	Banner         string `json:"banner"`
 	IsAdmin        bool   `json:"isAdmin"`
+	IsBlacklisted  bool   `json:"isBlacklisted"`
 	IsBusiness     bool   `json:"isBusiness"`
 	Name           string `json:"name"`
 	Nip05          string `json:"nip05"`
