@@ -11,4 +11,5 @@ type VerificationToken struct {
 	DeletedAt *time.Time `gorm:"index" json:"-,omitempty"`
 	Token     string     `gorm:"type:text" json:"token"`
 	AccountID uint       `gorm:"index" json:"accountId"`
+	OTPHash   string     `gorm:"type:text" json:"otpHash"`
 }
