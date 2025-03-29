@@ -32,5 +32,6 @@ type Interest struct {
 	Category              InterestCategory `json:"category"`
 	ContentUse            bool             `json:"contentUse"`
 	LocationUse           bool             `json:"locationUse"`
+	EventUse              bool             `json:"eventUse"`
 	PeopleUse             bool             `json:"peopleUse"`
 }
