@@ -2,6 +2,12 @@ package models
 
 import "time"
 
+type CalendarEventType struct {
+	ID          uint   `gorm:"primaryKey" json:"id"`
+	Name        string `json:"name"`
+	Description string `json:"description"`
+}
+
 type CalendarEvent struct {
 	ID                 uint                        `gorm:"primaryKey" json:"id"`
 	AccountID          uint                        `gorm:"index" json:"accountId"`
@@ -18,6 +24,7 @@ type CalendarEvent struct {
 	Event              Event                       `json:"event"`
 	Geohash            string                      `json:"geohash"`
 	Image              string                      `json:"image"`
+	Interests          []Interest                  `gorm:"many2many:calendar_event_interests" json:"interests"`
 	Location           string                      `json:"location"`
 	Kind               uint                        `gorm:"index" json:"kind"`
 	NostrID            string                      `gorm:"index" json:"nostrId"`
@@ -29,7 +36,8 @@ type CalendarEvent struct {
 	Summary            string                      `json:"summary"`
 	Tags               string                      `gorm:"type:jsonb" json:"tags"`
 	Title              string                      `json:"title"`
-	Type               string                      `json:"type"`
+	TypeID             uint                        `json:"typeId"`
+	Type               CalendarEventType           `gorm:"foreignKey:TypeID" json:"type"`
 	URL                string                      `json:"url"`
 	Website            string                      `json:"website"`
 }
