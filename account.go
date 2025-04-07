@@ -53,6 +53,8 @@ type Account struct {
 	Level                       int                    `gorm:"index;default:0" json:"level"`
 	FollowingCount              *int64                 `json:"followingCount"`
 	FollowersCount              *int64                 `json:"followersCount"`
+	AppleID                     *string                `gorm:"uniqueIndex" json:"appleId"`
+	GoogleID                    *string                `gorm:"uniqueIndex" json:"googleId"`
 }
 
 type AccountPortable struct {
@@ -88,6 +90,8 @@ type AccountPortable struct {
 	FollowedBy           []AccountDTO          `json:"followedBy"`
 	FollowingCount       *int64                `json:"followingCount"`
 	FollowersCount       *int64                `json:"followersCount"`
+	AppleID              *string               `json:"appleId"`
+	GoogleID             *string               `json:"googleId"`
 }
 
 type AccountDTO struct {
