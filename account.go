@@ -3,6 +3,7 @@ package models
 import (
 	"time"
 
+	"github.com/shopspring/decimal"
 	"gorm.io/gorm"
 )
 
@@ -55,6 +56,7 @@ type Account struct {
 	FollowersCount              *int64                 `json:"followersCount"`
 	AppleID                     *string                `gorm:"uniqueIndex" json:"appleId"`
 	GoogleID                    *string                `gorm:"uniqueIndex" json:"googleId"`
+	VertexRank                  decimal.Decimal        `gorm:"type:numeric;index" json:"vertexRank"`
 }
 
 type AccountPortable struct {
