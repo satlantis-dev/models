@@ -36,7 +36,7 @@ type CalendarEvent struct {
 	Summary            string                      `json:"summary"`
 	Tags               string                      `gorm:"type:jsonb" json:"tags"`
 	Title              string                      `json:"title"`
-	TypeID             uint                        `json:"typeId"`
+	TypeID             uint                        `gorm:"index;not null;default:1" json:"typeId"`
 	Type               CalendarEventType           `gorm:"foreignKey:TypeID" json:"type"`
 	URL                string                      `json:"url"`
 	Website            string                      `json:"website"`
