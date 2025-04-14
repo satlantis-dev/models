@@ -41,3 +41,8 @@ type CalendarEvent struct {
 	URL                string                      `json:"url"`
 	Website            string                      `json:"website"`
 }
+
+type CalendarEventInterest struct {
+	CalendarEventID uint `gorm:"uniqueIndex:idx_calendar_event_interest"`
+	InterestID      uint `gorm:"uniqueIndex:idx_calendar_event_interest"`
+}
