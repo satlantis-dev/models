@@ -32,6 +32,7 @@ var DatabaseModels = []interface{}{
 	Location{},
 	LocationCategory{},
 	LocationClaim{},
+	LocationDirectory{},
 	LocationGalleryImage{},
 	LocationNote{},
 	LocationTag{},
