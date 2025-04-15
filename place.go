@@ -111,6 +111,7 @@ func (place Place) ToDTO() *PlaceDTO {
 		OSMType:   place.OSMType,
 		OSMRef:    place.OSMRef,
 		RegionID:  place.RegionID,
+		Region:    place.Region,
 		WeatherID: place.WeatherID,
 		Weather:   place.Weather,
 	}
