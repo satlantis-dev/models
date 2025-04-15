@@ -10,7 +10,7 @@ type PlaceNote struct {
 	UpdatedAt   time.Time  `json:"-"`
 	DeletedAt   *time.Time `gorm:"index" json:"-,omitempty"`
 	PlaceID     uint       `gorm:"index" json:"placeId"`
-	Place       PlaceDTO   `json:"place"`
+	Place       Place      `json:"place"`
 	NoteID      uint       `gorm:"index" json:"noteId"`
 	Note        Note       `json:"note"`
 	Nsfw        bool       `json:"nsfw"`
