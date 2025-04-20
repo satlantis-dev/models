@@ -18,5 +18,5 @@ type LocationTag struct {
 	OsmPull          bool             `gorm:"type:boolean" json:"osmPull"`
 	Eligible         bool             `gorm:"type:boolean" json:"eligible"`
 	Locations        []Location       `gorm:"many2many:location_location_tags" json:"locations"`
-	Section          string           `gorm:"type:text" json:"section"`
+	Section          *string          `gorm:"type:text" json:"section"`
 }
