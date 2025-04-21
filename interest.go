@@ -27,7 +27,7 @@ type Interest struct {
 	AutofollowsByNpub     pq.StringArray   `gorm:"type:varchar[]" json:"autofollowsByNpub"`
 	AutofollowsById       pq.Int32Array    `gorm:"type:integer[]" json:"autofollowsById"`
 	Hashtags              pq.StringArray   `gorm:"type:varchar[]" json:"hashtags"`
-	LocationTags          []LocationTag    `gorm:"many2many:interest_location_tags" json:"locationTags"`
+	LocationTags          []LocationTag    `gorm:"many2many:interest_location_tags;constraint:OnDelete:CASCADE;" json:"locationTags"`
 	Category              InterestCategory `json:"category"`
 	Section               string           `json:"section"`
 	ContentUse            bool             `json:"contentUse"`
