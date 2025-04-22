@@ -40,6 +40,7 @@ type CalendarEvent struct {
 	Type               CalendarEventType           `gorm:"foreignKey:TypeID" json:"type"`
 	URL                string                      `json:"url"`
 	Website            string                      `json:"website"`
+	IsSatlantisCreated bool                        `gorm:"default:false" json:"IsSatlantisCreated"`
 }
 
 type CalendarEventInterest struct {
