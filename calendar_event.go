@@ -43,9 +43,21 @@ type CalendarEvent struct {
 	IsSatlantisCreated bool                        `gorm:"default:false" json:"IsSatlantisCreated"`
 	VenueId            uint                        `gorm:"index" json:"venueId"`
 	Venue              LocationDTO                 `gorm:"foreignKey:VenueId" json:"venue"`
+	Cohosts            []CalendarEventCohost       `json:"cohosts"`
 }
 
 type CalendarEventInterest struct {
 	CalendarEventID uint `gorm:"uniqueIndex:idx_calendar_event_interest"`
 	InterestID      uint `gorm:"uniqueIndex:idx_calendar_event_interest"`
+}
+
+type CalendarEventCohost struct {
+	ID                   uint          `gorm:"primaryKey" json:"id"`
+	CalendarEventID      uint          `gorm:"index;not null" json:"calendarEventID"`
+	CalendarEvent        CalendarEvent `gorm:"foreignKey:CalendarEventID" json:"calendarEvent"`
+	AccountID            uint          `gorm:"index;not null" json:"accountId"`
+	Account              AccountDTO    `gorm:"foreignKey:AccountID" json:"account"`
+	InvitationAcceptedAt *time.Time    `json:"invitationAcceptedAt"`
+	CreatedAt            time.Time     `json:"createdAt"`
+	UpdatedAt            time.Time     `json:"updatedAt"`
 }
