@@ -42,7 +42,7 @@ type CalendarEvent struct {
 	Website            string                      `json:"website"`
 	IsSatlantisCreated bool                        `gorm:"default:false" json:"IsSatlantisCreated"`
 	VenueId            uint                        `gorm:"index" json:"venueId"`
-	Venue              LocationDTO                 `gorm:"foreignKey:venueId" json:"venue"`
+	Venue              LocationDTO                 `gorm:"foreignKey:VenueId" json:"venue"`
 }
 
 type CalendarEventInterest struct {
