@@ -52,12 +52,12 @@ type CalendarEventInterest struct {
 }
 
 type CalendarEventCohost struct {
-	ID                   uint          `gorm:"primaryKey" json:"id"`
-	CalendarEventID      uint          `gorm:"index;not null" json:"calendarEventID"`
-	CalendarEvent        CalendarEvent `gorm:"foreignKey:CalendarEventID" json:"calendarEvent"`
-	AccountID            uint          `gorm:"index;not null" json:"accountId"`
-	Account              AccountDTO    `gorm:"foreignKey:AccountID" json:"account"`
-	InvitationAcceptedAt *time.Time    `json:"invitationAcceptedAt"`
-	CreatedAt            time.Time     `json:"createdAt"`
-	UpdatedAt            time.Time     `json:"updatedAt"`
+	ID                   uint           `gorm:"primaryKey" json:"id"`
+	CalendarEventID      uint           `gorm:"index;not null" json:"calendarEventId"`
+	CalendarEvent        *CalendarEvent `gorm:"foreignKey:CalendarEventID" json:"calendarEvent,omitempty"`
+	AccountID            uint           `gorm:"index;not null" json:"accountId"`
+	Account              *AccountDTO    `gorm:"foreignKey:AccountID" json:"account"`
+	InvitationAcceptedAt *time.Time     `json:"invitationAcceptedAt"`
+	CreatedAt            time.Time      `json:"createdAt"`
+	UpdatedAt            time.Time      `json:"updatedAt"`
 }
