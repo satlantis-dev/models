@@ -1,6 +1,9 @@
 package models
 
-import "time"
+import (
+	"gorm.io/gorm"
+	"time"
+)
 
 type CalendarEventType struct {
 	ID          uint   `gorm:"primaryKey" json:"id"`
@@ -44,6 +47,7 @@ type CalendarEvent struct {
 	VenueId            uint                        `gorm:"index" json:"venueId"`
 	Venue              LocationDTO                 `gorm:"foreignKey:VenueId" json:"venue"`
 	Cohosts            []CalendarEventCohost       `json:"cohosts"`
+	DeletedAt          gorm.DeletedAt              `gorm:"index" json:"-"`
 }
 
 type CalendarEventInterest struct {
