@@ -10,6 +10,7 @@ type Conversation struct {
 	ToAccountID       string     `gorm:"uniqueIndex:idx_from_account_to_account" json:"toAccountID"`
 	FromAccountReadAt *time.Time `json:"fromAccountReadAt"`
 	ToAccountReadAt   *time.Time `json:"toAccountReadAt"`
+	BlockedAt         *time.Time `json:"blockedAt"`
 	CreatedAt         time.Time  `json:"-"`
 	DeletedAt         *time.Time `json:"-,omitempty"`
 }
