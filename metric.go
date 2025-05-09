@@ -22,7 +22,7 @@ type Metric struct {
 	CategoryID      uint           `gorm:"index" json:"categoryId"`
 	Category        Category       `json:"category"`
 	Description     string         `gorm:"type:text" json:"description"`
-	Format          MetricFormat   `json:"type"`
+	Format          MetricFormat   `json:"format"`
 	MetricSourceID  uint           `gorm:"index" json:"metric_sourceId"`
 	MetricSource    MetricSource   `json:"metricSource"`
 	Name            string         `gorm:"type:text" json:"name"`
@@ -43,7 +43,7 @@ type MetricDTO struct {
 	CategoryID  uint         `json:"categoryId"`
 	Category    Category     `json:"category"`
 	Description string       `json:"description"`
-	Format      MetricFormat `json:"type"`
+	Format      MetricFormat `json:"format"`
 	Name        string       `json:"name"`
 	Order       uint         `json:"order"`
 	Prompt      string       `json:"prompt"`
