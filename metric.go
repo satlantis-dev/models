@@ -39,18 +39,19 @@ type Metric struct {
 }
 
 type MetricDTO struct {
-	ID          uint     `json:"id"`
-	CategoryID  uint     `json:"categoryId"`
-	Category    Category `json:"category"`
-	Description string   `json:"description"`
-	Name        string   `json:"name"`
-	Order       uint     `json:"order"`
-	Prompt      string   `json:"prompt"`
-	Slug        string   `json:"slug"`
-	Suffix      string   `json:"suffix"`
-	Tags        string   `json:"tags"`
-	TopicID     uint     `json:"topicId"`
-	Topic       Topic    `json:"topic"`
+	ID          uint         `json:"id"`
+	CategoryID  uint         `json:"categoryId"`
+	Category    Category     `json:"category"`
+	Description string       `json:"description"`
+	Format      MetricFormat `json:"type"`
+	Name        string       `json:"name"`
+	Order       uint         `json:"order"`
+	Prompt      string       `json:"prompt"`
+	Slug        string       `json:"slug"`
+	Suffix      string       `json:"suffix"`
+	Tags        string       `json:"tags"`
+	TopicID     uint         `json:"topicId"`
+	Topic       Topic        `json:"topic"`
 }
 
 func (MetricDTO) TableName() string {
