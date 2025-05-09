@@ -7,4 +7,5 @@ type LocationDirectory struct {
 	AccountID   uint    `gorm:"index" json:"accountId"`
 	Account     Account `gorm:"foreignKey:AccountID" json:"account"`
 	Description string  `json:"description"`
+	Eligible    bool    `json:"eligible"`
 }
