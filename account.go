@@ -169,12 +169,6 @@ func (a *Account) ToPortableProfile(db *gorm.DB) (*AccountPortable, error) {
 		return nil, err
 	}
 
-	// Get follower accounts
-	followersCountTotal, err := a.GetFollowersCount(db, a.ID)
-	if err != nil {
-		return nil, err
-	}
-
 	return &AccountPortable{
 		ID:                   a.ID,
 		About:                a.About,
@@ -202,19 +196,13 @@ func (a *Account) ToPortableProfile(db *gorm.DB) (*AccountPortable, error) {
 		Following:            following,
 		FollowedBy:           followedBy,
 		FollowingCount:       &followingCountTotal,
-		FollowersCount:       &followersCountTotal,
+		FollowersCount:       a.FollowersCount,
 	}, nil
 }
 
 func (a *Account) ToPortableProfileMin(db *gorm.DB) (*AccountPortable, error) {
 	// Get following count total
 	followingCountTotal, err := a.GetFollowingCount(db, a.ID)
-	if err != nil {
-		return nil, err
-	}
-
-	// Get follower accounts
-	followersCountTotal, err := a.GetFollowersCount(db, a.ID)
 	if err != nil {
 		return nil, err
 	}
@@ -244,7 +232,7 @@ func (a *Account) ToPortableProfileMin(db *gorm.DB) (*AccountPortable, error) {
 		PubKey:               a.PubKey,
 		Website:              a.Website,
 		FollowingCount:       &followingCountTotal,
-		FollowersCount:       &followersCountTotal,
+		FollowersCount:       a.FollowersCount,
 	}, nil
 }
 
