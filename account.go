@@ -321,7 +321,7 @@ func (a *Account) ToSearchAccountDTO(db *gorm.DB) (*SearchAccountDTO, error) {
 	}, nil
 }
 
-func (a *Account) ToAccountMiniDTO(db *gorm.DB) (*AccountMiniDTO, error) {
+func (a *Account) ToAccountMiniDTO() (*AccountMiniDTO, error) {
 	return &AccountMiniDTO{
 		ID:          a.ID,
 		Username:    a.Username,
