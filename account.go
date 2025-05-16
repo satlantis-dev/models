@@ -128,7 +128,7 @@ type SearchAccountDTO struct {
 	FollowersCount int64  `json:"followers_count"`
 }
 
-type AccountMini struct {
+type AccountMiniDTO struct {
 	ID          uint   `json:"id"`
 	Username    string `json:"username"`
 	DisplayName string `json:"display_name"`
@@ -318,5 +318,18 @@ func (a *Account) ToSearchAccountDTO(db *gorm.DB) (*SearchAccountDTO, error) {
 		About:       a.About,
 		Picture:     a.Picture,
 		Npub:        a.Npub,
+	}, nil
+}
+
+func (a *Account) ToAccountMiniDTO(db *gorm.DB) (*AccountMiniDTO, error) {
+	return &AccountMiniDTO{
+		ID:          a.ID,
+		Username:    a.Username,
+		DisplayName: a.DisplayName,
+		Name:        a.Name,
+		Nip05:       a.Nip05,
+		Picture:     a.Picture,
+		Npub:        a.Npub,
+		PubKey:      a.PubKey,
 	}, nil
 }
