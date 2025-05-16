@@ -68,6 +68,7 @@ type AccountPortable struct {
 	ChatMemberships      []ChatMembership      `gorm:"foreignKey:AccountID" json:"chatMemberships"`
 	CurrencyID           *uint                 `json:"currencyId"`
 	DisplayName          string                `json:"displayName"`
+	Username             string                `json:"username"`
 	Email                string                `json:"email"`
 	EmailVerified        bool                  `json:"emailVerified"`
 	InfluenceScore       uint                  `json:"influenceScore"`
@@ -178,6 +179,7 @@ func (a *Account) ToPortableProfile(db *gorm.DB) (*AccountPortable, error) {
 		ChatMemberships:      a.ChatMemberships,
 		CurrencyID:           a.CurrencyID,
 		DisplayName:          a.DisplayName,
+		Username:             a.Username,
 		Email:                a.Email,
 		EmailVerified:        a.EmailVerified,
 		InfluenceScore:       a.InfluenceScore,
