@@ -218,6 +218,7 @@ func (a *Account) ToPortableProfileMin(db *gorm.DB) (*AccountPortable, error) {
 		ChatMemberships:      a.ChatMemberships,
 		CurrencyID:           a.CurrencyID,
 		DisplayName:          a.DisplayName,
+		Username:             a.Username,
 		Email:                a.Email,
 		EmailVerified:        a.EmailVerified,
 		InfluenceScore:       a.InfluenceScore,
