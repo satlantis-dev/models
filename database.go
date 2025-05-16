@@ -89,6 +89,7 @@ var DatabaseModels = []interface{}{
 	CalendarEventCohost{},
 	ChatMessage{},
 	ContentReport{},
+	NoteRepost{},
 }
 
 func SetupDatabase(dbHost, dbUser, dbPassword, dbName string) (*gorm.DB, error) {
