@@ -48,16 +48,16 @@ type NoteWithClosure struct {
 
 type FeedNote struct {
 	Note
-	Source             string     `json:"source"`
-	Score              float64    `json:"score"`
-	CommentCount       int        `json:"commentCount"`
-	AllCommentCount    int        `json:"allCommentCount"`
-	ReactionCount      int        `json:"reactionCount"`
-	RepostCount        int        `json:"repostCount"`
-	RepostedByAccounts AccountDTO `json:"repostedByAccounts"`
-	CommentedByUser    bool       `json:"commentedByUser"`
-	ReactedByUser      bool       `json:"reactedByUser"`
-	Place              *PlaceDTO  `json:"place"`
+	Source             string      `json:"source"`
+	Score              float64     `json:"score"`
+	CommentCount       int         `json:"commentCount"`
+	AllCommentCount    int         `json:"allCommentCount"`
+	ReactionCount      int         `json:"reactionCount"`
+	RepostCount        int         `json:"repostCount"`
+	RepostedByAccounts AccountMini `json:"repostedByAccounts"`
+	CommentedByUser    bool        `json:"commentedByUser"`
+	ReactedByUser      bool        `json:"reactedByUser"`
+	Place              *PlaceDTO   `json:"place"`
 }
 
 type ChatNote struct {

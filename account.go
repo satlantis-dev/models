@@ -128,6 +128,17 @@ type SearchAccountDTO struct {
 	FollowersCount int64  `json:"followers_count"`
 }
 
+type AccountMini struct {
+	ID          uint   `json:"id"`
+	Username    string `json:"username"`
+	DisplayName string `json:"display_name"`
+	Name        string `json:"name"`
+	Nip05       string `json:"nip05"`
+	Picture     string `json:"picture"`
+	Npub        string `json:"npub"`
+	PubKey      string `json:"pubKey"`
+}
+
 func (AccountDTO) TableName() string {
 	return "accounts"
 }
