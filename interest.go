@@ -30,7 +30,7 @@ type Interest struct {
 	LocationTags          []LocationTag    `gorm:"many2many:interest_location_tags;constraint:OnDelete:CASCADE;" json:"locationTags"`
 	Category              InterestCategory `json:"category"`
 	Section               string           `json:"section"`
-	Emoji                 string           `gorm:"type:char(1)" json:"emoji"`
+	Emoji                 string           `gorm:"type:varchar(7)" json:"emoji"`
 	ContentUse            bool             `json:"contentUse"`
 	LocationUse           bool             `json:"locationUse"`
 	EventUse              bool             `json:"eventUse"`
