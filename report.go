@@ -8,6 +8,7 @@ type ContentReport struct {
 	CreatedBy      AccountDTO              `json:"createdBy"`
 	ReportedUserID *uint                   `gorm:"index" json:"reportedUserId"`
 	ReportedUser   *AccountDTO             `json:"reportedUser"`
+	ReportedItemID *uint                   `gorm:"index" json:"reportedItemId"`
 	Type           string                  `json:"type"`
 	Reason         string                  `json:"reason"`
 	Link           string                  `json:"link"`
