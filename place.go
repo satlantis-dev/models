@@ -53,6 +53,7 @@ type Place struct {
 	Description        string               `gorm:"type:text" json:"description"`
 	EventID            *uint                `gorm:"index" json:"eventId"`
 	Event              Event                `json:"event"`
+	Featured           bool                 `json:"featured"`
 	Lat                float64              `json:"lat"`
 	Level              PlaceLevel           `gorm:"type:text" json:"level"`
 	Lng                float64              `json:"lng"`
