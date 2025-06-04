@@ -48,16 +48,18 @@ type NoteWithClosure struct {
 
 type FeedNote struct {
 	Note
-	Source             string           `json:"source"`
-	Score              float64          `json:"score"`
-	CommentCount       int              `json:"commentCount"`
-	AllCommentCount    int              `json:"allCommentCount"`
-	ReactionCount      int              `json:"reactionCount"`
-	RepostCount        int              `json:"repostCount"`
-	RepostedByAccounts []AccountMiniDTO `json:"repostedByAccounts"`
-	CommentedByUser    bool             `json:"commentedByUser"`
-	ReactedByUser      bool             `json:"reactedByUser"`
-	Place              *PlaceDTO        `json:"place"`
+	Source               string           `json:"source"`
+	Score                float64          `json:"score"`
+	CommentCount         int              `json:"commentCount"`
+	AllCommentCount      int              `json:"allCommentCount"`
+	ReactionCount        int              `json:"reactionCount"`
+	NotableReactionCount int              `json:"notableReactionCount"`
+	ReactedByAccounts    []AccountMiniDTO `json:"reactedByAccounts"`
+	RepostCount          int              `json:"repostCount"`
+	RepostedByAccounts   []AccountMiniDTO `json:"repostedByAccounts"`
+	CommentedByUser      bool             `json:"commentedByUser"`
+	ReactedByUser        bool             `json:"reactedByUser"`
+	Place                *PlaceDTO        `json:"place"`
 }
 
 type ChatNote struct {
@@ -78,37 +80,4 @@ type NotePagination struct {
 	PaginationForward bool `json:"paginationForward"`
 	PaginationLimit   int  `json:"paginationLimit"`
 	PaginationNoteID  int  `json:"paginationNoteId"`
-}
-
-type NoteDTO struct {
-	ID        uint       `json:"id"`
-	AccountID uint       `json:"accountId"`
-	Account   AccountDTO `json:"account"`
-	CreatedAt *time.Time `json:"createdAt"`
-	Content   *string    `json:"content"`
-	EventID   uint       `json:"eventId"`
-	Kind      uint       `json:"kind"`
-	NostrID   string     `json:"nostrId"`
-	PubKey    string     `json:"pubkey"`
-	Sig       string     `json:"sig"`
-	Tags      *string    `json:"tags"`
-	Type      NoteType   `json:"type"`
-	Place     *Place     `json:"place"`
-}
-
-func (note *Note) ToDTO() NoteDTO {
-	return NoteDTO{
-		ID:        note.ID,
-		AccountID: note.AccountID,
-		Account:   note.Account,
-		CreatedAt: note.CreatedAt,
-		Content:   note.Content,
-		EventID:   note.EventID,
-		Kind:      note.Kind,
-		NostrID:   note.NostrID,
-		PubKey:    note.PubKey,
-		Sig:       note.Sig,
-		Tags:      note.Tags,
-		Type:      note.Type,
-	}
 }
