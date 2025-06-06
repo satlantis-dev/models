@@ -171,6 +171,35 @@ func (SourceLocationsExtra) TableName() string {
 	return "source_locations_extra"
 }
 
+// SourceLocationsAll with Response as JSON object
+type SourceLocationsAll struct {
+	GoogleId           string           `gorm:"primaryKey" json:"googleId"`
+	OSMRef             string           `gorm:"uniqueIndex" json:"osmRef"`
+	Name               string           `json:"name"`
+	Lat                float64          `json:"lat"`
+	Lng                float64          `json:"lng"`
+	OSMStdTags         string           `gorm:"type:jsonb" json:"osmStdTags"`
+	OSMExtraTags       string           `gorm:"type:jsonb" json:"osmExtraTags"`
+	SatlantisTags      string           `gorm:"type:jsonb" json:"satlantisTags"`
+	OSMPlaceRef        string           `json:"osmPlaceRef"`
+	OSMPlaceName       string           `json:"osmPlaceName"`
+	Source             string           `gorm:"not null" json:"source"`
+	OSMDetails         string           `gorm:"type:jsonb" json:"osmDetails"`
+	GoogleDetails      string           `gorm:"type:jsonb" json:"googleDetails"`
+	GooglePhotoUrl     string           `json:"googlePhotoUrl"`
+	TripadvisorId      *uint            `json:"tripadvisorId"`
+	TripadvisorDetails string           `gorm:"type:jsonb" json:"tripadvisorDetails"`
+	Reports            Reports          `gorm:"type:jsonb" json:"reports"`
+	Reviews            Reviews          `gorm:"type:jsonb" json:"reviews"`
+	ReviewSummary      string           `json:"reviewSummary"`
+	ReviewHighlights   ReviewHighlights `gorm:"type:jsonb;serializer:json" json:"reviewHighlights"`
+	Bio                string           `json:"bio"`
+	Hook               string           `gorm:"size:70" json:"hook"`
+	Photos             Photos           `gorm:"type:jsonb" json:"photos"`
+	Eligible           bool             `json:"eligible"`
+	UpdatedAt          time.Time        `json:"-"`
+}
+
 type SourceLocations struct {
 	OSMId              uint             `json:"osmId"`
 	OSMType            OSMType          `json:"osmType"`
@@ -199,4 +228,8 @@ type SourceLocations struct {
 	Bio                string           `json:"bio"`
 	Hook               string           `gorm:"size:70" json:"hook"`
 	Photos             Photos           `gorm:"type:jsonb" json:"photos"`
+}
+
+func (SourceLocationsAll) TableName() string {
+	return "source_locations_all"
 }
