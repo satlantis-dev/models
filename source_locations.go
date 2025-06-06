@@ -200,6 +200,10 @@ type SourceLocationsAll struct {
 	UpdatedAt          time.Time        `json:"-"`
 }
 
+func (SourceLocationsAll) TableName() string {
+	return "source_locations_all"
+}
+
 type SourceLocations struct {
 	OSMId              uint             `json:"osmId"`
 	OSMType            OSMType          `json:"osmType"`
@@ -228,8 +232,4 @@ type SourceLocations struct {
 	Bio                string           `json:"bio"`
 	Hook               string           `gorm:"size:70" json:"hook"`
 	Photos             Photos           `gorm:"type:jsonb" json:"photos"`
-}
-
-func (SourceLocationsAll) TableName() string {
-	return "source_locations_all"
 }
