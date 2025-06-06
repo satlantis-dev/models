@@ -73,6 +73,7 @@ var DatabaseModels = []interface{}{
 	SourceSurvey{},
 	SourceLocationsOsm{},
 	SourceLocationsExtra{},
+	SourceLocationsAll{},
 	Tag{},
 	TeamMember{},
 	Topic{},
