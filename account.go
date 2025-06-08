@@ -17,6 +17,7 @@ type Account struct {
 	Banner                      string                 `gorm:"type:text" json:"banner"`
 	BusinessCategory            string                 `gorm:"default:NULL" json:"businessCategory"`
 	ChatMemberships             []ChatMembership       `gorm:"foreignKey:AccountID" json:"chatMemberships"`
+	ClusterID                   *uint                  `gorm:"index" json:"clusterId"`
 	CurrencyID                  *uint                  `gorm:"index" json:"currencyId"`
 	Currency                    Currency               `json:"currency"`
 	DisplayName                 string                 `gorm:"type:text" json:"displayName"`
