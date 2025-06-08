@@ -116,7 +116,7 @@ type SourceLocationsOsm struct {
 	OSMPlaceRef        string           `json:"osmPlaceRef"`
 	OSMPlaceName       string           `json:"osmPlaceName"`
 	Source             string           `gorm:"default:osm" json:"source"`
-	GoogleId           string           `json:"googleId"`
+	GoogleId           string           `gorm:"uniqueIndex" json:"googleId"`
 	GoogleDetails      string           `gorm:"type:jsonb" json:"googleDetails"`
 	GooglePhotoUrl     string           `json:"googlePhotoUrl"`
 	TripadvisorId      *uint            `json:"tripadvisorId"`
@@ -173,8 +173,8 @@ func (SourceLocationsExtra) TableName() string {
 
 // SourceLocationsAll with Response as JSON object
 type SourceLocationsAll struct {
-	GoogleId           string           `gorm:"primaryKey" json:"googleId"`
-	OSMRef             string           `gorm:"uniqueIndex" json:"osmRef"`
+	GoogleId           string           `gorm:"primaryKey;index" json:"googleId"`
+	OSMRef             string           `gorm:"unique" json:"osmRef"`
 	Name               string           `json:"name"`
 	Lat                float64          `json:"lat"`
 	Lng                float64          `json:"lng"`
