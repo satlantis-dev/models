@@ -23,6 +23,8 @@ var DatabaseModels = []interface{}{
 	CalendarEvent{},
 	Category{},
 	ChatMembership{},
+	Cluster{},
+	ClusterInterest{},
 	Continent{},
 	Country{},
 	Currency{},
