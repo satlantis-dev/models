@@ -310,6 +310,12 @@ func (a *Account) GetFollowedByAccounts(db *gorm.DB, followingID uint) ([]Accoun
 }
 
 func (a *Account) ToSearchAccountDTO(db *gorm.DB) (*SearchAccountDTO, error) {
+	// Set followers count to 0 if nil
+	var followersCount int64 = 0
+	if a.FollowersCount != nil {
+		followersCount = *a.FollowersCount
+	}
+
 	return &SearchAccountDTO{
 		ID:             a.ID,
 		Username:       a.Username,
@@ -319,7 +325,7 @@ func (a *Account) ToSearchAccountDTO(db *gorm.DB) (*SearchAccountDTO, error) {
 		About:          a.About,
 		Picture:        a.Picture,
 		Npub:           a.Npub,
-		FollowersCount: *a.FollowersCount,
+		FollowersCount: followersCount,
 	}, nil
 }
 
