@@ -311,14 +311,15 @@ func (a *Account) GetFollowedByAccounts(db *gorm.DB, followingID uint) ([]Accoun
 
 func (a *Account) ToSearchAccountDTO(db *gorm.DB) (*SearchAccountDTO, error) {
 	return &SearchAccountDTO{
-		ID:          a.ID,
-		Username:    a.Username,
-		DisplayName: a.DisplayName,
-		Name:        a.Name,
-		Nip05:       a.Nip05,
-		About:       a.About,
-		Picture:     a.Picture,
-		Npub:        a.Npub,
+		ID:             a.ID,
+		Username:       a.Username,
+		DisplayName:    a.DisplayName,
+		Name:           a.Name,
+		Nip05:          a.Nip05,
+		About:          a.About,
+		Picture:        a.Picture,
+		Npub:           a.Npub,
+		FollowersCount: *a.FollowersCount,
 	}, nil
 }
 
