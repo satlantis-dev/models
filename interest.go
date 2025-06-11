@@ -38,6 +38,6 @@ type Interest struct {
 }
 
 type WeightedInterest struct {
-	Interest
-	Weight float64 `json:"weight"`
+	InterestID uint    `json:"interestId"`
+	Weight     float64 `json:"weight"`
 }
