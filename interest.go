@@ -36,3 +36,8 @@ type Interest struct {
 	EventUse              bool             `json:"eventUse"`
 	PeopleUse             bool             `json:"peopleUse"`
 }
+
+type WeightedInterest struct {
+	Interest
+	Weight float64 `json:"weight"`
+}
