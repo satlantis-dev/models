@@ -37,7 +37,4 @@ type Interest struct {
 	PeopleUse             bool             `json:"peopleUse"`
 }
 
-type WeightedInterest struct {
-	InterestID uint
-	Weight     float64
-}
+type WeightedInterests map[uint]float64

@@ -22,7 +22,4 @@ type LocationTag struct {
 	Hashtags         pq.StringArray   `gorm:"type:varchar[]" json:"hashtags"`
 }
 
-type WeightedLocationTag struct {
-	LocationTagID uint
-	Weight        float64
-}
+type WeightedLocationTags map[uint]float64
