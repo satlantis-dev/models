@@ -21,3 +21,8 @@ type LocationTag struct {
 	Section          *string          `gorm:"type:text" json:"section"`
 	Hashtags         pq.StringArray   `gorm:"type:varchar[]" json:"hashtags"`
 }
+
+type WeightedLocationTag struct {
+	LocationTagID uint
+	Weight        float64
+}
