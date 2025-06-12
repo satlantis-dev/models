@@ -1,8 +1,9 @@
 package models
 
 import (
-	"gorm.io/gorm"
 	"time"
+
+	"gorm.io/gorm"
 )
 
 type CalendarEventType struct {
@@ -43,9 +44,10 @@ type CalendarEvent struct {
 	Type               CalendarEventType           `gorm:"foreignKey:TypeID" json:"type"`
 	URL                string                      `json:"url"`
 	Website            string                      `json:"website"`
-	IsSatlantisCreated bool                        `gorm:"default:false" json:"IsSatlantisCreated"`
-	VenueId            *uint                       `gorm:"index" json:"venueId"`
-	Venue              LocationDTO                 `gorm:"foreignKey:VenueId" json:"venue"`
+	IsSatlantisCreated bool                        `gorm:"default:false" json:"isSatlantisCreated"`
+	GoogleID           string                      `json:"googleId"`
+	VenueID            *uint                       `gorm:"index" json:"venueId"`
+	Venue              LocationDTO                 `gorm:"foreignKey:VenueID" json:"venue"`
 	Cohosts            []CalendarEventCohost       `json:"cohosts"`
 	DeletedAt          gorm.DeletedAt              `gorm:"index" json:"-"`
 	OwnershipChangedAt *time.Time                  `json:"ownershipChangedAt"`
