@@ -7,6 +7,8 @@ import (
 	"time"
 )
 
+// OSM
+
 type OSMType string
 
 const (
@@ -14,6 +16,8 @@ const (
 	OSMTypeRelation OSMType = "relation"
 	OSMTypeWay      OSMType = "way"
 )
+
+// Reports
 
 type ReportType string
 
@@ -50,6 +54,8 @@ func (r Reports) Value() (driver.Value, error) {
 	return json.Marshal(r)
 }
 
+// Reviews
+
 type Review struct {
 	Source string    `json:"source"`
 	Id     string    `json:"id"`
@@ -76,6 +82,8 @@ func (r Reviews) Value() (driver.Value, error) {
 	return json.Marshal(r)
 }
 
+// Photos
+
 type Photo struct {
 	Url      string `gorm:"not null;unique" json:"url"`
 	SourceID string `gorm:"not null;unique" json:"id"`
@@ -101,7 +109,28 @@ func (p Photos) Value() (driver.Value, error) {
 	return json.Marshal(p)
 }
 
-// SourceLocationsOsm with Response as JSON object
+// Tags
+
+type JSONBMapSlice []map[string]string
+
+func (j *JSONBMapSlice) Scan(value interface{}) error {
+	if value == nil {
+		*j = nil
+		return nil
+	}
+	b, ok := value.([]byte)
+	if !ok {
+		return fmt.Errorf("unsupported type: %T", value)
+	}
+	return json.Unmarshal(b, j)
+}
+
+func (j JSONBMapSlice) Value() (driver.Value, error) {
+	return json.Marshal(j)
+}
+
+// SourceLocationsOsm  [TEMP STAGING ONLY]
+
 type SourceLocationsOsm struct {
 	OSMId              uint             `gorm:"primaryKey;type:uint" json:"osmId"`
 	OSMType            OSMType          `gorm:"primaryKey;type:string" json:"osmType"`
@@ -109,9 +138,9 @@ type SourceLocationsOsm struct {
 	Name               string           `json:"name"`
 	Lat                float64          `json:"lat"`
 	Lng                float64          `json:"lng"`
-	OSMStdTags         string           `gorm:"type:jsonb" json:"osmStdTags"`
-	OSMExtraTags       string           `gorm:"type:jsonb" json:"osmExtraTags"`
-	SatlantisTags      string           `gorm:"type:jsonb" json:"satlantisTags"`
+	OSMStdTags         JSONBMapSlice    `gorm:"type:jsonb" json:"osmStdTags"`
+	OSMExtraTags       JSONBMapSlice    `gorm:"type:jsonb" json:"osmExtraTags"`
+	SatlantisTags      JSONBMapSlice    `gorm:"type:jsonb" json:"satlantisTags"`
 	OSMDetails         string           `gorm:"type:jsonb" json:"osmDetails"`
 	OSMPlaceRef        string           `json:"osmPlaceRef"`
 	OSMPlaceName       string           `json:"osmPlaceName"`
@@ -136,61 +165,7 @@ func (SourceLocationsOsm) TableName() string {
 	return "source_locations_osm"
 }
 
-// SourceLocationsExtra with Response as JSON object
-type SourceLocationsExtra struct {
-	OSMId              uint             `gorm:"primaryKey;type:bigserial" json:"osmId"`
-	OSMType            OSMType          `gorm:"type:string;default:node" json:"osmType"`
-	OSMRef             string           `gorm:"uniqueIndex" json:"osmRef"`
-	Name               string           `json:"name"`
-	Lat                float64          `json:"lat"`
-	Lng                float64          `json:"lng"`
-	OSMStdTags         string           `gorm:"type:jsonb" json:"osmStdTags"`
-	OSMExtraTags       string           `gorm:"type:jsonb" json:"osmExtraTags"`
-	SatlantisTags      string           `gorm:"type:jsonb" json:"satlantisTags"`
-	OSMDetails         string           `gorm:"type:jsonb" json:"osmDetails"`
-	OSMPlaceRef        string           `json:"osmPlaceRef"`
-	OSMPlaceName       string           `json:"osmPlaceName"`
-	Source             string           `gorm:"not null" json:"source"`
-	GoogleId           string           `gorm:"uniqueIndex" json:"googleId"`
-	GoogleDetails      string           `gorm:"type:jsonb" json:"googleDetails"`
-	GooglePhotoUrl     string           `json:"googlePhotoUrl"`
-	TripadvisorId      *uint            `json:"tripadvisorId"`
-	TripadvisorDetails string           `gorm:"type:jsonb" json:"tripadvisorDetails"`
-	UpdatedOn          time.Time        `json:"updatedOn"`
-	Eligible           bool             `json:"eligible"`
-	Reports            Reports          `gorm:"type:jsonb" json:"reports"`
-	Reviews            Reviews          `gorm:"type:jsonb" json:"reviews"`
-	ReviewSummary      string           `json:"reviewSummary"`
-	ReviewHighlights   ReviewHighlights `gorm:"type:jsonb;serializer:json" json:"reviewHighlights"`
-	Bio                string           `json:"bio"`
-	Hook               string           `gorm:"size:70" json:"hook"`
-	Photos             Photos           `gorm:"type:jsonb" json:"photos"`
-}
-
-func (SourceLocationsExtra) TableName() string {
-	return "source_locations_extra"
-}
-
-// SourceLocationsAll with Response as JSON object
-type JSONBMapSlice []map[string]string
-
-// Scan implements the sql.Scanner interface for JSONBMapSlice
-func (j *JSONBMapSlice) Scan(value interface{}) error {
-	if value == nil {
-		*j = nil
-		return nil
-	}
-	b, ok := value.([]byte)
-	if !ok {
-		return fmt.Errorf("unsupported type: %T", value)
-	}
-	return json.Unmarshal(b, j)
-}
-
-// Value implements the driver.Valuer interface for JSONBMapSlice
-func (j JSONBMapSlice) Value() (driver.Value, error) {
-	return json.Marshal(j)
-}
+// SourceLocationsAll
 
 type SourceLocationsAll struct {
 	GoogleId           string           `gorm:"primaryKey;index" json:"googleId"`
@@ -222,34 +197,4 @@ type SourceLocationsAll struct {
 
 func (SourceLocationsAll) TableName() string {
 	return "source_locations_all"
-}
-
-type SourceLocations struct {
-	OSMId              uint             `json:"osmId"`
-	OSMType            OSMType          `json:"osmType"`
-	OSMRef             string           `gorm:"uniqueIndex" json:"osmRef"`
-	Name               string           `json:"name"`
-	Lat                float64          `json:"lat"`
-	Lng                float64          `json:"lng"`
-	OSMStdTags         string           `json:"osmStdTags"`
-	OSMExtraTags       string           `json:"osmExtraTags"`
-	SatlantisTags      string           `json:"satlantisTags"`
-	OSMDetails         string           `json:"osmDetails"`
-	OSMPlaceRef        string           `json:"osmPlaceRef"`
-	OSMPlaceName       string           `json:"osmPlaceName"`
-	Source             string           `json:"source"`
-	GoogleId           string           `json:"googleId"`
-	GoogleDetails      string           `json:"googleDetails"`
-	GooglePhotoUrl     string           `json:"googlePhotoUrl"`
-	TripadvisorId      *uint            `json:"tripadvisorId"`
-	TripadvisorDetails string           `json:"tripadvisorDetails"`
-	UpdatedOn          time.Time        `json:"updatedOn"`
-	Eligible           bool             `json:"eligible"`
-	Reports            Reports          `gorm:"type:jsonb" json:"reports"`
-	Reviews            Reviews          `gorm:"type:jsonb" json:"reviews"`
-	ReviewSummary      string           `json:"reviewSummary"`
-	ReviewHighlights   ReviewHighlights `gorm:"type:jsonb;serializer:json" json:"reviewHighlights"`
-	Bio                string           `json:"bio"`
-	Hook               string           `gorm:"size:70" json:"hook"`
-	Photos             Photos           `gorm:"type:jsonb" json:"photos"`
 }

@@ -74,7 +74,6 @@ var DatabaseModels = []interface{}{
 	SourceFacts{},
 	SourceSurvey{},
 	SourceLocationsOsm{},
-	SourceLocationsExtra{},
 	SourceLocationsAll{},
 	Tag{},
 	TeamMember{},
