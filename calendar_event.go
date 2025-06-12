@@ -46,8 +46,8 @@ type CalendarEvent struct {
 	Website            string                      `json:"website"`
 	IsSatlantisCreated bool                        `gorm:"default:false" json:"isSatlantisCreated"`
 	GoogleID           string                      `json:"googleId"`
-	VenueId            *uint                       `gorm:"index" json:"venueId"`
-	Venue              LocationDTO                 `gorm:"foreignKey:VenueId" json:"venue"`
+	VenueID            *uint                       `gorm:"index" json:"venueId"`
+	Venue              LocationDTO                 `gorm:"foreignKey:VenueID" json:"venue"`
 	Cohosts            []CalendarEventCohost       `json:"cohosts"`
 	DeletedAt          gorm.DeletedAt              `gorm:"index" json:"-"`
 	OwnershipChangedAt *time.Time                  `json:"ownershipChangedAt"`
