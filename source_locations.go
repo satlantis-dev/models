@@ -172,32 +172,52 @@ func (SourceLocationsExtra) TableName() string {
 }
 
 // SourceLocationsAll with Response as JSON object
+type JSONBMapSlice []map[string]string
+
+// Scan implements the sql.Scanner interface for JSONBMapSlice
+func (j *JSONBMapSlice) Scan(value interface{}) error {
+	if value == nil {
+		*j = nil
+		return nil
+	}
+	b, ok := value.([]byte)
+	if !ok {
+		return fmt.Errorf("unsupported type: %T", value)
+	}
+	return json.Unmarshal(b, j)
+}
+
+// Value implements the driver.Valuer interface for JSONBMapSlice
+func (j JSONBMapSlice) Value() (driver.Value, error) {
+	return json.Marshal(j)
+}
+
 type SourceLocationsAll struct {
-	GoogleId           string              `gorm:"primaryKey;index" json:"googleId"`
-	OSMRef             string              `gorm:"unique" json:"osmRef"`
-	Name               string              `json:"name"`
-	Lat                float64             `json:"lat"`
-	Lng                float64             `json:"lng"`
-	OSMStdTags         []map[string]string `gorm:"type:jsonb" json:"osmStdTags"`
-	OSMExtraTags       []map[string]string `gorm:"type:jsonb" json:"osmExtraTags"`
-	SatlantisTags      []map[string]string `gorm:"type:jsonb" json:"satlantisTags"`
-	OSMPlaceRef        string              `json:"osmPlaceRef"`
-	OSMPlaceName       string              `json:"osmPlaceName"`
-	Source             string              `gorm:"not null" json:"source"`
-	OSMDetails         string              `gorm:"type:jsonb" json:"osmDetails"`
-	GoogleDetails      string              `gorm:"type:jsonb" json:"googleDetails"`
-	GooglePhotoUrl     string              `json:"googlePhotoUrl"`
-	TripadvisorId      *uint               `json:"tripadvisorId"`
-	TripadvisorDetails string              `gorm:"type:jsonb" json:"tripadvisorDetails"`
-	Reports            Reports             `gorm:"type:jsonb" json:"reports"`
-	Reviews            Reviews             `gorm:"type:jsonb" json:"reviews"`
-	ReviewSummary      string              `json:"reviewSummary"`
-	ReviewHighlights   ReviewHighlights    `gorm:"type:jsonb;serializer:json" json:"reviewHighlights"`
-	Bio                string              `json:"bio"`
-	Hook               string              `gorm:"size:70" json:"hook"`
-	Photos             Photos              `gorm:"type:jsonb" json:"photos"`
-	Eligible           bool                `json:"eligible"`
-	UpdatedAt          time.Time           `json:"-"`
+	GoogleId           string           `gorm:"primaryKey;index" json:"googleId"`
+	OSMRef             string           `gorm:"unique" json:"osmRef"`
+	Name               string           `json:"name"`
+	Lat                float64          `json:"lat"`
+	Lng                float64          `json:"lng"`
+	OSMStdTags         JSONBMapSlice    `gorm:"type:jsonb" json:"osmStdTags"`
+	OSMExtraTags       JSONBMapSlice    `gorm:"type:jsonb" json:"osmExtraTags"`
+	SatlantisTags      JSONBMapSlice    `gorm:"type:jsonb" json:"satlantisTags"`
+	OSMPlaceRef        string           `json:"osmPlaceRef"`
+	OSMPlaceName       string           `json:"osmPlaceName"`
+	Source             string           `gorm:"not null" json:"source"`
+	OSMDetails         string           `gorm:"type:jsonb" json:"osmDetails"`
+	GoogleDetails      string           `gorm:"type:jsonb" json:"googleDetails"`
+	GooglePhotoUrl     string           `json:"googlePhotoUrl"`
+	TripadvisorId      *uint            `json:"tripadvisorId"`
+	TripadvisorDetails string           `gorm:"type:jsonb" json:"tripadvisorDetails"`
+	Reports            Reports          `gorm:"type:jsonb" json:"reports"`
+	Reviews            Reviews          `gorm:"type:jsonb" json:"reviews"`
+	ReviewSummary      string           `json:"reviewSummary"`
+	ReviewHighlights   ReviewHighlights `gorm:"type:jsonb;serializer:json" json:"reviewHighlights"`
+	Bio                string           `json:"bio"`
+	Hook               string           `gorm:"size:70" json:"hook"`
+	Photos             Photos           `gorm:"type:jsonb" json:"photos"`
+	Eligible           bool             `json:"eligible"`
+	UpdatedAt          time.Time        `json:"-"`
 }
 
 func (SourceLocationsAll) TableName() string {
