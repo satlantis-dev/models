@@ -173,31 +173,31 @@ func (SourceLocationsExtra) TableName() string {
 
 // SourceLocationsAll with Response as JSON object
 type SourceLocationsAll struct {
-	GoogleId           string                   `gorm:"primaryKey;index" json:"googleId"`
-	OSMRef             string                   `gorm:"unique" json:"osmRef"`
-	Name               string                   `json:"name"`
-	Lat                float64                  `json:"lat"`
-	Lng                float64                  `json:"lng"`
-	OSMStdTags         []map[string]interface{} `gorm:"type:jsonb" json:"osmStdTags"`
-	OSMExtraTags       []map[string]interface{} `gorm:"type:jsonb" json:"osmExtraTags"`
-	SatlantisTags      []map[string]interface{} `gorm:"type:jsonb" json:"satlantisTags"`
-	OSMPlaceRef        string                   `json:"osmPlaceRef"`
-	OSMPlaceName       string                   `json:"osmPlaceName"`
-	Source             string                   `gorm:"not null" json:"source"`
-	OSMDetails         string                   `gorm:"type:jsonb" json:"osmDetails"`
-	GoogleDetails      string                   `gorm:"type:jsonb" json:"googleDetails"`
-	GooglePhotoUrl     string                   `json:"googlePhotoUrl"`
-	TripadvisorId      *uint                    `json:"tripadvisorId"`
-	TripadvisorDetails string                   `gorm:"type:jsonb" json:"tripadvisorDetails"`
-	Reports            Reports                  `gorm:"type:jsonb" json:"reports"`
-	Reviews            Reviews                  `gorm:"type:jsonb" json:"reviews"`
-	ReviewSummary      string                   `json:"reviewSummary"`
-	ReviewHighlights   ReviewHighlights         `gorm:"type:jsonb;serializer:json" json:"reviewHighlights"`
-	Bio                string                   `json:"bio"`
-	Hook               string                   `gorm:"size:70" json:"hook"`
-	Photos             Photos                   `gorm:"type:jsonb" json:"photos"`
-	Eligible           bool                     `json:"eligible"`
-	UpdatedAt          time.Time                `json:"-"`
+	GoogleId           string              `gorm:"primaryKey;index" json:"googleId"`
+	OSMRef             string              `gorm:"unique" json:"osmRef"`
+	Name               string              `json:"name"`
+	Lat                float64             `json:"lat"`
+	Lng                float64             `json:"lng"`
+	OSMStdTags         []map[string]string `gorm:"type:jsonb" json:"osmStdTags"`
+	OSMExtraTags       []map[string]string `gorm:"type:jsonb" json:"osmExtraTags"`
+	SatlantisTags      []map[string]string `gorm:"type:jsonb" json:"satlantisTags"`
+	OSMPlaceRef        string              `json:"osmPlaceRef"`
+	OSMPlaceName       string              `json:"osmPlaceName"`
+	Source             string              `gorm:"not null" json:"source"`
+	OSMDetails         string              `gorm:"type:jsonb" json:"osmDetails"`
+	GoogleDetails      string              `gorm:"type:jsonb" json:"googleDetails"`
+	GooglePhotoUrl     string              `json:"googlePhotoUrl"`
+	TripadvisorId      *uint               `json:"tripadvisorId"`
+	TripadvisorDetails string              `gorm:"type:jsonb" json:"tripadvisorDetails"`
+	Reports            Reports             `gorm:"type:jsonb" json:"reports"`
+	Reviews            Reviews             `gorm:"type:jsonb" json:"reviews"`
+	ReviewSummary      string              `json:"reviewSummary"`
+	ReviewHighlights   ReviewHighlights    `gorm:"type:jsonb;serializer:json" json:"reviewHighlights"`
+	Bio                string              `json:"bio"`
+	Hook               string              `gorm:"size:70" json:"hook"`
+	Photos             Photos              `gorm:"type:jsonb" json:"photos"`
+	Eligible           bool                `json:"eligible"`
+	UpdatedAt          time.Time           `json:"-"`
 }
 
 func (SourceLocationsAll) TableName() string {
