@@ -203,7 +203,7 @@ type Location struct {
 	Name                  string                 `json:"name"`
 	Notes                 []LocationNote         `gorm:"foreignKey:LocationID" json:"notes"`
 	OpeningHours          OpeningHours           `gorm:"type:jsonb;serializer:json" json:"openingHours"`
-	OSMRef                string                 `gorm:"uniqueIndex;not null" json:"osmRef"`
+	OSMRef                string                 `json:"osmRef"`
 	Phone                 string                 `json:"phone"`
 	PriceLevel            PriceLevel             `json:"priceLevel"`
 	Score                 float64                `json:"score"`
@@ -233,7 +233,6 @@ type LocationDTO struct {
 	LocationTags    []LocationTag `gorm:"many2many:location_location_tags" json:"locationTags"`
 	Name            string        `json:"name"`
 	OpeningHours    OpeningHours  `gorm:"type:jsonb;serializer:json" json:"openingHours"`
-	OSMRef          string        `json:"osmRef"`
 	PlaceID         uint          `json:"placeId"`
 	PlaceOSMRef     string        `json:"placeOsmRef"`
 	ReviewSummary   string        `json:"reviewSummary"`
@@ -260,7 +259,6 @@ func (l Location) ToDTO(db *gorm.DB) (*LocationDTO, error) {
 		Lng:             l.Lng,
 		LocationTags:    l.LocationTags,
 		Name:            l.Name,
-		OSMRef:          l.OSMRef,
 		OpeningHours:    l.OpeningHours,
 		PlaceID:         l.PlaceID,
 		PlaceOSMRef:     l.Place.OSMRef,
