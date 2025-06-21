@@ -16,7 +16,6 @@ type Collection struct {
 }
 
 type CollectionLocations struct {
-	CollectionID uint   `gorm:"primaryKey" json:"collectionId"`
-	LocationID   uint   `gorm:"primaryKey" json:"locationId"`
-	Comment      string `gorm:"type:text" json:"comment,omitempty"`
+	CollectionID uint `gorm:"primaryKey" json:"collectionId"`
+	LocationID   uint `gorm:"primaryKey" json:"locationId"`
 }
