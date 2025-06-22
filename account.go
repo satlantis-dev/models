@@ -11,30 +11,29 @@ type Account struct {
 	ID                          uint                   `gorm:"primaryKey" json:"id"`
 	CreatedAt                   time.Time              `json:"-"`
 	About                       string                 `gorm:"type:text" json:"about"`
-	AccountPlaceRoles           []AccountPlaceRole     `gorm:"foreignKey:AccountID" json:"accountPlaceRoles"`
-	AccountLocationRoles        []AccountLocationRole  `gorm:"foreignKey:AccountID" json:"accountLocationRoles"`
+	AccountPlaceRoles           []AccountPlaceRole     `gorm:"foreignKey:AccountID" json:"accountPlaceRoles,omitempty"`
+	AccountLocationRoles        []AccountLocationRole  `gorm:"foreignKey:AccountID" json:"accountLocationRoles,omitempty"`
 	AuthDetails                 []AuthenticationDetail `gorm:"foreignKey:AccountID" json:"authDetails"`
 	Banner                      string                 `gorm:"type:text" json:"banner"`
 	BusinessCategory            string                 `gorm:"default:NULL" json:"businessCategory"`
 	ChatMemberships             []ChatMembership       `gorm:"foreignKey:AccountID" json:"chatMemberships"`
 	ClusterID                   *uint                  `gorm:"index" json:"clusterId"`
-	Collections                 []Collection           `gorm:"foreignKey:AccountID" json:"collections"`
+	Collections                 []Collection           `gorm:"foreignKey:AccountID" json:"collections,omitempty"`
 	CurrencyID                  *uint                  `gorm:"index" json:"currencyId"`
 	Currency                    Currency               `json:"currency"`
 	DisplayName                 string                 `gorm:"type:text" json:"displayName"`
 	Email                       string                 `gorm:"default:NULL" json:"email"`
 	EmailVerified               bool                   `json:"-"`
-	Experiences                 []Experience           `gorm:"foreignKey:AccountID" json:"experiences"`
 	FirstSeen                   *time.Time             `json:"-"`
 	Following                   []Follow               `gorm:"foreignKey:FollowerID" json:"following"`
 	FollowedBy                  []Follow               `gorm:"foreignKey:FollowingID" json:"followedBy"`
 	InfluenceScore              uint                   `json:"influenceScore"`
-	Interests                   []Interest             `gorm:"many2many:account_interests" json:"interests"`
+	Interests                   []Interest             `gorm:"many2many:account_interests" json:"interests,omitempty"`
 	IsAdmin                     bool                   `json:"isAdmin"`
 	IsBlacklisted               bool                   `json:"isBlacklisted"`
 	IsBusiness                  bool                   `json:"isBusiness"`
 	LastSeen                    *time.Time             `json:"-"`
-	LocationClaims              []LocationClaim        `gorm:"foreignKey:OwnerAccountID" json:"locationClaims"`
+	LocationClaims              []LocationClaim        `gorm:"foreignKey:OwnerAccountID" json:"locationClaims,,omitempty"`
 	Lud06                       string                 `gorm:"default:NULL" json:"lud06"`
 	Lud16                       string                 `gorm:"default:NULL" json:"lud16"`
 	Name                        string                 `gorm:"type:text" json:"name"`
@@ -44,7 +43,6 @@ type Account struct {
 	Password                    string                 `gorm:"type:text" json:"-"`
 	Picture                     string                 `gorm:"type:text" json:"picture"`
 	Phone                       string                 `json:"phone"`
-	PlaceRatings                []AccountPlaceRating   `gorm:"foreignKey:AccountID" json:"placeRatings"`
 	PrivateKey                  string                 `json:"-"`
 	PubKey                      string                 `gorm:"uniqueIndex;default:NULL" json:"pubKey"`
 	Relays                      []Relay                `gorm:"foreignKey:AccountID" json:"relays"`

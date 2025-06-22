@@ -30,7 +30,6 @@ var DatabaseModels = []interface{}{
 	Country{},
 	Currency{},
 	Event{},
-	Experience{},
 	Follow{},
 	Interest{},
 	Location{},
