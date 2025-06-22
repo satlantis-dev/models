@@ -9,7 +9,7 @@ import (
 type Collection struct {
 	ID          uint           `gorm:"primaryKey" json:"id"`
 	AccountID   uint           `gorm:"index;uniqueIndex:idx_accountid_name" json:"accountId"`
-	Account     AccountDTO     `gorm:"foreignKey:AccountID" json:"account"`
+	Account     AccountDTO     `gorm:"foreignKey:AccountID" json:"account,omitempty"`
 	Name        string         `gorm:"type:text;not null;uniqueIndex:idx_accountid_name" json:"name"`
 	Description string         `gorm:"type:text" json:"description"`
 	CreatedAt   time.Time      `json:"createdAt"`
