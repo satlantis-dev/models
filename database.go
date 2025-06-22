@@ -25,6 +25,8 @@ var DatabaseModels = []interface{}{
 	ChatMembership{},
 	Cluster{},
 	ClusterInterest{},
+	Collection{},
+	CollectionLocation{},
 	Continent{},
 	Country{},
 	Currency{},
