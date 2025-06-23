@@ -33,7 +33,7 @@ type Account struct {
 	IsBlacklisted               bool                   `json:"isBlacklisted"`
 	IsBusiness                  bool                   `json:"isBusiness"`
 	LastSeen                    *time.Time             `json:"-"`
-	LocationClaims              []LocationClaim        `gorm:"foreignKey:OwnerAccountID" json:"locationClaims,,omitempty"`
+	LocationClaims              []LocationClaim        `gorm:"foreignKey:OwnerAccountID" json:"locationClaims,omitempty"`
 	Lud06                       string                 `gorm:"default:NULL" json:"lud06"`
 	Lud16                       string                 `gorm:"default:NULL" json:"lud16"`
 	Name                        string                 `gorm:"type:text" json:"name"`
