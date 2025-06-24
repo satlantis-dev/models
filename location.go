@@ -265,3 +265,8 @@ func (l Location) ToDTO(db *gorm.DB) (*LocationDTO, error) {
 		ReviewSummary:   l.ReviewSummary,
 	}, nil
 }
+
+type NearbyLocationDTO struct {
+	LocationDTO
+	Distance int `json:"distance"`
+}
