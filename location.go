@@ -268,12 +268,5 @@ func (l Location) ToDTO(db *gorm.DB) (*LocationDTO, error) {
 
 type NearbyLocationDTO struct {
 	LocationDTO
-	Distance float64 `json:"distance"`
-}
-
-func ToNearbyLocationDTO(dto LocationDTO, distance float64) NearbyLocationDTO {
-	return NearbyLocationDTO{
-		LocationDTO: dto,
-		Distance:    distance,
-	}
+	Distance int `json:"distance"`
 }
