@@ -12,8 +12,9 @@ const (
 	Owner AccountLocationRoleType = iota + 1
 	Admin
 	Staff
-	DisoveredBy
-	RecommendedBy
+	DiscoveredBy
+	BookmarkedBy
+	LikedBy
 	DislikedBy
 )
 
