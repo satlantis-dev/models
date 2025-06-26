@@ -26,6 +26,7 @@ var DatabaseModels = []interface{}{
 	Cluster{},
 	ClusterInterest{},
 	Collection{},
+	CollectionLocation{},
 	Continent{},
 	Country{},
 	Currency{},
