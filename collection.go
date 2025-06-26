@@ -25,9 +25,9 @@ func (Collection) TableName() string {
 }
 
 type CollectionLocation struct {
-	CollectionID uint       `gorm:"primaryKey;autoIncrement:false" json:"collectionId"`
+	CollectionID uint       `gorm:"primaryKey;autoIncrement:false;not null" json:"collectionId"`
 	Collection   Collection `gorm:"foreignKey:CollectionID;references:ID" json:"collection"`
-	LocationID   uint       `gorm:"primaryKey;autoIncrement:false" json:"locationId"`
+	LocationID   uint       `gorm:"primaryKey;autoIncrement:false;not null" json:"locationId"`
 	Location     Location   `gorm:"foreignKey:LocationID;references:ID" json:"location"`
-	SeqNum       int        `gorm:"default:0" json:"seqNum"`
+	SeqNum       int        `gorm:"default:0;not null" json:"seqNum"`
 }
