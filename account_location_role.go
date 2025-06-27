@@ -27,5 +27,5 @@ type AccountLocationRole struct {
 	CreatedAt  time.Time               `json:"-"`
 	UpdatedAt  time.Time               `json:"-"`
 	DeletedAt  gorm.DeletedAt          `gorm:"index" json:"-,omitempty"`
-	Comment    string                  `gorm:"size:255" json:"comment,omitempty"`
+	Comment    *string                 `gorm:"size:255" json:"comment,omitempty"`
 }

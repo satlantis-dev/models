@@ -9,7 +9,7 @@ import (
 type Collection struct {
 	ID          uint                 `gorm:"primaryKey" json:"id"`
 	AccountID   uint                 `gorm:"index;uniqueIndex:idx_accountid_name" json:"accountId"`
-	Account     Account              `gorm:"foreignKey:AccountID" json:"account"`
+	Account     *Account             `gorm:"foreignKey:AccountID" json:"account,omitempty"`
 	Name        string               `gorm:"type:text;not null;uniqueIndex:idx_accountid_name" json:"name"`
 	Description *string              `gorm:"type:text" json:"description,omitempty"`
 	Cover       *string              `gorm:"type:text" json:"cover,omitempty"`
@@ -25,9 +25,9 @@ func (Collection) TableName() string {
 }
 
 type CollectionLocation struct {
-	CollectionID uint       `gorm:"primaryKey;autoIncrement:false;not null" json:"collectionId"`
-	Collection   Collection `gorm:"foreignKey:CollectionID;references:ID" json:"collection"`
-	LocationID   uint       `gorm:"primaryKey;autoIncrement:false;not null" json:"locationId"`
-	Location     Location   `gorm:"foreignKey:LocationID;references:ID" json:"location"`
-	SeqNum       int        `gorm:"default:0;not null" json:"seqNum"`
+	CollectionID uint        `gorm:"primaryKey;autoIncrement:false;not null" json:"collectionId"`
+	Collection   *Collection `gorm:"foreignKey:CollectionID;references:ID" json:"collection,omitempty"`
+	LocationID   uint        `gorm:"primaryKey;autoIncrement:false;not null" json:"locationId"`
+	Location     *Location   `gorm:"foreignKey:LocationID;references:ID" json:"location,omitempty"`
+	SeqNum       int         `gorm:"default:0;not null" json:"seqNum"`
 }
