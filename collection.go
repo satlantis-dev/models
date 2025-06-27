@@ -7,18 +7,17 @@ import (
 )
 
 type Collection struct {
-	ID           uint                 `gorm:"primaryKey" json:"id"`
-	AccountID    uint                 `gorm:"index;uniqueIndex:idx_accountid_name" json:"accountId"`
-	Account      *Account             `gorm:"foreignKey:AccountID" json:"account,omitempty"`
-	Name         string               `gorm:"type:text;not null;uniqueIndex:idx_accountid_name" json:"name"`
-	Description  *string              `gorm:"type:text" json:"description,omitempty"`
-	Cover        *string              `gorm:"type:text" json:"cover,omitempty"`
-	CreatedAt    time.Time            `gorm:"autoCreateTime" json:"createdAt"`
-	UpdatedAt    time.Time            `gorm:"autoUpdateTime" json:"updatedAt"`
-	DeletedAt    gorm.DeletedAt       `gorm:"index" json:"-"`
-	IsPublic     bool                 `gorm:"default:true" json:"isPublic"`
-	Locations    []CollectionLocation `json:"locations"`
-	NumLocations int                  `gorm:"default:0" json:"numLocations"`
+	ID          uint                 `gorm:"primaryKey" json:"id"`
+	AccountID   uint                 `gorm:"index;uniqueIndex:idx_accountid_name" json:"accountId"`
+	Account     *Account             `gorm:"foreignKey:AccountID" json:"account,omitempty"`
+	Name        string               `gorm:"type:text;not null;uniqueIndex:idx_accountid_name" json:"name"`
+	Description *string              `gorm:"type:text" json:"description,omitempty"`
+	Cover       *string              `gorm:"type:text" json:"cover,omitempty"`
+	CreatedAt   time.Time            `gorm:"autoCreateTime" json:"createdAt"`
+	UpdatedAt   time.Time            `gorm:"autoUpdateTime" json:"updatedAt"`
+	DeletedAt   gorm.DeletedAt       `gorm:"index" json:"-"`
+	IsPublic    bool                 `gorm:"default:true" json:"isPublic"`
+	Locations   []CollectionLocation `json:"locations"`
 }
 
 func (Collection) TableName() string {
