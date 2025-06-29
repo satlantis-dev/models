@@ -36,5 +36,4 @@ type UserReview struct {
 	Location   *LocationDTO `gorm:"foreignKey:LocationID" json:"location,omitempty"`
 	ReviewText string       `json:"reviewText"`
 	IsPositive bool         `gorm:"not null;default:true" json:"isPositive"`
-	IsPublic   bool         `gorm:"not null;default:true" json:"isPublic"`
 }
