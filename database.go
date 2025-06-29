@@ -14,6 +14,7 @@ var DatabaseModels = []interface{}{
 	AccountNoteTracker{},
 	AccountPlaceRole{},
 	AccountLocationRole{},
+	AccountLocationReview{},
 	AuthenticationDetail{},
 	Block{},
 	Brand{},

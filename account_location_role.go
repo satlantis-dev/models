@@ -28,12 +28,3 @@ type AccountLocationRole struct {
 	UpdatedAt  time.Time               `json:"-"`
 	DeletedAt  gorm.DeletedAt          `gorm:"index" json:"-,omitempty"`
 }
-
-type UserReview struct {
-	AccountID  uint         `gorm:"primaryKey;index" json:"accountId"`
-	Account    AccountDTO   `gorm:"foreignKey:AccountID" json:"account,omitempty"`
-	LocationID uint         `gorm:"primaryKey;index" json:"locationId"`
-	Location   *LocationDTO `gorm:"foreignKey:LocationID" json:"location,omitempty"`
-	ReviewText string       `json:"reviewText"`
-	IsPositive bool         `gorm:"not null;default:true" json:"isPositive"`
-}
