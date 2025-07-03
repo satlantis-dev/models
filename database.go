@@ -1,8 +1,6 @@
 package models
 
 import (
-	"database/sql/driver"
-	"encoding/json"
 	"fmt"
 	"log"
 	"time"
@@ -10,28 +8,6 @@ import (
 	"gorm.io/driver/postgres"
 	"gorm.io/gorm"
 )
-
-// Common custom types
-
-type JSONBMapSlice []map[string]string
-
-func (j *JSONBMapSlice) Scan(value interface{}) error {
-	if value == nil {
-		*j = nil
-		return nil
-	}
-	b, ok := value.([]byte)
-	if !ok {
-		return fmt.Errorf("unsupported type: %T", value)
-	}
-	return json.Unmarshal(b, j)
-}
-
-func (j JSONBMapSlice) Value() (driver.Value, error) {
-	return json.Marshal(j)
-}
-
-// DatabaseModels
 
 var DatabaseModels = []interface{}{
 	Account{},
