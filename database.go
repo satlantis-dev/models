@@ -33,6 +33,7 @@ var DatabaseModels = []interface{}{
 	Currency{},
 	Event{},
 	Follow{},
+	GoogleType{},
 	Interest{},
 	Location{},
 	LocationCategory{},
