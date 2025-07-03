@@ -37,8 +37,8 @@ type GoogleType struct {
 	Name          string    `gorm:"primaryKey" json:"name"`
 	OSMStdTag     *JSONBMap `gorm:"type:jsonb" json:"osmStdTag"`
 	OSMExtraTag   *JSONBMap `gorm:"type:jsonb" json:"osmExtraTag"`
-	OSMStdTagID   uint      `gorm:"index" json:"osmStdTagId"`
-	OSMExtraTagID uint      `gorm:"index" json:"osmExtraTagId"`
+	OSMStdTagID   *uint     `gorm:"index" json:"osmStdTagId"`
+	OSMExtraTagID *uint     `gorm:"index" json:"osmExtraTagId"`
 }
 
 func (GoogleType) TableName() string {
