@@ -109,26 +109,6 @@ func (p Photos) Value() (driver.Value, error) {
 	return json.Marshal(p)
 }
 
-// Tags
-
-type JSONBMapSlice []map[string]string
-
-func (j *JSONBMapSlice) Scan(value interface{}) error {
-	if value == nil {
-		*j = nil
-		return nil
-	}
-	b, ok := value.([]byte)
-	if !ok {
-		return fmt.Errorf("unsupported type: %T", value)
-	}
-	return json.Unmarshal(b, j)
-}
-
-func (j JSONBMapSlice) Value() (driver.Value, error) {
-	return json.Marshal(j)
-}
-
 // SourceLocationsOsm  [TEMP STAGING ONLY]
 
 type SourceLocationsOsm struct {
