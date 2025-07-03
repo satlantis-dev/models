@@ -1,9 +1,9 @@
 package models
 
 type GoogleType struct {
-	Name         string        `gorm:"primaryKey" json:"name"`
-	OSMStdTags   JSONBMapSlice `gorm:"type:jsonb" json:"osmStdTags"`
-	OSMExtraTags JSONBMapSlice `gorm:"type:jsonb" json:"osmExtraTags"`
+	Name        string             `gorm:"primaryKey" json:"name"`
+	OSMStdTag   *map[string]string `gorm:"type:jsonb" json:"osmStdTag"`
+	OSMExtraTag *map[string]string `gorm:"type:jsonb" json:"osmExtraTag"`
 }
 
 func (GoogleType) TableName() string {
