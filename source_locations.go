@@ -23,7 +23,7 @@ type JSONBMapSlice []map[string]string
 
 func (j *JSONBMapSlice) Scan(value interface{}) error {
 	if value == nil {
-		*j = nil
+		*j = JSONBMapSlice{}
 		return nil
 	}
 	b, ok := value.([]byte)
@@ -138,9 +138,9 @@ type SourceLocationsOsm struct {
 	Name               string           `json:"name"`
 	Lat                float64          `json:"lat"`
 	Lng                float64          `json:"lng"`
-	OSMStdTags         JSONBMapSlice    `gorm:"type:jsonb" json:"osmStdTags"`
-	OSMExtraTags       JSONBMapSlice    `gorm:"type:jsonb" json:"osmExtraTags"`
-	SatlantisTags      JSONBMapSlice    `gorm:"type:jsonb" json:"satlantisTags"`
+	OSMStdTags         JSONBMapSlice    `gorm:"type:jsonb;default:'[]'" json:"osmStdTags"`
+	OSMExtraTags       JSONBMapSlice    `gorm:"type:jsonb;default:'[]'" json:"osmExtraTags"`
+	SatlantisTags      JSONBMapSlice    `gorm:"type:jsonb;default:'[]'" json:"satlantisTags"`
 	OSMDetails         string           `gorm:"type:jsonb" json:"osmDetails"`
 	OSMPlaceRef        string           `json:"osmPlaceRef"`
 	OSMPlaceName       string           `json:"osmPlaceName"`
