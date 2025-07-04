@@ -22,15 +22,15 @@ const (
 type JSONBMapSlice []map[string]string
 
 func (j *JSONBMapSlice) Scan(value interface{}) error {
-	if value == nil {
+	bytes, ok := value.([]byte)
+	if !ok {
+		return fmt.Errorf("failed to convert value to []byte")
+	}
+	if len(bytes) == 0 {
 		*j = JSONBMapSlice{}
 		return nil
 	}
-	b, ok := value.([]byte)
-	if !ok {
-		return fmt.Errorf("unsupported type: %T", value)
-	}
-	return json.Unmarshal(b, j)
+	return json.Unmarshal(bytes, j)
 }
 
 func (j JSONBMapSlice) Value() (driver.Value, error) {
