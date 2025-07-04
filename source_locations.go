@@ -34,6 +34,9 @@ func (j *JSONBMapSlice) Scan(value interface{}) error {
 }
 
 func (j JSONBMapSlice) Value() (driver.Value, error) {
+	if len(j) == 0 {
+		return "[]", nil
+	}
 	return json.Marshal(j)
 }
 
