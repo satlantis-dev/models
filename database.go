@@ -11,6 +11,7 @@ import (
 
 var DatabaseModels = []interface{}{
 	Account{},
+	AccountCollectionRole{},
 	AccountNoteTracker{},
 	AccountPlaceRole{},
 	AccountLocationRole{},
