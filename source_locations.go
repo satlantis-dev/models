@@ -5,6 +5,8 @@ import (
 	"encoding/json"
 	"fmt"
 	"time"
+
+	"gorm.io/gorm"
 )
 
 // OSM
@@ -197,4 +199,26 @@ type SourceLocationsAll struct {
 
 func (SourceLocationsAll) TableName() string {
 	return "source_locations_all"
+}
+
+type SourceLocationDTO struct {
+	GoogleId     string  `gorm:"primaryKey;index" json:"googleId"`
+	OSMRef       string  `json:"osmRef"`
+	Name         string  `json:"name"`
+	Lat          float64 `json:"lat"`
+	Lng          float64 `json:"lng"`
+	OSMPlaceRef  string  `json:"osmPlaceRef"`
+	OSMPlaceName string  `json:"osmPlaceName"`
+}
+
+func (sl SourceLocationsAll) ToDTO(db *gorm.DB) (*SourceLocationDTO, error) {
+	return &SourceLocationDTO{
+		GoogleId:     sl.GoogleId,
+		OSMRef:       sl.OSMRef,
+		Name:         sl.Name,
+		Lat:          sl.Lat,
+		Lng:          sl.Lng,
+		OSMPlaceRef:  sl.OSMPlaceRef,
+		OSMPlaceName: sl.OSMPlaceName,
+	}, nil
 }

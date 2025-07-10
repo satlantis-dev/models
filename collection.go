@@ -25,9 +25,15 @@ func (Collection) TableName() string {
 }
 
 type CollectionLocation struct {
-	CollectionID uint        `gorm:"primaryKey;autoIncrement:false;not null" json:"collectionId"`
-	Collection   *Collection `gorm:"foreignKey:CollectionID;references:ID" json:"collection,omitempty"`
-	LocationID   uint        `gorm:"primaryKey;autoIncrement:false;not null" json:"locationId"`
-	Location     *Location   `gorm:"foreignKey:LocationID;references:ID" json:"location,omitempty"`
-	SeqNum       int         `gorm:"default:0;not null" json:"seqNum"`
+	CollectionID   uint               `gorm:"primaryKey;autoIncrement:false;not null;uniqueIndex:idx_collectionid_locationid" json:"collectionId"`
+	Collection     *Collection        `gorm:"foreignKey:CollectionID;references:ID" json:"collection,omitempty"`
+	GoogleID       string             `gorm:"primaryKey;type:text" json:"googleId"`
+	SourceLocation *SourceLocationDTO `gorm:"foreignKey:GoogleID;references:GoogleID" json:"sourceLocation,omitempty"`
+	Location       *LocationDTO       `gorm:"foreignKey:GoogleID;references:GoogleID" json:"location,omitempty"`
+	SeqNum         int                `gorm:"default:0;not null" json:"seqNum"`
+	Blurb          *string            `gorm:"type:text" json:"blurb,omitempty"`
+}
+
+func (CollectionLocation) TableName() string {
+	return "collection_locations"
 }
