@@ -1,12 +1,22 @@
 package models
 
+import (
+	"time"
+
+	"gorm.io/gorm"
+)
+
 type AccountLocationReview struct {
-	AccountID  uint         `gorm:"primaryKey;index" json:"accountId"`
-	Account    AccountDTO   `gorm:"foreignKey:AccountID" json:"account,omitempty"`
-	LocationID uint         `gorm:"primaryKey;index" json:"locationId"`
-	Location   *LocationDTO `gorm:"foreignKey:LocationID" json:"location,omitempty"`
-	ReviewText string       `json:"reviewText"`
-	IsPositive bool         `gorm:"not null;default:true" json:"isPositive"`
+	ID         uint           `gorm:"primaryKey;autoIncrement" json:"id"`
+	AccountID  uint           `gorm:"uniqueIndex:idx_account_location" json:"accountId"`
+	Account    AccountDTO     `gorm:"foreignKey:AccountID" json:"account,omitempty"`
+	LocationID uint           `gorm:"uniqueIndex:idx_account_location" json:"locationId"`
+	Location   *LocationDTO   `gorm:"foreignKey:LocationID" json:"location,omitempty"`
+	ReviewText string         `json:"reviewText"`
+	IsPositive bool           `gorm:"not null;default:true" json:"isPositive"`
+	CreatedAt  time.Time      `gorm:"autoCreateTime" json:"createdAt"`
+	UpdatedAt  time.Time      `gorm:"autoUpdateTime" json:"updatedAt"`
+	DeletedAt  gorm.DeletedAt `gorm:"index" json:"deletedAt,omitempty"`
 }
 
 func (AccountLocationReview) TableName() string {

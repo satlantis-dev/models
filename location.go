@@ -219,6 +219,7 @@ type Location struct {
 // LocationDTO
 type LocationDTO struct {
 	ID              uint          `json:"id"`
+	GoogleID        string        `gorm:"uniqueIndex;not null" json:"googleId"`
 	Address         Address       `gorm:"type:jsonb;serializer:json" json:"address"`
 	Bio             *string       `json:"bio"`
 	Email           string        `json:"email"`
@@ -246,6 +247,7 @@ func (l Location) ToDTO(db *gorm.DB) (*LocationDTO, error) {
 
 	return &LocationDTO{
 		ID:              l.ID,
+		GoogleID:        l.GoogleID,
 		Address:         l.Address,
 		Bio:             l.Bio,
 		Email:           l.Email,
