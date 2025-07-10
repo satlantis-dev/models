@@ -1,11 +1,12 @@
 package models
 
 type AccountLocationReview struct {
-	AccountID    uint         `gorm:"primaryKey;index" json:"accountId"`
+	ID           uint         `gorm:"primaryKey;autoIncrement" json:"id"`
+	AccountID    uint         `gorm:"uniqueIndex:idx_account_location_collection" json:"accountId"`
 	Account      AccountDTO   `gorm:"foreignKey:AccountID" json:"account,omitempty"`
-	LocationID   uint         `gorm:"primaryKey;index" json:"locationId"`
+	LocationID   uint         `gorm:"uniqueIndex:idx_account_location_collection" json:"locationId"`
 	Location     *LocationDTO `gorm:"foreignKey:LocationID" json:"location,omitempty"`
-	CollectionID *uint        `gorm:"primaryKey;index" json:"collectionId"`
+	CollectionID *uint        `gorm:"uniqueIndex:idx_account_location_collection" json:"collectionId"`
 	Collection   *Collection  `gorm:"foreignKey:CollectionID" json:"collection,omitempty"`
 	ReviewText   string       `json:"reviewText"`
 	IsPositive   bool         `gorm:"not null;default:true" json:"isPositive"`
