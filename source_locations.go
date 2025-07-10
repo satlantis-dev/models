@@ -203,7 +203,6 @@ func (SourceLocationsAll) TableName() string {
 
 type SourceLocationDTO struct {
 	GoogleID     string  `gorm:"primaryKey;index" json:"googleId"`
-	OSMRef       string  `json:"osmRef"`
 	Name         string  `json:"name"`
 	Lat          float64 `json:"lat"`
 	Lng          float64 `json:"lng"`
@@ -214,7 +213,6 @@ type SourceLocationDTO struct {
 func (sl SourceLocationsAll) ToDTO(db *gorm.DB) (*SourceLocationDTO, error) {
 	return &SourceLocationDTO{
 		GoogleID:     sl.GoogleID,
-		OSMRef:       sl.OSMRef,
 		Name:         sl.Name,
 		Lat:          sl.Lat,
 		Lng:          sl.Lng,
