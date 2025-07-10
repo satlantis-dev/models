@@ -147,7 +147,7 @@ type SourceLocationsOsm struct {
 	OSMPlaceRef        string           `json:"osmPlaceRef"`
 	OSMPlaceName       string           `json:"osmPlaceName"`
 	Source             string           `gorm:"default:osm" json:"source"`
-	GoogleId           string           `gorm:"uniqueIndex" json:"googleId"`
+	GoogleID           string           `gorm:"uniqueIndex" json:"googleId"`
 	GoogleDetails      string           `gorm:"type:jsonb" json:"googleDetails"`
 	GooglePhotoUrl     string           `json:"googlePhotoUrl"`
 	TripadvisorId      *uint            `json:"tripadvisorId"`
@@ -170,7 +170,7 @@ func (SourceLocationsOsm) TableName() string {
 // SourceLocationsAll
 
 type SourceLocationsAll struct {
-	GoogleId           string           `gorm:"primaryKey;index" json:"googleId"`
+	GoogleID           string           `gorm:"primaryKey;index" json:"googleId"`
 	OSMRef             string           `json:"osmRef"`
 	Name               string           `json:"name"`
 	Lat                float64          `json:"lat"`
@@ -202,7 +202,7 @@ func (SourceLocationsAll) TableName() string {
 }
 
 type SourceLocationDTO struct {
-	GoogleId     string  `gorm:"primaryKey;index" json:"googleId"`
+	GoogleID     string  `gorm:"primaryKey;index" json:"googleId"`
 	OSMRef       string  `json:"osmRef"`
 	Name         string  `json:"name"`
 	Lat          float64 `json:"lat"`
@@ -213,7 +213,7 @@ type SourceLocationDTO struct {
 
 func (sl SourceLocationsAll) ToDTO(db *gorm.DB) (*SourceLocationDTO, error) {
 	return &SourceLocationDTO{
-		GoogleId:     sl.GoogleId,
+		GoogleID:     sl.GoogleID,
 		OSMRef:       sl.OSMRef,
 		Name:         sl.Name,
 		Lat:          sl.Lat,
