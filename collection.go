@@ -29,7 +29,7 @@ type CollectionLocation struct {
 	Collection     *Collection        `gorm:"foreignKey:CollectionID;references:ID" json:"collection,omitempty"`
 	GoogleID       string             `gorm:"primaryKey;type:text" json:"googleId"`
 	SourceLocation *SourceLocationDTO `gorm:"foreignKey:GoogleID;references:GoogleId" json:"sourceLocation,omitempty"`
-	Location       *LocationDTO       `gorm:"foreignKey:GoogleID;references:GoogleID" json:"location,omitempty"`
+	Location       *Location          `gorm:"foreignKey:GoogleID;references:GoogleID" json:"location,omitempty"`
 	SeqNum         int                `gorm:"default:0;not null" json:"seqNum"`
 	Blurb          *string            `gorm:"type:text" json:"blurb,omitempty"`
 }
