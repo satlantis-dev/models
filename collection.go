@@ -19,6 +19,7 @@ type Collection struct {
 	IsPublic     bool                 `gorm:"default:true" json:"isPublic"`
 	Locations    []CollectionLocation `json:"locations"`
 	NumLocations int                  `gorm:"-" json:"numLocations"`
+	NumSaves     int                  `gorm:"-" json:"numSaves"`
 }
 
 func (Collection) TableName() string {
