@@ -7,7 +7,7 @@ type NoteRanking struct {
 	Note             Note      `gorm:"foreignKey:NoteId" json:"note"`
 	OnSatlantis      bool      `json:"onSatlantis"`
 	FromFocusAccount bool      `json:"fromFocusAccount"`
-	Nsfw             bool      `json:"nsfw"`
+	Nsfw             *bool     `json:"nsfw"`
 	Reactions        int       `gorm:"default:0" json:"reactions"`
 	Replies          int       `gorm:"default:0" json:"replies"`
 	AllReplies       int       `gorm:"default:0" json:"allReplies"`

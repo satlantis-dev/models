@@ -13,7 +13,7 @@ type PlaceNote struct {
 	Place       Place      `json:"place"`
 	NoteID      uint       `gorm:"index" json:"noteId"`
 	Note        Note       `json:"note"`
-	Nsfw        bool       `json:"nsfw"`
+	Nsfw        *bool      `json:"nsfw"`
 	Type        NoteType   `json:"type"`
 	OnSatlantis bool       `json:"onSatlantis"`
 	IsNews      bool       `json:"isNews"`
