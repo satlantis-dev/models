@@ -17,7 +17,7 @@ const (
 
 type AccountPlaceRole struct {
 	AccountID         uint                 `gorm:"index;primaryKey" json:"accountId"`
-	Account           AccountDTO           `gorm:"foreignKey:AccountID" json:"account,omitempty"`
+	Account           *AccountDTO          `gorm:"foreignKey:AccountID" json:"account,omitempty"`
 	PlaceID           uint                 `gorm:"index;primaryKey" json:"placeId"`
 	Place             *Place               `gorm:"foreignKey:PlaceID" json:"place,omitempty"`
 	AmbassadorRequest bool                 `json:"ambassadorRequest"`
