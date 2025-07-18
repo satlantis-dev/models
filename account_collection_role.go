@@ -12,6 +12,7 @@ const (
 	CollectionOwner AccountCollectionRoleType = iota + 1
 	CollectionContributor
 	CollectionSavedBy
+	CollectionViewer
 )
 
 type AccountCollectionRole struct {
