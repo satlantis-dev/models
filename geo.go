@@ -9,6 +9,9 @@ type GeoLocation struct {
 }
 
 type TimeZone struct {
-	Name   string  `json:"name"`
-	Offset float64 `json:"offset"`
+	Name            string  `json:"name"`
+	OffsetSTD       float64 `json:"offset_STD"`
+	OffsetDST       float64 `json:"offset_DST"`
+	AbbreviationSTD string  `json:"abbreviation_STD"`
+	AbbreviationDST string  `json:"abbreviation_DST"`
 }
