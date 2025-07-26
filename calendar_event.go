@@ -66,6 +66,7 @@ type CalendarEventCohost struct {
 	Account              *AccountDTO    `gorm:"foreignKey:AccountID" json:"account"`
 	InvitationAcceptedAt *time.Time     `json:"invitationAcceptedAt"`
 	InvitationDeclinedAt *time.Time     `json:"invitationDeclinedAt"`
+	AutoAcceptInvitation bool           `gorm:"default:false" json:"autoAcceptInvitation"`
 	CreatedAt            time.Time      `json:"createdAt"`
 	UpdatedAt            time.Time      `json:"updatedAt"`
 }
