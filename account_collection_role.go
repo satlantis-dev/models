@@ -18,7 +18,7 @@ type AccountCollectionRole struct {
 	AccountID    uint                      `gorm:"index;primaryKey" json:"accountId"`
 	Account      *AccountDTO               `gorm:"foreignKey:AccountID" json:"account,omitempty"`
 	CollectionID uint                      `gorm:"index;primaryKey" json:"collectionId"`
-	Collection   *Collection               `gorm:"foreignKey:CollectionID" json:"collection,omitempty"`
+	Collection   *Collection               `gorm:"foreignKey:CollectionID;constraint:OnDelete:CASCADE;" json:"collection,omitempty"`
 	Type         AccountCollectionRoleType `gorm:"not null" json:"type"`
 	CreatedAt    time.Time                 `json:"-"`
 	UpdatedAt    time.Time                 `json:"-"`
