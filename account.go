@@ -162,6 +162,19 @@ func (a *Account) ToDTO() AccountDTO {
 	}
 }
 
+func (a *Account) ToMiniDTO() AccountMiniDTO {
+	return AccountMiniDTO{
+		ID:          a.ID,
+		Username:    a.Username,
+		DisplayName: a.DisplayName,
+		Name:        a.Name,
+		Nip05:       a.Nip05,
+		Picture:     a.Picture,
+		Npub:        a.Npub,
+		PubKey:      a.PubKey,
+	}
+}
+
 func (a *Account) ToPortableProfile(db *gorm.DB) (*AccountPortable, error) {
 	// Get following accounts
 	following, err := a.GetFollowingAccounts(db, a.ID)
