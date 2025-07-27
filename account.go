@@ -59,6 +59,117 @@ type Account struct {
 	VertexRank                  decimal.Decimal        `gorm:"type:numeric;index" json:"vertexRank"`
 }
 
+// AccountMiniDTO
+
+type AccountMiniDTO struct {
+	ID          uint   `json:"id"`
+	Username    string `json:"username"`
+	DisplayName string `json:"display_name"`
+	Name        string `json:"name"`
+	Nip05       string `json:"nip05"`
+	Picture     string `json:"picture"`
+	Npub        string `json:"npub"`
+	PubKey      string `json:"pubKey"`
+}
+
+func (a *Account) ToMiniDTO() AccountMiniDTO {
+	return AccountMiniDTO{
+		ID:          a.ID,
+		Username:    a.Username,
+		DisplayName: a.DisplayName,
+		Name:        a.Name,
+		Nip05:       a.Nip05,
+		Picture:     a.Picture,
+		Npub:        a.Npub,
+		PubKey:      a.PubKey,
+	}
+}
+
+// SearchAccountDTO
+
+type SearchAccountDTO struct {
+	ID             uint   `json:"id"`
+	Username       string `json:"username"`
+	DisplayName    string `json:"display_name"`
+	FollowersCount int64  `json:"followers_count"`
+	FollowingCount int64  `json:"following_count"`
+	Name           string `json:"name"`
+	Nip05          string `json:"nip05"`
+	About          string `json:"about"`
+	Picture        string `json:"picture"`
+	Npub           string `json:"npub"`
+}
+
+func (a *Account) ToSearchAccountDTO(db *gorm.DB) (*SearchAccountDTO, error) {
+	// Set followers count to 0 if nil
+	var followersCount int64 = 0
+	if a.FollowersCount != nil {
+		followersCount = *a.FollowersCount
+	}
+
+	var followingCount int64 = 0
+	if a.FollowingCount != nil {
+		followingCount = *a.FollowingCount
+	}
+
+	return &SearchAccountDTO{
+		ID:             a.ID,
+		Username:       a.Username,
+		DisplayName:    a.DisplayName,
+		Name:           a.Name,
+		Nip05:          a.Nip05,
+		About:          a.About,
+		Picture:        a.Picture,
+		Npub:           a.Npub,
+		FollowersCount: followersCount,
+		FollowingCount: followingCount,
+	}, nil
+}
+
+// AccountDTO
+
+type AccountDTO struct {
+	ID             uint   `json:"id"`
+	About          string `json:"about"`
+	DisplayName    string `json:"displayName"`
+	Banner         string `json:"banner"`
+	FollowingCount *int64 `json:"followingCount"`
+	FollowersCount *int64 `json:"followersCount"`
+	IsAdmin        bool   `json:"isAdmin"`
+	IsBlacklisted  bool   `json:"isBlacklisted"`
+	IsBusiness     bool   `json:"isBusiness"`
+	Name           string `json:"name"`
+	Nip05          string `json:"nip05"`
+	Npub           string `json:"npub"`
+	Picture        string `json:"picture"`
+	PubKey         string `json:"pubKey"`
+	Username       string `json:"username"`
+	Website        string `json:"website"`
+}
+
+func (a *Account) ToDTO() AccountDTO {
+	return AccountDTO{
+		ID:             a.ID,
+		About:          a.About,
+		Banner:         a.Banner,
+		DisplayName:    a.DisplayName,
+		FollowersCount: a.FollowersCount,
+		FollowingCount: a.FollowingCount,
+		IsAdmin:        a.IsAdmin,
+		IsBlacklisted:  a.IsBlacklisted,
+		IsBusiness:     a.IsBusiness,
+		Name:           a.Name,
+		Nip05:          a.Nip05,
+		Npub:           a.Npub,
+		Picture:        a.Picture,
+		PubKey:         a.PubKey,
+		Username:       a.Username,
+		Website:        a.Website,
+	}
+}
+
+// PortableProfile
+
 type AccountPortable struct {
 	ID                   uint                  `json:"id"`
 	About                string                `json:"about"`
@@ -95,84 +206,6 @@ type AccountPortable struct {
 	FollowersCount       *int64                `json:"followersCount"`
 	AppleID              *string               `json:"appleId"`
 	GoogleID             *string               `json:"googleId"`
-}
-
-type AccountDTO struct {
-	ID             uint   `json:"id"`
-	About          string `json:"about"`
-	DisplayName    string `json:"displayName"`
-	Banner         string `json:"banner"`
-	IsAdmin        bool   `json:"isAdmin"`
-	IsBlacklisted  bool   `json:"isBlacklisted"`
-	IsBusiness     bool   `json:"isBusiness"`
-	Name           string `json:"name"`
-	Nip05          string `json:"nip05"`
-	Npub           string `json:"npub"`
-	Picture        string `json:"picture"`
-	PubKey         string `json:"pubKey"`
-	Username       string `json:"username"`
-	Website        string `json:"website"`
-	FollowingCount *int64 `json:"followingCount"`
-	FollowersCount *int64 `json:"followersCount"`
-}
-
-type SearchAccountDTO struct {
-	ID             uint   `json:"id"`
-	Username       string `json:"username"`
-	DisplayName    string `json:"display_name"`
-	Name           string `json:"name"`
-	Nip05          string `json:"nip05"`
-	About          string `json:"about"`
-	Picture        string `json:"picture"`
-	Npub           string `json:"npub"`
-	FollowersCount int64  `json:"followers_count"`
-}
-
-type AccountMiniDTO struct {
-	ID          uint   `json:"id"`
-	Username    string `json:"username"`
-	DisplayName string `json:"display_name"`
-	Name        string `json:"name"`
-	Nip05       string `json:"nip05"`
-	Picture     string `json:"picture"`
-	Npub        string `json:"npub"`
-	PubKey      string `json:"pubKey"`
-}
-
-func (AccountDTO) TableName() string {
-	return "accounts"
-}
-
-func (a *Account) ToDTO() AccountDTO {
-	return AccountDTO{
-		ID:             a.ID,
-		About:          a.About,
-		DisplayName:    a.DisplayName,
-		Banner:         a.Banner,
-		IsAdmin:        a.IsAdmin,
-		IsBusiness:     a.IsBusiness,
-		Name:           a.Name,
-		Nip05:          a.Nip05,
-		Npub:           a.Npub,
-		Picture:        a.Picture,
-		PubKey:         a.PubKey,
-		Username:       a.Username,
-		FollowersCount: a.FollowersCount,
-		FollowingCount: a.FollowingCount,
-	}
-}
-
-func (a *Account) ToMiniDTO() AccountMiniDTO {
-	return AccountMiniDTO{
-		ID:          a.ID,
-		Username:    a.Username,
-		DisplayName: a.DisplayName,
-		Name:        a.Name,
-		Nip05:       a.Nip05,
-		Picture:     a.Picture,
-		Npub:        a.Npub,
-		PubKey:      a.PubKey,
-	}
 }
 
 func (a *Account) ToPortableProfile(db *gorm.DB) (*AccountPortable, error) {
@@ -272,13 +305,11 @@ func (a *Account) GetFollowingAccounts(db *gorm.DB, followerID uint) ([]AccountD
 	if err != nil {
 		return nil, err
 	}
-
 	accountDTOs := make([]AccountDTO, len(accounts))
 
 	for i, account := range accounts {
 		accountDTOs[i] = account.ToDTO()
 	}
-
 	return accountDTOs, nil
 }
 
@@ -288,7 +319,6 @@ func (a *Account) GetFollowingCount(db *gorm.DB, userID uint) (int64, error) {
 	if err := db.Model(&Follow{}).Where("follows.follower_id = ?", userID).Count(&count).Error; err != nil {
 		return 0, err
 	}
-
 	return count, nil
 }
 
@@ -298,7 +328,6 @@ func (a *Account) GetFollowersCount(db *gorm.DB, userID uint) (int64, error) {
 	if err := db.Model(&Follow{}).Where("follows.following_id = ?", userID).Count(&count).Error; err != nil {
 		return 0, err
 	}
-
 	return count, nil
 }
 
@@ -319,37 +348,4 @@ func (a *Account) GetFollowedByAccounts(db *gorm.DB, followingID uint) ([]Accoun
 	}
 
 	return accountDTOs, nil
-}
-
-func (a *Account) ToSearchAccountDTO(db *gorm.DB) (*SearchAccountDTO, error) {
-	// Set followers count to 0 if nil
-	var followersCount int64 = 0
-	if a.FollowersCount != nil {
-		followersCount = *a.FollowersCount
-	}
-
-	return &SearchAccountDTO{
-		ID:             a.ID,
-		Username:       a.Username,
-		DisplayName:    a.DisplayName,
-		Name:           a.Name,
-		Nip05:          a.Nip05,
-		About:          a.About,
-		Picture:        a.Picture,
-		Npub:           a.Npub,
-		FollowersCount: followersCount,
-	}, nil
-}
-
-func (a *Account) ToAccountMiniDTO() (*AccountMiniDTO, error) {
-	return &AccountMiniDTO{
-		ID:          a.ID,
-		Username:    a.Username,
-		DisplayName: a.DisplayName,
-		Name:        a.Name,
-		Nip05:       a.Nip05,
-		Picture:     a.Picture,
-		Npub:        a.Npub,
-		PubKey:      a.PubKey,
-	}, nil
 }
