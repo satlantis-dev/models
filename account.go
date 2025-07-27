@@ -100,7 +100,7 @@ type SearchAccountDTO struct {
 	Npub           string `json:"npub"`
 }
 
-func (a *Account) ToSearchAccountDTO(db *gorm.DB) (*SearchAccountDTO, error) {
+func (a *Account) ToSearchAccountDTO() SearchAccountDTO {
 	// Set followers count to 0 if nil
 	var followersCount int64 = 0
 	if a.FollowersCount != nil {
@@ -112,7 +112,7 @@ func (a *Account) ToSearchAccountDTO(db *gorm.DB) (*SearchAccountDTO, error) {
 		followingCount = *a.FollowingCount
 	}
 
-	return &SearchAccountDTO{
+	return SearchAccountDTO{
 		ID:             a.ID,
 		Username:       a.Username,
 		DisplayName:    a.DisplayName,
@@ -123,7 +123,7 @@ func (a *Account) ToSearchAccountDTO(db *gorm.DB) (*SearchAccountDTO, error) {
 		Npub:           a.Npub,
 		FollowersCount: followersCount,
 		FollowingCount: followingCount,
-	}, nil
+	}
 }
 
 // AccountDTO
