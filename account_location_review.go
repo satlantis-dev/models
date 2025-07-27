@@ -12,7 +12,7 @@ type AccountLocationReview struct {
 	Account    AccountDTO     `gorm:"foreignKey:AccountID" json:"account,omitempty"`
 	GoogleID   string         `gorm:"uniqueIndex:idx_account_location" json:"googleId"`
 	Location   *LocationDTO   `gorm:"foreignKey:GoogleID;references:GoogleID" json:"location,omitempty"`
-	ReviewText string         `json:"reviewText"`
+	ReviewText *string        `json:"reviewText"`
 	IsPositive bool           `gorm:"not null;default:true" json:"isPositive"`
 	CreatedAt  time.Time      `gorm:"autoCreateTime" json:"createdAt"`
 	UpdatedAt  time.Time      `gorm:"autoUpdateTime" json:"updatedAt"`
