@@ -168,6 +168,10 @@ func (a *Account) ToDTO() AccountDTO {
 	}
 }
 
+func (AccountDTO) TableName() string {
+	return "accounts"
+}
+
 // PortableProfile
 
 type AccountPortable struct {
