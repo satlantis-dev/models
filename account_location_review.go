@@ -10,7 +10,7 @@ type AccountLocationReview struct {
 	ID         uint           `gorm:"primaryKey;autoIncrement" json:"id"`
 	AccountID  uint           `gorm:"uniqueIndex:idx_account_location" json:"accountId"`
 	Account    AccountDTO     `gorm:"foreignKey:AccountID" json:"account,omitempty"`
-	GoogleID   uint           `gorm:"uniqueIndex:idx_account_location" json:"googleId"`
+	GoogleID   string         `gorm:"uniqueIndex:idx_account_location" json:"googleId"`
 	Location   *LocationDTO   `gorm:"foreignKey:LocationID" json:"location,omitempty"`
 	ReviewText string         `json:"reviewText"`
 	IsPositive bool           `gorm:"not null;default:true" json:"isPositive"`
