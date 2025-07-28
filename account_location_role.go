@@ -14,8 +14,6 @@ const (
 	Staff
 	DiscoveredBy
 	BookmarkedBy
-	LikedBy
-	DislikedBy
 )
 
 type AccountLocationRole struct {
