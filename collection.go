@@ -20,6 +20,7 @@ type Collection struct {
 	Locations    []CollectionLocation `json:"locations"`
 	NumLocations int                  `gorm:"-" json:"numLocations"`
 	NumSaves     int                  `gorm:"-" json:"numSaves"`
+	Contributors []AccountMiniDTO     `gorm:"-" json:"contributors,omitempty"`
 }
 
 func (Collection) TableName() string {
