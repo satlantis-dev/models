@@ -21,6 +21,7 @@ type Collection struct {
 	NumLocations int                  `gorm:"-" json:"numLocations"`
 	NumSaves     int                  `gorm:"-" json:"numSaves"`
 	Contributors []AccountMiniDTO     `gorm:"-" json:"contributors,omitempty"`
+	LocationTags []LocationTag        `gorm:"many2many:collection_location_tags" json:"locationTags"`
 }
 
 func (Collection) TableName() string {
