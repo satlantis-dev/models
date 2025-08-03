@@ -3,6 +3,7 @@ package models
 import (
 	"time"
 
+	"github.com/lib/pq"
 	"gorm.io/gorm"
 )
 
@@ -21,6 +22,8 @@ type Collection struct {
 	NumLocations int                  `gorm:"-" json:"numLocations"`
 	NumSaves     int                  `gorm:"-" json:"numSaves"`
 	Contributors []AccountMiniDTO     `gorm:"-" json:"contributors,omitempty"`
+	LocationTags []LocationTag        `gorm:"many2many:collection_location_tags" json:"locationTags"`
+	PlacesByID   pq.Int32Array        `gorm:"type:integer[]" json:"placesById"`
 }
 
 func (Collection) TableName() string {
