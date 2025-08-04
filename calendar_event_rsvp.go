@@ -2,6 +2,15 @@ package models
 
 import "time"
 
+type RsvpStatus string
+
+const (
+	RsvpAccepted    RsvpStatus = "accepted"
+	RsvpTentative   RsvpStatus = "tentative"
+	RsvpDeclined    RsvpStatus = "declined"
+	RsvpWhitelisted RsvpStatus = "whitelisted"
+)
+
 type CalendarEventRSVP struct {
 	ID                   uint      `gorm:"primaryKey" json:"id"`
 	AccountID            uint      `json:"accountId"`
