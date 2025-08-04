@@ -4,7 +4,7 @@ import "time"
 
 type RsvpStatus string
 
-const (
+var (
 	RsvpAccepted    RsvpStatus = "accepted"
 	RsvpTentative   RsvpStatus = "tentative"
 	RsvpDeclined    RsvpStatus = "declined"
