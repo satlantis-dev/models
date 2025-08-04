@@ -51,6 +51,7 @@ type CalendarEvent struct {
 	Cohosts            []CalendarEventCohost       `json:"cohosts"`
 	DeletedAt          gorm.DeletedAt              `gorm:"index" json:"-"`
 	OwnershipChangedAt *time.Time                  `json:"ownershipChangedAt"`
+	RsvpLimit          *int                        `json:"rsvpLimit"`
 }
 
 type CalendarEventInterest struct {
