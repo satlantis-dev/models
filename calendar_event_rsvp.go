@@ -5,10 +5,10 @@ import "time"
 type RsvpStatus string
 
 var (
-	RsvpAccepted    RsvpStatus = "accepted"
-	RsvpTentative   RsvpStatus = "tentative"
-	RsvpDeclined    RsvpStatus = "declined"
-	RsvpWhitelisted RsvpStatus = "whitelisted"
+	RsvpAccepted   RsvpStatus = "accepted"
+	RsvpTentative  RsvpStatus = "tentative"
+	RsvpDeclined   RsvpStatus = "declined"
+	RsvpWaitlisted RsvpStatus = "waitlisted"
 )
 
 type CalendarEventRSVP struct {
