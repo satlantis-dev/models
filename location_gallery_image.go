@@ -16,6 +16,7 @@ const (
 type LocationGalleryImage struct {
 	ID         uint          `gorm:"primaryKey;autoIncrement" json:"id"`
 	LocationID uint          `gorm:"not null;index" json:"locationId"`
+	Location   Location      `gorm:"foreignKey:LocationID;references:ID;constraint:OnDelete:CASCADE;" json:"-"`
 	Url        string        `gorm:"not null;unique" json:"url"`
 	Caption    *string       `json:"caption"`
 	Category   ImageCategory `gorm:"type:string;default:'general'" json:"category"`

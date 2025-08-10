@@ -196,7 +196,7 @@ type Location struct {
 	IsClaimed             bool                   `json:"isClaimed"`
 	Lat                   float64                `json:"lat"`
 	Lng                   float64                `json:"lng"`
-	LocationGalleryImages []LocationGalleryImage `gorm:"foreignKey:LocationID" json:"locationGalleryImages,omitempty"`
+	LocationGalleryImages []LocationGalleryImage `gorm:"foreignKey:LocationID;constraint:OnDelete:CASCADE;" json:"locationGalleryImages,omitempty"`
 	LocationTags          []LocationTag          `gorm:"many2many:location_location_tags;constraint:OnDelete:CASCADE;" json:"locationTags"`
 	PlaceID               uint                   `gorm:"index" json:"placeId"`
 	Place                 Place                  `json:"place"`
