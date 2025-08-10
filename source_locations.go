@@ -176,7 +176,7 @@ type SourceLocationsAll struct {
 	OSMStdTags         JSONBMapSlice    `gorm:"type:jsonb" json:"osmStdTags"`
 	OSMExtraTags       JSONBMapSlice    `gorm:"type:jsonb" json:"osmExtraTags"`
 	SatlantisTags      JSONBMapSlice    `gorm:"type:jsonb" json:"satlantisTags"`
-	OSMPlaceRef        string           `json:"osmPlaceRef"`
+	OSMPlaceRef        string           `gorm:"not null" json:"osmPlaceRef"`
 	OSMPlaceName       string           `json:"osmPlaceName"`
 	Source             string           `gorm:"not null" json:"source"`
 	OSMDetails         string           `gorm:"type:jsonb" json:"osmDetails"`
