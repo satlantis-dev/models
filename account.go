@@ -28,7 +28,7 @@ type Account struct {
 	Following                   []Follow               `gorm:"foreignKey:FollowerID" json:"following"`
 	FollowedBy                  []Follow               `gorm:"foreignKey:FollowingID" json:"followedBy"`
 	InfluenceScore              uint                   `json:"influenceScore"`
-	Interests                   []Interest             `gorm:"many2many:account_interests" json:"interests,omitempty"`
+	Interests                   []Interest             `gorm:"many2many:account_interests;constraint:OnDelete:CASCADE" json:"interests,omitempty"`
 	IsAdmin                     bool                   `gorm:"default:false" json:"isAdmin"`
 	IsBlacklisted               bool                   `gorm:"default:false" json:"isBlacklisted"`
 	IsBusiness                  bool                   `gorm:"default:false" json:"isBusiness"`

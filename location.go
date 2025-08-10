@@ -197,7 +197,7 @@ type Location struct {
 	Lat                   float64                `json:"lat"`
 	Lng                   float64                `json:"lng"`
 	LocationGalleryImages []LocationGalleryImage `gorm:"foreignKey:LocationID" json:"locationGalleryImages,omitempty"`
-	LocationTags          []LocationTag          `gorm:"many2many:location_location_tags" json:"locationTags"`
+	LocationTags          []LocationTag          `gorm:"many2many:location_location_tags;constraint:OnDelete:CASCADE;" json:"locationTags"`
 	PlaceID               uint                   `gorm:"index" json:"placeId"`
 	Place                 Place                  `json:"place"`
 	Name                  string                 `json:"name"`
@@ -231,7 +231,7 @@ type LocationDTO struct {
 	IsClaimed       bool          `json:"isClaimed"`
 	Lat             float64       `json:"lat"`
 	Lng             float64       `json:"lng"`
-	LocationTags    []LocationTag `gorm:"many2many:location_location_tags" json:"locationTags"`
+	LocationTags    []LocationTag `gorm:"many2many:location_location_tags;constraint:OnDelete:CASCADE;" json:"locationTags"`
 	Name            string        `json:"name"`
 	OpeningHours    OpeningHours  `gorm:"type:jsonb;serializer:json" json:"openingHours"`
 	PlaceID         uint          `json:"placeId"`

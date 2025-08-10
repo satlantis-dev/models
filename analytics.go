@@ -14,7 +14,7 @@ type AccountAnalytics struct {
 type MerchantAnalytics struct {
 	Date           time.Time `gorm:"primaryKey;type:date" json:"date"`
 	PlaceID        uint      `gorm:"primaryKey" json:"placeId"`
-	Place          Place     `gorm:"foreignKey:PlaceID;references:ID"`
+	Place          Place     `gorm:"foreignKey:PlaceID;references:ID;constraint:OnDelete:CASCADE"`
 	Locations      int       `json:"locations"`
 	TotalLocations int       `json:"totalLocations"`
 	Claimed        int       `json:"claimed"`
@@ -24,7 +24,7 @@ type MerchantAnalytics struct {
 type EventAnalytics struct {
 	Date            time.Time `gorm:"primaryKey;type:date" json:"date"`
 	PlaceID         uint      `gorm:"primaryKey" json:"placeId"`
-	Place           Place     `gorm:"foreignKey:PlaceID;references:ID"`
+	Place           Place     `gorm:"foreignKey:PlaceID;references:ID;constraint:OnDelete:CASCADE"`
 	Events          int       `json:"events"`
 	EventsSatlantis int       `json:"eventsSatlantis"`
 	UpcomingEvents  int       `json:"upcomingEvents"`
@@ -34,6 +34,7 @@ type EventAnalytics struct {
 type EngagementAnalytics struct {
 	Date           time.Time `gorm:"primaryKey;type:date" json:"date"`
 	PlaceID        uint      `gorm:"primaryKey" json:"placeId"`
+	Place          Place     `gorm:"foreignKey:PlaceID;references:ID;constraint:OnDelete:CASCADE"`
 	MediaNoteViews int       `json:"mediaNoteViews"`
 	MediaNotes     int       `json:"mediaNotes"`
 	Reactions      int       `json:"reactions"`
@@ -43,7 +44,7 @@ type EngagementAnalytics struct {
 type PlaceAnalytics struct {
 	Date                time.Time `gorm:"primaryKey;type:date" json:"date"`
 	PlaceID             uint      `gorm:"primaryKey" json:"placeId"`
-	Place               Place     `gorm:"foreignKey:PlaceID;references:ID"`
+	Place               Place     `gorm:"foreignKey:PlaceID;references:ID;constraint:OnDelete:CASCADE"`
 	PageViews           int       `json:"pageViews"`
 	Followers           int       `json:"followers"`
 	Unfollowers         int       `json:"unfollowers"`
