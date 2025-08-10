@@ -17,7 +17,6 @@ type LocationTag struct {
 	Value            string           `gorm:"type:text" json:"value"`
 	OsmPull          bool             `gorm:"type:boolean" json:"osmPull"`
 	Eligible         bool             `gorm:"type:boolean" json:"eligible"`
-	Locations        []Location       `gorm:"many2many:location_location_tags" json:"locations"`
 	Section          *string          `gorm:"type:text" json:"section"`
 	Hashtags         pq.StringArray   `gorm:"type:varchar[]" json:"hashtags"`
 }
