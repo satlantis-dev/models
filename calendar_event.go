@@ -51,7 +51,6 @@ type CalendarEvent struct {
 	Type                  *CalendarEventType          `gorm:"foreignKey:TypeID" json:"type,omitempty"`
 	URL                   string                      `json:"url"`
 	Venue                 *LocationDTO                `gorm:"foreignKey:VenueID" json:"venue,omitempty"`
-	VenueID               *uint                       `gorm:"index" json:"venueId,omitempty"`
 	Website               string                      `json:"website"`
 }
 
