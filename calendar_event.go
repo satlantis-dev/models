@@ -15,7 +15,7 @@ type CalendarEventType struct {
 type CalendarEvent struct {
 	ID                    uint                        `gorm:"primaryKey" json:"id"`
 	AccountID             uint                        `gorm:"index" json:"accountId"`
-	Account               AccountDTO                  `json:"account,omitempty"`
+	Account               *AccountDTO                 `json:"account,omitempty"`
 	EventID               uint                        `gorm:"index" json:"eventId"`
 	NostrID               string                      `gorm:"index" json:"nostrId"`
 	Event                 Event                       `json:"event"`
@@ -48,9 +48,10 @@ type CalendarEvent struct {
 	Summary               string                      `json:"summary"`
 	Title                 string                      `json:"title"`
 	TypeID                uint                        `gorm:"index;not null;default:1" json:"typeId"`
-	Type                  CalendarEventType           `gorm:"foreignKey:TypeID" json:"type,omitempty"`
+	Type                  *CalendarEventType          `gorm:"foreignKey:TypeID" json:"type,omitempty"`
 	URL                   string                      `json:"url"`
-	Venue                 *LocationDTO                `json:"venue,omitempty"`
+	Venue                 *LocationDTO                `gorm:"foreignKey:VenueID" json:"venue,omitempty"`
+	VenueID               *uint                       `gorm:"index" json:"venueId,omitempty"`
 	Website               string                      `json:"website"`
 }
 
