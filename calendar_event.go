@@ -71,3 +71,9 @@ type CalendarEventCohost struct {
 	CreatedAt            time.Time      `json:"createdAt"`
 	UpdatedAt            time.Time      `json:"updatedAt"`
 }
+
+type CalendarEventResponse struct {
+	*CalendarEvent
+	Place   map[string]interface{} `json:"place,omitempty"`
+	Country map[string]interface{} `json:"country,omitempty"`
+}
