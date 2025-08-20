@@ -16,7 +16,7 @@ type Collection struct {
 	Cover        *string              `gorm:"type:text" json:"cover,omitempty"`
 	CreatedAt    time.Time            `gorm:"autoCreateTime" json:"createdAt"`
 	UpdatedAt    time.Time            `gorm:"autoUpdateTime" json:"updatedAt"`
-	DeletedAt    gorm.DeletedAt       `gorm:"index" json:"-"`
+	DeletedAt    *gorm.DeletedAt      `gorm:"index" json:"-"`
 	IsPublic     bool                 `gorm:"default:true" json:"isPublic"`
 	Locations    []CollectionLocation `json:"locations"`
 	NumLocations int                  `gorm:"-" json:"numLocations"`
