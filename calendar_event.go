@@ -32,6 +32,7 @@ type CalendarEvent struct {
 	Cohosts               []CalendarEventCohost       `json:"cohosts"`
 	End                   time.Time                   `json:"end"`
 	EndTzId               string                      `json:"endTzId"`
+	Featured              bool                        `gorm:"default:false" json:"featured"`
 	Geohash               string                      `json:"geohash"`
 	GoogleID              string                      `json:"googleId"`
 	Image                 string                      `json:"image"`
