@@ -22,6 +22,8 @@ type CalendarEventRSVP struct {
 	Status             string     `json:"status"`
 	AcceptedAt         *time.Time `json:"acceptedAt,omitempty"`
 	RejectedAt         *time.Time `json:"rejectedAt,omitempty"`
+	StatusUpdatedById  *uint      `json:"statusUpdatedById"`
+	StatusUpdatedBy    *Account   `json:"statusUpdatedBy"`
 	IsSatlantisCreated bool       `gorm:"default:false"`
 
 	// Nostr fields
