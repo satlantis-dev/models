@@ -18,7 +18,7 @@ const (
 	NotificationTypeCollectionSaved                       = "collection_saved"
 	NotificationTypeComment                               = "comment"
 	NotificationTypeFollow                                = "follow"
-	NotificationTypeLikeMediaNote                         = "like_media_note"
+	NotificationTypeLikeMediaNote                         = "like-media-note"
 	NotificationTypeMention                               = "mention"
 	NotificationTypeReport                                = "report"
 	NotificationTypeVerifyEmail                           = "verify_email"
