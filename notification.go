@@ -4,6 +4,27 @@ import (
 	"time"
 )
 
+const (
+	NotificationTypeCalendarEventAnnouncement             = "calendar_event_announcement"
+	NotificationTypeCalendarEventCohostInvitation         = "calendar_event_cohost_invitation"
+	NotificationTypeCalendarEventCohostInvitationAccepted = "calendar_event_cohost_invitation_accepted"
+	NotificationTypeCalendarEventCohostInvitationDeclined = "calendar_event_cohost_invitation_declined"
+	NotificationTypeCalendarEventCommentMention           = "calendar_event_comment_mention"
+	NotificationTypeCalendarEventDiscussion               = "calendar_event_discussion"
+	NotificationTypeCalendarEventDiscussionMention        = "calendar_event_discussion_mention"
+	NotificationTypeCalendarEventRSVP                     = "calendar_event_rsvp"
+	NotificationTypeCalendarEventUpdate                   = "calendar_event_update"
+	NotificationTypeCollectionImportSuccessful            = "collection_import_successful"
+	NotificationTypeCollectionInvitation                  = "collection_invitation"
+	NotificationTypeCollectionSaved                       = "collection_saved"
+	NotificationTypeComment                               = "comment"
+	NotificationTypeFollow                                = "follow"
+	NotificationTypeLikeMediaNote                         = "like-media-note"
+	NotificationTypeMention                               = "mention"
+	NotificationTypeReport                                = "report"
+	NotificationTypeVerifyEmail                           = "verify_email"
+)
+
 type Notification struct {
 	ID                 uint                    `gorm:"primaryKey" json:"id"`
 	CreatorAccountID   uint                    `gorm:"index" json:"creatorAccountId"` // Account that created the event
