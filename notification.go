@@ -8,6 +8,7 @@ const (
 	NotificationTypeCalendarEventAnnouncement             = "calendar_event_announcement"
 	NotificationTypeCalendarEventCohostInvitation         = "calendar_event_cohost_invitation"
 	NotificationTypeCalendarEventCohostInvitationAccepted = "calendar_event_cohost_invitation_accepted"
+	NotificationTypeCalendarEventCohostInvitationDeclined = "calendar_event_cohost_invitation_declined"
 	NotificationTypeCalendarEventCommentMention           = "calendar_event_comment_mention"
 	NotificationTypeCalendarEventDiscussion               = "calendar_event_discussion"
 	NotificationTypeCalendarEventDiscussionMention        = "calendar_event_discussion_mention"
