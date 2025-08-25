@@ -25,7 +25,7 @@ type CalendarEventRSVP struct {
 	StatusUpdatedById   *uint                   `json:"statusUpdatedById"`
 	StatusUpdatedBy     *Account                `json:"statusUpdatedBy"`
 	IsSatlantisCreated  bool                    `gorm:"default:false"`
-	RegistrationAnswers *map[string]interface{} `gorm:"type:jsonb" json:"registrationAnswers"`
+	RegistrationAnswers *map[string]interface{} `gorm:"type:jsonb;serializer:json" json:"registrationAnswers,omitempty"`
 
 	// Nostr fields
 	Content string `gorm:"type:text" json:"content"`
