@@ -16,6 +16,8 @@ const (
 	NotificationTypeCalendarEventUpdate                   = "calendar_event_update"
 	NotificationTypeCollectionImportSuccessful            = "collection_import_successful"
 	NotificationTypeCollectionInvitation                  = "collection_invitation"
+	NotificationTypeCollectionInvitationAccepted          = "collection_invitation_accepted"
+	NotificationTypeCollectionInvitationDeclined          = "collection_invitation_declined"
 	NotificationTypeCollectionSaved                       = "collection_saved"
 	NotificationTypeComment                               = "comment"
 	NotificationTypeFollow                                = "follow"
