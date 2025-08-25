@@ -53,7 +53,7 @@ type CalendarEvent struct {
 	URL                   string                      `json:"url"`
 	Venue                 *LocationDTO                `gorm:"-" json:"venue,omitempty"`
 	Website               string                      `json:"website"`
-	RegistrationQuestions *string                     `gorm:"type:jsonb" json:"registrationQuestions"`
+	RegistrationQuestions *map[string]interface{}     `gorm:"type:jsonb" json:"registrationQuestions"`
 }
 
 type CalendarEventInterest struct {

@@ -14,18 +14,18 @@ var (
 )
 
 type CalendarEventRSVP struct {
-	ID                  uint       `gorm:"primaryKey" json:"id"`
-	AccountID           uint       `json:"accountId"`
-	Account             Account    `json:"account"`
-	CreatedAt           time.Time  `json:"createdAt"`
-	CalendarEventID     uint       `json:"calendarEventId"`
-	Status              string     `json:"status"`
-	AcceptedAt          *time.Time `json:"acceptedAt,omitempty"`
-	RejectedAt          *time.Time `json:"rejectedAt,omitempty"`
-	StatusUpdatedById   *uint      `json:"statusUpdatedById"`
-	StatusUpdatedBy     *Account   `json:"statusUpdatedBy"`
-	IsSatlantisCreated  bool       `gorm:"default:false"`
-	RegistrationAnswers *string    `gorm:"type:jsonb" json:"registrationAnswers"`
+	ID                  uint                    `gorm:"primaryKey" json:"id"`
+	AccountID           uint                    `json:"accountId"`
+	Account             Account                 `json:"account"`
+	CreatedAt           time.Time               `json:"createdAt"`
+	CalendarEventID     uint                    `json:"calendarEventId"`
+	Status              string                  `json:"status"`
+	AcceptedAt          *time.Time              `json:"acceptedAt,omitempty"`
+	RejectedAt          *time.Time              `json:"rejectedAt,omitempty"`
+	StatusUpdatedById   *uint                   `json:"statusUpdatedById"`
+	StatusUpdatedBy     *Account                `json:"statusUpdatedBy"`
+	IsSatlantisCreated  bool                    `gorm:"default:false"`
+	RegistrationAnswers *map[string]interface{} `gorm:"type:jsonb" json:"registrationAnswers"`
 
 	// Nostr fields
 	Content string `gorm:"type:text" json:"content"`
