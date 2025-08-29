@@ -7,7 +7,8 @@ type PlaceCalendarEvent struct {
 	CreatedAt       time.Time     `json:"createdAt"`
 	UpdatedAt       time.Time     `json:"-"`
 	DeletedAt       *time.Time    `gorm:"index" json:"-,omitempty"`
-	PlaceID         uint          `gorm:"index;not null;foreignKey:PlaceID;references:ID;constraint:OnDelete:CASCADE" json:"placeId"`
+	PlaceID         uint          `gorm:"index" json:"placeId"`
+	Place           Place         `json:"place,omitempty"`
 	CalendarEventID uint          `gorm:"index" json:"calendarEventId"`
-	CalendarEvent   CalendarEvent `json:"calendarEvent"`
+	CalendarEvent   CalendarEvent `json:"calendarEvent,omitempty"`
 }
