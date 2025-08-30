@@ -11,9 +11,9 @@ type Account struct {
 	ID                          uint                   `gorm:"primaryKey" json:"id"`
 	CreatedAt                   time.Time              `json:"-"`
 	About                       string                 `gorm:"type:text" json:"about"`
-	AccountPlaceRoles           []AccountPlaceRole     `gorm:"foreignKey:AccountID" json:"accountPlaceRoles,omitempty"`
-	AccountLocationRoles        []AccountLocationRole  `gorm:"foreignKey:AccountID" json:"accountLocationRoles,omitempty"`
-	AuthDetails                 []AuthenticationDetail `gorm:"foreignKey:AccountID" json:"authDetails"`
+	AccountPlaceRoles           []AccountPlaceRole     `json:"accountPlaceRoles,omitempty"`
+	AccountLocationRoles        []AccountLocationRole  `json:"accountLocationRoles,omitempty"`
+	AuthDetails                 []AuthenticationDetail `json:"authDetails"`
 	Banner                      string                 `gorm:"type:text" json:"banner"`
 	BusinessCategory            string                 `gorm:"default:NULL" json:"businessCategory"`
 	ChatMemberships             []ChatMembership       `gorm:"foreignKey:AccountID" json:"chatMemberships"`
