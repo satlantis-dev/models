@@ -13,7 +13,6 @@ const (
 	Admin
 	Staff
 	DiscoveredBy
-	BookmarkedBy
 )
 
 type AccountLocationRole struct {
