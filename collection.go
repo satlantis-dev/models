@@ -32,9 +32,9 @@ func (Collection) TableName() string {
 }
 
 type CollectionLocation struct {
-	CollectionID uint         `gorm:"primaryKey;autoIncrement:false;not null;uniqueIndex:idx_collectionid_locationid" json:"collectionId"`
+	CollectionID uint         `gorm:"autoIncrement:false;not null;uniqueIndex:idx_collectionid_locationid" json:"collectionId"`
 	Collection   *Collection  `json:"collection,omitempty"`
-	GoogleID     string       `gorm:"primaryKey;type:text;not null;uniqueIndex:idx_collectionid_locationid" json:"googleId"`
+	GoogleID     string       `gorm:"type:text;not null;uniqueIndex:idx_collectionid_locationid" json:"googleId"`
 	Location     *LocationDTO `gorm:"-" json:"location,omitempty"`
 	SeqNum       int          `gorm:"default:0;not null" json:"seqNum"`
 	Blurb        *string      `gorm:"type:text" json:"blurb,omitempty"`
