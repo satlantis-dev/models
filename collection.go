@@ -18,7 +18,7 @@ type Collection struct {
 	UpdatedAt    time.Time            `gorm:"autoUpdateTime" json:"updatedAt"`
 	DeletedAt    *gorm.DeletedAt      `gorm:"index" json:"-"`
 	IsPublic     bool                 `gorm:"default:true" json:"isPublic"`
-	Locations    []CollectionLocation `json:"locations"`
+	Locations    []CollectionLocation `gorm:"foreignKey:CollectionID;constraint:OnDelete:CASCADE;" json:"locations"`
 	NumLocations int                  `gorm:"-" json:"numLocations"`
 	NumSaves     int                  `gorm:"-" json:"numSaves"`
 	Contributors []AccountMiniDTO     `gorm:"-" json:"contributors,omitempty"`
@@ -33,7 +33,7 @@ func (Collection) TableName() string {
 
 type CollectionLocation struct {
 	CollectionID uint         `gorm:"primaryKey;autoIncrement:false;not null;uniqueIndex:idx_collectionid_locationid" json:"collectionId"`
-	Collection   *Collection  `gorm:"foreignKey:CollectionID;references:ID;" json:"collection,omitempty"`
+	Collection   *Collection  `json:"collection,omitempty"`
 	GoogleID     string       `gorm:"primaryKey;type:text;not null;uniqueIndex:idx_collectionid_locationid" json:"googleId"`
 	Location     *LocationDTO `gorm:"-" json:"location,omitempty"`
 	SeqNum       int          `gorm:"default:0;not null" json:"seqNum"`
