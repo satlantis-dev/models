@@ -16,9 +16,9 @@ const (
 )
 
 type AccountCollectionRole struct {
-	AccountID    uint                      `gorm:"index;uniqueIndex:idx_account_collection_role" json:"accountId"`
+	AccountID    uint                      `gorm:"not null;index;uniqueIndex:idx_account_collection_role" json:"accountId"`
 	Account      *Account                  `gorm:"foreignKey:AccountID;constraint:OnDelete:CASCADE;" json:"account,omitempty"`
-	CollectionID uint                      `gorm:"index;uniqueIndex:idx_account_collection_role" json:"collectionId"`
+	CollectionID uint                      `gorm:"not null;index;uniqueIndex:idx_account_collection_role" json:"collectionId"`
 	Collection   *Collection               `gorm:"foreignKey:CollectionID;constraint:OnDelete:CASCADE;" json:"collection,omitempty"`
 	Type         AccountCollectionRoleType `gorm:"not null" json:"type"`
 	CreatedAt    time.Time                 `json:"-"`
