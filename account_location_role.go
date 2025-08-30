@@ -17,9 +17,9 @@ const (
 
 type AccountLocationRole struct {
 	AccountID  uint                    `gorm:"index;primaryKey" json:"accountId"`
-	Account    *AccountDTO             `gorm:"foreignKey:AccountID;constraint:OnDelete:CASCADE" json:"account,omitempty"`
+	Account    *Account                `gorm:"foreignKey:AccountID;constraint:OnDelete:CASCADE" json:"account,omitempty"`
 	LocationID uint                    `gorm:"index;primaryKey" json:"locationId"`
-	Location   *LocationDTO            `gorm:"foreignKey:LocationID;constraint:OnDelete:CASCADE" json:"location,omitempty"`
+	Location   *Location               `gorm:"foreignKey:LocationID;constraint:OnDelete:CASCADE" json:"location,omitempty"`
 	Type       AccountLocationRoleType `gorm:"not null" json:"type"`
 	CreatedAt  time.Time               `json:"-"`
 	UpdatedAt  time.Time               `json:"-"`
