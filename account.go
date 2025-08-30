@@ -12,7 +12,7 @@ type Account struct {
 	CreatedAt                   time.Time              `json:"-"`
 	About                       string                 `gorm:"type:text" json:"about"`
 	AccountPlaceRoles           []AccountPlaceRole     `gorm:"foreignKey:AccountID" json:"accountPlaceRoles,omitempty"`
-	AccountLocationRoles        []AccountLocationRole  `json:"accountLocationRoles,omitempty"`
+	AccountLocationRoles        []AccountLocationRole  `gorm:"foreignKey:AccountID" json:"accountLocationRoles,omitempty"`
 	AuthDetails                 []AuthenticationDetail `gorm:"foreignKey:AccountID" json:"authDetails"`
 	Banner                      string                 `gorm:"type:text" json:"banner"`
 	BusinessCategory            string                 `gorm:"default:NULL" json:"businessCategory"`
@@ -177,31 +177,30 @@ func (AccountDTO) TableName() string {
 type AccountPortable struct {
 	ID                   uint                  `json:"id"`
 	About                string                `json:"about"`
-	AccountPlaceRoles    []AccountPlaceRole    `gorm:"foreignKey:AccountID" json:"accountPlaceRoles"`
-	AccountLocationRoles []AccountLocationRole `gorm:"foreignKey:AccountID" json:"accountLocationRoles"`
+	AccountPlaceRoles    []AccountPlaceRole    `json:"accountPlaceRoles"`
+	AccountLocationRoles []AccountLocationRole `json:"accountLocationRoles"`
 	Banner               string                `json:"banner"`
-	ChatMemberships      []ChatMembership      `gorm:"foreignKey:AccountID" json:"chatMemberships"`
+	ChatMemberships      []ChatMembership      `json:"chatMemberships"`
 	CurrencyID           *uint                 `json:"currencyId"`
 	DisplayName          string                `json:"displayName"`
 	Username             string                `json:"username"`
 	Email                string                `json:"email"`
 	EmailVerified        bool                  `json:"emailVerified"`
 	InfluenceScore       uint                  `json:"influenceScore"`
-	Interests            []Interest            `gorm:"many2many:account_interests" json:"interests"`
+	Interests            []Interest            `json:"interests"`
 	IsAdmin              bool                  `json:"isAdmin"`
 	IsBlacklisted        bool                  `json:"isBlacklisted"`
 	IsBusiness           bool                  `json:"isBusiness"`
 	LastSeen             *time.Time            `json:"-"`
 	LocationSetEventID   *uint                 `json:"locationSetEventId"`
-	LocationSetEvent     Event                 `gorm:"foreignKey:LocationSetEventID" json:"locationSetEvent"`
+	LocationSetEvent     Event                 `json:"locationSetEvent"`
 	Lud06                string                `gorm:"default:NULL" json:"lud06"`
 	Lud16                string                `gorm:"default:NULL" json:"lud16"`
 	Name                 string                `json:"name"`
 	Nip05                string                `gorm:"default:NULL" json:"nip05"`
-	Notes                []Note                `gorm:"foreignKey:AccountID" json:"notes"`
+	Notes                []Note                `json:"notes"`
 	Npub                 string                `json:"npub"`
 	Picture              string                `json:"picture"`
-	PlaceRatings         []AccountPlaceRating  `gorm:"foreignKey:AccountID" json:"placeRatings"`
 	PubKey               string                `json:"pubKey"`
 	Website              string                `json:"website"`
 	Following            []AccountDTO          `json:"following"`
