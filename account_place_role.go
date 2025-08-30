@@ -16,9 +16,9 @@ const (
 )
 
 type AccountPlaceRole struct {
-	AccountID         uint                 `gorm:"index;uniqueIndex:idx_account_place" json:"accountId"`
+	AccountID         uint                 `gorm:"index;uniqueIndex:idx_account_place_role" json:"accountId"`
 	Account           *Account             `gorm:"foreignKey:AccountID;constraint:OnDelete:CASCADE" json:"account,omitempty"`
-	PlaceID           uint                 `gorm:"index;uniqueIndex:idx_account_place" json:"placeId"`
+	PlaceID           uint                 `gorm:"index;uniqueIndex:idx_account_place_role" json:"placeId"`
 	Place             *Place               `gorm:"foreignKey:PlaceID;constraint:OnDelete:CASCADE" json:"place,omitempty"`
 	Type              AccountPlaceRoleType `gorm:"not null" json:"type"`
 	AmbassadorRequest bool                 `json:"ambassadorRequest"`
