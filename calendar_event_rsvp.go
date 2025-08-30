@@ -16,7 +16,7 @@ var (
 type CalendarEventRSVP struct {
 	ID                  uint                    `gorm:"primaryKey" json:"id"`
 	AccountID           uint                    `json:"accountId"`
-	Account             Account                 `json:"account"`
+	Account             Account                 `gorm:"constraint:OnDelete:CASCADE;" json:"account"`
 	CreatedAt           time.Time               `json:"createdAt"`
 	CalendarEventID     uint                    `json:"calendarEventId"`
 	Status              string                  `json:"status"`

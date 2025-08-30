@@ -30,7 +30,7 @@ const (
 type Notification struct {
 	ID                 uint                    `gorm:"primaryKey" json:"id"`
 	CreatorAccountID   uint                    `gorm:"index" json:"creatorAccountId"` // Account that created the event
-	CreatorAccount     AccountDTO              `gorm:"foreignKey:CreatorAccountID;references:ID" json:"creatorAccount"`
+	CreatorAccount     AccountDTO              `gorm:"foreignKey:CreatorAccountID;references:ID;constraint:OnDelete:CASCADE" json:"creatorAccount"`
 	RecipientAccountID uint                    `gorm:"index" json:"-"` // Account that will be notified
 	Type               string                  `gorm:"type:varchar(255)" json:"type"`
 	Action             string                  `gorm:"type:text" json:"action"`
