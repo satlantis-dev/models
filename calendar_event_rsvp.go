@@ -9,7 +9,7 @@ var (
 	RsvpTentative  RsvpStatus = "tentative"
 	RsvpDeclined   RsvpStatus = "declined"
 	RsvpWaitlisted RsvpStatus = "waitlisted"
-	RsvpPending    RsvpStatus = "pending"
+	RsvpRequested  RsvpStatus = "requested"
 	RsvpRejected   RsvpStatus = "rejected"
 )
 
