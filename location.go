@@ -182,7 +182,7 @@ type Location struct {
 	CreatedAt             time.Time              `json:"-"`
 	UpdatedAt             time.Time              `json:"-"`
 	DeletedAt             *time.Time             `gorm:"index" json:"-,omitempty"`
-	AccountRoles          []AccountLocationRole  `gorm:"foreignKey:LocationID" json:"accountRoles"`
+	AccountRoles          []AccountLocationRole  `gorm:"foreignKey:LocationID;constraint:OnDelete:CASCADE;" json:"accountRoles"`
 	Address               Address                `gorm:"type:jsonb;serializer:json" json:"address"`
 	Bio                   *string                `json:"bio"`
 	BusinessStatus        BusinessStatus         `gorm:"type:text" json:"businessStatus"`

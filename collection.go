@@ -18,11 +18,11 @@ type Collection struct {
 	UpdatedAt    time.Time            `gorm:"autoUpdateTime" json:"updatedAt"`
 	DeletedAt    *gorm.DeletedAt      `gorm:"index" json:"-"`
 	IsPublic     bool                 `gorm:"default:true" json:"isPublic"`
-	Locations    []CollectionLocation `json:"locations"`
+	Locations    []CollectionLocation `gorm:"foreignKey:CollectionID;constraint:OnDelete:CASCADE" json:"locations"`
 	NumLocations int                  `gorm:"-" json:"numLocations"`
 	NumSaves     int                  `gorm:"-" json:"numSaves"`
 	Contributors []AccountMiniDTO     `gorm:"-" json:"contributors,omitempty"`
-	LocationTags []LocationTag        `gorm:"many2many:collection_location_tags" json:"locationTags"`
+	LocationTags []LocationTag        `gorm:"many2many:collection_location_tags;constraint:OnDelete:CASCADE" json:"locationTags"`
 	PlacesByID   pq.Int32Array        `gorm:"type:integer[]" json:"placesById"`
 	Featured     bool                 `gorm:"default:false" json:"featured"`
 }
@@ -32,9 +32,9 @@ func (Collection) TableName() string {
 }
 
 type CollectionLocation struct {
-	CollectionID uint         `gorm:"primaryKey;autoIncrement:false;not null;uniqueIndex:idx_collectionid_locationid" json:"collectionId"`
-	Collection   *Collection  `gorm:"foreignKey:CollectionID;references:ID" json:"collection,omitempty"`
-	GoogleID     string       `gorm:"primaryKey;type:text;not null;uniqueIndex:idx_collectionid_locationid" json:"googleId"`
+	CollectionID uint         `gorm:"not null;index;uniqueIndex:idx_collection_location" json:"collectionId"`
+	Collection   *Collection  `gorm:"foreignKey:CollectionID;constraint:OnDelete:CASCADE;" json:"collection,omitempty"`
+	GoogleID     string       `gorm:"type:text;not null;index;uniqueIndex:idx_collection_location" json:"googleId"`
 	Location     *LocationDTO `gorm:"-" json:"location,omitempty"`
 	SeqNum       int          `gorm:"default:0;not null" json:"seqNum"`
 	Blurb        *string      `gorm:"type:text" json:"blurb,omitempty"`

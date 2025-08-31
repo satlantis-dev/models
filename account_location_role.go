@@ -13,15 +13,14 @@ const (
 	Admin
 	Staff
 	DiscoveredBy
-	BookmarkedBy
 )
 
 type AccountLocationRole struct {
-	AccountID  uint                    `gorm:"index;primaryKey" json:"accountId"`
-	Account    *AccountDTO             `gorm:"foreignKey:AccountID;constraint:OnDelete:CASCADE" json:"account,omitempty"`
-	LocationID uint                    `gorm:"index;primaryKey" json:"locationId"`
-	Location   *LocationDTO            `gorm:"foreignKey:LocationID;constraint:OnDelete:CASCADE" json:"location,omitempty"`
-	Type       AccountLocationRoleType `gorm:"not null;primaryKey" json:"type"`
+	AccountID  uint                    `gorm:"not null;index;uniqueIndex:idx_account_location_role" json:"accountId"`
+	Account    *Account                `gorm:"foreignKey:AccountID;constraint:OnDelete:CASCADE" json:"account,omitempty"`
+	LocationID uint                    `gorm:"not null;index;uniqueIndex:idx_account_location_role" json:"locationId"`
+	Location   *Location               `gorm:"foreignKey:LocationID;constraint:OnDelete:CASCADE" json:"location,omitempty"`
+	Type       AccountLocationRoleType `gorm:"not null" json:"type"`
 	CreatedAt  time.Time               `json:"-"`
 	UpdatedAt  time.Time               `json:"-"`
 	DeletedAt  gorm.DeletedAt          `gorm:"index" json:"-"`
