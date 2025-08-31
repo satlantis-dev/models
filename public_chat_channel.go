@@ -10,11 +10,11 @@ type PublicChatChannel struct {
 	ID        uint           `gorm:"primaryKey" json:"id"`
 	About     string         `json:"about"`
 	AccountID uint           `gorm:"index" json:"accountId"`
-	Account   AccountDTO     `json:"account" gorm:"foreignKey:AccountID"`
+	Account   *Account       `gorm:"foreignKey:AccountID;constraint:OnDelete:CASCADE" json:"account"`
 	CreatedAt *time.Time     `json:"createdAt"`
 	Content   string         `gorm:"type:text" json:"content"`
 	EventID   uint           `gorm:"index" json:"eventId"`
-	Event     Event          `json:"event"`
+	Event     *Event         `gorm:"foreignKey:EventID" json:"event"`
 	Kind      uint           `gorm:"index" json:"kind"`
 	Name      string         `json:"name"`
 	NostrID   string         `gorm:"index" json:"nostrId"`
