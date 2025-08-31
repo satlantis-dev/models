@@ -8,9 +8,9 @@ import (
 
 type AccountLocationReview struct {
 	ID         uint           `gorm:"primaryKey;autoIncrement" json:"id"`
-	AccountID  uint           `gorm:"uniqueIndex:idx_account_location_review" json:"accountId"`
+	AccountID  uint           `gorm:"not null;uniqueIndex:idx_account_location_review" json:"accountId"`
 	Account    *Account       `gorm:"foreignKey:AccountID;references:ID;constraint:OnDelete:CASCADE" json:"account,omitempty"`
-	GoogleID   string         `gorm:"uniqueIndex:idx_account_location_review" json:"googleId"`
+	GoogleID   string         `gorm:"not null;uniqueIndex:idx_account_location_review" json:"googleId"`
 	ReviewText *string        `json:"reviewText"`
 	IsPositive bool           `gorm:"not null;default:true" json:"isPositive"`
 	CreatedAt  time.Time      `gorm:"autoCreateTime" json:"createdAt"`
