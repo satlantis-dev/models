@@ -44,6 +44,7 @@ type CalendarEvent struct {
 	PubKey                string                      `gorm:"type:text;index" json:"pubkey"`
 	RsvpLimit             *int64                      `json:"rsvpLimit"`
 	RsvpWaitlistEnabledAt *time.Time                  `json:"rsvpWaitlistEnabledAt"`
+	RsvpGatedEnabledAt    *time.Time                  `json:"rsvpGatedEnabledAt"`
 	Start                 time.Time                   `json:"start"`
 	StartTzId             string                      `json:"startTzId"`
 	Summary               string                      `json:"summary"`
