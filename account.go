@@ -11,8 +11,8 @@ type Account struct {
 	ID                          uint                   `gorm:"primaryKey" json:"id"`
 	CreatedAt                   time.Time              `json:"-"`
 	About                       string                 `gorm:"type:text" json:"about"`
-	AccountPlaceRoles           []AccountPlaceRole     `json:"accountPlaceRoles,omitempty"`
-	AccountLocationRoles        []AccountLocationRole  `json:"accountLocationRoles,omitempty"`
+	AccountPlaceRoles           []AccountPlaceRole     `gorm:"foreignKey:AccountID;constraint:OnDelete:CASCADE;" json:"accountPlaceRoles,omitempty"`
+	AccountLocationRoles        []AccountLocationRole  `gorm:"foreignKey:AccountID;constraint:OnDelete:CASCADE;" json:"accountLocationRoles,omitempty"`
 	AuthDetails                 []AuthenticationDetail `json:"authDetails"`
 	Banner                      string                 `gorm:"type:text" json:"banner"`
 	BusinessCategory            string                 `gorm:"default:NULL" json:"businessCategory"`
@@ -33,7 +33,7 @@ type Account struct {
 	IsBlacklisted               bool                   `gorm:"default:false" json:"isBlacklisted"`
 	IsBusiness                  bool                   `gorm:"default:false" json:"isBusiness"`
 	LastSeen                    *time.Time             `json:"-"`
-	LocationClaims              []LocationClaim        `gorm:"foreignKey:OwnerAccountID" json:"locationClaims,omitempty"`
+	LocationClaims              []LocationClaim        `gorm:"foreignKey:OwnerAccountID;constraint:OnDelete:CASCADE;" json:"locationClaims,omitempty"`
 	Lud06                       string                 `gorm:"default:NULL" json:"lud06"`
 	Lud16                       string                 `gorm:"default:NULL" json:"lud16"`
 	Name                        string                 `gorm:"type:text" json:"name"`
@@ -48,7 +48,7 @@ type Account struct {
 	Relays                      []Relay                `gorm:"foreignKey:AccountID" json:"relays"`
 	ResetPasswordToken          *string                `gorm:"type:text" json:"-"`
 	ResetPasswordTokenExpiresAt *time.Time             `json:"-"`
-	SocialMediaList             []SocialMedia          `gorm:"foreignKey:AccountID" json:"socialMediaList"`
+	SocialMediaList             []SocialMedia          `gorm:"foreignKey:AccountID;constraint:OnDelete:CASCADE;" json:"socialMediaList"`
 	Website                     string                 `gorm:"type:text" json:"website"`
 	Username                    string                 `gorm:"uniqueIndex;default:NULL" json:"username"`
 	Level                       int                    `gorm:"index;default:0" json:"level"`
