@@ -71,7 +71,7 @@ type CalendarEventCohost struct {
 	InvitationAcceptedAt *time.Time     `json:"invitationAcceptedAt"`
 	InvitationDeclinedAt *time.Time     `json:"invitationDeclinedAt"`
 	AutoAcceptInvitation bool           `gorm:"default:false" json:"-"`
-	IsEmailAdded         bool           `gorm:"default:false" json:"-"`
+	IsEmailAdded         *bool          `gorm:"default:false" json:"-"`
 	CreatedAt            time.Time      `json:"createdAt"`
 	UpdatedAt            time.Time      `json:"updatedAt"`
 }
