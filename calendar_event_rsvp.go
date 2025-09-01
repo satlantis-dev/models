@@ -22,22 +22,22 @@ type CalendarEventRSVP struct {
 	Status              string                  `json:"status"`
 	AcceptedAt          *time.Time              `json:"acceptedAt,omitempty"`
 	RejectedAt          *time.Time              `json:"rejectedAt,omitempty"`
-	StatusUpdatedById   *uint                   `json:"statusUpdatedById"`
-	StatusUpdatedBy     *Account                `json:"statusUpdatedBy"`
-	IsSatlantisCreated  bool                    `gorm:"default:false"`
+	StatusUpdatedById   *uint                   `json:"-"`
+	StatusUpdatedBy     *Account                `json:"-"`
+	IsSatlantisCreated  bool                    `json:"-" gorm:"default:false"`
 	RegistrationAnswers *map[string]interface{} `gorm:"type:jsonb;serializer:json" json:"registrationAnswers,omitempty"`
 
 	// Nostr fields
-	Content string `gorm:"type:text" json:"content"`
-	EventID uint   `gorm:"index" json:"eventId"`
-	Kind    uint   `gorm:"index" json:"kind"`
-	NostrID string `gorm:"index" json:"nostrId"`
-	PubKey  string `gorm:"type:text;index" json:"pubkey"`
-	Sig     string `gorm:"type:text" json:"sig"`
-	Tags    string `gorm:"type:jsonb" json:"tags"`
+	Content string `gorm:"type:text" json:"-"`
+	EventID uint   `gorm:"index" json:"-"`
+	Kind    uint   `gorm:"index" json:"-"`
+	NostrID string `gorm:"index" json:"-"`
+	PubKey  string `gorm:"type:text;index" json:"-"`
+	Sig     string `gorm:"type:text" json:"-"`
+	Tags    string `gorm:"type:jsonb" json:"-"`
 
 	// Notification flags
-	NotificationWeekSent bool `gorm:"default:false"`
-	NotificationDaySent  bool `gorm:"default:false"`
-	NotificationHourSent bool `gorm:"default:false"`
+	NotificationHourSentAt *time.Time `json:"-"`
+	NotificationDaySentAt  *time.Time `json:"-"`
+	NotificationWeekSentAt *time.Time `json:"-"`
 }
