@@ -6,7 +6,7 @@ require (
 	github.com/lib/pq v1.10.9
 	github.com/nbd-wtf/go-nostr v0.34.5
 	gorm.io/driver/postgres v1.5.9
-	gorm.io/gorm v1.30.0
+	gorm.io/gorm v1.25.11
 )
 
 require (
@@ -38,6 +38,6 @@ require (
 	golang.org/x/sync v0.9.0 // indirect
 	golang.org/x/sys v0.20.0 // indirect
 	golang.org/x/text v0.20.0 // indirect
-	gorm.io/datatypes v1.2.6 // indirect
+	gorm.io/datatypes v1.2.5 // indirect
 	gorm.io/driver/mysql v1.5.6 // indirect
 )
