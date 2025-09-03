@@ -26,3 +26,7 @@ type AccountPlaceRole struct {
 	UpdatedAt         time.Time            `json:"-"`
 	DeletedAt         gorm.DeletedAt       `gorm:"index" json:"-"`
 }
+
+func (AccountPlaceRole) TableName() string {
+	return "account_place_roles"
+}

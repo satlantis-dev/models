@@ -8,55 +8,53 @@ import (
 )
 
 type Account struct {
-	ID                          uint                   `gorm:"primaryKey" json:"id"`
-	CreatedAt                   time.Time              `json:"-"`
-	About                       string                 `gorm:"type:text" json:"about"`
-	AccountPlaceRoles           []AccountPlaceRole     `gorm:"foreignKey:AccountID;constraint:OnDelete:CASCADE;" json:"accountPlaceRoles,omitempty"`
-	AccountLocationRoles        []AccountLocationRole  `gorm:"foreignKey:AccountID;constraint:OnDelete:CASCADE;" json:"accountLocationRoles,omitempty"`
-	AuthDetails                 []AuthenticationDetail `gorm:"foreignKey:AccountID;constraint:OnDelete:CASCADE;" json:"authDetails"`
-	Banner                      string                 `gorm:"type:text" json:"banner"`
-	BusinessCategory            string                 `gorm:"default:NULL" json:"businessCategory"`
-	ChatMemberships             []ChatMembership       `gorm:"foreignKey:AccountID" json:"chatMemberships"`
-	ClusterID                   *uint                  `gorm:"index" json:"clusterId"`
-	Collections                 []Collection           `gorm:"foreignKey:AccountID" json:"collections,omitempty"`
-	CurrencyID                  *uint                  `gorm:"index" json:"currencyId"`
-	Currency                    Currency               `json:"currency"`
-	DisplayName                 string                 `gorm:"type:text" json:"displayName"`
-	Email                       string                 `gorm:"default:NULL" json:"email"`
-	EmailVerified               bool                   `json:"-"`
-	FirstSeen                   *time.Time             `json:"-"`
-	Following                   []Follow               `gorm:"foreignKey:FollowerID" json:"following"`
-	FollowedBy                  []Follow               `gorm:"foreignKey:FollowingID" json:"followedBy"`
-	InfluenceScore              uint                   `json:"influenceScore"`
-	Interests                   []Interest             `gorm:"many2many:account_interests;constraint:OnDelete:CASCADE" json:"interests,omitempty"`
-	IsAdmin                     bool                   `gorm:"default:false" json:"isAdmin"`
-	IsBlacklisted               bool                   `gorm:"default:false" json:"isBlacklisted"`
-	IsBusiness                  bool                   `gorm:"default:false" json:"isBusiness"`
-	LastSeen                    *time.Time             `json:"-"`
-	LocationClaims              []LocationClaim        `gorm:"foreignKey:OwnerAccountID;constraint:OnDelete:CASCADE;" json:"locationClaims,omitempty"`
-	Lud06                       string                 `gorm:"default:NULL" json:"lud06"`
-	Lud16                       string                 `gorm:"default:NULL" json:"lud16"`
-	Name                        string                 `gorm:"type:text" json:"name"`
-	Nip05                       string                 `gorm:"default:NULL" json:"nip05"`
-	Notes                       []Note                 `gorm:"foreignKey:AccountID" json:"notes"`
-	Npub                        string                 `gorm:"uniqueIndex;default:NULL" json:"npub"`
-	Password                    string                 `gorm:"type:text" json:"-"`
-	Picture                     string                 `gorm:"type:text" json:"picture"`
-	Phone                       string                 `json:"phone"`
-	PrivateKey                  string                 `json:"-"`
-	PubKey                      string                 `gorm:"uniqueIndex;default:NULL" json:"pubKey"`
-	Relays                      []Relay                `gorm:"foreignKey:AccountID" json:"relays"`
-	ResetPasswordToken          *string                `gorm:"type:text" json:"-"`
-	ResetPasswordTokenExpiresAt *time.Time             `json:"-"`
-	SocialMediaList             []SocialMedia          `gorm:"foreignKey:AccountID;constraint:OnDelete:CASCADE;" json:"socialMediaList"`
-	Website                     string                 `gorm:"type:text" json:"website"`
-	Username                    string                 `gorm:"uniqueIndex;default:NULL" json:"username"`
-	Level                       int                    `gorm:"index;default:0" json:"level"`
-	FollowingCount              *int64                 `json:"followingCount"`
-	FollowersCount              *int64                 `json:"followersCount"`
-	AppleID                     *string                `gorm:"uniqueIndex" json:"appleId"`
-	GoogleID                    *string                `gorm:"uniqueIndex" json:"googleId"`
-	VertexRank                  decimal.Decimal        `gorm:"type:numeric;index" json:"vertexRank"`
+	ID                          uint                  `gorm:"primaryKey" json:"id"`
+	CreatedAt                   time.Time             `json:"-"`
+	About                       string                `gorm:"type:text" json:"about"`
+	AccountPlaceRoles           []AccountPlaceRole    `gorm:"foreignKey:AccountID;constraint:OnDelete:CASCADE;" json:"accountPlaceRoles,omitempty"`
+	AccountLocationRoles        []AccountLocationRole `gorm:"foreignKey:AccountID;constraint:OnDelete:CASCADE;" json:"accountLocationRoles,omitempty"`
+	Banner                      string                `gorm:"type:text" json:"banner"`
+	BusinessCategory            string                `gorm:"default:NULL" json:"businessCategory"`
+	ChatMemberships             []ChatMembership      `gorm:"foreignKey:AccountID" json:"chatMemberships"`
+	ClusterID                   *uint                 `gorm:"index" json:"clusterId"`
+	Collections                 []Collection          `gorm:"foreignKey:AccountID" json:"collections,omitempty"`
+	CurrencyID                  *uint                 `gorm:"index" json:"currencyId"`
+	Currency                    Currency              `json:"currency"`
+	DisplayName                 string                `gorm:"type:text" json:"displayName"`
+	Email                       string                `gorm:"default:NULL" json:"email"`
+	EmailVerified               bool                  `json:"-"`
+	FirstSeen                   *time.Time            `json:"-"`
+	Following                   []Follow              `gorm:"foreignKey:FollowerID" json:"following"`
+	FollowedBy                  []Follow              `gorm:"foreignKey:FollowingID" json:"followedBy"`
+	InfluenceScore              uint                  `json:"influenceScore"`
+	Interests                   []Interest            `gorm:"many2many:account_interests;constraint:OnDelete:CASCADE" json:"interests,omitempty"`
+	IsAdmin                     bool                  `gorm:"default:false" json:"isAdmin"`
+	IsBlacklisted               bool                  `gorm:"default:false" json:"isBlacklisted"`
+	IsBusiness                  bool                  `gorm:"default:false" json:"isBusiness"`
+	LastSeen                    *time.Time            `json:"-"`
+	LocationClaims              []LocationClaim       `gorm:"foreignKey:OwnerAccountID;constraint:OnDelete:CASCADE;" json:"locationClaims,omitempty"`
+	Lud06                       string                `gorm:"default:NULL" json:"lud06"`
+	Lud16                       string                `gorm:"default:NULL" json:"lud16"`
+	Name                        string                `gorm:"type:text" json:"name"`
+	Nip05                       string                `gorm:"default:NULL" json:"nip05"`
+	Notes                       []Note                `gorm:"foreignKey:AccountID" json:"notes"`
+	Npub                        string                `gorm:"uniqueIndex;default:NULL" json:"npub"`
+	Password                    string                `gorm:"type:text" json:"-"`
+	Picture                     string                `gorm:"type:text" json:"picture"`
+	Phone                       string                `json:"phone"`
+	PrivateKey                  string                `json:"-"`
+	PubKey                      string                `gorm:"uniqueIndex;default:NULL" json:"pubKey"`
+	Relays                      []Relay               `gorm:"foreignKey:AccountID" json:"relays"`
+	ResetPasswordToken          *string               `gorm:"type:text" json:"-"`
+	ResetPasswordTokenExpiresAt *time.Time            `json:"-"`
+	Website                     string                `gorm:"type:text" json:"website"`
+	Username                    string                `gorm:"uniqueIndex;default:NULL" json:"username"`
+	Level                       int                   `gorm:"index;default:0" json:"level"`
+	FollowingCount              *int64                `json:"followingCount"`
+	FollowersCount              *int64                `json:"followersCount"`
+	AppleID                     *string               `gorm:"uniqueIndex" json:"appleId"`
+	GoogleID                    *string               `gorm:"uniqueIndex" json:"googleId"`
+	VertexRank                  decimal.Decimal       `gorm:"type:numeric;index" json:"vertexRank"`
 }
 
 // AccountMiniDTO
