@@ -95,6 +95,7 @@ var DatabaseModels = []interface{}{
 	ChatMessage{},
 	ContentReport{},
 	NoteRepost{},
+	AccountRSVPAnswers{},
 }
 
 func SetupDatabase(dbHost, dbUser, dbPassword, dbName string) (*gorm.DB, error) {
