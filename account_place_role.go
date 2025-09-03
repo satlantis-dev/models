@@ -22,8 +22,8 @@ type AccountPlaceRole struct {
 	Place             *Place               `gorm:"foreignKey:PlaceID;constraint:OnDelete:CASCADE" json:"place,omitempty"`
 	Type              AccountPlaceRoleType `gorm:"not null" json:"type"`
 	AmbassadorRequest bool                 `json:"ambassadorRequest"`
-	CreatedAt         time.Time            `json:"createdAt"`
-	UpdatedAt         time.Time            `json:"updatedAt"`
+	CreatedAt         time.Time            `json:"-"`
+	UpdatedAt         time.Time            `json:"-"`
 	DeletedAt         gorm.DeletedAt       `gorm:"index" json:"-"`
 }
 
