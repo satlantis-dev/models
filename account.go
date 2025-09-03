@@ -47,7 +47,6 @@ type Account struct {
 	Relays                      []Relay               `gorm:"foreignKey:AccountID" json:"relays"`
 	ResetPasswordToken          *string               `gorm:"type:text" json:"-"`
 	ResetPasswordTokenExpiresAt *time.Time            `json:"-"`
-	SocialMediaList             []SocialMedia         `gorm:"foreignKey:AccountID;constraint:OnDelete:CASCADE;" json:"socialMediaList"`
 	Website                     string                `gorm:"type:text" json:"website"`
 	Username                    string                `gorm:"uniqueIndex;default:NULL" json:"username"`
 	Level                       int                   `gorm:"index;default:0" json:"level"`
