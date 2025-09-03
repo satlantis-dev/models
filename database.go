@@ -80,7 +80,6 @@ var DatabaseModels = []interface{}{
 	SourceLocationsOsm{},
 	SourceLocationsAll{},
 	Tag{},
-	TeamMember{},
 	Topic{},
 	VerificationToken{},
 	Weather{},
