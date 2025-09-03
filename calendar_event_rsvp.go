@@ -11,6 +11,7 @@ var (
 	RsvpWaitlisted RsvpStatus = "waitlisted"
 	RsvpRequested  RsvpStatus = "requested"
 	RsvpRejected   RsvpStatus = "rejected"
+	RsvpInvited    RsvpStatus = "invited"
 )
 
 type CalendarEventRSVP struct {
