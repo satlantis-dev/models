@@ -16,7 +16,6 @@ var DatabaseModels = []interface{}{
 	AccountPlaceRole{},
 	AccountLocationRole{},
 	AccountLocationReview{},
-	AuthenticationDetail{},
 	Block{},
 	Brand{},
 	CalendarEventAnnouncement{},
