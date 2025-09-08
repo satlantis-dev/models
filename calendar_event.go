@@ -55,6 +55,8 @@ type CalendarEvent struct {
 	Venue                 *LocationDTO                `gorm:"-" json:"venue,omitempty"`
 	Website               string                      `json:"website"`
 	RegistrationQuestions *map[string]interface{}     `gorm:"type:jsonb;serializer:json" json:"registrationQuestions,omitempty"`
+	OfficialCalendarID    *uint                       `gorm:"index" json:"officialCalendarId,omitempty"`
+	OfficialCalendar      *Calendar                   `gorm:"foreignKey:OfficialCalendarID" json:"officialCalendar,omitempty"`
 }
 
 type CalendarEventInterest struct {
