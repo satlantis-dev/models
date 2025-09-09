@@ -36,6 +36,7 @@ var DatabaseModels = []interface{}{
 	Follow{},
 	GoogleType{},
 	Interest{},
+	InterestImage{},
 	Location{},
 	LocationCategory{},
 	LocationClaim{},
