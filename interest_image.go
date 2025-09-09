@@ -7,5 +7,5 @@ type InterestImage struct {
 	InterestID uint      `gorm:"not null;index" json:"interestId"`
 	Interest   *Interest `gorm:"foreignKey:InterestID;references:ID;constraint:OnDelete:CASCADE;" json:"interest,omitempty"`
 	Url        string    `gorm:"not null;unique" json:"url"`
-	CreatedAt  time.Time `json:"created_at"`
+	CreatedAt  time.Time `gorm:"autoCreateTime" json:"_"`
 }
