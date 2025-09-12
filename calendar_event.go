@@ -36,7 +36,7 @@ type CalendarEvent struct {
 	Geohash               string                      `json:"geohash"`
 	GoogleID              string                      `json:"googleId"`
 	Image                 string                      `json:"image"`
-	Interests             []Interest                  `gorm:"many2many:calendar_event_interests" json:"interests"`
+	Interests             []Interest                  `gorm:"many2many:calendar_event_interests;constraint:OnDelete:CASCADE" json:"interests"`
 	IsSatlantisCreated    bool                        `gorm:"default:false" json:"isSatlantisCreated"`
 	Location              string                      `json:"location"`
 	Notes                 []CalendarEventNote         `gorm:"foreignKey:CalendarEventID" json:"notes"`
