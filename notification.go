@@ -14,6 +14,7 @@ const (
 	NotificationTypeCalendarEventDiscussionMention        = "calendar_event_discussion_mention"
 	NotificationTypeCalendarEventRSVP                     = "calendar_event_rsvp"
 	NotificationTypeCalendarEventUpdate                   = "calendar_event_update"
+	NotificationTypeCalendarEventRsvpGatedRejected        = "calendar_event_rsvp_gated_rejected"
 	NotificationTypeCollectionImportSuccessful            = "collection_import_successful"
 	NotificationTypeCollectionInvitation                  = "collection_invitation"
 	NotificationTypeCollectionInvitationAccepted          = "collection_invitation_accepted"
