@@ -35,7 +35,7 @@ type Interest struct {
 	LocationUse           bool             `json:"locationUse"`
 	EventUse              bool             `json:"eventUse"`
 	PeopleUse             bool             `json:"peopleUse"`
-	IsActive              bool             `json:"isActive"`
+	IsSelectable          bool             `json:"isSelectable"`
 }
 
 type WeightedInterests map[uint]float64
