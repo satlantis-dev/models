@@ -4,6 +4,7 @@ import (
 	"time"
 
 	"github.com/lib/pq"
+	"gorm.io/gorm"
 )
 
 type InterestCategory int
@@ -20,7 +21,7 @@ type Interest struct {
 	Name                  string           `gorm:"unique" json:"name"`
 	CreatedAt             time.Time        `json:"-"`
 	UpdatedAt             time.Time        `json:"-"`
-	DeletedAt             *time.Time       `gorm:"index" json:"-,omitempty"`
+	DeletedAt             *gorm.DeletedAt  `gorm:"index" json:"-,omitempty"`
 	Description           string           `gorm:"type:text" json:"description"`
 	RecommendationsByNpub pq.StringArray   `gorm:"type:varchar[]" json:"recommendationsByNpub"`
 	RecommendationsById   pq.Int32Array    `gorm:"type:integer[]" json:"recommendationsById"`

@@ -50,6 +50,7 @@ var DatabaseModels = []interface{}{
 	NoteClosure{},
 	NoteRanking{},
 	Notification{},
+	OnboardingProfile{},
 	Place{},
 	PlaceCalendarEvent{},
 	PlaceCategoryScore{},
