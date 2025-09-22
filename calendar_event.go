@@ -31,7 +31,7 @@ type CalendarEvent struct {
 	CalendarEventRSVPs    []CalendarEventRSVP         `json:"calendarEventRsvps"`
 	Cohosts               []CalendarEventCohost       `json:"cohosts"`
 	End                   time.Time                   `json:"end"`
-	EndTzId               string                      `json:"endTzId"`
+	EndTzId               string                      `gorm:"not null" json:"endTzId"`
 	Featured              bool                        `gorm:"default:false" json:"featured"`
 	Geohash               string                      `json:"geohash"`
 	GoogleID              string                      `json:"googleId"`
@@ -46,7 +46,7 @@ type CalendarEvent struct {
 	RsvpWaitlistEnabledAt *time.Time                  `json:"rsvpWaitlistEnabledAt"`
 	RsvpGatedEnabledAt    *time.Time                  `json:"rsvpGatedEnabledAt"`
 	Start                 time.Time                   `json:"start"`
-	StartTzId             string                      `json:"startTzId"`
+	StartTzId             string                      `gorm:"not null" json:"startTzId"`
 	Summary               string                      `json:"summary"`
 	Title                 string                      `json:"title"`
 	TypeID                uint                        `gorm:"index;not null;default:1" json:"typeId"`
