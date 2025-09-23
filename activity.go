@@ -18,32 +18,30 @@ type Verb string
 
 const (
 	// account related
-	VerbCreateAccount Verb = "create_account"
-	VerbUpdateAccount Verb = "update_account"
-	VerbFollowAccount Verb = "follow_account"
+	VerbUpdateAccount Verb = "updated_account"
+	VerbFollowAccount Verb = "followed_account"
 	// note related
-	VerbCreateNote Verb = "create_note"
-	VerbRepostNote Verb = "repost_note"
-	VerbReplyNote  Verb = "reply_note"
-	VerbLikeNote   Verb = "like_note"
+	VerbCreateNote Verb = "created_note"
+	VerbRepostNote Verb = "reposted_note"
+	VerbReplyNote  Verb = "replied_to_note"
+	VerbLikeNote   Verb = "liked_note"
 	// destination related
-	VerbAddDestination    Verb = "add_destination"
-	VerbFollowDestination Verb = "follow_destination"
+	VerbFollowDestination Verb = "followed_destination"
 	// collection related
-	VerbCreateCollection Verb = "create_collection"
-	VerbAddToCollection  Verb = "addto_collection"
-	VerbSaveCollection   Verb = "save_collection"
+	VerbCreateCollection Verb = "created_collection"
+	VerbSaveCollection   Verb = "saved_collection"
 	// location related
-	VerbAddLocation    Verb = "add_location"
-	VerbReviewLocation Verb = "review_location"
-	VerbClaimLocation  Verb = "claim_location"
+	VerbSuggestLocation  Verb = "suggested_location"
+	VerbClaimLocation    Verb = "claimed_location"
+	VerbReviewLocation   Verb = "reviewed_location"
+	VerbBookmarkLocation Verb = "bookmarked_location"
 	// calendar related
-	VerbCreateCalendar Verb = "create_calendar"
-	VerbAddToCalendar  Verb = "addto_calendar"
+	VerbCreateCalendar Verb = "created_calendar"
 	// event related
-	VerbCreateEvent Verb = "create_event"
-	VerbUpdateEvent Verb = "update_event"
-	VerbRSVPEvent   Verb = "rsvp_event"
+	VerbCreatedEvent  Verb = "created_event"
+	VerbUpdatedEvent  Verb = "updated_event"
+	VerbRSVPEvent     Verb = "rsvped_to_event"
+	VerbBookmarkEvent Verb = "bookmarked_event"
 )
 
 type Activity struct {
