@@ -100,6 +100,9 @@ var DatabaseModels = []interface{}{
 	NoteRepost{},
 	AccountRSVPAnswers{},
 	CalendarEventTicketType{},
+	CalendarEventTicketOrder{},
+	CalendarEventTicketOrderItem{},
+	CalendarEventTicket{},
 }
 
 func SetupDatabase(dbHost, dbUser, dbPassword, dbName string) (*gorm.DB, error) {
