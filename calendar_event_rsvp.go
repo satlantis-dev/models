@@ -1,6 +1,9 @@
 package models
 
-import "time"
+import (
+	"gorm.io/datatypes"
+	"time"
+)
 
 type RsvpStatus string
 
@@ -15,18 +18,18 @@ var (
 )
 
 type CalendarEventRSVP struct {
-	ID                  uint                    `gorm:"primaryKey" json:"id"`
-	AccountID           uint                    `json:"accountId"`
-	Account             Account                 `gorm:"constraint:OnDelete:CASCADE;" json:"account"`
-	CreatedAt           time.Time               `json:"createdAt"`
-	CalendarEventID     uint                    `json:"calendarEventId"`
-	Status              string                  `json:"status"`
-	AcceptedAt          *time.Time              `json:"acceptedAt,omitempty"`
-	RejectedAt          *time.Time              `json:"rejectedAt,omitempty"`
-	StatusUpdatedById   *uint                   `json:"-"`
-	StatusUpdatedBy     *Account                `json:"-"`
-	IsSatlantisCreated  bool                    `json:"-" gorm:"default:false"`
-	RegistrationAnswers *map[string]interface{} `gorm:"type:jsonb;serializer:json" json:"registrationAnswers,omitempty"`
+	ID                  uint            `gorm:"primaryKey" json:"id"`
+	AccountID           uint            `json:"accountId"`
+	Account             Account         `gorm:"constraint:OnDelete:CASCADE;" json:"account"`
+	CreatedAt           time.Time       `json:"createdAt"`
+	CalendarEventID     uint            `json:"calendarEventId"`
+	Status              string          `json:"status"`
+	AcceptedAt          *time.Time      `json:"acceptedAt,omitempty"`
+	RejectedAt          *time.Time      `json:"rejectedAt,omitempty"`
+	StatusUpdatedById   *uint           `json:"-"`
+	StatusUpdatedBy     *Account        `json:"-"`
+	IsSatlantisCreated  bool            `json:"-" gorm:"default:false"`
+	RegistrationAnswers *datatypes.JSON `gorm:"type:jsonb;serializer:json" json:"registrationAnswers,omitempty"`
 
 	// Nostr fields
 	Content string `gorm:"type:text" json:"-"`
