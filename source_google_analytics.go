@@ -25,4 +25,5 @@ type SourceGoogleAnalytics struct {
 	SessionsPerUser           float64   `json:"sessionsPerUser"`
 	UserEngagementDuration    float64   `json:"userEngagementDuration"`
 	TopPages                  string    `gorm:"type:jsonb" json:"topPages"`
+	SessionsSignedIn          int       `json:"SessionsSignedIn"`
 }
