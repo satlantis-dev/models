@@ -14,34 +14,34 @@ const (
 	ObjectTypeEvent       ObjectType = "event"
 )
 
-type Verb string
+type Action string
 
 const (
 	// account related
-	VerbUpdateAccount Verb = "updated_account"
-	VerbFollowAccount Verb = "followed_account"
+	ActionUpdateAccount Action = "updated_account"
+	ActionFollowAccount Action = "followed_account"
 	// note related
-	VerbCreateNote Verb = "created_note"
-	VerbRepostNote Verb = "reposted_note"
-	VerbReplyNote  Verb = "replied_to_note"
-	VerbLikeNote   Verb = "liked_note"
+	ActionCreateNote Action = "created_note"
+	ActionRepostNote Action = "reposted_note"
+	ActionReplyNote  Action = "replied_to_note"
+	ActionLikeNote   Action = "liked_note"
 	// destination related
-	VerbFollowDestination Verb = "followed_destination"
+	ActionFollowDestination Action = "followed_destination"
 	// collection related
-	VerbCreateCollection Verb = "created_collection"
-	VerbSaveCollection   Verb = "saved_collection"
+	ActionCreateCollection Action = "created_collection"
+	ActionSaveCollection   Action = "saved_collection"
 	// location related
-	VerbSuggestLocation  Verb = "suggested_location"
-	VerbClaimLocation    Verb = "claimed_location"
-	VerbReviewLocation   Verb = "reviewed_location"
-	VerbBookmarkLocation Verb = "bookmarked_location"
+	ActionSuggestLocation  Action = "suggested_location"
+	ActionClaimLocation    Action = "claimed_location"
+	ActionReviewLocation   Action = "reviewed_location"
+	ActionBookmarkLocation Action = "bookmarked_location"
 	// calendar related
-	VerbCreateCalendar Verb = "created_calendar"
+	ActionCreateCalendar Action = "created_calendar"
 	// event related
-	VerbCreatedEvent  Verb = "created_event"
-	VerbUpdatedEvent  Verb = "updated_event"
-	VerbRSVPEvent     Verb = "rsvped_to_event"
-	VerbBookmarkEvent Verb = "bookmarked_event"
+	ActionCreatedEvent  Action = "created_event"
+	ActionUpdatedEvent  Action = "updated_event"
+	ActionRSVPEvent     Action = "rsvped_to_event"
+	ActionBookmarkEvent Action = "bookmarked_event"
 )
 
 type Activity struct {
@@ -50,7 +50,7 @@ type Activity struct {
 	Account    *Account                `gorm:"foreignKey:AccountID;constraint:OnDelete:CASCADE;" json:"account,omitempty"`
 	ObjectType ObjectType              `gorm:"not null;index" json:"objectType"`
 	ObjectID   uint                    `gorm:"not null" json:"objectId"`
-	Verb       Verb                    `gorm:"not null" json:"verb"`
+	Action     Action                  `gorm:"not null" json:"action"`
 	Details    *map[string]interface{} `gorm:"type:jsonb;serializer:json" json:"details,omitempty"`
 	CreatedAt  time.Time               `gorm:"autoCreateTime" json:"createdAt"`
 }
