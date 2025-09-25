@@ -49,7 +49,7 @@ type Activity struct {
 	AccountID  uint                    `gorm:"not null;index" json:"accountId"`
 	Account    *Account                `gorm:"foreignKey:AccountID;constraint:OnDelete:CASCADE;" json:"account,omitempty"`
 	ObjectType ObjectType              `gorm:"not null;index" json:"objectType"`
-	ObjectID   uint                    `gorm:"not null" json:"objectId"`
+	ObjectID   *uint                   `json:"objectId"`
 	Action     Action                  `gorm:"not null" json:"action"`
 	Details    *map[string]interface{} `gorm:"type:jsonb;serializer:json" json:"details,omitempty"`
 	CreatedAt  time.Time               `gorm:"autoCreateTime" json:"createdAt"`
