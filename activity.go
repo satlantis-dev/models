@@ -38,9 +38,9 @@ const (
 	// calendar related
 	ActionCreateCalendar Action = "created_calendar"
 	// event related
-	ActionCreatedEvent  Action = "created_event"
-	ActionUpdatedEvent  Action = "updated_event"
-	ActionRSVPEvent     Action = "rsvped_to_event"
+	ActionCreateEvent   Action = "created_event"
+	ActionUpdateEvent   Action = "updated_event"
+	ActionRsvpEvent     Action = "rsvped_to_event"
 	ActionBookmarkEvent Action = "bookmarked_event"
 )
 
