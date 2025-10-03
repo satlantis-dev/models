@@ -103,6 +103,7 @@ var DatabaseModels = []interface{}{
 	CalendarEventTicketOrder{},
 	CalendarEventTicketOrderItem{},
 	CalendarEventTicket{},
+	CalendarEventTicketOrderPayment{},
 }
 
 func SetupDatabase(dbHost, dbUser, dbPassword, dbName string) (*gorm.DB, error) {
