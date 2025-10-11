@@ -80,6 +80,7 @@ type CalendarEventCohost struct {
 
 type CalendarEventResponse struct {
 	*CalendarEvent
-	Place   map[string]interface{} `json:"place,omitempty"`
-	Country map[string]interface{} `json:"country,omitempty"`
+	Place          map[string]interface{} `json:"place,omitempty"`
+	Country        map[string]interface{} `json:"country,omitempty"`
+	KnownAttendees *[]AccountDTO          `json:"knownAttendees,omitempty"`
 }
