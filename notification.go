@@ -20,6 +20,7 @@ const (
 	NotificationTypeCollectionInvitation                  = "collection_invitation"
 	NotificationTypeCollectionInvitationAccepted          = "collection_invitation_accepted"
 	NotificationTypeCollectionInvitationDeclined          = "collection_invitation_declined"
+	NotificationTypeCollectionShared                      = "collection_shared"
 	NotificationTypeCollectionSaved                       = "collection_saved"
 	NotificationTypeComment                               = "comment"
 	NotificationTypeFollow                                = "follow"
