@@ -15,6 +15,7 @@ type Calendar struct {
 	AccountID   uint            `json:"account_id"`
 	Account     *Account        `gorm:"foreignKey:AccountID;constraint:OnDelete:CASCADE" json:"account,omitempty"`
 	Events      []CalendarEvent `gorm:"many2many:calendar_calendar_events;" json:"events"`
+	EventCount  *int64          `json:"eventCount,omitempty"`
 	IsPublic    bool            `gorm:"default:true" json:"isPublic"`
 	CreatedAt   time.Time       `gorm:"autoCreateTime" json:"createdAt"`
 	UpdatedAt   time.Time       `gorm:"autoUpdateTime" json:"updatedAt"`
