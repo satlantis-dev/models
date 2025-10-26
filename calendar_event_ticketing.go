@@ -68,17 +68,17 @@ type CalendarEventTicketType struct {
 }
 
 type CalendarEventTicketOrder struct {
-	ID              uint                    `gorm:"primaryKey" json:"id"`
-	CalendarEventID uint                    `gorm:"not null;index" json:"calendarEventId"`
-	AccountID       uint                    `gorm:"not null;index" json:"accountId"`
-	TotalPrice      int64                   `gorm:"type:bigint" json:"totalPrice"`
-	Currency        OrderCurrency           `gorm:"type:varchar(8)" json:"currency"`
-	RefundedAmount  int64                   `gorm:"type:bigint;default:0" json:"refundedAmount"`
-	Status          OrderStatus             `gorm:"type:varchar(32);default:'pending'" json:"status"`
-	RsvpData        *map[string]interface{} `gorm:"type:jsonb" json:"rsvpData,omitempty"`
-	CreatedAt       time.Time               `json:"-"`
-	UpdatedAt       time.Time               `json:"-"`
-	DeletedAt       gorm.DeletedAt          `gorm:"index" json:"-"`
+	ID              uint           `gorm:"primaryKey" json:"id"`
+	CalendarEventID uint           `gorm:"not null;index" json:"calendarEventId"`
+	AccountID       uint           `gorm:"not null;index" json:"accountId"`
+	TotalPrice      int64          `gorm:"type:bigint" json:"totalPrice"`
+	Currency        OrderCurrency  `gorm:"type:varchar(8)" json:"currency"`
+	RefundedAmount  int64          `gorm:"type:bigint;default:0" json:"refundedAmount"`
+	Status          OrderStatus    `gorm:"type:varchar(32);default:'pending'" json:"status"`
+	RsvpData        datatypes.JSON `gorm:"type:jsonb" json:"rsvpData,omitempty"`
+	CreatedAt       time.Time      `json:"-"`
+	UpdatedAt       time.Time      `json:"-"`
+	DeletedAt       gorm.DeletedAt `gorm:"index" json:"-"`
 }
 
 type CalendarEventTicketOrderItem struct {
