@@ -7,4 +7,5 @@ type Reaction struct {
 	EventID   uint       `gorm:"index;not null" json:"eventId"`
 	Event     Event      `json:"event"`
 	NoteID    uint       `gorm:"index;not null" json:"noteId"`
+	Note      *Note      `gorm:"constraint:OnDelete:CASCADE;" json:"note,omitempty"`
 }
