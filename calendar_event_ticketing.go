@@ -106,6 +106,7 @@ type CalendarEventTicket struct {
 	RSVP        *CalendarEventRSVP           `gorm:"foreignKey:RsvpID" json:"rsvp,omitempty"`
 	Status      TicketStatus                 `gorm:"type:varchar(32);default:'active'" json:"status"`
 	Code        string                       `gorm:"uniqueIndex;size:64" json:"code"`
+	CheckedInAt *time.Time                   `json:"checkedInAt,omitempty"`
 	CreatedAt   time.Time                    `json:"-"`
 	UpdatedAt   time.Time                    `json:"-"`
 	DeletedAt   gorm.DeletedAt               `gorm:"index" json:"-"`
