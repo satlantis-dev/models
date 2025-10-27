@@ -201,7 +201,7 @@ type Location struct {
 	PlaceID               uint                   `gorm:"index" json:"placeId"`
 	Place                 Place                  `json:"place"`
 	Name                  string                 `json:"name"`
-	Notes                 []LocationNote         `gorm:"foreignKey:LocationID" json:"notes"`
+	Notes                 []LocationNote         `gorm:"foreignKey:LocationID;constraint:OnDelete:CASCADE;" json:"notes"`
 	OpeningHours          OpeningHours           `gorm:"type:jsonb;serializer:json" json:"openingHours"`
 	OSMRef                string                 `json:"osmRef"`
 	Phone                 string                 `json:"phone"`
