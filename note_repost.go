@@ -6,9 +6,9 @@ type NoteRepost struct {
 	ID        uint       `gorm:"primaryKey" json:"id"`
 	EventID   string     `gorm:"index" json:"eventId"`
 	NoteID    uint       `json:"noteId"`
-	Note      Note       `gorm:"foreignKey:NoteID" json:"note"`
+	Note      Note       `gorm:"foreignKey:NoteID;constraint:OnDelete:CASCADE" json:"note"`
 	AccountID uint       `json:"accountId"`
-	Account   Account    `gorm:"foreignKey:AccountID" json:"account"`
+	Account   Account    `gorm:"foreignKey:AccountID;constraint:OnDelete:CASCADE" json:"account"`
 	CreatedAt time.Time  `json:"-"`
 	DeletedAt *time.Time `json:"-"`
 }

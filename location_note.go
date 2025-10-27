@@ -10,8 +10,9 @@ type LocationNote struct {
 	UpdatedAt  time.Time  `json:"-"`
 	DeletedAt  *time.Time `gorm:"index" json:"-,omitempty"`
 	LocationID uint       `gorm:"index" json:"locationId"`
+	Location   *Location  `gorm:"constraint:OnDelete:CASCADE;" json:"location,omitempty"`
 	NoteID     uint       `gorm:"index" json:"noteId"`
-	Note       Note       `json:"note"`
+	Note       *Note      `gorm:"constraint:OnDelete:CASCADE;" json:"note,omitempty"`
 	Type       NoteType   `json:"type"`
 }
 
@@ -21,16 +22,4 @@ type LocationFeedNote struct {
 	NoteID     uint     `json:"noteId"`
 	Note       FeedNote `json:"note"`
 	Type       NoteType `json:"type"`
-}
-
-type LocationNoteWithClosure struct {
-	LocationNote
-	AncestorID   uint `gorm:"column:ancestor_id" json:"ancestorId"`
-	Depth        int  `gorm:"column:depth" json:"depth"`
-	DescendantID uint `gorm:"column:descendant_id" json:"descendantId"`
-}
-
-type LocationNoteWithStartTime struct {
-	Note      LocationNoteWithClosure
-	StartTime time.Time
 }
