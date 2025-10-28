@@ -14,7 +14,7 @@ type CalendarEventType struct {
 
 type CalendarEvent struct {
 	ID                    uint                        `gorm:"primaryKey" json:"id"`
-	AccountID             uint                        `gorm:"index" json:"accountId"`
+	AccountID             uint                        `gorm:"index;not null" json:"accountId"`
 	Account               *AccountDTO                 `gorm:"foreignKey:AccountID" json:"account,omitempty"`
 	EventID               uint                        `gorm:"index" json:"eventId"`
 	NostrID               string                      `gorm:"index" json:"nostrId"`
