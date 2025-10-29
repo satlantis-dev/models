@@ -51,7 +51,7 @@ type Account struct {
 	Username                    string                `gorm:"uniqueIndex;default:NULL" json:"username"`
 	Level                       int                   `gorm:"index;default:0" json:"level"`
 	FollowingCount              *int64                `json:"followingCount"`
-	FollowersCount              *int64                `json:"followersCount"`
+	FollowersCount              *int64                `gorm:"index:,sort:desc,nulls:LAST" json:"followersCount"`
 	AppleID                     *string               `gorm:"uniqueIndex" json:"appleId"`
 	GoogleID                    *string               `gorm:"uniqueIndex" json:"googleId"`
 	VertexRank                  decimal.Decimal       `gorm:"type:numeric;index" json:"vertexRank"`
