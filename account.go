@@ -20,7 +20,7 @@ type Account struct {
 	Collections                 []Collection          `gorm:"foreignKey:AccountID" json:"collections,omitempty"`
 	CurrencyID                  *uint                 `gorm:"index" json:"currencyId"`
 	Currency                    Currency              `json:"currency"`
-	DisplayName                 string                `gorm:"type:text" json:"displayName"`
+	DisplayName                 string                `gorm:"type:text;index:idx_accounts_search_fields,type:gin,option:gin_trgm_ops" json:"displayName"`
 	Email                       string                `gorm:"default:NULL" json:"email"`
 	EmailVerified               bool                  `json:"-"`
 	FirstSeen                   *time.Time            `json:"-"`
@@ -35,8 +35,8 @@ type Account struct {
 	LocationClaims              []LocationClaim       `gorm:"foreignKey:OwnerAccountID;constraint:OnDelete:CASCADE;" json:"locationClaims,omitempty"`
 	Lud06                       string                `gorm:"default:NULL" json:"lud06"`
 	Lud16                       string                `gorm:"default:NULL" json:"lud16"`
-	Name                        string                `gorm:"type:text" json:"name"`
-	Nip05                       string                `gorm:"default:NULL" json:"nip05"`
+	Name                        string                `gorm:"type:text;index:idx_accounts_search_fields,type:gin,option:gin_trgm_ops" json:"name"`
+	Nip05                       string                `gorm:"default:NULL;index:idx_accounts_search_fields,type:gin,option:gin_trgm_ops" json:"nip05"`
 	Notes                       []Note                `gorm:"foreignKey:AccountID" json:"notes"`
 	Npub                        string                `gorm:"uniqueIndex;default:NULL" json:"npub"`
 	Password                    string                `gorm:"type:text" json:"-"`
@@ -48,10 +48,10 @@ type Account struct {
 	ResetPasswordToken          *string               `gorm:"type:text" json:"-"`
 	ResetPasswordTokenExpiresAt *time.Time            `json:"-"`
 	Website                     string                `gorm:"type:text" json:"website"`
-	Username                    string                `gorm:"uniqueIndex;default:NULL" json:"username"`
+	Username                    string                `gorm:"uniqueIndex;default:NULL;index:idx_accounts_search_fields,type:gin,option:gin_trgm_ops" json:"username"`
 	Level                       int                   `gorm:"index;default:0" json:"level"`
 	FollowingCount              *int64                `json:"followingCount"`
-	FollowersCount              *int64                `json:"followersCount"`
+	FollowersCount              *int64                `gorm:"index:,sort:desc,nulls:LAST" json:"followersCount"`
 	AppleID                     *string               `gorm:"uniqueIndex" json:"appleId"`
 	GoogleID                    *string               `gorm:"uniqueIndex" json:"googleId"`
 	VertexRank                  decimal.Decimal       `gorm:"type:numeric;index" json:"vertexRank"`
