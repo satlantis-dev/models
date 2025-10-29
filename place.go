@@ -52,7 +52,7 @@ type Place struct {
 	Descendants        []PlaceWithClosure    `gorm:"-" json:"descendants"`
 	Description        string                `gorm:"type:text" json:"description"`
 	EventID            *uint                 `gorm:"index" json:"eventId"`
-	Event              Event                 `json:"event"`
+	Event              *Event                `json:"event,omitempty"`
 	Featured           bool                  `json:"featured"`
 	Lat                float64               `json:"lat"`
 	Level              PlaceLevel            `gorm:"type:text" json:"level"`
