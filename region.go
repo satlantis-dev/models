@@ -10,11 +10,9 @@ type Region struct {
 	CreatedAt      time.Time              `json:"-"`
 	UpdatedAt      time.Time              `json:"-"`
 	DeletedAt      *time.Time             `gorm:"index" json:"-,omitempty"`
-	Banner         *string                `gorm:"type:text" json:"banner,omitempty"`
 	CategoryScores *[]RegionCategoryScore `gorm:"foreignKey:RegionID" json:"categoryScores,omitempty"`
 	CountryID      uint                   `gorm:"index" json:"countryId"`
 	Country        *Country               `json:"country,omitempty"`
-	Description    *string                `gorm:"type:text" json:"description,omitempty"`
 	EventID        uint                   `gorm:"index" json:"eventId"`
 	Event          *Event                 `json:"event,omitempty"`
 	Metrics        *[]RegionMetric        `gorm:"foreignKey:RegionID" json:"metrics,omitempty"`
