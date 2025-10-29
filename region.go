@@ -2,8 +2,6 @@ package models
 
 import (
 	"time"
-
-	"github.com/lib/pq"
 )
 
 type Region struct {
@@ -12,15 +10,13 @@ type Region struct {
 	CreatedAt      time.Time              `json:"-"`
 	UpdatedAt      time.Time              `json:"-"`
 	DeletedAt      *time.Time             `gorm:"index" json:"-,omitempty"`
-	Banner         string                 `gorm:"type:text" json:"banner"`
+	Banner         *string                `gorm:"type:text" json:"banner,omitempty"`
 	CategoryScores *[]RegionCategoryScore `gorm:"foreignKey:RegionID" json:"categoryScores,omitempty"`
 	CountryID      uint                   `gorm:"index" json:"countryId"`
 	Country        *Country               `json:"country,omitempty"`
-	Description    string                 `gorm:"type:text" json:"description"`
-	EventID        *uint                  `gorm:"index" json:"eventId"`
+	Description    *string                `gorm:"type:text" json:"description,omitempty"`
+	EventID        uint                   `gorm:"index" json:"eventId"`
 	Event          *Event                 `json:"event,omitempty"`
-	Lat            float64                `json:"lat"`
-	Lng            float64                `json:"lng"`
 	Metrics        *[]RegionMetric        `gorm:"foreignKey:RegionID" json:"metrics,omitempty"`
 	Name           string                 `gorm:"index;type:text" json:"name"`
 	OSMID          *uint                  `json:"osmId"`
@@ -28,6 +24,4 @@ type Region struct {
 	OSMType        OSMType                `json:"osmType"`
 	OSMRef         string                 `gorm:"uniqueIndex" json:"osmRef"`
 	Places         *[]Place               `gorm:"foreignKey:RegionID" json:"places,omitempty"`
-	Slug           string                 `gorm:"type:text" json:"slug"` // Unique slug for the region navigation
-	Hashtags       pq.StringArray         `gorm:"type:varchar[]" json:"hashtags"`
 }
