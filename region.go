@@ -13,8 +13,6 @@ type Region struct {
 	CategoryScores *[]RegionCategoryScore `gorm:"foreignKey:RegionID" json:"categoryScores,omitempty"`
 	CountryID      uint                   `gorm:"index" json:"countryId"`
 	Country        *Country               `json:"country,omitempty"`
-	EventID        uint                   `gorm:"index" json:"eventId"`
-	Event          *Event                 `json:"event,omitempty"`
 	Metrics        *[]RegionMetric        `gorm:"foreignKey:RegionID" json:"metrics,omitempty"`
 	Name           string                 `gorm:"index;type:text" json:"name"`
 	OSMID          *uint                  `json:"osmId"`
