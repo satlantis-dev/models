@@ -21,9 +21,9 @@ type Collection struct {
 	Locations    *[]CollectionLocation `gorm:"foreignKey:CollectionID;constraint:OnDelete:CASCADE" json:"locations,omitempty"`
 	NumLocations int                   `gorm:"-" json:"numLocations"`
 	NumSaves     int                   `gorm:"-" json:"numSaves"`
-	Contributors []AccountMiniDTO      `gorm:"-" json:"contributors,omitempty"`
-	LocationTags []LocationTag         `gorm:"many2many:collection_location_tags;constraint:OnDelete:CASCADE" json:"locationTags"`
-	PlacesByID   pq.Int32Array         `gorm:"type:integer[]" json:"placesById"`
+	Contributors *[]AccountMiniDTO     `gorm:"-" json:"contributors,omitempty"`
+	LocationTags *[]LocationTag        `gorm:"many2many:collection_location_tags;constraint:OnDelete:CASCADE" json:"locationTags,omitempty"`
+	PlacesByID   *pq.Int32Array        `gorm:"type:integer[]" json:"placesById,omitempty"`
 	Featured     bool                  `gorm:"default:false" json:"featured"`
 }
 
