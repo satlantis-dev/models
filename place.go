@@ -67,7 +67,7 @@ type Place struct {
 	PlaceGalleryImages *[]PlaceGalleryImage  `gorm:"foreignKey:PlaceID;constraint:OnDelete:CASCADE;" json:"placeGalleryImages,omitempty"`
 	RegionID           *uint                 `gorm:"index" json:"regionId"`
 	Region             *Region               `gorm:"foreignKey:RegionID" json:"region,omitempty"`
-	Slug               string                `gorm:"type:text" json:"slug"` // Unique slug for the place navigation
+	Timezone           string                `gorm:"type:text" json:"timezone"`
 	WeatherID          *uint                 `gorm:"index" json:"weatherId"`
 	Weather            *Weather              `gorm:"foreignKey:PlaceID;constraint:OnDelete:CASCADE;" json:"weather,omitempty"`
 	Hashtags           pq.StringArray        `gorm:"type:varchar[]" json:"hashtags"`
