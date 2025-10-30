@@ -34,6 +34,7 @@ var DatabaseModels = []interface{}{
 	CalendarEventTicketOrderItem{},
 	CalendarEventTicketOrderPayment{},
 	CalendarEventWallet{},
+	CalendarEventWalletWithdrawal{},
 	CalendarSubscription{},
 	Category{},
 	ChatMembership{},
