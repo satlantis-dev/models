@@ -27,7 +27,7 @@ type CalendarEvent struct {
 	Sig                   string                      `gorm:"type:text" json:"sig"`
 	CreatedAt             *time.Time                  `json:"createdAt"`
 	DeletedAt             gorm.DeletedAt              `gorm:"index" json:"-"`
-	Announcements         []CalendarEventAnnouncement `gorm:"foreignKey:CalendarEventID" json:"announcements"`
+	Announcements         []CalendarEventAnnouncement `gorm:"foreignKey:CalendarEventID;constraint:OnDelete:CASCADE;" json:"announcements"`
 	CalendarEventRSVPs    []CalendarEventRSVP         `json:"calendarEventRsvps"`
 	Cohosts               []CalendarEventCohost       `json:"cohosts"`
 	End                   time.Time                   `json:"end"`
@@ -39,7 +39,7 @@ type CalendarEvent struct {
 	Interests             []Interest                  `gorm:"many2many:calendar_event_interests;constraint:OnDelete:CASCADE" json:"interests"`
 	IsSatlantisCreated    bool                        `gorm:"default:false" json:"isSatlantisCreated"`
 	Location              string                      `json:"location"`
-	Notes                 []CalendarEventNote         `gorm:"foreignKey:CalendarEventID" json:"notes"`
+	Notes                 []CalendarEventNote         `gorm:"foreignKey:CalendarEventID;constraint:OnDelete:CASCADE;" json:"notes"`
 	OwnershipChangedAt    *time.Time                  `json:"ownershipChangedAt"`
 	PubKey                string                      `gorm:"type:text;index" json:"pubkey"`
 	RsvpLimit             *int64                      `json:"rsvpLimit"`
