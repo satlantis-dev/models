@@ -48,7 +48,7 @@ type Account struct {
 	ResetPasswordToken          *string               `gorm:"type:text" json:"-"`
 	ResetPasswordTokenExpiresAt *time.Time            `json:"-"`
 	Website                     string                `gorm:"type:text" json:"website"`
-	Username                    string                `gorm:"uniqueIndex;default:NULL" json:"username"`
+	Username                    string                `gorm:"uniqueIndex;default:NULL;size:30" json:"username"`
 	Level                       int                   `gorm:"index;default:0" json:"level"`
 	FollowingCount              *int64                `json:"followingCount"`
 	FollowersCount              *int64                `gorm:"index:,sort:desc,nulls:LAST" json:"followersCount"`
