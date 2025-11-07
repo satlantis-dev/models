@@ -128,6 +128,7 @@ func (a *Account) ToSearchAccountDTO() SearchAccountDTO {
 
 type AccountDTO struct {
 	ID             uint   `json:"id"`
+	Email          string `json:"email"`
 	About          string `json:"about"`
 	DisplayName    string `json:"displayName"`
 	Banner         string `json:"banner"`
@@ -148,6 +149,7 @@ type AccountDTO struct {
 func (a *Account) ToDTO() AccountDTO {
 	return AccountDTO{
 		ID:             a.ID,
+		Email:          a.Email,
 		About:          a.About,
 		Banner:         a.Banner,
 		DisplayName:    a.DisplayName,
