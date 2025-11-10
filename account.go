@@ -89,8 +89,8 @@ type SearchAccountDTO struct {
 	ID             uint   `json:"id"`
 	Username       string `json:"username"`
 	DisplayName    string `json:"display_name"`
-	FollowersCount int64  `json:"followers_count"`
-	FollowingCount int64  `json:"following_count"`
+	FollowersCount *int64 `json:"followers_count"`
+	FollowingCount *int64 `json:"following_count"`
 	Name           string `json:"name"`
 	Nip05          string `json:"nip05"`
 	About          string `json:"about"`
@@ -99,16 +99,6 @@ type SearchAccountDTO struct {
 }
 
 func (a *Account) ToSearchAccountDTO() SearchAccountDTO {
-	// Set followers count to 0 if nil
-	var followersCount int64 = 0
-	if a.FollowersCount != nil {
-		followersCount = *a.FollowersCount
-	}
-
-	var followingCount int64 = 0
-	if a.FollowingCount != nil {
-		followingCount = *a.FollowingCount
-	}
 
 	return SearchAccountDTO{
 		ID:             a.ID,
@@ -119,8 +109,8 @@ func (a *Account) ToSearchAccountDTO() SearchAccountDTO {
 		About:          a.About,
 		Picture:        a.Picture,
 		Npub:           a.Npub,
-		FollowersCount: followersCount,
-		FollowingCount: followingCount,
+		FollowersCount: a.FollowersCount,
+		FollowingCount: a.FollowingCount,
 	}
 }
 
