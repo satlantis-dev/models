@@ -48,7 +48,7 @@ type Place struct {
 	BoundingBox        BoundingBox           `gorm:"type:jsonb" json:"boundingBox"`
 	CategoryScores     *[]PlaceCategoryScore `gorm:"foreignKey:PlaceID;constraint:OnDelete:CASCADE;" json:"categoryScores,omitempty"`
 	CountryID          uint                  `gorm:"index" json:"countryId"`
-	Country            Country               `json:"country"`
+	Country            *Country              `json:"country,omitempty"`
 	Descendants        []PlaceWithClosure    `gorm:"-" json:"descendants"`
 	Description        string                `gorm:"type:text" json:"description"`
 	EventID            *uint                 `gorm:"index" json:"eventId"`
@@ -85,7 +85,7 @@ type PlaceDTO struct {
 	ID        uint       `gorm:"primaryKey" json:"id"`
 	Banner    string     `gorm:"type:text" json:"banner"`
 	CountryID uint       `gorm:"index" json:"countryId"`
-	Country   Country    `json:"country"`
+	Country   *Country   `json:"country"`
 	Level     PlaceLevel `gorm:"type:text" json:"level"`
 	Name      string     `gorm:"index;type:text" json:"name"`
 	OSMID     *uint      `json:"osmId"`
