@@ -86,3 +86,35 @@ type CalendarEventResponse struct {
 	Country        map[string]interface{} `json:"country,omitempty"`
 	KnownAttendees *[]AccountDTO          `json:"knownAttendees,omitempty"`
 }
+
+// UserRSVPInfo contains minimal RSVP information for the requesting user
+type UserRSVPInfo struct {
+	ID        uint       `json:"id"`
+	AccountID uint       `json:"accountId"`
+	Status    RsvpStatus `json:"status"`
+}
+
+// UserTicketInfo contains minimal ticket information for the requesting user
+type UserTicketInfo struct {
+	ID             uint         `json:"id"`
+	AccountID      uint         `json:"accountId"`
+	Status         TicketStatus `json:"status"`
+	TicketTypeID   uint         `json:"ticketTypeId"`
+	TicketTypeName string       `json:"ticketTypeName"`
+	CreatedAt      time.Time    `json:"createdAt"`
+	CheckedInAt    *time.Time   `json:"checkedInAt,omitempty"`
+}
+
+type GetEventResponseFull struct {
+	*CalendarEvent
+	RsvpAcceptedCount   int64                  `json:"rsvpAcceptedCount"`
+	RsvpWaitlistedCount int64                  `json:"rsvpWaitlistedCount"`
+	RsvpInvitedCount    int64                  `json:"rsvpInvitedCount"`
+	RsvpTentativeCount  int64                  `json:"rsvpTentativeCount"`
+	RsvpRequestedCount  int64                  `json:"rsvpRequestedCount"`
+	RsvpDeclinedCount   int64                  `json:"rsvpDeclinedCount"`
+	RsvpRejectedCount   int64                  `json:"rsvpRejectedCount"`
+	Country             map[string]interface{} `json:"country"`
+	UserRSVP            *UserRSVPInfo          `json:"userRsvp,omitempty"`
+	UserTicket          *UserTicketInfo        `json:"userTicket,omitempty"`
+}
