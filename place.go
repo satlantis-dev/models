@@ -94,6 +94,10 @@ type PlaceDTO struct {
 	OSMRef    string     `gorm:"uniqueIndex" json:"osmRef"`
 }
 
+func (PlaceDTO) TableName() string {
+	return "places"
+}
+
 // ToDTO - Convert Place to PlaceDTO.
 func (place Place) ToDTO() *PlaceDTO {
 	return &PlaceDTO{
