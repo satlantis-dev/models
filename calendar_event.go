@@ -42,6 +42,8 @@ type CalendarEvent struct {
 	Location              string                      `json:"location"`
 	Notes                 []CalendarEventNote         `gorm:"foreignKey:CalendarEventID;constraint:OnDelete:CASCADE;" json:"notes"`
 	OwnershipChangedAt    *time.Time                  `json:"ownershipChangedAt"`
+	PlaceID               *uint                       `gorm:"index" json:"placeId"`
+	Place                 *PlaceDTO                   `gorm:"foreignKey:PlaceID" json:"place,omitempty"`
 	PubKey                string                      `gorm:"type:text;index" json:"pubkey"`
 	RsvpLimit             *int64                      `json:"rsvpLimit"`
 	RsvpWaitlistEnabledAt *time.Time                  `json:"rsvpWaitlistEnabledAt"`
@@ -65,23 +67,40 @@ type CalendarEventInterest struct {
 	InterestID      uint `gorm:"uniqueIndex:idx_calendar_event_interest"`
 }
 
-type CalendarEventCohost struct {
-	ID                   uint           `gorm:"primaryKey" json:"id"`
-	CalendarEventID      uint           `gorm:"index;not null" json:"calendarEventId"`
-	CalendarEvent        *CalendarEvent `gorm:"foreignKey:CalendarEventID" json:"calendarEvent,omitempty"`
-	AccountID            uint           `gorm:"index;not null" json:"accountId"`
-	Account              *AccountDTO    `gorm:"foreignKey:AccountID" json:"account"`
-	InvitationAcceptedAt *time.Time     `json:"invitationAcceptedAt"`
-	InvitationDeclinedAt *time.Time     `json:"invitationDeclinedAt"`
-	AutoAcceptInvitation bool           `gorm:"default:false" json:"-"`
-	IsEmailAdded         bool           `gorm:"default:false" json:"-"`
-	CreatedAt            time.Time      `json:"createdAt"`
-	UpdatedAt            time.Time      `json:"updatedAt"`
-}
-
 type CalendarEventResponse struct {
 	*CalendarEvent
-	Place          map[string]interface{} `json:"place,omitempty"`
 	Country        map[string]interface{} `json:"country,omitempty"`
 	KnownAttendees *[]AccountDTO          `json:"knownAttendees,omitempty"`
+}
+
+// UserRSVPInfo contains minimal RSVP information for the requesting user
+type UserRSVPInfo struct {
+	ID        uint       `json:"id"`
+	AccountID uint       `json:"accountId"`
+	Status    RsvpStatus `json:"status"`
+}
+
+// UserTicketInfo contains minimal ticket information for the requesting user
+type UserTicketInfo struct {
+	ID             uint         `json:"id"`
+	AccountID      uint         `json:"accountId"`
+	Status         TicketStatus `json:"status"`
+	TicketTypeID   uint         `json:"ticketTypeId"`
+	TicketTypeName string       `json:"ticketTypeName"`
+	CreatedAt      time.Time    `json:"createdAt"`
+	CheckedInAt    *time.Time   `json:"checkedInAt,omitempty"`
+}
+
+type CalendarEventResponseFull struct {
+	*CalendarEvent
+	RsvpAcceptedCount   int64                  `json:"rsvpAcceptedCount"`
+	RsvpWaitlistedCount int64                  `json:"rsvpWaitlistedCount"`
+	RsvpInvitedCount    int64                  `json:"rsvpInvitedCount"`
+	RsvpTentativeCount  int64                  `json:"rsvpTentativeCount"`
+	RsvpRequestedCount  int64                  `json:"rsvpRequestedCount"`
+	RsvpDeclinedCount   int64                  `json:"rsvpDeclinedCount"`
+	RsvpRejectedCount   int64                  `json:"rsvpRejectedCount"`
+	Country             map[string]interface{} `json:"country"`
+	UserRSVP            *UserRSVPInfo          `json:"userRsvp,omitempty"`
+	UserTicket          *UserTicketInfo        `json:"userTicket,omitempty"`
 }
