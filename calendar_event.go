@@ -105,7 +105,7 @@ type UserTicketInfo struct {
 	CheckedInAt    *time.Time   `json:"checkedInAt,omitempty"`
 }
 
-type GetEventResponseFull struct {
+type CalendarEventResponseFull struct {
 	*CalendarEvent
 	RsvpAcceptedCount   int64                  `json:"rsvpAcceptedCount"`
 	RsvpWaitlistedCount int64                  `json:"rsvpWaitlistedCount"`
