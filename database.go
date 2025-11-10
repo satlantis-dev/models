@@ -74,7 +74,6 @@ var DatabaseModels = []interface{}{
 	OnboardingProfile{},
 	Place{},
 	PlaceAnalytics{},
-	PlaceCalendarEvent{},
 	PlaceCategoryScore{},
 	PlaceClosure{},
 	PlaceFoundationScore{},

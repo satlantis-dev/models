@@ -42,6 +42,8 @@ type CalendarEvent struct {
 	Location              string                      `json:"location"`
 	Notes                 []CalendarEventNote         `gorm:"foreignKey:CalendarEventID;constraint:OnDelete:CASCADE;" json:"notes"`
 	OwnershipChangedAt    *time.Time                  `json:"ownershipChangedAt"`
+	PlaceID               uint                        `gorm:"index" json:"placeId"`
+	Place                 *PlaceDTO                   `gorm:"foreignKey:PlaceID" json:"place,omitempty"`
 	PubKey                string                      `gorm:"type:text;index" json:"pubkey"`
 	RsvpLimit             *int64                      `json:"rsvpLimit"`
 	RsvpWaitlistEnabledAt *time.Time                  `json:"rsvpWaitlistEnabledAt"`
@@ -81,7 +83,6 @@ type CalendarEventCohost struct {
 
 type CalendarEventResponse struct {
 	*CalendarEvent
-	Place          map[string]interface{} `json:"place,omitempty"`
 	Country        map[string]interface{} `json:"country,omitempty"`
 	KnownAttendees *[]AccountDTO          `json:"knownAttendees,omitempty"`
 }
