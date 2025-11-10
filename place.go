@@ -85,7 +85,7 @@ type PlaceDTO struct {
 	ID        uint       `gorm:"primaryKey" json:"id"`
 	Banner    string     `gorm:"type:text" json:"banner"`
 	CountryID uint       `gorm:"index" json:"countryId"`
-	Country   *Country   `json:"country"`
+	Country   *Country   `json:"country,omitempty"`
 	Level     PlaceLevel `gorm:"type:text" json:"level"`
 	Name      string     `gorm:"index;type:text" json:"name"`
 	OSMID     *uint      `json:"osmId"`
