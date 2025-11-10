@@ -124,6 +124,10 @@ func (a *Account) ToSearchAccountDTO() SearchAccountDTO {
 	}
 }
 
+func (SearchAccountDTO) TableName() string {
+	return "accounts"
+}
+
 // AccountDTO
 
 type AccountDTO struct {
