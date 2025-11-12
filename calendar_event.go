@@ -38,7 +38,7 @@ type CalendarEvent struct {
 	Image                 string                      `json:"image"`
 	Interests             []Interest                  `gorm:"many2many:calendar_event_interests;constraint:OnDelete:CASCADE" json:"interests"`
 	IsSatlantisCreated    bool                        `gorm:"default:false" json:"isSatlantisCreated"`
-	IsUnlisted            bool                        `gorm:"default:false" json:"isUnlisted"`
+	IsUnlisted            bool                        `gorm:"default:false;index" json:"isUnlisted"`
 	Location              string                      `json:"location"`
 	Notes                 []CalendarEventNote         `gorm:"foreignKey:CalendarEventID;constraint:OnDelete:CASCADE;" json:"notes"`
 	OwnershipChangedAt    *time.Time                  `json:"ownershipChangedAt"`
