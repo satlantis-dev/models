@@ -11,7 +11,7 @@ type PlaceTopicScore struct {
 	Score      float64   `json:"score"`
 	UpdatedAt  time.Time `json:"updatedAt"`
 	TopicID    uint      `gorm:"primaryKey;autoIncrement:false" json:"topicId"`
-	Topic      Topic     `gorm:"constraint:OnDelete:CASCADE" json:"topic"`
+	Topic      Topic     `gorm:"foreignKey:TopicID;constraint:OnDelete:CASCADE" json:"topic"`
 	UserNumber uint      `json:"userNumber"`
 	UserScore  float64   `json:"userScore"`
 }
