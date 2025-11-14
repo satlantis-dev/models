@@ -21,8 +21,8 @@ type Account struct {
 	CurrencyID                  *uint                 `gorm:"index" json:"currencyId"`
 	Currency                    Currency              `json:"currency"`
 	DisplayName                 string                `gorm:"type:text" json:"displayName"`
-	Email                       string                `gorm:"default:NULL" json:"email"`
-	EmailVerified               bool                  `json:"-"`
+	Email                       string                `gorm:"uniqueIndex;default:NULL" json:"email"`
+	EmailUnverified             string                `gorm:"default:NULL" json:"emailUnverified"`
 	FirstSeen                   *time.Time            `json:"-"`
 	Following                   []Follow              `gorm:"foreignKey:FollowerID" json:"following"`
 	FollowedBy                  []Follow              `gorm:"foreignKey:FollowingID" json:"followedBy"`
@@ -179,7 +179,6 @@ type AccountPortable struct {
 	DisplayName          string                `json:"displayName"`
 	Username             string                `json:"username"`
 	Email                string                `json:"email"`
-	EmailVerified        bool                  `json:"emailVerified"`
 	InfluenceScore       uint                  `json:"influenceScore"`
 	Interests            []Interest            `json:"interests"`
 	IsAdmin              bool                  `json:"isAdmin"`
@@ -235,7 +234,6 @@ func (a *Account) ToPortableProfile(db *gorm.DB) (*AccountPortable, error) {
 		DisplayName:          a.DisplayName,
 		Username:             a.Username,
 		Email:                a.Email,
-		EmailVerified:        a.EmailVerified,
 		InfluenceScore:       a.InfluenceScore,
 		Interests:            a.Interests,
 		IsAdmin:              a.IsAdmin,
@@ -274,7 +272,6 @@ func (a *Account) ToPortableProfileMin(db *gorm.DB) (*AccountPortable, error) {
 		DisplayName:          a.DisplayName,
 		Username:             a.Username,
 		Email:                a.Email,
-		EmailVerified:        a.EmailVerified,
 		InfluenceScore:       a.InfluenceScore,
 		Interests:            a.Interests,
 		IsAdmin:              a.IsAdmin,
