@@ -21,8 +21,8 @@ type Account struct {
 	CurrencyID                  *uint                 `gorm:"index" json:"currencyId"`
 	Currency                    Currency              `json:"currency"`
 	DisplayName                 string                `gorm:"type:text" json:"displayName"`
-	Email                       string                `gorm:"default:NULL" json:"email"`
-	EmailVerified               bool                  `json:"-"`
+	Email                       string                `gorm:"index:idx_unique_verified_email,unique,where:email IS NOT NULL AND email_verified = true,sort:asc,nulls:last;default:NULL" json:"email"`
+	EmailVerified               bool                  `gorm:"index:idx_unique_verified_email" json:"-"`
 	FirstSeen                   *time.Time            `json:"-"`
 	Following                   []Follow              `gorm:"foreignKey:FollowerID" json:"following"`
 	FollowedBy                  []Follow              `gorm:"foreignKey:FollowingID" json:"followedBy"`
