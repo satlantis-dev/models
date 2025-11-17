@@ -5,4 +5,5 @@ type CalendarEventNote struct {
 	CalendarEventID uint  `json:"calendarEventId"`
 	NoteID          uint  `json:"noteId"`
 	Note            *Note `gorm:"constraint:OnDelete:CASCADE;" json:"note,omitempty"`
+	ToNostr         bool  `gorm:"default:false" json:"toNostr"`
 }
