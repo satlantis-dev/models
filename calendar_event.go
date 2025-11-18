@@ -36,7 +36,7 @@ type CalendarEvent struct {
 	Geohash               string                      `json:"geohash"`
 	GoogleID              string                      `json:"googleId"`
 	Image                 string                      `json:"image"`
-	Interests             []Interest                  `gorm:"many2many:calendar_event_interests;constraint:OnDelete:CASCADE" json:"interests"`
+	CalendarEventTags     []CalendarEventTag          `gorm:"many2many:calendar_event_calendar_event_tags;constraint:OnDelete:CASCADE" json:"calendarEventTags"`
 	IsSatlantisCreated    bool                        `gorm:"default:false" json:"isSatlantisCreated"`
 	IsUnlisted            bool                        `gorm:"default:false;index" json:"isUnlisted"`
 	Location              string                      `json:"location"`
@@ -62,9 +62,9 @@ type CalendarEvent struct {
 	OfficialCalendar      *Calendar                   `gorm:"foreignKey:OfficialCalendarID" json:"officialCalendar,omitempty"`
 }
 
-type CalendarEventInterest struct {
-	CalendarEventID uint `gorm:"uniqueIndex:idx_calendar_event_interest"`
-	InterestID      uint `gorm:"uniqueIndex:idx_calendar_event_interest"`
+type CalendarEventCalendarEventTag struct {
+	CalendarEventID    uint `gorm:"uniqueIndex:idx_calendar_event_calendar_event_tag"`
+	CalendarEventTagID uint `gorm:"uniqueIndex:idx_calendar_event_calendar_event_tag"`
 }
 
 type CalendarEventResponse struct {
