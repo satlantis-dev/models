@@ -23,4 +23,5 @@ type Calendar struct {
 	CreatedAt    time.Time         `gorm:"autoCreateTime" json:"createdAt"`
 	UpdatedAt    time.Time         `gorm:"autoUpdateTime" json:"updatedAt"`
 	DeletedAt    *gorm.DeletedAt   `gorm:"index" json:"-"`
+	Featured     bool              `gorm:"default:false" json:"featured"`
 }
