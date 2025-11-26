@@ -40,6 +40,7 @@ type Account struct {
 	Notes                       []Note                `gorm:"foreignKey:AccountID" json:"notes"`
 	Npub                        string                `gorm:"uniqueIndex;default:NULL" json:"npub"`
 	Password                    string                `gorm:"type:text" json:"-"`
+	Personas                    []Persona             `gorm:"many2many:account_personas;constraint:OnDelete:CASCADE" json:"personas,omitempty"`
 	Picture                     string                `gorm:"type:text" json:"picture"`
 	Phone                       string                `json:"phone"`
 	PrivateKey                  string                `json:"-"`
