@@ -72,6 +72,7 @@ var DatabaseModels = []interface{}{
 	NoteRepost{},
 	Notification{},
 	OnboardingProfile{},
+	Persona{},
 	Place{},
 	PlaceAnalytics{},
 	PlaceCategoryScore{},
