@@ -17,13 +17,13 @@ type Collection struct {
 	CreatedAt    time.Time             `gorm:"autoCreateTime" json:"createdAt"`
 	UpdatedAt    time.Time             `gorm:"autoUpdateTime" json:"updatedAt"`
 	DeletedAt    *gorm.DeletedAt       `gorm:"index" json:"-"`
-	IsPublic     bool                  `gorm:"default:true" json:"isPublic"`
 	Locations    *[]CollectionLocation `gorm:"foreignKey:CollectionID;constraint:OnDelete:CASCADE" json:"locations,omitempty"`
-	NumLocations int                   `gorm:"-" json:"numLocations"`
-	NumSaves     int                   `gorm:"-" json:"numSaves"`
-	Contributors *[]AccountMiniDTO     `gorm:"-" json:"contributors,omitempty"`
 	LocationTags *[]LocationTag        `gorm:"many2many:collection_location_tags;constraint:OnDelete:CASCADE" json:"locationTags,omitempty"`
+	NumLocations int                   `gorm:"-" json:"numLocations"`
+	Contributors *[]AccountMiniDTO     `gorm:"-" json:"contributors,omitempty"`
+	NumSaves     int                   `gorm:"-" json:"numSaves"`
 	PlacesByID   *pq.Int32Array        `gorm:"type:integer[]" json:"placesById,omitempty"`
+	IsPublic     bool                  `gorm:"default:true" json:"isPublic"`
 	Featured     bool                  `gorm:"default:false" json:"featured"`
 }
 
