@@ -50,6 +50,16 @@ const (
 	PaymentCancelled PaymentStatus = "cancelled"
 )
 
+// RefundStatus represents the status of a refund
+type RefundStatus string
+
+const (
+	RefundPending    RefundStatus = "pending"
+	RefundProcessing RefundStatus = "processing"
+	RefundCompleted  RefundStatus = "completed"
+	RefundFailed     RefundStatus = "failed"
+)
+
 type CalendarEventTicketType struct {
 	ID              uint           `gorm:"primaryKey" json:"id"`
 	CalendarEventID uint           `gorm:"not null;index" json:"calendarEventId"`
@@ -135,4 +145,28 @@ type CalendarEventTicketOrderPayment struct {
 	CreatedAt               time.Time                `json:"createdAt"`
 	UpdatedAt               time.Time                `json:"updatedAt"`
 	DeletedAt               gorm.DeletedAt           `gorm:"index" json:"-"`
+}
+
+// CalendarEventTicketOrderRefund represents a refund for a ticket order
+type CalendarEventTicketOrderRefund struct {
+	ID           uint         `gorm:"primarykey" json:"id"`
+	OrderID      uint         `gorm:"not null;index" json:"orderId"`
+	Amount       int64        `gorm:"not null" json:"amount"`
+	Currency     string       `gorm:"not null" json:"currency"`
+	Status       RefundStatus `gorm:"not null;default:'pending'" json:"status"`
+	RefundMethod string       `gorm:"not null" json:"refundMethod"` // "lightning", "stripe", etc.
+
+	LightningAddress     *string `json:"lightningAddress,omitempty"`
+	LightningPaymentHash *string `json:"lightningPaymentHash,omitempty"`
+
+	StripeRefundID        *string `json:"stripeRefundId,omitempty"`
+	StripePaymentIntentID *string `json:"stripePaymentIntentId,omitempty"`
+
+	Reason        *string         `gorm:"type:text" json:"reason,omitempty"`
+	CreatedAt     time.Time       `json:"createdAt"`
+	ProcessedAt   *time.Time      `json:"processedAt,omitempty"`
+	FailedAt      *time.Time      `json:"failedAt,omitempty"`
+	FailureReason *string         `gorm:"type:text" json:"failureReason,omitempty"`
+	Metadata      *datatypes.JSON `gorm:"type:jsonb" json:"metadata,omitempty"`
+	DeletedAt     gorm.DeletedAt  `gorm:"index" json:"-"`
 }
