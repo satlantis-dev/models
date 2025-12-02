@@ -9,7 +9,7 @@ type CalendarEventAnnouncement struct {
 	Note              *Note         `gorm:"constraint:OnDelete:CASCADE;" json:"note,omitempty"`
 	ToDiscussion      bool          `gorm:"default:true" json:"toDiscussion"`
 	ToNostr           bool          `gorm:"default:false" json:"toNostr"`
-	ToEmail           bool          `gorm:"default:false" json:"toEmail"`
+	ToEmail           bool          `gorm:"default:true" json:"toEmail"`
 	EmailSubject      *string       `gorm:"type:text" json:"emailSubject,omitempty"`
 	EmailRecipientIDs pq.Int32Array `gorm:"type:integer[]" json:"emailRecipientIds"`
 }
