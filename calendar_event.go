@@ -158,15 +158,14 @@ type UserTicketInfo struct {
 
 type CalendarEventResponseFull struct {
 	*CalendarEvent
-	RsvpAcceptedCount   int64                  `json:"rsvpAcceptedCount"`
-	RsvpWaitlistedCount int64                  `json:"rsvpWaitlistedCount"`
-	RsvpInvitedCount    int64                  `json:"rsvpInvitedCount"`
-	RsvpTentativeCount  int64                  `json:"rsvpTentativeCount"`
-	RsvpRequestedCount  int64                  `json:"rsvpRequestedCount"`
-	RsvpDeclinedCount   int64                  `json:"rsvpDeclinedCount"`
-	RsvpRejectedCount   int64                  `json:"rsvpRejectedCount"`
-	Country             map[string]interface{} `json:"country"`
-	Venue               *LocationDTO           `json:"venue,omitempty"`
-	UserRSVP            *UserRSVPInfo          `json:"userRsvp,omitempty"`
-	UserTicket          *UserTicketInfo        `json:"userTicket,omitempty"`
+	RsvpAcceptedCount   int64           `json:"rsvpAcceptedCount"`
+	RsvpWaitlistedCount int64           `json:"rsvpWaitlistedCount"`
+	RsvpInvitedCount    int64           `json:"rsvpInvitedCount"`
+	RsvpTentativeCount  int64           `json:"rsvpTentativeCount"`
+	RsvpRequestedCount  int64           `json:"rsvpRequestedCount"`
+	RsvpDeclinedCount   int64           `json:"rsvpDeclinedCount"`
+	RsvpRejectedCount   int64           `json:"rsvpRejectedCount"`
+	Venue               *LocationDTO    `json:"venue,omitempty"`
+	UserRSVP            *UserRSVPInfo   `json:"userRsvp,omitempty"`
+	UserTicket          *UserTicketInfo `json:"userTicket,omitempty"`
 }
