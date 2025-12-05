@@ -152,6 +152,7 @@ type CalendarEventTicketOrderRefund struct {
 	ID           uint         `gorm:"primarykey" json:"id"`
 	OrderID      uint         `gorm:"not null;index" json:"orderId"`
 	Amount       int64        `gorm:"not null" json:"amount"`
+	Fee          int64        `gorm:"type:bigint;default:0" json:"fee"`
 	Currency     string       `gorm:"not null" json:"currency"`
 	Status       RefundStatus `gorm:"not null;default:'pending'" json:"status"`
 	RefundMethod string       `gorm:"not null" json:"refundMethod"` // "lightning", "stripe", etc.
