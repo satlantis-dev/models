@@ -156,8 +156,9 @@ type CalendarEventTicketOrderRefund struct {
 	Status       RefundStatus `gorm:"not null;default:'pending'" json:"status"`
 	RefundMethod string       `gorm:"not null" json:"refundMethod"` // "lightning", "stripe", etc.
 
-	LightningAddress     *string `json:"lightningAddress,omitempty"`
-	LightningPaymentHash *string `json:"lightningPaymentHash,omitempty"`
+	LightningAddress         *string `json:"lightningAddress,omitempty"`
+	LightningPaymentHash     *string `json:"lightningPaymentHash,omitempty"`
+	LightningPaymentPreimage *string `json:"lightningPaymentPreimage,omitempty"`
 
 	StripeRefundID        *string `json:"stripeRefundId,omitempty"`
 	StripePaymentIntentID *string `json:"stripePaymentIntentId,omitempty"`
