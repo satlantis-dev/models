@@ -95,7 +95,7 @@ func (CalendarEventDTO) TableName() string {
 	return "calendar_events"
 }
 
-func (c CalendarEvent) ToDTO(db *gorm.DB) (*CalendarEventDTO, error) {
+func (c CalendarEvent) ToDTO() *CalendarEventDTO {
 
 	return &CalendarEventDTO{
 		ID:                 c.ID,
@@ -121,7 +121,7 @@ func (c CalendarEvent) ToDTO(db *gorm.DB) (*CalendarEventDTO, error) {
 		Website:            c.Website,
 		OfficialCalendarID: c.OfficialCalendarID,
 		OfficialCalendar:   c.OfficialCalendar,
-	}, nil
+	}
 }
 
 type CalendarEventCalendarEventTag struct {
