@@ -192,7 +192,7 @@ type SourceLocationsAll struct {
 	Hook               string           `gorm:"size:70" json:"hook"`
 	Photos             Photos           `gorm:"type:jsonb" json:"photos"`
 	Eligible           bool             `json:"eligible"`
-	UpdatedAt          time.Time        `json:"-"`
+	UpdatedAt          time.Time        `gorm:"autoUpdateTime" json:"-"`
 }
 
 func (SourceLocationsAll) TableName() string {
