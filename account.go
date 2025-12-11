@@ -4,6 +4,7 @@ import (
 	"time"
 
 	"github.com/shopspring/decimal"
+	"gorm.io/datatypes"
 	"gorm.io/gorm"
 )
 
@@ -49,6 +50,7 @@ type Account struct {
 	ResetPasswordToken          *string               `gorm:"type:text" json:"-"`
 	ResetPasswordTokenExpiresAt *time.Time            `json:"-"`
 	Website                     string                `gorm:"type:text" json:"website"`
+	SocialLinks                 datatypes.JSON        `gorm:"type:jsonb" json:"socialLinks,omitempty"`
 	Username                    string                `gorm:"uniqueIndex;default:NULL;size:30" json:"username"`
 	Level                       int                   `gorm:"index;default:0" json:"level"`
 	FollowingCount              *int64                `json:"followingCount"`
@@ -122,23 +124,24 @@ func (SearchAccountDTO) TableName() string {
 // AccountDTO
 
 type AccountDTO struct {
-	ID             uint   `json:"id"`
-	Email          string `json:"email"`
-	About          string `json:"about"`
-	DisplayName    string `json:"displayName"`
-	Banner         string `json:"banner"`
-	FollowingCount *int64 `json:"followingCount"`
-	FollowersCount *int64 `json:"followersCount"`
-	IsAdmin        bool   `json:"isAdmin"`
-	IsBlacklisted  bool   `json:"isBlacklisted"`
-	IsBusiness     bool   `json:"isBusiness"`
-	Name           string `json:"name"`
-	Nip05          string `json:"nip05"`
-	Npub           string `json:"npub"`
-	Picture        string `json:"picture"`
-	PubKey         string `json:"pubKey"`
-	Username       string `json:"username"`
-	Website        string `json:"website"`
+	ID             uint           `json:"id"`
+	Email          string         `json:"email"`
+	About          string         `json:"about"`
+	DisplayName    string         `json:"displayName"`
+	Banner         string         `json:"banner"`
+	FollowingCount *int64         `json:"followingCount"`
+	FollowersCount *int64         `json:"followersCount"`
+	IsAdmin        bool           `json:"isAdmin"`
+	IsBlacklisted  bool           `json:"isBlacklisted"`
+	IsBusiness     bool           `json:"isBusiness"`
+	Name           string         `json:"name"`
+	Nip05          string         `json:"nip05"`
+	Npub           string         `json:"npub"`
+	Picture        string         `json:"picture"`
+	PubKey         string         `json:"pubKey"`
+	Username       string         `json:"username"`
+	Website        string         `json:"website"`
+	SocialLinks    datatypes.JSON `json:"socialLinks,omitempty"`
 }
 
 func (a *Account) ToDTO() AccountDTO {
@@ -160,6 +163,7 @@ func (a *Account) ToDTO() AccountDTO {
 		PubKey:         a.PubKey,
 		Username:       a.Username,
 		Website:        a.Website,
+		SocialLinks:    a.SocialLinks,
 	}
 }
 
@@ -198,6 +202,7 @@ type AccountPortable struct {
 	Picture              string                `json:"picture"`
 	PubKey               string                `json:"pubKey"`
 	Website              string                `json:"website"`
+	SocialLinks          datatypes.JSON        `json:"socialLinks,omitempty"`
 	Following            []AccountDTO          `json:"following"`
 	FollowedBy           []AccountDTO          `json:"followedBy"`
 	FollowingCount       *int64                `json:"followingCount"`
@@ -250,6 +255,7 @@ func (a *Account) ToPortableProfile(db *gorm.DB) (*AccountPortable, error) {
 		Picture:              a.Picture,
 		PubKey:               a.PubKey,
 		Website:              a.Website,
+		SocialLinks:          a.SocialLinks,
 		Following:            following,
 		FollowedBy:           followedBy,
 		FollowingCount:       &followingCountTotal,
@@ -289,6 +295,7 @@ func (a *Account) ToPortableProfileMin(db *gorm.DB) (*AccountPortable, error) {
 		Picture:              a.Picture,
 		PubKey:               a.PubKey,
 		Website:              a.Website,
+		SocialLinks:          a.SocialLinks,
 		FollowingCount:       &followingCountTotal,
 		FollowersCount:       a.FollowersCount,
 	}, nil
