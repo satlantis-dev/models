@@ -96,7 +96,7 @@ type CalendarEventTicketOrderItem struct {
 	ID             uint                     `gorm:"primaryKey" json:"id"`
 	OrderID        uint                     `gorm:"not null;index;constraint:OnDelete:CASCADE" json:"orderId"`
 	Order          CalendarEventTicketOrder `json:"order"`
-	TicketTypeID   uint                     `gorm:"not null;index" json:"ticketTypeId"`
+	TicketTypeID   uint                     `gorm:"not null;index;constraint:OnDelete:CASCADE" json:"ticketTypeId"`
 	TicketType     CalendarEventTicketType  `json:"ticketType"`
 	Quantity       uint                     `json:"quantity"`
 	PriceEach      int64                    `gorm:"type:bigint" json:"priceEach"`
