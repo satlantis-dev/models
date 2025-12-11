@@ -1,9 +1,10 @@
 package models
 
 import (
+	"time"
+
 	"gorm.io/datatypes"
 	"gorm.io/gorm"
-	"time"
 )
 
 type OrderCurrency string
@@ -62,7 +63,7 @@ const (
 
 type CalendarEventTicketType struct {
 	ID              uint           `gorm:"primaryKey" json:"id"`
-	CalendarEventID uint           `gorm:"not null;index" json:"calendarEventId"`
+	CalendarEventID uint           `gorm:"not null;index;constraint:OnDelete:CASCADE" json:"calendarEventId"`
 	Name            string         `json:"name"`
 	Description     *string        `json:"description"`
 	PriceSats       *int64         `gorm:"type:bigint" json:"priceSats"`
@@ -79,8 +80,8 @@ type CalendarEventTicketType struct {
 
 type CalendarEventTicketOrder struct {
 	ID              uint           `gorm:"primaryKey" json:"id"`
-	CalendarEventID uint           `gorm:"not null;index" json:"calendarEventId"`
-	AccountID       uint           `gorm:"not null;index" json:"accountId"`
+	CalendarEventID uint           `gorm:"not null;index;constraint:OnDelete:CASCADE" json:"calendarEventId"`
+	AccountID       uint           `gorm:"not null;index;constraint:OnDelete:CASCADE" json:"accountId"`
 	TotalPrice      int64          `gorm:"type:bigint" json:"totalPrice"`
 	Currency        OrderCurrency  `gorm:"type:varchar(8)" json:"currency"`
 	RefundedAmount  int64          `gorm:"type:bigint;default:0" json:"refundedAmount"`
@@ -93,7 +94,7 @@ type CalendarEventTicketOrder struct {
 
 type CalendarEventTicketOrderItem struct {
 	ID             uint                     `gorm:"primaryKey" json:"id"`
-	OrderID        uint                     `gorm:"not null;index" json:"orderId"`
+	OrderID        uint                     `gorm:"not null;index;constraint:OnDelete:CASCADE" json:"orderId"`
 	Order          CalendarEventTicketOrder `json:"order"`
 	TicketTypeID   uint                     `gorm:"not null;index" json:"ticketTypeId"`
 	TicketType     CalendarEventTicketType  `json:"ticketType"`
@@ -109,10 +110,10 @@ type CalendarEventTicketOrderItem struct {
 
 type CalendarEventTicket struct {
 	ID          uint                         `gorm:"primaryKey" json:"id"`
-	OrderItemID uint                         `gorm:"not null;index" json:"orderItemId"`
+	OrderItemID uint                         `gorm:"not null;index;constraint:OnDelete:CASCADE" json:"orderItemId"`
 	OrderItem   CalendarEventTicketOrderItem `json:"orderItem"`
-	AccountID   uint                         `gorm:"not null;index" json:"accountId"`
-	RsvpID      *uint                        `gorm:"index" json:"rsvpId,omitempty"`
+	AccountID   uint                         `gorm:"not null;index;constraint:OnDelete:CASCADE" json:"accountId"`
+	RsvpID      *uint                        `gorm:"index;constraint:OnDelete:CASCADE" json:"rsvpId,omitempty"`
 	RSVP        *CalendarEventRSVP           `gorm:"foreignKey:RsvpID" json:"rsvp,omitempty"`
 	Status      TicketStatus                 `gorm:"type:varchar(32);default:'active'" json:"status"`
 	Code        string                       `gorm:"uniqueIndex;size:64" json:"code"`
@@ -124,7 +125,7 @@ type CalendarEventTicket struct {
 
 type CalendarEventTicketOrderPayment struct {
 	ID                      uint                     `gorm:"primaryKey" json:"id"`
-	OrderID                 uint                     `gorm:"uniqueIndex;not null" json:"orderId"`
+	OrderID                 uint                     `gorm:"uniqueIndex;not null;constraint:OnDelete:CASCADE" json:"orderId"`
 	Order                   CalendarEventTicketOrder `json:"order"`
 	PaymentMethod           PaymentMethod            `gorm:"type:varchar(32);not null" json:"paymentMethod"`
 	Status                  PaymentStatus            `gorm:"type:varchar(32);default:'pending'" json:"status"`
@@ -150,7 +151,7 @@ type CalendarEventTicketOrderPayment struct {
 // CalendarEventTicketOrderRefund represents a refund for a ticket order
 type CalendarEventTicketOrderRefund struct {
 	ID           uint         `gorm:"primarykey" json:"id"`
-	OrderID      uint         `gorm:"not null;index" json:"orderId"`
+	OrderID      uint         `gorm:"not null;index;constraint:OnDelete:CASCADE" json:"orderId"`
 	Amount       int64        `gorm:"not null" json:"amount"`
 	Fee          int64        `gorm:"type:bigint;default:0" json:"fee"`
 	Currency     string       `gorm:"not null" json:"currency"`
