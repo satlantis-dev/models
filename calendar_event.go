@@ -17,9 +17,9 @@ type CalendarEvent struct {
 	AccountID             uint                        `gorm:"index;not null" json:"accountId"`
 	Account               *AccountDTO                 `gorm:"foreignKey:AccountID" json:"account,omitempty"`
 	ContactEmail          *string                     `gorm:"type:text" json:"contactEmail"`
-	EventID               uint                        `gorm:"index" json:"eventId"`
 	NostrID               string                      `gorm:"index" json:"nostrId"`
-	Event                 Event                       `json:"event"`
+	EventID               *uint                       `gorm:"index" json:"eventId"`
+	Event                 *Event                      `gorm:"foreignKey:EventID;constraint:OnDelete:SET NULL" json:"event,omitempty"`
 	Kind                  uint                        `gorm:"index" json:"kind"`
 	Content               *string                     `gorm:"type:text" json:"content"`
 	Tags                  string                      `gorm:"type:jsonb" json:"tags"`
