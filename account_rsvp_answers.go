@@ -1,16 +1,17 @@
 package models
 
 import (
-	"gorm.io/gorm"
 	"time"
+
+	"gorm.io/gorm"
 )
 
 type AccountRSVPAnswers struct {
 	ID              uint                    `gorm:"primaryKey" json:"id"`
 	AccountID       uint                    `json:"accountId"`
-	Account         Account                 `json:"account"`
+	Account         Account                 `gorm:"constraint:OnDelete:CASCADE;" json:"account"`
 	CalendarEventID uint                    `json:"calendarEventId"`
-	CalendarEvent   CalendarEvent           `json:"calendarEvent"`
+	CalendarEvent   CalendarEvent           `gorm:"constraint:OnDelete:CASCADE;" json:"calendarEvent"`
 	RsvpStatus      RsvpStatus              `json:"rsvpStatus"`
 	Answers         *map[string]interface{} `gorm:"type:jsonb;serializer:json" json:"answers,omitempty"`
 	CreatedAt       time.Time               `json:"createdAt"`
