@@ -74,7 +74,7 @@ type CalendarEventTicketType struct {
 	SellStartDate   *time.Time     `json:"sellStartDate"`
 	SellEndDate     *time.Time     `json:"sellEndDate"`
 	CreatedByID     *uint          `json:"-"`
-	CreatedBy       *Account       `json:"-"`
+	CreatedBy       *Account       `gorm:"foreignKey:CreatedByID;constraint:OnDelete:SET NULL" json:"-"`
 	CreatedAt       time.Time      `json:"createdAt"`
 	DeletedAt       gorm.DeletedAt `gorm:"index" json:"-"`
 }
