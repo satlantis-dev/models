@@ -161,13 +161,13 @@ type CalendarEventResponseFull struct {
 	Venue               *LocationDTO    `json:"venue,omitempty"`
 	SampleAttendees     *[]AccountDTO   `json:"sampleAttendees,omitempty"`
 	KnownAttendees      *[]AccountDTO   `json:"knownAttendees,omitempty"`
-	RsvpAcceptedCount   int             `json:"rsvpAcceptedCount"`
-	RsvpWaitlistedCount int             `json:"rsvpWaitlistedCount"`
-	RsvpInvitedCount    int             `json:"rsvpInvitedCount"`
-	RsvpTentativeCount  int             `json:"rsvpTentativeCount"`
-	RsvpRequestedCount  int             `json:"rsvpRequestedCount"`
-	RsvpDeclinedCount   int             `json:"rsvpDeclinedCount"`
-	RsvpRejectedCount   int             `json:"rsvpRejectedCount"`
+	RsvpAcceptedCount   int64           `json:"rsvpAcceptedCount"`
+	RsvpWaitlistedCount int64           `json:"rsvpWaitlistedCount"`
+	RsvpInvitedCount    int64           `json:"rsvpInvitedCount"`
+	RsvpTentativeCount  int64           `json:"rsvpTentativeCount"`
+	RsvpRequestedCount  int64           `json:"rsvpRequestedCount"`
+	RsvpDeclinedCount   int64           `json:"rsvpDeclinedCount"`
+	RsvpRejectedCount   int64           `json:"rsvpRejectedCount"`
 	UserRSVP            *UserRSVPInfo   `json:"userRsvp,omitempty"`
 	UserTicket          *UserTicketInfo `json:"userTicket,omitempty"`
 }
