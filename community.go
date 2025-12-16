@@ -12,7 +12,7 @@ type Community struct {
 	UpdatedAt   time.Time              `gorm:"autoUpdateTime" json:"updatedAt"`
 	DeletedAt   *gorm.DeletedAt        `gorm:"index" json:"-"`
 	Newsletters *[]CommunityNewsletter `gorm:"foreignKey:CommunityID;constraint:OnDelete:CASCADE;" json:"newsletters,omitempty"`
-	Members     *[]CommunityMember     `json:"members,omitempty"`
+	Members     *[]CommunityMember     `gorm:"foreignKey:CommunityID;constraint:OnDelete:CASCADE;" json:"members,omitempty"`
 	Calendar    *Calendar              `json:"calendar,omitempty"`
 }
 
