@@ -17,7 +17,7 @@ type Calendar struct {
 	CreatedAt        time.Time          `gorm:"autoCreateTime" json:"createdAt"`
 	UpdatedAt        time.Time          `gorm:"autoUpdateTime" json:"updatedAt"`
 	DeletedAt        *gorm.DeletedAt    `gorm:"index" json:"-"`
-	Events           []CalendarEvent    `gorm:"many2many:calendar_calendar_events;constraint:OnDelete:CASCADE;" json:"events,omitempty"`
+	Events           *[]CalendarEvent   `gorm:"many2many:calendar_calendar_events;constraint:OnDelete:CASCADE;" json:"events,omitempty"`
 	EventCount       int                `gorm:"-" json:"eventCount"`
 	EventTags        []CalendarEventTag `gorm:"many2many:calendar_calendar_event_tags;constraint:OnDelete:CASCADE" json:"eventTags,omitempty"`
 	Contributors     *[]AccountMiniDTO  `gorm:"-" json:"contributors,omitempty"`
