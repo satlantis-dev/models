@@ -8,6 +8,8 @@ import (
 
 type Community struct {
 	ID          uint                   `gorm:"primaryKey;autoIncrement" json:"id"`
+	AccountID   uint                   `gorm:"index" json:"accountId"`
+	Account     *Account               `gorm:"foreignKey:AccountID;constraint:OnDelete:CASCADE;" json:"account,omitempty"`
 	CreatedAt   time.Time              `gorm:"autoCreateTime" json:"-"`
 	UpdatedAt   time.Time              `gorm:"autoUpdateTime" json:"-"`
 	DeletedAt   *gorm.DeletedAt        `gorm:"index" json:"-"`
