@@ -50,7 +50,7 @@ type Account struct {
 	ResetPasswordToken          *string               `gorm:"type:text" json:"-"`
 	ResetPasswordTokenExpiresAt *time.Time            `json:"-"`
 	Website                     string                `gorm:"type:text" json:"website"`
-	SocialLinks                 datatypes.JSON        `gorm:"type:jsonb" json:"socialLinks,omitempty"`
+	SocialLinks                 datatypes.JSON        `gorm:"type:jsonb" json:"socialLinks"`
 	Username                    string                `gorm:"uniqueIndex;default:NULL;size:30" json:"username"`
 	Level                       int                   `gorm:"index;default:0" json:"level"`
 	FollowingCount              *int64                `json:"followingCount"`
@@ -141,7 +141,7 @@ type AccountDTO struct {
 	PubKey         string         `json:"pubKey"`
 	Username       string         `json:"username"`
 	Website        string         `json:"website"`
-	SocialLinks    datatypes.JSON `json:"socialLinks,omitempty"`
+	SocialLinks    datatypes.JSON `json:"socialLinks"`
 }
 
 func (a *Account) ToDTO() AccountDTO {
@@ -202,7 +202,7 @@ type AccountPortable struct {
 	Picture              string                `json:"picture"`
 	PubKey               string                `json:"pubKey"`
 	Website              string                `json:"website"`
-	SocialLinks          datatypes.JSON        `json:"socialLinks,omitempty"`
+	SocialLinks          datatypes.JSON        `json:"socialLinks"`
 	Following            []AccountDTO          `json:"following"`
 	FollowedBy           []AccountDTO          `json:"followedBy"`
 	FollowingCount       *int64                `json:"followingCount"`
