@@ -18,7 +18,7 @@ type Community struct {
 	Banner      *string                `gorm:"type:text" json:"banner,omitempty"`
 	Newsletters *[]CommunityNewsletter `gorm:"foreignKey:CommunityID;constraint:OnDelete:CASCADE;" json:"newsletters,omitempty"`
 	Members     *[]CommunityMember     `gorm:"foreignKey:CommunityID;constraint:OnDelete:CASCADE;" json:"members,omitempty"`
-	Calendar    *Calendar              `json:"calendar,omitempty"`
+	Calendars   *[]Calendar            `gorm:"foreignKey:CommunityID;constraint:OnDelete:SET NULL" json:"calendars,omitempty"`
 }
 
 func (Community) TableName() string {
