@@ -108,6 +108,8 @@ var DatabaseModels = []interface{}{
 	VanityPath{},
 	VerificationToken{},
 	Weather{},
+	AccountWallet{},
+	AccountWalletTransaction{},
 }
 
 func SetupDatabase(dbHost, dbUser, dbPassword, dbName string) (*gorm.DB, error) {

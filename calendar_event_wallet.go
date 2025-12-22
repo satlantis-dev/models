@@ -7,12 +7,6 @@ import (
 	"gorm.io/gorm"
 )
 
-type WalletProvider string
-
-var (
-	WalletProviderIbex WalletProvider = "IBEX"
-)
-
 type EventWalletWithdrawalStatus string
 
 const (
