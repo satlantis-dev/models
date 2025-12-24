@@ -132,7 +132,6 @@ type CalendarEventCalendarEventTag struct {
 type CalendarEventResponse struct {
 	*CalendarEventDTO
 	Country         map[string]interface{} `json:"country,omitempty"`
-	Venue           *LocationDTO           `json:"venue,omitempty"`
 	AttendeeCount   int                    `json:"attendeeCount"`
 	SampleAttendees *[]AccountDTO          `json:"sampleAttendees,omitempty"`
 	KnownAttendees  *[]AccountDTO          `json:"knownAttendees,omitempty"`
@@ -158,7 +157,6 @@ type UserTicketInfo struct {
 
 type CalendarEventResponseFull struct {
 	*CalendarEvent
-	Venue               *LocationDTO    `json:"venue,omitempty"`
 	SampleAttendees     *[]AccountDTO   `json:"sampleAttendees,omitempty"`
 	KnownAttendees      *[]AccountDTO   `json:"knownAttendees,omitempty"`
 	RsvpAcceptedCount   int64           `json:"rsvpAcceptedCount"`
