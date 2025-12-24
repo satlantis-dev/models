@@ -134,6 +134,7 @@ type AccountDTO struct {
 	IsAdmin        bool           `json:"isAdmin"`
 	IsBlacklisted  bool           `json:"isBlacklisted"`
 	IsBusiness     bool           `json:"isBusiness"`
+	Level          int            `json:"level"`
 	Name           string         `json:"name"`
 	Nip05          string         `json:"nip05"`
 	Npub           string         `json:"npub"`
@@ -156,6 +157,7 @@ func (a *Account) ToDTO() AccountDTO {
 		IsAdmin:        a.IsAdmin,
 		IsBlacklisted:  a.IsBlacklisted,
 		IsBusiness:     a.IsBusiness,
+		Level:          a.Level,
 		Name:           a.Name,
 		Nip05:          a.Nip05,
 		Npub:           a.Npub,
@@ -191,6 +193,7 @@ type AccountPortable struct {
 	IsBlacklisted        bool                  `json:"isBlacklisted"`
 	IsBusiness           bool                  `json:"isBusiness"`
 	LastSeen             *time.Time            `json:"-"`
+	Level                int                   `json:"level"`
 	LocationSetEventID   *uint                 `json:"locationSetEventId"`
 	LocationSetEvent     Event                 `json:"locationSetEvent"`
 	Lud06                string                `gorm:"default:NULL" json:"lud06"`
@@ -246,6 +249,7 @@ func (a *Account) ToPortableProfile(db *gorm.DB) (*AccountPortable, error) {
 		Interests:            a.Interests,
 		IsAdmin:              a.IsAdmin,
 		IsBusiness:           a.IsBusiness,
+		Level:                a.Level,
 		Lud06:                a.Lud06,
 		Lud16:                a.Lud16,
 		Name:                 a.Name,
