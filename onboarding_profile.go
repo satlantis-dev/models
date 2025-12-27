@@ -7,15 +7,15 @@ import (
 )
 
 type OnboardingProfile struct {
-	AccountID                  uint           `gorm:"primaryKey" json:"accountId"`
-	Account                    *AccountDTO    `gorm:"foreignKey:AccountID;references:ID;constraint:OnDelete:CASCADE" json:"account,omitempty"`
-	CreatedAt                  time.Time      `gorm:"autoCreateTime" json:"createdAt"`
-	UpdatedAt                  time.Time      `gorm:"autoUpdateTime" json:"updatedAt"`
-	Host                       bool           `gorm:"default:false" json:"host"`
-	SuggestedLocationGoogleIDs pq.StringArray `gorm:"type:text[]" json:"suggestedLocationGoogleIds"`
-	InterestStatement          string         `gorm:"type:text" json:"interestStatement"`
-	InferredInterests          pq.StringArray `gorm:"type:text[]" json:"inferredInterests"`
-	InferredInterestIDs        pq.Int32Array  `gorm:"type:integer[]" json:"inferredInterestIds"`
+	AccountID                  uint            `gorm:"primaryKey" json:"accountId"`
+	Account                    *AccountDTO     `gorm:"foreignKey:AccountID;references:ID;constraint:OnDelete:CASCADE" json:"account,omitempty"`
+	CreatedAt                  time.Time       `gorm:"autoCreateTime" json:"createdAt"`
+	UpdatedAt                  time.Time       `gorm:"autoUpdateTime" json:"updatedAt"`
+	IsHost                     *bool           `json:"isHost,omitempty"`
+	SuggestedLocationGoogleIDs *pq.StringArray `gorm:"type:text[]" json:"suggestedLocationGoogleIds,omitempty"`
+	InterestStatement          *string         `gorm:"type:text" json:"interestStatement,omitempty"`
+	InferredInterests          *pq.StringArray `gorm:"type:text[]" json:"inferredInterests,omitempty"`
+	InferredInterestIDs        *pq.Int32Array  `gorm:"type:integer[]" json:"inferredInterestIds,omitempty"`
 }
 
 func (OnboardingProfile) TableName() string {
