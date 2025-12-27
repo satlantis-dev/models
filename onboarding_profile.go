@@ -21,3 +21,9 @@ type OnboardingProfile struct {
 func (OnboardingProfile) TableName() string {
 	return "onboarding_profiles"
 }
+
+type OnboardingProfileInput struct {
+	InterestStatement  *string   `json:"interestStatement,omitempty"`
+	SuggestedGoogleIDs *[]string `json:"suggestedGoogleIds,omitempty"`
+	IsHost             *bool     `json:"isHost"`
+}
