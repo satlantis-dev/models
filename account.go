@@ -206,6 +206,7 @@ type AccountPortable struct {
 	Notes                []Note                `json:"notes"`
 	Npub                 string                `json:"npub"`
 	Picture              string                `json:"picture"`
+	AdditionalPictures   datatypes.JSON        `json:"additionalPictures"`
 	PubKey               string                `json:"pubKey"`
 	Website              string                `json:"website"`
 	SocialLinks          datatypes.JSON        `json:"socialLinks"`
@@ -260,6 +261,7 @@ func (a *Account) ToPortableProfile(db *gorm.DB) (*AccountPortable, error) {
 		Notes:                a.Notes,
 		Npub:                 a.Npub,
 		Picture:              a.Picture,
+		AdditionalPictures:   a.AdditionalPictures,
 		PubKey:               a.PubKey,
 		Website:              a.Website,
 		SocialLinks:          a.SocialLinks,
@@ -300,6 +302,7 @@ func (a *Account) ToPortableProfileMin(db *gorm.DB) (*AccountPortable, error) {
 		Notes:                a.Notes,
 		Npub:                 a.Npub,
 		Picture:              a.Picture,
+		AdditionalPictures:   a.AdditionalPictures,
 		PubKey:               a.PubKey,
 		Website:              a.Website,
 		SocialLinks:          a.SocialLinks,
