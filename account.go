@@ -43,6 +43,7 @@ type Account struct {
 	Password                    string                `gorm:"type:text" json:"-"`
 	Personas                    []Persona             `gorm:"many2many:account_personas;constraint:OnDelete:CASCADE" json:"personas,omitempty"`
 	Picture                     string                `gorm:"type:text" json:"picture"`
+	AdditionalPictures          datatypes.JSON        `gorm:"type:jsonb" json:"additionalPictures"`
 	Phone                       string                `json:"phone"`
 	PrivateKey                  string                `json:"-"`
 	PubKey                      string                `gorm:"uniqueIndex;default:NULL" json:"pubKey"`
@@ -124,48 +125,50 @@ func (SearchAccountDTO) TableName() string {
 // AccountDTO
 
 type AccountDTO struct {
-	ID             uint           `json:"id"`
-	Email          string         `json:"email"`
-	About          string         `json:"about"`
-	DisplayName    string         `json:"displayName"`
-	Banner         string         `json:"banner"`
-	FollowingCount *int64         `json:"followingCount"`
-	FollowersCount *int64         `json:"followersCount"`
-	IsAdmin        bool           `json:"isAdmin"`
-	IsBlacklisted  bool           `json:"isBlacklisted"`
-	IsBusiness     bool           `json:"isBusiness"`
-	Level          int            `json:"level"`
-	Name           string         `json:"name"`
-	Nip05          string         `json:"nip05"`
-	Npub           string         `json:"npub"`
-	Picture        string         `json:"picture"`
-	PubKey         string         `json:"pubKey"`
-	Username       string         `json:"username"`
-	Website        string         `json:"website"`
-	SocialLinks    datatypes.JSON `json:"socialLinks"`
+	ID                 uint           `json:"id"`
+	Email              string         `json:"email"`
+	About              string         `json:"about"`
+	DisplayName        string         `json:"displayName"`
+	Banner             string         `json:"banner"`
+	FollowingCount     *int64         `json:"followingCount"`
+	FollowersCount     *int64         `json:"followersCount"`
+	IsAdmin            bool           `json:"isAdmin"`
+	IsBlacklisted      bool           `json:"isBlacklisted"`
+	IsBusiness         bool           `json:"isBusiness"`
+	Level              int            `json:"level"`
+	Name               string         `json:"name"`
+	Nip05              string         `json:"nip05"`
+	Npub               string         `json:"npub"`
+	Picture            string         `json:"picture"`
+	AdditionalPictures datatypes.JSON `json:"additionalPictures"`
+	PubKey             string         `json:"pubKey"`
+	Username           string         `json:"username"`
+	Website            string         `json:"website"`
+	SocialLinks        datatypes.JSON `json:"socialLinks"`
 }
 
 func (a *Account) ToDTO() AccountDTO {
 	return AccountDTO{
-		ID:             a.ID,
-		Email:          a.Email,
-		About:          a.About,
-		Banner:         a.Banner,
-		DisplayName:    a.DisplayName,
-		FollowersCount: a.FollowersCount,
-		FollowingCount: a.FollowingCount,
-		IsAdmin:        a.IsAdmin,
-		IsBlacklisted:  a.IsBlacklisted,
-		IsBusiness:     a.IsBusiness,
-		Level:          a.Level,
-		Name:           a.Name,
-		Nip05:          a.Nip05,
-		Npub:           a.Npub,
-		Picture:        a.Picture,
-		PubKey:         a.PubKey,
-		Username:       a.Username,
-		Website:        a.Website,
-		SocialLinks:    a.SocialLinks,
+		ID:                 a.ID,
+		Email:              a.Email,
+		About:              a.About,
+		Banner:             a.Banner,
+		DisplayName:        a.DisplayName,
+		FollowersCount:     a.FollowersCount,
+		FollowingCount:     a.FollowingCount,
+		IsAdmin:            a.IsAdmin,
+		IsBlacklisted:      a.IsBlacklisted,
+		IsBusiness:         a.IsBusiness,
+		Level:              a.Level,
+		Name:               a.Name,
+		Nip05:              a.Nip05,
+		Npub:               a.Npub,
+		Picture:            a.Picture,
+		AdditionalPictures: a.AdditionalPictures,
+		PubKey:             a.PubKey,
+		Username:           a.Username,
+		Website:            a.Website,
+		SocialLinks:        a.SocialLinks,
 	}
 }
 
