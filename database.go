@@ -114,6 +114,7 @@ var DatabaseModels = []interface{}{
 	Weather{},
 	AccountWallet{},
 	AccountWalletTransaction{},
+	AccountStripeConnect{},
 }
 
 func SetupDatabase(dbHost, dbUser, dbPassword, dbName string) (*gorm.DB, error) {
