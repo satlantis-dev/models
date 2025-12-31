@@ -20,9 +20,10 @@ const (
 // AccountStripeConnect stores Stripe Connect account information linked to a user account
 type AccountStripeConnect struct {
 	ID               uint                `gorm:"primaryKey" json:"id"`
-	AccountID        uint                `gorm:"not null;uniqueIndex" json:"accountId"`
+	AccountID        uint                `gorm:"not null;index" json:"accountId"`
 	Account          *Account            `gorm:"foreignKey:AccountID;constraint:OnDelete:CASCADE" json:"-"`
 	StripeAccountID  string              `gorm:"uniqueIndex;not null;size:64" json:"stripeAccountId"` // acct_xxx
+	IsDefault        bool                `gorm:"default:false" json:"isDefault"`
 	Status           StripeAccountStatus `gorm:"type:varchar(32);default:'pending'" json:"status"`
 	ChargesEnabled   bool                `gorm:"default:false" json:"chargesEnabled"`
 	PayoutsEnabled   bool                `gorm:"default:false" json:"payoutsEnabled"`
@@ -48,6 +49,8 @@ type AccountStripeConnectDTO struct {
 	DetailsSubmitted bool                `json:"detailsSubmitted"`
 	DefaultCurrency  *string             `json:"defaultCurrency,omitempty"`
 	Country          *string             `json:"country,omitempty"`
+	Email            *string             `json:"email,omitempty"`
+	IsDefault        bool                `json:"isDefault"`
 	ConnectedAt      time.Time           `json:"connectedAt"`
 }
 
@@ -62,6 +65,8 @@ func (a *AccountStripeConnect) ToDTO() AccountStripeConnectDTO {
 		DetailsSubmitted: a.DetailsSubmitted,
 		DefaultCurrency:  a.DefaultCurrency,
 		Country:          a.Country,
+		Email:            a.Email,
+		IsDefault:        a.IsDefault,
 		ConnectedAt:      a.ConnectedAt,
 	}
 }
