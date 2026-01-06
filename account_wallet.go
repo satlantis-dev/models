@@ -43,11 +43,12 @@ type AccountWallet struct {
 
 // AccountWalletTransaction stores all wallet transactions
 type AccountWalletTransaction struct {
-	ID              uint                           `gorm:"primaryKey" json:"id"`
-	AccountWalletID uint                           `gorm:"not null;index" json:"accountWalletId"`
-	AccountWallet   *AccountWallet                 `gorm:"foreignKey:AccountWalletID;constraint:OnDelete:CASCADE" json:"-"`
-	TransactionType AccountWalletTransactionType   `gorm:"type:varchar(32);not null" json:"transactionType"`
-	Status          AccountWalletTransactionStatus `gorm:"type:varchar(32);default:'pending'" json:"status"`
+	ID                        uint                           `gorm:"primaryKey" json:"id"`
+	AccountWalletID           uint                           `gorm:"not null;index" json:"accountWalletId"`
+	AccountWallet             *AccountWallet                 `gorm:"foreignKey:AccountWalletID;constraint:OnDelete:CASCADE" json:"-"`
+	TransactionType           AccountWalletTransactionType   `gorm:"type:varchar(32);not null" json:"transactionType"`
+	Status                    AccountWalletTransactionStatus `gorm:"type:varchar(32);default:'pending'" json:"status"`
+	CounterpartyTransactionID *uint                          `gorm:"index" json:"counterpartyTransactionId,omitempty"`
 
 	// FROM Side
 	FromAccountID  *uint    `gorm:"index" json:"fromAccountId,omitempty"`
@@ -79,7 +80,7 @@ type AccountWalletTransaction struct {
 
 	// Lightning Network Details
 	LightningInvoice     *string `gorm:"type:text" json:"lightningInvoice,omitempty"`
-	LightningPaymentHash *string `gorm:"uniqueIndex;size:64" json:"lightningPaymentHash,omitempty"`
+	LightningPaymentHash *string `gorm:"uniqueIndex:idx_lightning_hash_type,priority:1;size:64" json:"lightningPaymentHash,omitempty"`
 	LightningPreimage    *string `gorm:"size:64" json:"lightningPreimage,omitempty"`
 
 	// Provider References
