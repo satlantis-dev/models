@@ -73,7 +73,7 @@ type CalendarEventDTO struct {
 	End                time.Time          `json:"end"`
 	EndTzId            string             `gorm:"not null" json:"endTzId"`
 	Featured           bool               `gorm:"default:false" json:"featured"`
-	GoogleID           string             `json:"googleId"`
+	GoogleID           *string            `json:"googleId"`
 	Image              string             `json:"image"`
 	IsUnlisted         bool               `gorm:"default:false;index" json:"isUnlisted"`
 	IsHidingAttendees  bool               `gorm:"default:false" json:"isHidingAttendees"`
@@ -106,7 +106,7 @@ func (c CalendarEvent) ToDTO() *CalendarEventDTO {
 		End:                c.End,
 		EndTzId:            c.EndTzId,
 		Featured:           c.Featured,
-		GoogleID:           c.GoogleID,
+		GoogleID:           &c.GoogleID,
 		Image:              c.Image,
 		IsUnlisted:         c.IsUnlisted,
 		IsHidingAttendees:  c.IsHidingAttendees,
