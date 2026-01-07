@@ -244,6 +244,10 @@ func (LocationDTO) TableName() string {
 }
 
 func (l Location) ToDTO(db *gorm.DB) (*LocationDTO, error) {
+	placeOSMRef := ""
+	if l.Place.ID != 0 {
+		placeOSMRef = l.Place.OSMRef
+	}
 
 	return &LocationDTO{
 		ID:              l.ID,
@@ -263,7 +267,7 @@ func (l Location) ToDTO(db *gorm.DB) (*LocationDTO, error) {
 		Name:            l.Name,
 		OpeningHours:    l.OpeningHours,
 		PlaceID:         l.PlaceID,
-		PlaceOSMRef:     l.Place.OSMRef,
+		PlaceOSMRef:     placeOSMRef,
 		ReviewSummary:   l.ReviewSummary,
 	}, nil
 }
