@@ -42,6 +42,7 @@ type CalendarEvent struct {
 	IsSatlantisCreated    bool                        `gorm:"default:false" json:"isSatlantisCreated"`
 	IsUnlisted            bool                        `gorm:"default:false;index" json:"isUnlisted"`
 	IsHidingAttendees     bool                        `gorm:"default:false" json:"isHidingAttendees"`
+	IsHidingLocation      bool                        `gorm:"default:false" json:"isHidingLocation"`
 	Location              string                      `json:"location"`
 	Notes                 []CalendarEventNote         `gorm:"foreignKey:CalendarEventID;constraint:OnDelete:CASCADE;" json:"notes"`
 	OwnershipChangedAt    *time.Time                  `json:"ownershipChangedAt"`
@@ -76,6 +77,7 @@ type CalendarEventDTO struct {
 	Image              string             `json:"image"`
 	IsUnlisted         bool               `gorm:"default:false;index" json:"isUnlisted"`
 	IsHidingAttendees  bool               `gorm:"default:false" json:"isHidingAttendees"`
+	IsHidingLocation   bool               `gorm:"default:false" json:"isHidingLocation"`
 	Location           string             `json:"location"`
 	PlaceID            *uint              `gorm:"index" json:"placeId"`
 	Place              *PlaceDTO          `gorm:"foreignKey:PlaceID" json:"place,omitempty"`
@@ -108,6 +110,7 @@ func (c CalendarEvent) ToDTO() *CalendarEventDTO {
 		Image:              c.Image,
 		IsUnlisted:         c.IsUnlisted,
 		IsHidingAttendees:  c.IsHidingAttendees,
+		IsHidingLocation:   c.IsHidingLocation,
 		Location:           c.Location,
 		PlaceID:            c.PlaceID,
 		Place:              c.Place,
