@@ -73,7 +73,7 @@ type CalendarEventDTO struct {
 	End                time.Time          `json:"end"`
 	EndTzId            string             `gorm:"not null" json:"endTzId"`
 	Featured           bool               `gorm:"default:false" json:"featured"`
-	GoogleID           *string            `json:"googleId"`
+	GoogleID           *string            `json:"googleId,omitempty"`
 	Image              string             `json:"image"`
 	IsUnlisted         bool               `gorm:"default:false;index" json:"isUnlisted"`
 	IsHidingAttendees  bool               `gorm:"default:false" json:"isHidingAttendees"`
