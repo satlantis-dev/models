@@ -11,6 +11,7 @@ import (
 type Account struct {
 	ID                          uint                  `gorm:"primaryKey" json:"id"`
 	CreatedAt                   time.Time             `json:"-"`
+	DeletedAt                   gorm.DeletedAt        `gorm:"index" json:"-"`
 	About                       string                `gorm:"type:text" json:"about"`
 	AccountPlaceRoles           []AccountPlaceRole    `gorm:"foreignKey:AccountID;constraint:OnDelete:CASCADE;" json:"accountPlaceRoles,omitempty"`
 	AccountLocationRoles        []AccountLocationRole `gorm:"foreignKey:AccountID;constraint:OnDelete:CASCADE;" json:"accountLocationRoles,omitempty"`
