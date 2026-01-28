@@ -314,8 +314,8 @@ func (a *Account) ToPortableProfileMin(db *gorm.DB) (*AccountPortable, error) {
 
 func (a *Account) GetFollowingAccounts(db *gorm.DB, followerID uint) ([]AccountDTO, error) {
 	var accounts []Account
-	err := db.Table("follows").Select("accounts.*").
-		Joins("join accounts on accounts.id = follows.following_id").
+	err := db.Table("accounts").Select("accounts.*").
+		Joins("JOIN follows on accounts.id = follows.following_id").
 		Where("follows.follower_id = ?", followerID).
 		Scan(&accounts).Error
 	if err != nil {
@@ -349,8 +349,8 @@ func (a *Account) GetFollowersCount(db *gorm.DB, userID uint) (int64, error) {
 
 func (a *Account) GetFollowedByAccounts(db *gorm.DB, followingID uint) ([]AccountDTO, error) {
 	var accounts []Account
-	err := db.Table("follows").Select("accounts.*").
-		Joins("join accounts on accounts.id = follows.follower_id").
+	err := db.Table("accounts").Select("accounts.*").
+		Joins("JOIN follows on accounts.id = follows.follower_id").
 		Where("follows.following_id = ?", followingID).
 		Scan(&accounts).Error
 	if err != nil {
