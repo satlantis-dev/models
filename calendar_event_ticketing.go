@@ -70,6 +70,9 @@ type CalendarEventTicketType struct {
 	PriceSats       *int64         `gorm:"type:bigint" json:"priceSats"`
 	PriceFiat       *int64         `gorm:"type:bigint" json:"priceFiat"`
 	FiatCurrency    *OrderCurrency `gorm:"type:varchar(8)" json:"fiatCurrency"`
+	PriceCurrency   *string        `gorm:"type:varchar(10)" json:"priceCurrency"`
+	SellCurrencies  datatypes.JSON `gorm:"type:jsonb" json:"sellCurrencies"`
+	PriceAmount     *int64         `json:"priceAmount"`
 	MaxCapacity     *uint          `json:"maxCapacity"`
 	SellStartDate   *time.Time     `json:"sellStartDate"`
 	SellEndDate     *time.Time     `json:"sellEndDate"`
@@ -88,6 +91,8 @@ type CalendarEventTicketOrder struct {
 	TotalPrice      int64          `gorm:"type:bigint" json:"totalPrice"`
 	Currency        OrderCurrency  `gorm:"type:varchar(8)" json:"currency"`
 	RefundedAmount  int64          `gorm:"type:bigint;default:0" json:"refundedAmount"`
+	PriceCurrency   *string        `gorm:"type:varchar(10)" json:"priceCurrency"` // "USD"
+	PriceAmount     *int64         `json:"priceAmount"`
 	Status          OrderStatus    `gorm:"type:varchar(32);default:'pending'" json:"status"`
 	RsvpData        datatypes.JSON `gorm:"type:jsonb" json:"rsvpData,omitempty"`
 	CreatedAt       time.Time      `json:"-"`
@@ -105,6 +110,8 @@ type CalendarEventTicketOrderItem struct {
 	PriceEach      int64                    `gorm:"type:bigint" json:"priceEach"`
 	Currency       OrderCurrency            `gorm:"type:varchar(8)" json:"currency"`
 	RefundedAmount int64                    `gorm:"type:bigint;default:0" json:"refundedAmount"`
+	PriceCurrency  *string                  `gorm:"type:varchar(10)" json:"priceCurrency"`
+	PriceAmount    *int64                   `json:"priceAmount"`
 	Status         OrderStatus              `gorm:"type:varchar(32);default:'pending'" json:"status"`
 	CreatedAt      time.Time                `json:"-"`
 	UpdatedAt      time.Time                `json:"-"`
@@ -135,6 +142,8 @@ type CalendarEventTicketOrderPayment struct {
 	Status                  PaymentStatus            `gorm:"type:varchar(32);default:'pending'" json:"status"`
 	Amount                  int64                    `gorm:"not null" json:"amount"` // Cents for fiat, sats for BTC/Lightning
 	Currency                OrderCurrency            `gorm:"type:varchar(8);not null" json:"currency"`
+	ExchangeRate            *float64                 `json:"exchangeRate"`
+	ExchangeRateSource      *string                  `gorm:"type:varchar(50)" json:"exchangeRateSource"`
 	LightningPaymentHash    *string                  `gorm:"uniqueIndex;size:64" json:"lightningPaymentHash,omitempty"`
 	LightningPaymentRequest *string                  `gorm:"type:text" json:"lightningPaymentRequest,omitempty"`
 	LightningPreimage       *string                  `gorm:"size:64" json:"lightningPreimage,omitempty"`
