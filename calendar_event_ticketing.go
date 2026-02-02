@@ -70,7 +70,7 @@ type CalendarEventTicketType struct {
 	PriceSats       *int64         `gorm:"type:bigint" json:"priceSats"`
 	PriceFiat       *int64         `gorm:"type:bigint" json:"priceFiat"`
 	FiatCurrency    *OrderCurrency `gorm:"type:varchar(8)" json:"fiatCurrency"`
-	PriceCurrency   *string        `gorm:"type:varchar(10)" json:"priceCurrency"`
+	PriceCurrency   *OrderCurrency `gorm:"type:varchar(10)" json:"priceCurrency"`
 	SellCurrencies  datatypes.JSON `gorm:"type:jsonb" json:"sellCurrencies"`
 	PriceAmount     *int64         `json:"priceAmount"`
 	MaxCapacity     *uint          `json:"maxCapacity"`
@@ -91,7 +91,7 @@ type CalendarEventTicketOrder struct {
 	TotalPrice      int64          `gorm:"type:bigint" json:"totalPrice"`
 	Currency        OrderCurrency  `gorm:"type:varchar(8)" json:"currency"`
 	RefundedAmount  int64          `gorm:"type:bigint;default:0" json:"refundedAmount"`
-	PriceCurrency   *string        `gorm:"type:varchar(10)" json:"priceCurrency"` // "USD"
+	PriceCurrency   *OrderCurrency `gorm:"type:varchar(10)" json:"priceCurrency"`
 	PriceAmount     *int64         `json:"priceAmount"`
 	Status          OrderStatus    `gorm:"type:varchar(32);default:'pending'" json:"status"`
 	RsvpData        datatypes.JSON `gorm:"type:jsonb" json:"rsvpData,omitempty"`
@@ -110,7 +110,7 @@ type CalendarEventTicketOrderItem struct {
 	PriceEach      int64                    `gorm:"type:bigint" json:"priceEach"`
 	Currency       OrderCurrency            `gorm:"type:varchar(8)" json:"currency"`
 	RefundedAmount int64                    `gorm:"type:bigint;default:0" json:"refundedAmount"`
-	PriceCurrency  *string                  `gorm:"type:varchar(10)" json:"priceCurrency"`
+	PriceCurrency  *OrderCurrency           `gorm:"type:varchar(10)" json:"priceCurrency"`
 	PriceAmount    *int64                   `json:"priceAmount"`
 	Status         OrderStatus              `gorm:"type:varchar(32);default:'pending'" json:"status"`
 	CreatedAt      time.Time                `json:"-"`
