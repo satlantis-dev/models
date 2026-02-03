@@ -62,24 +62,25 @@ const (
 )
 
 type CalendarEventTicketType struct {
-	ID              uint           `gorm:"primaryKey" json:"id"`
-	CalendarEventID uint           `gorm:"not null;index" json:"calendarEventId"`
-	CalendarEvent   *CalendarEvent `gorm:"foreignKey:CalendarEventID;constraint:OnDelete:CASCADE" json:"-"`
-	Name            string         `json:"name"`
-	Description     *string        `json:"description"`
-	PriceSats       *int64         `gorm:"type:bigint" json:"priceSats"`
-	PriceFiat       *int64         `gorm:"type:bigint" json:"priceFiat"`
-	FiatCurrency    *OrderCurrency `gorm:"type:varchar(8)" json:"fiatCurrency"`
-	PriceCurrency   *OrderCurrency `gorm:"type:varchar(10)" json:"priceCurrency"`
-	SellCurrencies  datatypes.JSON `gorm:"type:jsonb" json:"sellCurrencies"`
-	PriceAmount     *int64         `json:"priceAmount"`
-	MaxCapacity     *uint          `json:"maxCapacity"`
-	SellStartDate   *time.Time     `json:"sellStartDate"`
-	SellEndDate     *time.Time     `json:"sellEndDate"`
-	CreatedByID     *uint          `json:"-"`
-	CreatedBy       *Account       `gorm:"foreignKey:CreatedByID;constraint:OnDelete:SET NULL" json:"-"`
-	CreatedAt       time.Time      `json:"createdAt"`
-	DeletedAt       gorm.DeletedAt `gorm:"index" json:"-"`
+	ID                uint           `gorm:"primaryKey" json:"id"`
+	CalendarEventID   uint           `gorm:"not null;index" json:"calendarEventId"`
+	CalendarEvent     *CalendarEvent `gorm:"foreignKey:CalendarEventID;constraint:OnDelete:CASCADE" json:"-"`
+	Name              string         `json:"name"`
+	Description       *string        `json:"description"`
+	PriceSats         *int64         `gorm:"type:bigint" json:"priceSats"`
+	PriceFiat         *int64         `gorm:"type:bigint" json:"priceFiat"`
+	FiatCurrency      *OrderCurrency `gorm:"type:varchar(8)" json:"fiatCurrency"`
+	PriceCurrency     *OrderCurrency `gorm:"type:varchar(10)" json:"priceCurrency"`
+	SellCurrencies    datatypes.JSON `gorm:"type:jsonb" json:"sellCurrencies"`
+	PriceAmount       *int64         `json:"priceAmount"`
+	PriceAmountForBTC *int64         `json:"priceAmountForBTC"`
+	MaxCapacity       *uint          `json:"maxCapacity"`
+	SellStartDate     *time.Time     `json:"sellStartDate"`
+	SellEndDate       *time.Time     `json:"sellEndDate"`
+	CreatedByID       *uint          `json:"-"`
+	CreatedBy         *Account       `gorm:"foreignKey:CreatedByID;constraint:OnDelete:SET NULL" json:"-"`
+	CreatedAt         time.Time      `json:"createdAt"`
+	DeletedAt         gorm.DeletedAt `gorm:"index" json:"-"`
 }
 
 type CalendarEventTicketOrder struct {
