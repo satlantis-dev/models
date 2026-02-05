@@ -136,30 +136,31 @@ type CalendarEventTicket struct {
 }
 
 type CalendarEventTicketOrderPayment struct {
-	ID                      uint                     `gorm:"primaryKey" json:"id"`
-	OrderID                 uint                     `gorm:"uniqueIndex;not null" json:"orderId"`
-	Order                   CalendarEventTicketOrder `gorm:"foreignKey:OrderID;constraint:OnDelete:CASCADE" json:"order"`
-	PaymentMethod           PaymentMethod            `gorm:"type:varchar(32);not null" json:"paymentMethod"`
-	Status                  PaymentStatus            `gorm:"type:varchar(32);default:'pending'" json:"status"`
-	Amount                  int64                    `gorm:"not null" json:"amount"` // Cents for fiat, sats for BTC/Lightning
-	Currency                OrderCurrency            `gorm:"type:varchar(8);not null" json:"currency"`
-	ExchangeRate            *float64                 `json:"exchangeRate"`
-	ExchangeRateSource      *string                  `gorm:"type:varchar(50)" json:"exchangeRateSource"`
-	LightningPaymentHash    *string                  `gorm:"uniqueIndex;size:64" json:"lightningPaymentHash,omitempty"`
-	LightningPaymentRequest *string                  `gorm:"type:text" json:"lightningPaymentRequest,omitempty"`
-	LightningPreimage       *string                  `gorm:"size:64" json:"lightningPreimage,omitempty"`
-	LightningProvider       *string                  `gorm:"size:32" json:"lightningProvider,omitempty"`
-	LightningProviderTxID   *string                  `gorm:"index" json:"lightningProviderTxId,omitempty"`
-	Metadata                *datatypes.JSON          `gorm:"type:jsonb" json:"metadata,omitempty"`
-	PaidAt                  *time.Time               `json:"paidAt,omitempty"`
-	ExpiredAt               *time.Time               `json:"expiredAt,omitempty"`
-	ExpiresAt               *time.Time               `json:"expiresAt,omitempty"`
-	FailedAt                *time.Time               `json:"failedAt,omitempty"`
-	RefundedAt              *time.Time               `json:"refundedAt,omitempty"`
-	CancelledAt             *time.Time               `json:"cancelledAt,omitempty"`
-	CreatedAt               time.Time                `json:"createdAt"`
-	UpdatedAt               time.Time                `json:"updatedAt"`
-	DeletedAt               gorm.DeletedAt           `gorm:"index" json:"-"`
+	ID                       uint                     `gorm:"primaryKey" json:"id"`
+	OrderID                  uint                     `gorm:"uniqueIndex;not null" json:"orderId"`
+	Order                    CalendarEventTicketOrder `gorm:"foreignKey:OrderID;constraint:OnDelete:CASCADE" json:"order"`
+	PaymentMethod            PaymentMethod            `gorm:"type:varchar(32);not null" json:"paymentMethod"`
+	Status                   PaymentStatus            `gorm:"type:varchar(32);default:'pending'" json:"status"`
+	Amount                   int64                    `gorm:"not null" json:"amount"` // Cents for fiat, sats for BTC/Lightning
+	Currency                 OrderCurrency            `gorm:"type:varchar(8);not null" json:"currency"`
+	ExchangeRate             *float64                 `json:"exchangeRate"`
+	ExchangeRateSource       *string                  `gorm:"type:varchar(50)" json:"exchangeRateSource"`
+	LightningPaymentHash     *string                  `gorm:"uniqueIndex;size:64" json:"lightningPaymentHash,omitempty"`
+	LightningPaymentRequest  *string                  `gorm:"type:text" json:"lightningPaymentRequest,omitempty"`
+	LightningPreimage        *string                  `gorm:"size:64" json:"lightningPreimage,omitempty"`
+	LightningProvider        *string                  `gorm:"size:32" json:"lightningProvider,omitempty"`
+	LightningProviderTxID    *string                  `gorm:"index" json:"lightningProviderTxId,omitempty"`
+	PaymentProviderReference *string                  `gorm:"index" json:"paymentProviderReference"`
+	Metadata                 *datatypes.JSON          `gorm:"type:jsonb" json:"metadata,omitempty"`
+	PaidAt                   *time.Time               `json:"paidAt,omitempty"`
+	ExpiredAt                *time.Time               `json:"expiredAt,omitempty"`
+	ExpiresAt                *time.Time               `json:"expiresAt,omitempty"`
+	FailedAt                 *time.Time               `json:"failedAt,omitempty"`
+	RefundedAt               *time.Time               `json:"refundedAt,omitempty"`
+	CancelledAt              *time.Time               `json:"cancelledAt,omitempty"`
+	CreatedAt                time.Time                `json:"createdAt"`
+	UpdatedAt                time.Time                `json:"updatedAt"`
+	DeletedAt                gorm.DeletedAt           `gorm:"index" json:"-"`
 }
 
 // CalendarEventTicketOrderRefund represents a refund for a ticket order
