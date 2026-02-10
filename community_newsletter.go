@@ -1,6 +1,7 @@
 package models
 
 import (
+	"encoding/json"
 	"time"
 
 	"gorm.io/gorm"
@@ -22,7 +23,8 @@ type CommunityNewsletter struct {
 	Community    *Community       `gorm:"constraint:OnDelete:CASCADE;" json:"community,omitempty"`
 	AccountID    uint             `gorm:"index" json:"accountId"`
 	Account      *Account         `gorm:"constraint:OnDelete:CASCADE;" json:"account,omitempty"`
-	Content      string           `gorm:"type:text" json:"content"`
+	ContentJson  json.RawMessage  `gorm:"type:jsonb" json:"contentJson,omitempty"`
+	ContentHtml  string           `gorm:"type:text" json:"contentHtml,omitempty"`
 	Subject      string           `gorm:"type:varchar(255)" json:"subject"`
 	Status       NewsletterStatus `gorm:"type:varchar(50);default:'draft'" json:"status"`
 	ScheduledFor *time.Time       `json:"scheduledFor,omitempty"`
