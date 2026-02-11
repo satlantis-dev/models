@@ -22,7 +22,7 @@ type AccountCalendarRole struct {
 	Calendar   *Calendar               `gorm:"foreignKey:CalendarID;constraint:OnDelete:CASCADE;" json:"calendar,omitempty"`
 	Type       AccountCalendarRoleType `gorm:"not null" json:"type"`
 	CreatedAt  time.Time               `json:"-"`
-	UpdatedAt  time.Time               `json:"-"`
+	UpdatedAt  time.Time               `json:"updatedAt"`
 	DeletedAt  gorm.DeletedAt          `gorm:"index" json:"-"`
 }
 

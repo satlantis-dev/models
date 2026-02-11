@@ -22,7 +22,7 @@ type AccountCollectionRole struct {
 	Collection   *Collection               `gorm:"foreignKey:CollectionID;constraint:OnDelete:CASCADE;" json:"collection,omitempty"`
 	Type         AccountCollectionRoleType `gorm:"not null" json:"type"`
 	CreatedAt    time.Time                 `json:"-"`
-	UpdatedAt    time.Time                 `json:"-"`
+	UpdatedAt    time.Time                 `json:"updatedAt"`
 	DeletedAt    gorm.DeletedAt            `gorm:"index" json:"-"`
 }
 
