@@ -189,3 +189,24 @@ type CalendarEventTicketOrderRefund struct {
 	Metadata      *datatypes.JSON `gorm:"type:jsonb" json:"metadata,omitempty"`
 	DeletedAt     gorm.DeletedAt  `gorm:"index" json:"-"`
 }
+
+type CalendarEventTicketCoupon struct {
+	ID              uint           `gorm:"primaryKey" json:"id"`
+	AccountID       *uint          `json:"-"`
+	Account         *Account       `gorm:"foreignKey:AccountID;constraint:OnDelete:SET NULL" json:"-"`
+	CalendarEventID uint           `gorm:"not null;index" json:"calendarEventId"`
+	CalendarEvent   *CalendarEvent `gorm:"foreignKey:CalendarEventID;constraint:OnDelete:CASCADE" json:"-"`
+	TicketTypeIDs   *[]uint        `json:"ticketTypeIds,omitempty"`
+	Code            string         `gorm:"uniqueIndex;size:64;not null" json:"code"`
+	Description     *string        `json:"description,omitempty"`
+	DiscountPercent uint           `json:"discountPercent"`
+	Currency        *OrderCurrency `gorm:"type:varchar(8)" json:"currency,omitempty"`
+	MaxRedemptions  *uint          `json:"maxRedemptions,omitempty"`
+	Redemptions     uint           `gorm:"default:0" json:"redemptions"`
+	StartsAt        time.Time      `json:"startsAt"`
+	EndsAt          time.Time      `json:"endsAt"`
+	IsActive        bool           `gorm:"default:true" json:"isActive"`
+	CreatedAt       time.Time      `json:"createdAt"`
+	UpdatedAt       time.Time      `json:"updatedAt"`
+	DeletedAt       gorm.DeletedAt `gorm:"index" json:"-"`
+}
