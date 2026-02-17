@@ -209,9 +209,9 @@ type CalendarEventTicketCoupon struct {
 	AccountID        *uint              `json:"-"`
 	Account          *Account           `gorm:"foreignKey:AccountID;constraint:OnDelete:SET NULL" json:"-"`
 	Scope            CouponScope        `gorm:"type:varchar(16);not null" json:"scope"`
-	CalendarEventID  *uint              `gorm:"not null;index" json:"calendarEventId,omitempty"`
+	CalendarEventID  *uint              `gorm:"index" json:"calendarEventId,omitempty"`
 	CalendarEvent    *CalendarEvent     `gorm:"foreignKey:CalendarEventID;constraint:OnDelete:CASCADE" json:"-"`
-	CalendarID       *uint              `gorm:"not null;index" json:"calendarId,omitempty"`
+	CalendarID       *uint              `gorm:"index" json:"calendarId,omitempty"`
 	Calendar         *Calendar          `gorm:"foreignKey:CalendarID;constraint:OnDelete:CASCADE" json:"-"`
 	TicketTypeIDs    *[]uint            `json:"ticketTypeIds,omitempty"`
 	Code             string             `gorm:"uniqueIndex;size:64;not null" json:"code"`
