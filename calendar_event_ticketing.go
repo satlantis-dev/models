@@ -3,6 +3,7 @@ package models
 import (
 	"time"
 
+	"github.com/lib/pq"
 	"gorm.io/datatypes"
 	"gorm.io/gorm"
 )
@@ -213,7 +214,7 @@ type CalendarEventTicketCoupon struct {
 	CalendarEvent    *CalendarEvent     `gorm:"foreignKey:CalendarEventID;constraint:OnDelete:CASCADE" json:"-"`
 	CalendarID       *uint              `gorm:"index" json:"calendarId,omitempty"`
 	Calendar         *Calendar          `gorm:"foreignKey:CalendarID;constraint:OnDelete:CASCADE" json:"-"`
-	TicketTypeIDs    *[]uint            `json:"ticketTypeIds,omitempty"`
+	TicketTypeIDs    pq.Int32Array      `gorm:"type:integer[]" json:"ticketTypeIds,omitempty"`
 	Code             string             `gorm:"uniqueIndex;size:64;not null" json:"code"`
 	Description      *string            `json:"description,omitempty"`
 	DiscountType     CouponDiscountType `gorm:"type:varchar(16);not null" json:"discountType"`
