@@ -221,11 +221,11 @@ type CalendarEventTicketCoupon struct {
 	DiscountPercent  *uint              `json:"discountPercent,omitempty"`
 	DiscountAmount   *uint              `json:"discountAmount,omitempty"`
 	DiscountCurrency *OrderCurrency     `gorm:"type:varchar(8)" json:"discountCurrency,omitempty"`
-	SingleUse        bool               `gorm:"default:false" json:"singleUse"`
 	MaxRedemptions   *uint              `json:"maxRedemptions,omitempty"`
 	Redemptions      uint               `gorm:"default:0" json:"redemptions"`
 	StartsAt         time.Time          `json:"startsAt"`
 	EndsAt           time.Time          `json:"endsAt"`
+	IsSingleUse      bool               `gorm:"default:false" json:"isSingleUse"`
 	IsActive         bool               `gorm:"default:true" json:"isActive"`
 	CreatedAt        time.Time          `json:"createdAt"`
 	UpdatedAt        time.Time          `json:"updatedAt"`
