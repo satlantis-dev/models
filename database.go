@@ -31,7 +31,7 @@ var DatabaseModels = []interface{}{
 	CalendarEventRSVP{},
 	CalendarEventTag{},
 	CalendarEventTicket{},
-	CalendarEventTicketCoupon{},
+	CalendarEventCoupon{},
 	CalendarEventTicketType{},
 	CalendarEventTicketOrder{},
 	CalendarEventTicketOrderItem{},

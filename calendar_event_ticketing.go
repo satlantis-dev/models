@@ -205,7 +205,7 @@ const (
 	CouponScopeCalendar CouponScope = "calendar"
 )
 
-type CalendarEventTicketCoupon struct {
+type CalendarEventCoupon struct {
 	ID               uint               `gorm:"primaryKey" json:"id"`
 	AccountID        *uint              `json:"-"`
 	Account          *Account           `gorm:"foreignKey:AccountID;constraint:OnDelete:SET NULL" json:"-"`
@@ -232,6 +232,6 @@ type CalendarEventTicketCoupon struct {
 	DeletedAt        gorm.DeletedAt     `gorm:"index" json:"-"`
 }
 
-func (CalendarEventTicketCoupon) TableName() string {
-	return "calendar_event_ticket_coupons"
+func (CalendarEventCoupon) TableName() string {
+	return "calendar_event_coupons"
 }
