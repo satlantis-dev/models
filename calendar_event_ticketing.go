@@ -230,3 +230,7 @@ type CalendarEventTicketCoupon struct {
 	UpdatedAt        time.Time          `json:"updatedAt"`
 	DeletedAt        gorm.DeletedAt     `gorm:"index" json:"-"`
 }
+
+func (CalendarEventTicketCoupon) TableName() string {
+	return "calendar_event_ticket_coupons"
+}
