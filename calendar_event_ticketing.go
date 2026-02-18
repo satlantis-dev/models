@@ -210,12 +210,12 @@ type CalendarEventCoupon struct {
 	AccountID          uint               `json:"-"`
 	Account            *Account           `gorm:"foreignKey:AccountID;constraint:OnDelete:SET NULL" json:"-"`
 	Scope              CouponScope        `gorm:"type:varchar(16);not null" json:"scope"`
-	CalendarEventID    *uint              `gorm:"index" json:"calendarEventId,omitempty"`
+	CalendarEventID    *uint              `gorm:"index;uniqueIndex:idx_coupon_code_event" json:"calendarEventId,omitempty"`
 	CalendarEvent      *CalendarEvent     `gorm:"foreignKey:CalendarEventID;constraint:OnDelete:CASCADE" json:"-"`
-	CalendarID         *uint              `gorm:"index" json:"calendarId,omitempty"`
+	CalendarID         *uint              `gorm:"index;uniqueIndex:idx_coupon_code_calendar" json:"calendarId,omitempty"`
 	Calendar           *Calendar          `gorm:"foreignKey:CalendarID;constraint:OnDelete:CASCADE" json:"-"`
 	TicketTypeIDs      pq.Int32Array      `gorm:"type:integer[]" json:"ticketTypeIds,omitempty"`
-	Code               string             `gorm:"uniqueIndex;size:64;not null" json:"code"`
+	Code               string             `gorm:"index;uniqueIndex:idx_coupon_code_event;uniqueIndex:idx_coupon_code_calendar;size:64;not null" json:"code"`
 	Description        *string            `json:"description,omitempty"`
 	DiscountType       CouponDiscountType `gorm:"type:varchar(16);not null" json:"discountType"`
 	DiscountPercentage *uint              `json:"discountPercentage,omitempty"`
