@@ -15,11 +15,18 @@ var (
 )
 
 type CalendarEventRSVP struct {
-	ID                  uint                    `gorm:"primaryKey" json:"id"`
-	AccountID           uint                    `json:"accountId"`
-	Account             AccountDTO              `gorm:"constraint:OnDelete:CASCADE;" json:"account"`
-	CreatedAt           time.Time               `json:"createdAt"`
-	CalendarEventID     uint                    `json:"calendarEventId"`
+	ID        uint       `gorm:"primaryKey" json:"id"`
+	AccountID uint       `json:"accountId"`
+	Account   AccountDTO `gorm:"constraint:OnDelete:CASCADE;" json:"account"`
+	CreatedAt time.Time  `json:"createdAt"`
+
+	// Reference to the calendar event instance (+ occurrence if recurring event)
+	CalendarEventID uint                     `gorm:"index" json:"calendarEventId"`
+	CalendarEvent   *CalendarEvent           `gorm:"constraint:OnDelete:CASCADE;" json:"calendarEvent,omitempty"`
+	OccurrenceID    *uint                    `gorm:"index" json:"occurrenceId,omitempty"`
+	Occurrence      *CalendarEventOccurrence `gorm:"foreignKey:OccurrenceID;constraint:OnDelete:SET NULL" json:"occurrence,omitempty"`
+
+	// RSVP status and metadata
 	Status              string                  `json:"status"`
 	AcceptedAt          *time.Time              `json:"acceptedAt,omitempty"`
 	RejectedAt          *time.Time              `json:"rejectedAt,omitempty"`
