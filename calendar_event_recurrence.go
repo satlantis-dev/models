@@ -16,7 +16,7 @@ type CalendarEventSeries struct {
 	DeletedAt gorm.DeletedAt `gorm:"index" json:"-"`
 
 	// Anchor event holds base event data (title, summary, time, location, etc).
-	AnchorEventID *uint          `gorm:"index" json:"anchorEventId,omitempty"`
+	AnchorEventID uint           `gorm:"index" json:"anchorEventId"`
 	AnchorEvent   *CalendarEvent `gorm:"foreignKey:AnchorEventID;constraint:OnDelete:SET NULL" json:"anchorEvent,omitempty"`
 
 	// RFC5545 RRULE (e.g. FREQ=WEEKLY;BYDAY=MO,WE;INTERVAL=1) and optional UNTIL/COUNT for recurrence end.
