@@ -68,6 +68,7 @@ type CalendarEvent struct {
 	AccountStripeConnectID           *uint                       `gorm:"index" json:"accountStripeConnectId,omitempty"`
 	AccountStripeConnect             *AccountStripeConnect       `gorm:"foreignKey:AccountStripeConnectID" json:"accountStripeConnect,omitempty"`
 	MultipleTicketsPurchaseAllowedAt *time.Time                  `json:"multipleTicketsPurchaseAllowedAt"`
+	SeriesLastOccurrenceAt           *time.Time                  `gorm:"index" json:"seriesLastOccurrenceAt,omitempty"`
 }
 
 type CalendarEventDTO struct {

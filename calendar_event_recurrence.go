@@ -19,10 +19,8 @@ type CalendarEventSeries struct {
 	AnchorEventID uint           `gorm:"index" json:"anchorEventId"`
 	AnchorEvent   *CalendarEvent `gorm:"foreignKey:AnchorEventID;constraint:OnDelete:SET NULL" json:"anchorEvent,omitempty"`
 
-	// RFC5545 RRULE (e.g. FREQ=WEEKLY;BYDAY=MO,WE;INTERVAL=1) and optional UNTIL/COUNT for recurrence end.
+	// RFC5545 RRULE (e.g. FREQ=WEEKLY;BYDAY=MO,WE;INTERVAL=1) and GeneratedThrough timestamp for tracking generation progress.
 	RRule            string     `gorm:"type:text;not null" json:"rrule"`
-	Until            *time.Time `gorm:"index" json:"until,omitempty"`
-	Count            *int       `json:"count,omitempty"`
 	GeneratedThrough *time.Time `gorm:"index" json:"generatedThrough,omitempty"`
 }
 
