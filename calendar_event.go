@@ -40,6 +40,7 @@ type CalendarEvent struct {
 	Image                            string                      `json:"image"`
 	CalendarEventTags                []CalendarEventTag          `gorm:"many2many:calendar_event_calendar_event_tags;constraint:OnDelete:CASCADE" json:"calendarEventTags"`
 	IsSatlantisCreated               bool                        `gorm:"default:false" json:"isSatlantisCreated"`
+	IsAnchor                         bool                        `gorm:"default:false;index" json:"isAnchor"`
 	IsUnlisted                       bool                        `gorm:"default:false;index" json:"isUnlisted"`
 	IsHidingAttendees                bool                        `gorm:"default:false" json:"isHidingAttendees"`
 	IsHidingLocation                 bool                        `gorm:"default:false" json:"isHidingLocation"`
@@ -67,6 +68,7 @@ type CalendarEvent struct {
 	AccountStripeConnectID           *uint                       `gorm:"index" json:"accountStripeConnectId,omitempty"`
 	AccountStripeConnect             *AccountStripeConnect       `gorm:"foreignKey:AccountStripeConnectID" json:"accountStripeConnect,omitempty"`
 	MultipleTicketsPurchaseAllowedAt *time.Time                  `json:"multipleTicketsPurchaseAllowedAt"`
+	SeriesLastOccurrenceAt           *time.Time                  `gorm:"index" json:"seriesLastOccurrenceAt,omitempty"`
 }
 
 type CalendarEventDTO struct {

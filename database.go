@@ -28,6 +28,8 @@ var DatabaseModels = []interface{}{
 	CalendarEventDraft{},
 	CalendarEventCohost{},
 	CalendarEventNote{},
+	CalendarEventSeries{},
+	CalendarEventOccurrence{},
 	CalendarEventRSVP{},
 	CalendarEventTag{},
 	CalendarEventTicket{},
