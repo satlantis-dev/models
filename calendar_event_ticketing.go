@@ -82,6 +82,7 @@ type CalendarEventTicketType struct {
 	CreatedBy         *Account       `gorm:"foreignKey:CreatedByID;constraint:OnDelete:SET NULL" json:"-"`
 	CreatedAt         time.Time      `json:"createdAt"`
 	DeletedAt         gorm.DeletedAt `gorm:"index" json:"-"`
+	IsHidden          bool           `gorm:"default:false" json:"isHidden"`
 }
 
 type CalendarEventTicketOrder struct {
