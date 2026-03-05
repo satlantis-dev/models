@@ -35,6 +35,7 @@ const (
 	NotificationTypeMention                         = "mention"
 	NotificationTypeReport                          = "report"
 	NotificationTypeVerifyEmail                     = "verify_email"
+	NotificationTypeWalletReceived                  = "wallet_received"
 )
 
 type Notification struct {
