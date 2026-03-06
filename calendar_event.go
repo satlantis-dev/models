@@ -52,6 +52,7 @@ type CalendarEvent struct {
 	RsvpLimit                        *int64                      `json:"rsvpLimit"`
 	RsvpWaitlistEnabledAt            *time.Time                  `json:"rsvpWaitlistEnabledAt"`
 	RsvpGatedEnabledAt               *time.Time                  `json:"rsvpGatedEnabledAt"`
+	RsvpConfirmationMessage          *string                     `gorm:"type:text" json:"rsvpConfirmationMessage,omitempty"`
 	Start                            time.Time                   `json:"start"`
 	StartTzId                        string                      `gorm:"not null" json:"startTzId"`
 	Summary                          string                      `json:"summary"`
