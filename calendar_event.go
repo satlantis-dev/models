@@ -13,9 +13,9 @@ type CalendarEventType struct {
 }
 
 type RsvpConfirmationMessage struct {
-	Subject string            `json:"subject"`
-	Body    string            `json:"body"`
-	Links   map[string]string `json:"links,omitempty"`
+	Title string            `json:"title"`
+	Body  string            `json:"body"`
+	Links map[string]string `json:"links,omitempty"`
 }
 
 type CalendarEvent struct {
