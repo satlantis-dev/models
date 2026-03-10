@@ -12,6 +12,12 @@ type CalendarEventType struct {
 	Description string `json:"description"`
 }
 
+type RsvpConfirmationMessage struct {
+	Title string            `json:"title"`
+	Body  string            `json:"body"`
+	Links map[string]string `json:"links,omitempty"`
+}
+
 type CalendarEvent struct {
 	ID                               uint                        `gorm:"primaryKey" json:"id"`
 	AccountID                        uint                        `gorm:"index;not null" json:"accountId"`
@@ -52,7 +58,7 @@ type CalendarEvent struct {
 	RsvpLimit                        *int64                      `json:"rsvpLimit"`
 	RsvpWaitlistEnabledAt            *time.Time                  `json:"rsvpWaitlistEnabledAt"`
 	RsvpGatedEnabledAt               *time.Time                  `json:"rsvpGatedEnabledAt"`
-	RsvpConfirmationMessage          *string                     `gorm:"type:text" json:"rsvpConfirmationMessage,omitempty"`
+	RsvpConfirmationMessage          *RsvpConfirmationMessage    `gorm:"type:jsonb;serializer:json" json:"rsvpConfirmationMessage,omitempty"`
 	Start                            time.Time                   `json:"start"`
 	StartTzId                        string                      `gorm:"not null" json:"startTzId"`
 	Summary                          string                      `json:"summary"`
