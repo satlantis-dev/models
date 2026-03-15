@@ -35,7 +35,7 @@ type Note struct {
 	Tags               *string    `gorm:"type:jsonb" json:"tags"`
 	Type               NoteType   `json:"type"`
 	RepostedNoteID     *uint      `gorm:"index" json:"repostedNoteId"`
-	RepostedNote       *Note      `json:"reposted_note"`
+	RepostedNote       *Note      `json:"reposted_note" swaggerignore:"true"`
 	CreatedOnSatlantis bool       `json:"createdOnSatlantis"`
 }
 

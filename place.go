@@ -49,7 +49,7 @@ type Place struct {
 	CategoryScores     *[]PlaceCategoryScore `gorm:"foreignKey:PlaceID;constraint:OnDelete:CASCADE;" json:"categoryScores,omitempty"`
 	CountryID          uint                  `gorm:"index" json:"countryId"`
 	Country            *Country              `json:"country,omitempty"`
-	Descendants        []PlaceWithClosure    `gorm:"-" json:"descendants"`
+	Descendants        []PlaceWithClosure    `gorm:"-" json:"descendants" swaggerignore:"true"`
 	Description        string                `gorm:"type:text" json:"description"`
 	EventID            *uint                 `gorm:"index" json:"eventId"`
 	Event              *Event                `json:"event,omitempty"`

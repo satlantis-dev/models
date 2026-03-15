@@ -13,8 +13,8 @@ type Account struct {
 	CreatedAt                   time.Time             `json:"-"`
 	DeletedAt                   gorm.DeletedAt        `gorm:"index" json:"-"`
 	About                       string                `gorm:"type:text" json:"about"`
-	AccountPlaceRoles           []AccountPlaceRole    `gorm:"foreignKey:AccountID;constraint:OnDelete:CASCADE;" json:"accountPlaceRoles,omitempty"`
-	AccountLocationRoles        []AccountLocationRole `gorm:"foreignKey:AccountID;constraint:OnDelete:CASCADE;" json:"accountLocationRoles,omitempty"`
+	AccountPlaceRoles           []AccountPlaceRole    `gorm:"foreignKey:AccountID;constraint:OnDelete:CASCADE;" json:"accountPlaceRoles,omitempty" swaggerignore:"true"`
+	AccountLocationRoles        []AccountLocationRole `gorm:"foreignKey:AccountID;constraint:OnDelete:CASCADE;" json:"accountLocationRoles,omitempty" swaggerignore:"true"`
 	Banner                      string                `gorm:"type:text" json:"banner"`
 	BusinessCategory            string                `gorm:"default:NULL" json:"businessCategory"`
 	ChatMemberships             []ChatMembership      `gorm:"foreignKey:AccountID" json:"chatMemberships"`
@@ -182,8 +182,8 @@ func (AccountDTO) TableName() string {
 type AccountPortable struct {
 	ID                   uint                  `json:"id"`
 	About                string                `json:"about"`
-	AccountPlaceRoles    []AccountPlaceRole    `json:"accountPlaceRoles"`
-	AccountLocationRoles []AccountLocationRole `json:"accountLocationRoles"`
+	AccountPlaceRoles    []AccountPlaceRole    `json:"accountPlaceRoles" swaggerignore:"true"`
+	AccountLocationRoles []AccountLocationRole `json:"accountLocationRoles" swaggerignore:"true"`
 	Banner               string                `json:"banner"`
 	ChatMemberships      []ChatMembership      `json:"chatMemberships"`
 	CurrencyID           *uint                 `json:"currencyId"`
