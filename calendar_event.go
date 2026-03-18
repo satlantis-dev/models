@@ -49,8 +49,7 @@ type CalendarEvent struct {
 	IsUnlisted                       bool                        `gorm:"default:false;index" json:"isUnlisted"`
 	IsHidingAttendees                bool                        `gorm:"default:false" json:"isHidingAttendees"`
 	IsHidingLocation                 bool                        `gorm:"default:false" json:"isHidingLocation"`
-	IsDigital                        bool                        `gorm:"default:false" json:"isDigital"`
-	DigitalEventLink                 *string                     `json:"digitalEventLink,omitempty"`
+	IsOnline                         bool                        `gorm:"default:false" json:"isOnline"`
 	Location                         string                      `json:"location"`
 	Notes                            []CalendarEventNote         `gorm:"foreignKey:CalendarEventID;constraint:OnDelete:CASCADE;" json:"notes"`
 	OwnershipChangedAt               *time.Time                  `json:"ownershipChangedAt"`
@@ -90,8 +89,7 @@ type CalendarEventDTO struct {
 	IsUnlisted         bool               `gorm:"default:false;index" json:"isUnlisted"`
 	IsHidingAttendees  bool               `gorm:"default:false" json:"isHidingAttendees"`
 	IsHidingLocation   bool               `gorm:"default:false" json:"isHidingLocation"`
-	IsDigital          bool               `gorm:"default:false" json:"isDigital"`
-	DigitalEventLink   *string            `json:"digitalEventLink,omitempty"`
+	IsOnline           bool               `gorm:"default:false" json:"isOnline"`
 	Location           string             `json:"location"`
 	PlaceID            *uint              `gorm:"index" json:"placeId"`
 	Place              *PlaceDTO          `gorm:"foreignKey:PlaceID" json:"place,omitempty"`
@@ -125,8 +123,7 @@ func (c CalendarEvent) ToDTO() *CalendarEventDTO {
 		IsUnlisted:         c.IsUnlisted,
 		IsHidingAttendees:  c.IsHidingAttendees,
 		IsHidingLocation:   c.IsHidingLocation,
-		IsDigital:          c.IsDigital,
-		DigitalEventLink:   c.DigitalEventLink,
+		IsOnline:           c.IsOnline,
 		Location:           c.Location,
 		PlaceID:            c.PlaceID,
 		Place:              c.Place,
