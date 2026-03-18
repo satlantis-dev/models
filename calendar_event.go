@@ -49,6 +49,8 @@ type CalendarEvent struct {
 	IsUnlisted                       bool                        `gorm:"default:false;index" json:"isUnlisted"`
 	IsHidingAttendees                bool                        `gorm:"default:false" json:"isHidingAttendees"`
 	IsHidingLocation                 bool                        `gorm:"default:false" json:"isHidingLocation"`
+	IsDigital                        bool                        `gorm:"default:false" json:"isDigital"`
+	DigitalEventLink                 *string                     `json:"digitalEventLink,omitempty"`
 	Location                         string                      `json:"location"`
 	Notes                            []CalendarEventNote         `gorm:"foreignKey:CalendarEventID;constraint:OnDelete:CASCADE;" json:"notes"`
 	OwnershipChangedAt               *time.Time                  `json:"ownershipChangedAt"`
