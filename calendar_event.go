@@ -90,6 +90,8 @@ type CalendarEventDTO struct {
 	IsUnlisted         bool               `gorm:"default:false;index" json:"isUnlisted"`
 	IsHidingAttendees  bool               `gorm:"default:false" json:"isHidingAttendees"`
 	IsHidingLocation   bool               `gorm:"default:false" json:"isHidingLocation"`
+	IsDigital          bool               `gorm:"default:false" json:"isDigital"`
+	DigitalEventLink   *string            `json:"digitalEventLink,omitempty"`
 	Location           string             `json:"location"`
 	PlaceID            *uint              `gorm:"index" json:"placeId"`
 	Place              *PlaceDTO          `gorm:"foreignKey:PlaceID" json:"place,omitempty"`
@@ -123,6 +125,8 @@ func (c CalendarEvent) ToDTO() *CalendarEventDTO {
 		IsUnlisted:         c.IsUnlisted,
 		IsHidingAttendees:  c.IsHidingAttendees,
 		IsHidingLocation:   c.IsHidingLocation,
+		IsDigital:          c.IsDigital,
+		DigitalEventLink:   c.DigitalEventLink,
 		Location:           c.Location,
 		PlaceID:            c.PlaceID,
 		Place:              c.Place,
