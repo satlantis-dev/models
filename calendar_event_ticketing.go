@@ -91,6 +91,7 @@ type CalendarEventTicketType struct {
 
 type CalendarEventTicketOrder struct {
 	ID              uint                           `gorm:"primaryKey" json:"id"`
+	Code            string                         `gorm:"uniqueIndex;size:64" json:"code"`
 	CalendarEventID uint                           `gorm:"not null;index" json:"calendarEventId"`
 	CalendarEvent   *CalendarEvent                 `gorm:"foreignKey:CalendarEventID;constraint:OnDelete:CASCADE" json:"calendarEvent,omitempty"`
 	AccountID       uint                           `gorm:"not null;index" json:"accountId"`
