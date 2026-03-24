@@ -182,6 +182,7 @@ type CalendarEventResponseFull struct {
 	RsvpRequestedCount  int64           `json:"rsvpRequestedCount"`
 	RsvpDeclinedCount   int64           `json:"rsvpDeclinedCount"`
 	RsvpRejectedCount   int64           `json:"rsvpRejectedCount"`
-	UserRSVP            *UserRSVPInfo   `json:"userRsvp,omitempty"`
-	UserTicket          *UserTicketInfo `json:"userTicket,omitempty"`
+	UserRSVP            *UserRSVPInfo    `json:"userRsvp,omitempty"`
+	UserTicket          *UserTicketInfo  `json:"userTicket,omitempty"`
+	UserTickets         []UserTicketInfo `json:"userTickets,omitempty"`
 }
