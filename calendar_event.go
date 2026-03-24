@@ -165,6 +165,7 @@ type UserTicketInfo struct {
 	ID             uint         `json:"id"`
 	AccountID      uint         `json:"accountId"`
 	Status         TicketStatus `json:"status"`
+	Code           string       `json:"code"`
 	TicketTypeID   uint         `json:"ticketTypeId"`
 	TicketTypeName string       `json:"ticketTypeName"`
 	CreatedAt      time.Time    `json:"createdAt"`
@@ -173,15 +174,15 @@ type UserTicketInfo struct {
 
 type CalendarEventResponseFull struct {
 	*CalendarEvent
-	SampleAttendees     *[]AccountDTO   `json:"sampleAttendees,omitempty"`
-	KnownAttendees      *[]AccountDTO   `json:"knownAttendees,omitempty"`
-	RsvpAcceptedCount   int64           `json:"rsvpAcceptedCount"`
-	RsvpWaitlistedCount int64           `json:"rsvpWaitlistedCount"`
-	RsvpInvitedCount    int64           `json:"rsvpInvitedCount"`
-	RsvpTentativeCount  int64           `json:"rsvpTentativeCount"`
-	RsvpRequestedCount  int64           `json:"rsvpRequestedCount"`
-	RsvpDeclinedCount   int64           `json:"rsvpDeclinedCount"`
-	RsvpRejectedCount   int64           `json:"rsvpRejectedCount"`
+	SampleAttendees     *[]AccountDTO    `json:"sampleAttendees,omitempty"`
+	KnownAttendees      *[]AccountDTO    `json:"knownAttendees,omitempty"`
+	RsvpAcceptedCount   int64            `json:"rsvpAcceptedCount"`
+	RsvpWaitlistedCount int64            `json:"rsvpWaitlistedCount"`
+	RsvpInvitedCount    int64            `json:"rsvpInvitedCount"`
+	RsvpTentativeCount  int64            `json:"rsvpTentativeCount"`
+	RsvpRequestedCount  int64            `json:"rsvpRequestedCount"`
+	RsvpDeclinedCount   int64            `json:"rsvpDeclinedCount"`
+	RsvpRejectedCount   int64            `json:"rsvpRejectedCount"`
 	UserRSVP            *UserRSVPInfo    `json:"userRsvp,omitempty"`
 	UserTicket          *UserTicketInfo  `json:"userTicket,omitempty"`
 	UserTickets         []UserTicketInfo `json:"userTickets,omitempty"`
