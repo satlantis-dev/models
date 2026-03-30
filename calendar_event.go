@@ -51,6 +51,7 @@ type CalendarEvent struct {
 	IsHidingLocation                 bool                        `gorm:"default:false" json:"isHidingLocation"`
 	IsOnline                         bool                        `gorm:"default:false" json:"isOnline"`
 	Location                         string                      `json:"location"`
+	LocationInstructions             *string                     `json:"locationInstructions,omitempty"`
 	Notes                            []CalendarEventNote         `gorm:"foreignKey:CalendarEventID;constraint:OnDelete:CASCADE;" json:"notes"`
 	OwnershipChangedAt               *time.Time                  `json:"ownershipChangedAt"`
 	PlaceID                          *uint                       `gorm:"index" json:"placeId"`
@@ -78,31 +79,32 @@ type CalendarEvent struct {
 }
 
 type CalendarEventDTO struct {
-	ID                 uint               `gorm:"primaryKey" json:"id"`
-	AccountID          uint               `gorm:"index;not null" json:"accountId"`
-	Account            *AccountDTO        `gorm:"foreignKey:AccountID" json:"account,omitempty"`
-	End                time.Time          `json:"end"`
-	EndTzId            string             `gorm:"not null" json:"endTzId"`
-	Featured           bool               `gorm:"default:false" json:"featured"`
-	GoogleID           *string            `json:"googleId,omitempty"`
-	Image              string             `json:"image"`
-	IsUnlisted         bool               `gorm:"default:false;index" json:"isUnlisted"`
-	IsHidingAttendees  bool               `gorm:"default:false" json:"isHidingAttendees"`
-	IsHidingLocation   bool               `gorm:"default:false" json:"isHidingLocation"`
-	IsOnline           bool               `gorm:"default:false" json:"isOnline"`
-	Location           string             `json:"location"`
-	PlaceID            *uint              `gorm:"index" json:"placeId"`
-	Place              *PlaceDTO          `gorm:"foreignKey:PlaceID" json:"place,omitempty"`
-	Start              time.Time          `json:"start"`
-	StartTzId          string             `gorm:"not null" json:"startTzId"`
-	Summary            string             `json:"summary"`
-	Title              string             `json:"title"`
-	TypeID             uint               `gorm:"index;not null;default:1" json:"typeId"`
-	Type               *CalendarEventType `gorm:"foreignKey:TypeID" json:"type,omitempty"`
-	URL                string             `json:"url"`
-	Website            string             `json:"website"`
-	OfficialCalendarID *uint              `gorm:"index" json:"officialCalendarId,omitempty"`
-	OfficialCalendar   *Calendar          `gorm:"foreignKey:OfficialCalendarID" json:"officialCalendar,omitempty"`
+	ID                   uint               `gorm:"primaryKey" json:"id"`
+	AccountID            uint               `gorm:"index;not null" json:"accountId"`
+	Account              *AccountDTO        `gorm:"foreignKey:AccountID" json:"account,omitempty"`
+	End                  time.Time          `json:"end"`
+	EndTzId              string             `gorm:"not null" json:"endTzId"`
+	Featured             bool               `gorm:"default:false" json:"featured"`
+	GoogleID             *string            `json:"googleId,omitempty"`
+	Image                string             `json:"image"`
+	IsUnlisted           bool               `gorm:"default:false;index" json:"isUnlisted"`
+	IsHidingAttendees    bool               `gorm:"default:false" json:"isHidingAttendees"`
+	IsHidingLocation     bool               `gorm:"default:false" json:"isHidingLocation"`
+	IsOnline             bool               `gorm:"default:false" json:"isOnline"`
+	Location             string             `json:"location"`
+	LocationInstructions *string            `json:"locationInstructions,omitempty"`
+	PlaceID              *uint              `gorm:"index" json:"placeId"`
+	Place                *PlaceDTO          `gorm:"foreignKey:PlaceID" json:"place,omitempty"`
+	Start                time.Time          `json:"start"`
+	StartTzId            string             `gorm:"not null" json:"startTzId"`
+	Summary              string             `json:"summary"`
+	Title                string             `json:"title"`
+	TypeID               uint               `gorm:"index;not null;default:1" json:"typeId"`
+	Type                 *CalendarEventType `gorm:"foreignKey:TypeID" json:"type,omitempty"`
+	URL                  string             `json:"url"`
+	Website              string             `json:"website"`
+	OfficialCalendarID   *uint              `gorm:"index" json:"officialCalendarId,omitempty"`
+	OfficialCalendar     *Calendar          `gorm:"foreignKey:OfficialCalendarID" json:"officialCalendar,omitempty"`
 }
 
 func (CalendarEventDTO) TableName() string {
@@ -112,31 +114,32 @@ func (CalendarEventDTO) TableName() string {
 func (c CalendarEvent) ToDTO() *CalendarEventDTO {
 
 	return &CalendarEventDTO{
-		ID:                 c.ID,
-		AccountID:          c.AccountID,
-		Account:            c.Account,
-		End:                c.End,
-		EndTzId:            c.EndTzId,
-		Featured:           c.Featured,
-		GoogleID:           &c.GoogleID,
-		Image:              c.Image,
-		IsUnlisted:         c.IsUnlisted,
-		IsHidingAttendees:  c.IsHidingAttendees,
-		IsHidingLocation:   c.IsHidingLocation,
-		IsOnline:           c.IsOnline,
-		Location:           c.Location,
-		PlaceID:            c.PlaceID,
-		Place:              c.Place,
-		Start:              c.Start,
-		StartTzId:          c.StartTzId,
-		Summary:            c.Summary,
-		Title:              c.Title,
-		TypeID:             c.TypeID,
-		Type:               c.Type,
-		URL:                c.URL,
-		Website:            c.Website,
-		OfficialCalendarID: c.OfficialCalendarID,
-		OfficialCalendar:   c.OfficialCalendar,
+		ID:                   c.ID,
+		AccountID:            c.AccountID,
+		Account:              c.Account,
+		End:                  c.End,
+		EndTzId:              c.EndTzId,
+		Featured:             c.Featured,
+		GoogleID:             &c.GoogleID,
+		Image:                c.Image,
+		IsUnlisted:           c.IsUnlisted,
+		IsHidingAttendees:    c.IsHidingAttendees,
+		IsHidingLocation:     c.IsHidingLocation,
+		IsOnline:             c.IsOnline,
+		Location:             c.Location,
+		LocationInstructions: c.LocationInstructions,
+		PlaceID:              c.PlaceID,
+		Place:                c.Place,
+		Start:                c.Start,
+		StartTzId:            c.StartTzId,
+		Summary:              c.Summary,
+		Title:                c.Title,
+		TypeID:               c.TypeID,
+		Type:                 c.Type,
+		URL:                  c.URL,
+		Website:              c.Website,
+		OfficialCalendarID:   c.OfficialCalendarID,
+		OfficialCalendar:     c.OfficialCalendar,
 	}
 }
 
