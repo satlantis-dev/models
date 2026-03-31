@@ -42,7 +42,7 @@ type CalendarEvent struct {
 	EndTzId                          string                      `gorm:"not null" json:"endTzId"`
 	Featured                         bool                        `gorm:"default:false" json:"featured"`
 	Geohash                          string                      `json:"geohash"`
-	GoogleID                         string                      `json:"googleId"`
+	GoogleID                         *string                     `json:"googleId,omitempty"`
 	Image                            string                      `json:"image"`
 	CalendarEventTags                []CalendarEventTag          `gorm:"many2many:calendar_event_calendar_event_tags;constraint:OnDelete:CASCADE" json:"calendarEventTags"`
 	IsSatlantisCreated               bool                        `gorm:"default:false" json:"isSatlantisCreated"`
@@ -119,7 +119,7 @@ func (c CalendarEvent) ToDTO() *CalendarEventDTO {
 		End:                c.End,
 		EndTzId:            c.EndTzId,
 		Featured:           c.Featured,
-		GoogleID:           &c.GoogleID,
+		GoogleID:           c.GoogleID,
 		Image:              c.Image,
 		IsUnlisted:         c.IsUnlisted,
 		IsHidingAttendees:  c.IsHidingAttendees,
