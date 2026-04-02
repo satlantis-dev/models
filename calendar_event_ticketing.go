@@ -110,21 +110,25 @@ type CalendarEventTicketOrder struct {
 }
 
 type CalendarEventTicketOrderItem struct {
-	ID             uint                      `gorm:"primaryKey" json:"id"`
-	OrderID        uint                      `gorm:"not null;index" json:"orderId"`
-	Order          *CalendarEventTicketOrder `gorm:"foreignKey:OrderID;constraint:OnDelete:CASCADE" json:"order,omitempty"`
-	TicketTypeID   uint                      `gorm:"not null;index" json:"ticketTypeId"`
-	TicketType     *CalendarEventTicketType  `gorm:"foreignKey:TicketTypeID;constraint:OnDelete:CASCADE" json:"ticketType,omitempty"`
-	Quantity       uint                      `json:"quantity"`
-	PriceEach      int64                     `gorm:"type:bigint" json:"priceEach"`
-	Currency       OrderCurrency             `gorm:"type:varchar(8)" json:"currency"`
-	RefundedAmount int64                     `gorm:"type:bigint;default:0" json:"refundedAmount"`
-	PriceCurrency  *OrderCurrency            `gorm:"type:varchar(10)" json:"priceCurrency"`
-	PriceAmount    *int64                    `json:"priceAmount"`
-	Status         OrderStatus               `gorm:"type:varchar(32);default:'pending'" json:"status"`
-	CreatedAt      time.Time                 `json:"-"`
-	UpdatedAt      time.Time                 `json:"-"`
-	DeletedAt      gorm.DeletedAt            `gorm:"index" json:"-"`
+	ID              uint                              `gorm:"primaryKey" json:"id"`
+	OrderID         uint                              `gorm:"not null;index" json:"orderId"`
+	Order           *CalendarEventTicketOrder         `gorm:"foreignKey:OrderID;constraint:OnDelete:CASCADE" json:"order,omitempty"`
+	TicketTypeID    uint                              `gorm:"not null;index" json:"ticketTypeId"`
+	TicketType      *CalendarEventTicketType          `gorm:"foreignKey:TicketTypeID;constraint:OnDelete:CASCADE" json:"ticketType,omitempty"`
+	Quantity        uint                              `json:"quantity"`
+	PriceEach       int64                             `gorm:"type:bigint" json:"priceEach"`
+	Currency        OrderCurrency                     `gorm:"type:varchar(8)" json:"currency"`
+	RefundedAmount  int64                             `gorm:"type:bigint;default:0" json:"refundedAmount"`
+	PriceCurrency   *OrderCurrency                    `gorm:"type:varchar(10)" json:"priceCurrency"`
+	PriceAmount     *int64                            `json:"priceAmount"`
+	Status          OrderStatus                       `gorm:"type:varchar(32);default:'pending'" json:"status"`
+	PromotionID     *uint                             `gorm:"index" json:"promotionId,omitempty"`
+	Promotion       *CalendarEventTicketTypePromotion `gorm:"foreignKey:PromotionID;constraint:OnDelete:SET NULL" json:"promotion,omitempty"`
+	OriginalPrice   *int64                            `gorm:"type:bigint" json:"originalPrice,omitempty"`
+	DiscountPercent *uint                             `json:"discountPercent,omitempty"`
+	CreatedAt       time.Time                         `json:"-"`
+	UpdatedAt       time.Time                         `json:"-"`
+	DeletedAt       gorm.DeletedAt                    `gorm:"index" json:"-"`
 }
 
 type CalendarEventTicket struct {
@@ -241,4 +245,19 @@ type CalendarEventCoupon struct {
 
 func (CalendarEventCoupon) TableName() string {
 	return "calendar_event_coupons"
+}
+
+type CalendarEventTicketTypePromotion struct {
+	ID                 uint                     `gorm:"primaryKey" json:"id"`
+	TicketTypeID       uint                     `gorm:"not null;index" json:"ticketTypeId"`
+	TicketType         *CalendarEventTicketType `gorm:"foreignKey:TicketTypeID;constraint:OnDelete:CASCADE" json:"-"`
+	Name               string                   `gorm:"size:30;not null" json:"name"`
+	DiscountPercentage uint                     `gorm:"not null" json:"discountPercentage"`
+	EndDate            *time.Time               `json:"endDate,omitempty"`
+	MaxQuantity        *uint                    `json:"maxQuantity,omitempty"`
+	RedeemedQuantity   uint                     `gorm:"default:0" json:"redeemedQuantity"`
+	IsActive           bool                     `gorm:"default:true" json:"isActive"`
+	CreatedAt          time.Time                `json:"createdAt"`
+	UpdatedAt          time.Time                `json:"updatedAt"`
+	DeletedAt          gorm.DeletedAt           `gorm:"index" json:"-"`
 }
