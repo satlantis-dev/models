@@ -7,14 +7,17 @@ import (
 )
 
 type CommunityMember struct {
-	ID          uint            `gorm:"primaryKey;autoIncrement" json:"id"`
-	CommunityID uint            `gorm:"not null;index;uniqueIndex:idx_community_account" json:"communityId"`
-	Community   *Community      `gorm:"foreignKey:CommunityID;constraint:OnDelete:CASCADE;" json:"community,omitempty"`
-	AccountID   uint            `gorm:"not null;index;uniqueIndex:idx_community_account" json:"accountId"`
-	Account     *AccountDTO     `gorm:"foreignKey:AccountID;constraint:OnDelete:CASCADE;" json:"account,omitempty"`
-	CreatedAt   time.Time       `gorm:"autoCreateTime" json:"createdAt"`
-	UpdatedAt   time.Time       `gorm:"autoUpdateTime" json:"updatedAt"`
-	DeletedAt   *gorm.DeletedAt `gorm:"index" json:"-"`
+	ID               uint                     `gorm:"primaryKey;autoIncrement" json:"id"`
+	CommunityID      uint                     `gorm:"not null;index;uniqueIndex:idx_community_account" json:"communityId"`
+	Community        *Community               `gorm:"foreignKey:CommunityID;constraint:OnDelete:CASCADE;" json:"community,omitempty"`
+	AccountID        uint                     `gorm:"not null;index;uniqueIndex:idx_community_account" json:"accountId"`
+	Account          *AccountDTO              `gorm:"foreignKey:AccountID;constraint:OnDelete:CASCADE;" json:"account,omitempty"`
+	TierID           *uint                    `gorm:"index" json:"tierId,omitempty"`
+	Tier             *CommunityMembershipTier `gorm:"foreignKey:TierID;constraint:OnDelete:SET NULL;" json:"tier,omitempty"`
+	IsCommunityAdmin bool                     `gorm:"not null;default:false" json:"isCommunityAdmin"`
+	CreatedAt        time.Time                `gorm:"autoCreateTime" json:"createdAt"`
+	UpdatedAt        time.Time                `gorm:"autoUpdateTime" json:"updatedAt"`
+	DeletedAt        *gorm.DeletedAt          `gorm:"index" json:"-"`
 }
 
 func (CommunityMember) TableName() string {
