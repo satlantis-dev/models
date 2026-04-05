@@ -179,18 +179,18 @@ type CalendarEventTicket struct {
 }
 
 type CalendarEventTicketOrderPaymentDTO struct {
-	ID                       uint                      `gorm:"primaryKey" json:"id"`
-	OrderID                  uint                      `gorm:"uniqueIndex;not null" json:"orderId"`
-	Order                    *CalendarEventTicketOrder `gorm:"foreignKey:OrderID;constraint:OnDelete:CASCADE" json:"order,omitempty"`
-	PaymentMethod            PaymentMethod             `gorm:"type:varchar(32);not null" json:"paymentMethod"`
-	Status                   PaymentStatus             `gorm:"type:varchar(32);default:'pending'" json:"status"`
-	Amount                   int64                     `gorm:"not null" json:"amount"` // Cents for fiat, sats for BTC/Lightning
-	Currency                 OrderCurrency             `gorm:"type:varchar(8);not null" json:"currency"`
+	ID                       uint                      `json:"id"`
+	OrderID                  uint                      `json:"orderId"`
+	Order                    *CalendarEventTicketOrder `json:"order,omitempty"`
+	PaymentMethod            PaymentMethod             `json:"paymentMethod"`
+	Status                   PaymentStatus             `json:"status"`
+	Amount                   int64                     `json:"amount"` // Cents for fiat, sats for BTC/Lightning
+	Currency                 OrderCurrency             `json:"currency"`
 	ExchangeRate             *float64                  `json:"exchangeRate"`
-	LightningPreimage        *string                   `gorm:"size:64" json:"lightningPreimage,omitempty"`
-	LightningProvider        *string                   `gorm:"size:32" json:"lightningProvider,omitempty"`
-	LightningProviderTxID    *string                   `gorm:"index" json:"lightningProviderTxId,omitempty"`
-	PaymentProviderReference *string                   `gorm:"index" json:"paymentProviderReference"`
+	LightningPreimage        *string                   `json:"lightningPreimage,omitempty"`
+	LightningProvider        *string                   `json:"lightningProvider,omitempty"`
+	LightningProviderTxID    *string                   `json:"lightningProviderTxId,omitempty"`
+	PaymentProviderReference *string                   `json:"paymentProviderReference"`
 	PaidAt                   *time.Time                `json:"paidAt,omitempty"`
 	ExpiredAt                *time.Time                `json:"expiredAt,omitempty"`
 	ExpiresAt                *time.Time                `json:"expiresAt,omitempty"`
