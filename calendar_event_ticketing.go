@@ -3,7 +3,6 @@ package models
 import (
 	"time"
 
-	"github.com/lib/pq"
 	"gorm.io/datatypes"
 	"gorm.io/gorm"
 )
@@ -66,27 +65,59 @@ const (
 	RefundFailed     RefundStatus = "failed"
 )
 
-type CalendarEventTicketType struct {
-	ID                uint           `gorm:"primaryKey" json:"id"`
-	CalendarEventID   uint           `gorm:"not null;index" json:"calendarEventId"`
-	CalendarEvent     *CalendarEvent `gorm:"foreignKey:CalendarEventID;constraint:OnDelete:CASCADE" json:"-"`
-	Name              string         `json:"name"`
-	Description       *string        `json:"description"`
-	PriceSats         *int64         `gorm:"type:bigint" json:"priceSats"`
-	PriceFiat         *int64         `gorm:"type:bigint" json:"priceFiat"`
-	FiatCurrency      *OrderCurrency `gorm:"type:varchar(8)" json:"fiatCurrency"`
-	PriceCurrency     *OrderCurrency `gorm:"type:varchar(10)" json:"priceCurrency"`
-	SellCurrencies    datatypes.JSON `gorm:"type:jsonb" json:"sellCurrencies"`
-	PriceAmount       *int64         `json:"priceAmount"`
-	PriceAmountForBTC *int64         `json:"priceAmountForBTC"`
-	MaxCapacity       *uint          `json:"maxCapacity"`
-	SellStartDate     *time.Time     `json:"sellStartDate"`
-	SellEndDate       *time.Time     `json:"sellEndDate"`
-	CreatedByID       *uint          `json:"-"`
-	CreatedBy         *Account       `gorm:"foreignKey:CreatedByID;constraint:OnDelete:SET NULL" json:"-"`
-	CreatedAt         time.Time      `json:"createdAt"`
-	DeletedAt         gorm.DeletedAt `gorm:"index" json:"-"`
-	IsHidden          bool           `gorm:"default:false" json:"isHidden"`
+type CalendarEventTicketOrderPayment struct {
+	ID                       uint                      `gorm:"primaryKey" json:"id"`
+	OrderID                  uint                      `gorm:"uniqueIndex;not null" json:"orderId"`
+	Order                    *CalendarEventTicketOrder `gorm:"foreignKey:OrderID;constraint:OnDelete:CASCADE" json:"order,omitempty"`
+	PaymentMethod            PaymentMethod             `gorm:"type:varchar(32);not null" json:"paymentMethod"`
+	Status                   PaymentStatus             `gorm:"type:varchar(32);default:'pending'" json:"status"`
+	Amount                   int64                     `gorm:"not null" json:"amount"` // Cents for fiat, sats for BTC/Lightning
+	Currency                 OrderCurrency             `gorm:"type:varchar(8);not null" json:"currency"`
+	ExchangeRate             *float64                  `json:"exchangeRate"`
+	ExchangeRateSource       *string                   `gorm:"type:varchar(50)" json:"exchangeRateSource"`
+	LightningPaymentHash     *string                   `gorm:"uniqueIndex;size:64" json:"lightningPaymentHash,omitempty"`
+	LightningPaymentRequest  *string                   `gorm:"type:text" json:"lightningPaymentRequest,omitempty"`
+	LightningPreimage        *string                   `gorm:"size:64" json:"lightningPreimage,omitempty"`
+	LightningProvider        *string                   `gorm:"size:32" json:"lightningProvider,omitempty"`
+	LightningProviderTxID    *string                   `gorm:"index" json:"lightningProviderTxId,omitempty"`
+	PaymentProviderReference *string                   `gorm:"index" json:"paymentProviderReference"`
+	Metadata                 *datatypes.JSON           `gorm:"type:jsonb" json:"metadata,omitempty"`
+	PaidAt                   *time.Time                `json:"paidAt,omitempty"`
+	ExpiredAt                *time.Time                `json:"expiredAt,omitempty"`
+	ExpiresAt                *time.Time                `json:"expiresAt,omitempty"`
+	FailedAt                 *time.Time                `json:"failedAt,omitempty"`
+	RefundedAt               *time.Time                `json:"refundedAt,omitempty"`
+	CancelledAt              *time.Time                `json:"cancelledAt,omitempty"`
+	CreatedAt                time.Time                 `json:"createdAt"`
+	UpdatedAt                time.Time                 `json:"updatedAt"`
+	DeletedAt                gorm.DeletedAt            `gorm:"index" json:"-"`
+}
+
+// CalendarEventTicketOrderRefund represents a refund for a ticket order
+type CalendarEventTicketOrderRefund struct {
+	ID           uint                      `gorm:"primarykey" json:"id"`
+	OrderID      uint                      `gorm:"not null;index" json:"orderId"`
+	Order        *CalendarEventTicketOrder `gorm:"foreignKey:OrderID;constraint:OnDelete:CASCADE" json:"-"`
+	Amount       int64                     `gorm:"not null" json:"amount"`
+	Fee          int64                     `gorm:"type:bigint;default:0" json:"fee"`
+	Currency     OrderCurrency             `gorm:"not null" json:"currency"`
+	Status       RefundStatus              `gorm:"not null;default:'pending'" json:"status"`
+	RefundMethod string                    `gorm:"not null" json:"refundMethod"` // "lightning", "stripe", etc.
+
+	LightningAddress     *string `json:"lightningAddress,omitempty"`
+	LightningPaymentHash *string `json:"lightningPaymentHash,omitempty"`
+	LightningPreimage    *string `gorm:"size:64" json:"lightningPreimage,omitempty"`
+
+	StripeRefundID        *string `json:"stripeRefundId,omitempty"`
+	StripePaymentIntentID *string `json:"stripePaymentIntentId,omitempty"`
+
+	Reason        *string         `gorm:"type:text" json:"reason,omitempty"`
+	CreatedAt     time.Time       `json:"createdAt"`
+	ProcessedAt   *time.Time      `json:"processedAt,omitempty"`
+	FailedAt      *time.Time      `json:"failedAt,omitempty"`
+	FailureReason *string         `gorm:"type:text" json:"failureReason,omitempty"`
+	Metadata      *datatypes.JSON `gorm:"type:jsonb" json:"metadata,omitempty"`
+	DeletedAt     gorm.DeletedAt  `gorm:"index" json:"-"`
 }
 
 type CalendarEventTicketOrder struct {
@@ -147,117 +178,50 @@ type CalendarEventTicket struct {
 	DeletedAt   gorm.DeletedAt                `gorm:"index" json:"-"`
 }
 
-type CalendarEventTicketOrderPayment struct {
-	ID                       uint                      `gorm:"primaryKey" json:"id"`
-	OrderID                  uint                      `gorm:"uniqueIndex;not null" json:"orderId"`
-	Order                    *CalendarEventTicketOrder `gorm:"foreignKey:OrderID;constraint:OnDelete:CASCADE" json:"order,omitempty"`
-	PaymentMethod            PaymentMethod             `gorm:"type:varchar(32);not null" json:"paymentMethod"`
-	Status                   PaymentStatus             `gorm:"type:varchar(32);default:'pending'" json:"status"`
-	Amount                   int64                     `gorm:"not null" json:"amount"` // Cents for fiat, sats for BTC/Lightning
-	Currency                 OrderCurrency             `gorm:"type:varchar(8);not null" json:"currency"`
+type CalendarEventTicketOrderPaymentDTO struct {
+	ID                       uint                      `json:"id"`
+	OrderID                  uint                      `json:"orderId"`
+	Order                    *CalendarEventTicketOrder `json:"order,omitempty"`
+	PaymentMethod            PaymentMethod             `json:"paymentMethod"`
+	Status                   PaymentStatus             `json:"status"`
+	Amount                   int64                     `json:"amount"` // Cents for fiat, sats for BTC/Lightning
+	Currency                 OrderCurrency             `json:"currency"`
 	ExchangeRate             *float64                  `json:"exchangeRate"`
-	ExchangeRateSource       *string                   `gorm:"type:varchar(50)" json:"exchangeRateSource"`
-	LightningPaymentHash     *string                   `gorm:"uniqueIndex;size:64" json:"lightningPaymentHash,omitempty"`
-	LightningPaymentRequest  *string                   `gorm:"type:text" json:"lightningPaymentRequest,omitempty"`
-	LightningPreimage        *string                   `gorm:"size:64" json:"lightningPreimage,omitempty"`
-	LightningProvider        *string                   `gorm:"size:32" json:"lightningProvider,omitempty"`
-	LightningProviderTxID    *string                   `gorm:"index" json:"lightningProviderTxId,omitempty"`
-	PaymentProviderReference *string                   `gorm:"index" json:"paymentProviderReference"`
-	Metadata                 *datatypes.JSON           `gorm:"type:jsonb" json:"metadata,omitempty"`
+	LightningPreimage        *string                   `json:"lightningPreimage,omitempty"`
+	LightningProvider        *string                   `json:"lightningProvider,omitempty"`
+	LightningProviderTxID    *string                   `json:"lightningProviderTxId,omitempty"`
+	PaymentProviderReference *string                   `json:"paymentProviderReference"`
 	PaidAt                   *time.Time                `json:"paidAt,omitempty"`
 	ExpiredAt                *time.Time                `json:"expiredAt,omitempty"`
 	ExpiresAt                *time.Time                `json:"expiresAt,omitempty"`
 	FailedAt                 *time.Time                `json:"failedAt,omitempty"`
 	RefundedAt               *time.Time                `json:"refundedAt,omitempty"`
 	CancelledAt              *time.Time                `json:"cancelledAt,omitempty"`
-	CreatedAt                time.Time                 `json:"createdAt"`
-	UpdatedAt                time.Time                 `json:"updatedAt"`
-	DeletedAt                gorm.DeletedAt            `gorm:"index" json:"-"`
 }
 
-// CalendarEventTicketOrderRefund represents a refund for a ticket order
-type CalendarEventTicketOrderRefund struct {
-	ID           uint                      `gorm:"primarykey" json:"id"`
-	OrderID      uint                      `gorm:"not null;index" json:"orderId"`
-	Order        *CalendarEventTicketOrder `gorm:"foreignKey:OrderID;constraint:OnDelete:CASCADE" json:"-"`
-	Amount       int64                     `gorm:"not null" json:"amount"`
-	Fee          int64                     `gorm:"type:bigint;default:0" json:"fee"`
-	Currency     string                    `gorm:"not null" json:"currency"`
-	Status       RefundStatus              `gorm:"not null;default:'pending'" json:"status"`
-	RefundMethod string                    `gorm:"not null" json:"refundMethod"` // "lightning", "stripe", etc.
-
-	LightningAddress     *string `json:"lightningAddress,omitempty"`
-	LightningPaymentHash *string `json:"lightningPaymentHash,omitempty"`
-	LightningPreimage    *string `gorm:"size:64" json:"lightningPreimage,omitempty"`
-
-	StripeRefundID        *string `json:"stripeRefundId,omitempty"`
-	StripePaymentIntentID *string `json:"stripePaymentIntentId,omitempty"`
-
-	Reason        *string         `gorm:"type:text" json:"reason,omitempty"`
-	CreatedAt     time.Time       `json:"createdAt"`
-	ProcessedAt   *time.Time      `json:"processedAt,omitempty"`
-	FailedAt      *time.Time      `json:"failedAt,omitempty"`
-	FailureReason *string         `gorm:"type:text" json:"failureReason,omitempty"`
-	Metadata      *datatypes.JSON `gorm:"type:jsonb" json:"metadata,omitempty"`
-	DeletedAt     gorm.DeletedAt  `gorm:"index" json:"-"`
+func (CalendarEventTicketOrderPaymentDTO) TableName() string {
+	return "calendar_event_ticket_order_payments"
 }
 
-type CouponDiscountType string
-
-const (
-	CouponDiscountPercent CouponDiscountType = "percentage"
-	CouponDiscountAmount  CouponDiscountType = "fixed_amount"
-)
-
-type CouponScope string
-
-const (
-	CouponScopeEvent    CouponScope = "event"
-	CouponScopeCalendar CouponScope = "calendar"
-)
-
-type CalendarEventCoupon struct {
-	ID                 uint               `gorm:"primaryKey" json:"id"`
-	AccountID          uint               `json:"-"`
-	Account            *Account           `gorm:"foreignKey:AccountID;constraint:OnDelete:SET NULL" json:"-"`
-	Scope              CouponScope        `gorm:"type:varchar(16);not null" json:"scope"`
-	CalendarEventID    *uint              `gorm:"index;uniqueIndex:idx_coupon_code_event" json:"calendarEventId,omitempty"`
-	CalendarEvent      *CalendarEvent     `gorm:"foreignKey:CalendarEventID;constraint:OnDelete:CASCADE" json:"-"`
-	CalendarID         *uint              `gorm:"index;uniqueIndex:idx_coupon_code_calendar" json:"calendarId,omitempty"`
-	Calendar           *Calendar          `gorm:"foreignKey:CalendarID;constraint:OnDelete:CASCADE" json:"-"`
-	TicketTypeIDs      pq.Int32Array      `gorm:"type:integer[]" json:"ticketTypeIds,omitempty"`
-	Code               string             `gorm:"index;uniqueIndex:idx_coupon_code_event;uniqueIndex:idx_coupon_code_calendar;size:64;not null" json:"code"`
-	Description        *string            `json:"description,omitempty"`
-	DiscountType       CouponDiscountType `gorm:"type:varchar(16);not null" json:"discountType"`
-	DiscountPercentage *uint              `json:"discountPercentage,omitempty"`
-	DiscountAmount     *uint              `json:"discountAmount,omitempty"`
-	DiscountCurrency   *OrderCurrency     `gorm:"type:varchar(8)" json:"discountCurrency,omitempty"`
-	MaxRedemptions     *uint              `json:"maxRedemptions,omitempty"`
-	Redemptions        uint               `gorm:"default:0" json:"redemptions"`
-	StartsAt           time.Time          `json:"startsAt"`
-	EndsAt             time.Time          `json:"endsAt"`
-	IsSingleUse        bool               `gorm:"default:false" json:"isSingleUse"`
-	IsActive           bool               `gorm:"default:true" json:"isActive"`
-	CreatedAt          time.Time          `json:"createdAt"`
-	UpdatedAt          time.Time          `json:"updatedAt"`
-	DeletedAt          gorm.DeletedAt     `gorm:"index" json:"-"`
-}
-
-func (CalendarEventCoupon) TableName() string {
-	return "calendar_event_coupons"
-}
-
-type CalendarEventTicketTypePromotion struct {
-	ID                 uint                     `gorm:"primaryKey" json:"id"`
-	TicketTypeID       uint                     `gorm:"not null;index" json:"ticketTypeId"`
-	TicketType         *CalendarEventTicketType `gorm:"foreignKey:TicketTypeID;constraint:OnDelete:CASCADE" json:"-"`
-	Name               string                   `gorm:"size:30;not null" json:"name"`
-	DiscountPercentage uint                     `gorm:"not null" json:"discountPercentage"`
-	EndDate            *time.Time               `json:"endDate,omitempty"`
-	MaxQuantity        *uint                    `json:"maxQuantity,omitempty"`
-	RedeemedQuantity   uint                     `gorm:"default:0" json:"redeemedQuantity"`
-	IsActive           bool                     `gorm:"default:true" json:"isActive"`
-	CreatedAt          time.Time                `json:"createdAt"`
-	UpdatedAt          time.Time                `json:"updatedAt"`
-	DeletedAt          gorm.DeletedAt           `gorm:"index" json:"-"`
+// ToDTO - Convert CalendarEventTicketOrderPayment to CalendarEventTicketOrderPaymentDTO.
+func (payment CalendarEventTicketOrderPayment) ToDTO() *CalendarEventTicketOrderPaymentDTO {
+	return &CalendarEventTicketOrderPaymentDTO{
+		ID:                       payment.ID,
+		OrderID:                  payment.OrderID,
+		Order:                    payment.Order,
+		PaymentMethod:            payment.PaymentMethod,
+		Status:                   payment.Status,
+		Amount:                   payment.Amount,
+		Currency:                 payment.Currency,
+		ExchangeRate:             payment.ExchangeRate,
+		LightningPreimage:        payment.LightningPreimage,
+		LightningProvider:        payment.LightningProvider,
+		LightningProviderTxID:    payment.LightningProviderTxID,
+		PaymentProviderReference: payment.PaymentProviderReference,
+		PaidAt:                   payment.PaidAt,
+		ExpiredAt:                payment.ExpiredAt,
+		ExpiresAt:                payment.ExpiresAt,
+		RefundedAt:               payment.RefundedAt,
+		CancelledAt:              payment.CancelledAt,
+	}
 }
