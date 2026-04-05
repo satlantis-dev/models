@@ -197,16 +197,13 @@ type CalendarEventTicketOrderPaymentDTO struct {
 	FailedAt                 *time.Time                `json:"failedAt,omitempty"`
 	RefundedAt               *time.Time                `json:"refundedAt,omitempty"`
 	CancelledAt              *time.Time                `json:"cancelledAt,omitempty"`
-	CreatedAt                time.Time                 `json:"createdAt"`
-	UpdatedAt                time.Time                 `json:"updatedAt"`
-	DeletedAt                gorm.DeletedAt            `gorm:"index" json:"-"`
 }
 
 func (CalendarEventTicketOrderPaymentDTO) TableName() string {
 	return "calendar_event_ticket_order_payments"
 }
 
-// ToDTO - Convert Place to PlaceDTO.
+// ToDTO - Convert CalendarEventTicketOrderPayment to CalendarEventTicketOrderPaymentDTO.
 func (payment CalendarEventTicketOrderPayment) ToDTO() *CalendarEventTicketOrderPaymentDTO {
 	return &CalendarEventTicketOrderPaymentDTO{
 		ID:                       payment.ID,
