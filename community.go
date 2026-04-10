@@ -3,6 +3,7 @@ package models
 import (
 	"time"
 
+	"gorm.io/datatypes"
 	"gorm.io/gorm"
 )
 
@@ -22,6 +23,7 @@ type Community struct {
 	Calendars   *[]Calendar                `gorm:"foreignKey:CommunityID;constraint:OnDelete:SET NULL" json:"calendars,omitempty"`
 	FAQ         *[]CommunityFAQ            `gorm:"type:jsonb;serializer:json" json:"faq,omitempty"`
 	Gallery     *[]CommunityGalleryImage   `gorm:"foreignKey:CommunityID;constraint:OnDelete:CASCADE;" json:"gallery,omitempty"`
+	SocialLinks datatypes.JSON             `gorm:"type:jsonb" json:"socialLinks"`
 }
 
 type CommunityFAQ struct {
