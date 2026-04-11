@@ -119,6 +119,22 @@ func (a *Account) ToSearchAccountDTO() SearchAccountDTO {
 	}
 }
 
+func (a *AccountDTO) ToSearchAccountDTO() SearchAccountDTO {
+
+	return SearchAccountDTO{
+		ID:             a.ID,
+		Username:       a.Username,
+		DisplayName:    a.DisplayName,
+		Name:           a.Name,
+		Nip05:          a.Nip05,
+		About:          a.About,
+		Picture:        a.Picture,
+		Npub:           a.Npub,
+		FollowersCount: a.FollowersCount,
+		FollowingCount: a.FollowingCount,
+	}
+}
+
 func (SearchAccountDTO) TableName() string {
 	return "accounts"
 }
