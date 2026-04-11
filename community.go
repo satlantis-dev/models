@@ -19,6 +19,7 @@ type Community struct {
 	Banner      *string                    `gorm:"type:text" json:"banner,omitempty"`
 	Newsletters *[]CommunityNewsletter     `gorm:"foreignKey:CommunityID;constraint:OnDelete:CASCADE;" json:"newsletters,omitempty"`
 	Members     *[]CommunityMember         `gorm:"foreignKey:CommunityID;constraint:OnDelete:CASCADE;" json:"members,omitempty"`
+	MemberCount *int                       `gorm:"-" json:"memberCount"`
 	Tiers       *[]CommunityMembershipTier `gorm:"foreignKey:CommunityID;constraint:OnDelete:CASCADE;" json:"tiers,omitempty"`
 	Calendars   *[]Calendar                `gorm:"foreignKey:CommunityID;constraint:OnDelete:SET NULL" json:"calendars,omitempty"`
 	FAQ         *[]CommunityFAQ            `gorm:"type:jsonb;serializer:json" json:"faq,omitempty"`
