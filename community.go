@@ -15,6 +15,7 @@ type Community struct {
 	UpdatedAt   time.Time                  `gorm:"autoUpdateTime" json:"-"`
 	DeletedAt   *gorm.DeletedAt            `gorm:"index" json:"-"`
 	Name        string                     `gorm:"type:text;not null" json:"name"`
+	Bio         *string                    `gorm:"type:text" json:"bio,omitempty"`
 	Description *string                    `gorm:"type:text" json:"description,omitempty"`
 	Banner      *string                    `gorm:"type:text" json:"banner,omitempty"`
 	Newsletters *[]CommunityNewsletter     `gorm:"foreignKey:CommunityID;constraint:OnDelete:CASCADE;" json:"newsletters,omitempty"`
