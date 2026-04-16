@@ -60,6 +60,7 @@ type Account struct {
 	AppleID                     *string               `gorm:"uniqueIndex" json:"appleId"`
 	GoogleID                    *string               `gorm:"uniqueIndex" json:"googleId"`
 	VertexRank                  decimal.Decimal       `gorm:"type:numeric;index" json:"vertexRank"`
+	WithdrawalDisabledAt        *time.Time            `gorm:"default:NULL" json:"-"`
 }
 
 // AccountMiniDTO
