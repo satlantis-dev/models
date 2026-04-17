@@ -18,6 +18,7 @@ type Community struct {
 	Bio         *string                    `gorm:"type:text" json:"bio,omitempty"`
 	Description *string                    `gorm:"type:text" json:"description,omitempty"`
 	Banner      *string                    `gorm:"type:text" json:"banner,omitempty"`
+	Logo        *string                    `gorm:"type:text" json:"logo,omitempty"`
 	Newsletters *[]CommunityNewsletter     `gorm:"foreignKey:CommunityID;constraint:OnDelete:CASCADE;" json:"newsletters,omitempty"`
 	Members     *[]CommunityMember         `gorm:"foreignKey:CommunityID;constraint:OnDelete:CASCADE;" json:"members,omitempty"`
 	MemberCount *int                       `gorm:"-" json:"memberCount,omitempty"`
