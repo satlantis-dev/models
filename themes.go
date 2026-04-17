@@ -14,4 +14,5 @@ type Theme struct {
 	DeletedAt       *gorm.DeletedAt `gorm:"index" json:"-"`
 	BackgroundColor string          `gorm:"type:varchar(7);not null" json:"backgroundColor"`
 	ForegroundColor string          `gorm:"type:varchar(7);not null" json:"foregroundColor"`
+	Rank            int             `gorm:"not null" json:"rank"`
 }
