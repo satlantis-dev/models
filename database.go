@@ -112,6 +112,7 @@ var DatabaseModels = []interface{}{
 	SourceLocationsOsm{},
 	SourceLocationsAll{},
 	Tag{},
+	Theme{},
 	Topic{},
 	VanityPath{},
 	VerificationToken{},
