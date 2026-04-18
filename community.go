@@ -16,9 +16,11 @@ type Community struct {
 	DeletedAt   *gorm.DeletedAt            `gorm:"index" json:"-"`
 	Name        string                     `gorm:"type:text;not null" json:"name"`
 	Bio         *string                    `gorm:"type:text" json:"bio,omitempty"`
+	Blurb       *string                    `gorm:"type:text" json:"blurb,omitempty"`
 	Description *string                    `gorm:"type:text" json:"description,omitempty"`
 	Banner      *string                    `gorm:"type:text" json:"banner,omitempty"`
 	Logo        *string                    `gorm:"type:text" json:"logo,omitempty"`
+	Notice      *string                    `gorm:"type:text" json:"notice,omitempty"`
 	Newsletters *[]CommunityNewsletter     `gorm:"foreignKey:CommunityID;constraint:OnDelete:CASCADE;" json:"newsletters,omitempty"`
 	Members     *[]CommunityMember         `gorm:"foreignKey:CommunityID;constraint:OnDelete:CASCADE;" json:"members,omitempty"`
 	MemberCount *int                       `gorm:"-" json:"memberCount,omitempty"`

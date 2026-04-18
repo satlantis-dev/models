@@ -23,6 +23,7 @@ var DatabaseModels = []interface{}{
 	Block{},
 	Brand{},
 	Calendar{},
+	CalendarCalendarEvent{},
 	CalendarEvent{},
 	CalendarEventAnnouncement{},
 	CalendarEventDraft{},
