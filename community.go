@@ -28,7 +28,8 @@ type Community struct {
 	Calendars   *[]Calendar                `gorm:"foreignKey:CommunityID;constraint:OnDelete:SET NULL" json:"calendars,omitempty"`
 	FAQ         *[]CommunityFAQ            `gorm:"type:jsonb;serializer:json" json:"faq,omitempty"`
 	Gallery     *[]CommunityGalleryImage   `gorm:"foreignKey:CommunityID;constraint:OnDelete:CASCADE;" json:"gallery,omitempty"`
-	SocialLinks datatypes.JSON             `gorm:"type:jsonb" json:"socialLinks"`
+	SocialLinks *datatypes.JSON            `gorm:"type:jsonb" json:"socialLinks,omitempty"`
+	ChatLinks   *datatypes.JSON            `gorm:"type:jsonb" json:"chatLinks,omitempty"`
 	ThemeID     *uint                      `gorm:"index" json:"themeId,omitempty"`
 	Theme       *Theme                     `gorm:"foreignKey:ThemeID;constraint:OnDelete:SET NULL;" json:"theme,omitempty"`
 }
