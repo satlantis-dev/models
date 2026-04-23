@@ -98,6 +98,8 @@ type CalendarEventTicketOrderRefund struct {
 	ID           uint                      `gorm:"primarykey" json:"id"`
 	OrderID      uint                      `gorm:"not null;index" json:"orderId"`
 	Order        *CalendarEventTicketOrder `gorm:"foreignKey:OrderID;constraint:OnDelete:CASCADE" json:"-"`
+	TicketID     *uint                     `gorm:"index" json:"ticketId,omitempty"`
+	Ticket       *CalendarEventTicket      `gorm:"foreignKey:TicketID;constraint:OnDelete:SET NULL" json:"ticket,omitempty"`
 	Amount       int64                     `gorm:"not null" json:"amount"`
 	Fee          int64                     `gorm:"type:bigint;default:0" json:"fee"`
 	Currency     OrderCurrency             `gorm:"not null" json:"currency"`
