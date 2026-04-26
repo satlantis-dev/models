@@ -14,6 +14,8 @@ type CommunityMember struct {
 	Account          *AccountDTO              `gorm:"foreignKey:AccountID;constraint:OnDelete:CASCADE;" json:"account,omitempty"`
 	TierID           *uint                    `gorm:"index" json:"tierId,omitempty"`
 	Tier             *CommunityMembershipTier `gorm:"foreignKey:TierID;constraint:OnDelete:SET NULL;" json:"tier,omitempty"`
+	StartDate        *time.Time               `gorm:"type:timestamptz" json:"startDate,omitempty"`
+	ExpiryDate       *time.Time               `gorm:"type:timestamptz;index" json:"expiryDate,omitempty"`
 	IsCommunityAdmin bool                     `gorm:"not null;default:false" json:"isCommunityAdmin"`
 	CreatedAt        time.Time                `gorm:"autoCreateTime" json:"createdAt"`
 	UpdatedAt        time.Time                `gorm:"autoUpdateTime" json:"updatedAt"`
