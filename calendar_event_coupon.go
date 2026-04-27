@@ -51,3 +51,23 @@ type CalendarEventCoupon struct {
 func (CalendarEventCoupon) TableName() string {
 	return "calendar_event_coupons"
 }
+
+type CalendarEventCouponRedemption struct {
+	ID             uint                      `gorm:"primaryKey" json:"id"`
+	CouponID       uint                      `gorm:"not null;index;uniqueIndex:idx_coupon_account_redemption,priority:1" json:"couponId"`
+	Coupon         *CalendarEventCoupon      `gorm:"foreignKey:CouponID;constraint:OnDelete:CASCADE" json:"-"`
+	AccountID      uint                      `gorm:"not null;index;uniqueIndex:idx_coupon_account_redemption,priority:2" json:"accountId"`
+	Account        *Account                  `gorm:"foreignKey:AccountID;constraint:OnDelete:CASCADE" json:"-"`
+	OrderID        uint                      `gorm:"not null;uniqueIndex" json:"orderId"`
+	Order          *CalendarEventTicketOrder `gorm:"foreignKey:OrderID;constraint:OnDelete:CASCADE" json:"-"`
+	DiscountAmount int64                     `gorm:"type:bigint;not null" json:"discountAmount"`
+	Currency       OrderCurrency             `gorm:"type:varchar(8);not null" json:"currency"`
+	RedeemedAt     time.Time                 `json:"redeemedAt"`
+	CreatedAt      time.Time                 `json:"-"`
+	UpdatedAt      time.Time                 `json:"-"`
+	DeletedAt      gorm.DeletedAt            `gorm:"index" json:"-"`
+}
+
+func (CalendarEventCouponRedemption) TableName() string {
+	return "calendar_event_coupon_redemptions"
+}

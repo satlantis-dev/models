@@ -123,45 +123,52 @@ type CalendarEventTicketOrderRefund struct {
 }
 
 type CalendarEventTicketOrder struct {
-	ID              uint                           `gorm:"primaryKey" json:"id"`
-	Code            string                         `gorm:"uniqueIndex;size:64" json:"code"`
-	CalendarEventID uint                           `gorm:"not null;index" json:"calendarEventId"`
-	CalendarEvent   *CalendarEvent                 `gorm:"foreignKey:CalendarEventID;constraint:OnDelete:CASCADE" json:"calendarEvent,omitempty"`
-	AccountID       uint                           `gorm:"not null;index" json:"accountId"`
-	Account         *Account                       `gorm:"foreignKey:AccountID;constraint:OnDelete:CASCADE" json:"-"`
-	TotalPrice      int64                          `gorm:"type:bigint" json:"totalPrice"`
-	Currency        OrderCurrency                  `gorm:"type:varchar(8)" json:"currency"`
-	RefundedAmount  int64                          `gorm:"type:bigint;default:0" json:"refundedAmount"`
-	PriceCurrency   *OrderCurrency                 `gorm:"type:varchar(10)" json:"priceCurrency"`
-	PriceAmount     *int64                         `json:"priceAmount"`
-	Status          OrderStatus                    `gorm:"type:varchar(32);default:'pending'" json:"status"`
-	RsvpData        datatypes.JSON                 `gorm:"type:jsonb" json:"rsvpData,omitempty"`
-	Items           []CalendarEventTicketOrderItem `gorm:"foreignKey:OrderID" json:"items,omitempty"`
-	CreatedAt       time.Time                      `json:"-"`
-	UpdatedAt       time.Time                      `json:"-"`
-	DeletedAt       gorm.DeletedAt                 `gorm:"index" json:"-"`
+	ID                   uint                           `gorm:"primaryKey" json:"id"`
+	Code                 string                         `gorm:"uniqueIndex;size:64" json:"code"`
+	CalendarEventID      uint                           `gorm:"not null;index" json:"calendarEventId"`
+	CalendarEvent        *CalendarEvent                 `gorm:"foreignKey:CalendarEventID;constraint:OnDelete:CASCADE" json:"calendarEvent,omitempty"`
+	AccountID            uint                           `gorm:"not null;index" json:"accountId"`
+	Account              *Account                       `gorm:"foreignKey:AccountID;constraint:OnDelete:CASCADE" json:"-"`
+	TotalPrice           int64                          `gorm:"type:bigint" json:"totalPrice"`
+	Currency             OrderCurrency                  `gorm:"type:varchar(8)" json:"currency"`
+	RefundedAmount       int64                          `gorm:"type:bigint;default:0" json:"refundedAmount"`
+	PriceCurrency        *OrderCurrency                 `gorm:"type:varchar(10)" json:"priceCurrency"`
+	PriceAmount          *int64                         `json:"priceAmount"`
+	Status               OrderStatus                    `gorm:"type:varchar(32);default:'pending'" json:"status"`
+	RsvpData             datatypes.JSON                 `gorm:"type:jsonb" json:"rsvpData,omitempty"`
+	Items                []CalendarEventTicketOrderItem `gorm:"foreignKey:OrderID" json:"items,omitempty"`
+	CouponID             *uint                          `gorm:"index" json:"couponId,omitempty"`
+	Coupon               *CalendarEventCoupon           `gorm:"foreignKey:CouponID;constraint:OnDelete:SET NULL" json:"coupon,omitempty"`
+	CouponCode           *string                        `gorm:"size:64" json:"couponCode,omitempty"`
+	CouponDiscountAmount *int64                         `gorm:"type:bigint" json:"couponDiscountAmount,omitempty"`
+	CreatedAt            time.Time                      `json:"-"`
+	UpdatedAt            time.Time                      `json:"-"`
+	DeletedAt            gorm.DeletedAt                 `gorm:"index" json:"-"`
 }
 
 type CalendarEventTicketOrderItem struct {
-	ID              uint                              `gorm:"primaryKey" json:"id"`
-	OrderID         uint                              `gorm:"not null;index" json:"orderId"`
-	Order           *CalendarEventTicketOrder         `gorm:"foreignKey:OrderID;constraint:OnDelete:CASCADE" json:"order,omitempty"`
-	TicketTypeID    uint                              `gorm:"not null;index" json:"ticketTypeId"`
-	TicketType      *CalendarEventTicketType          `gorm:"foreignKey:TicketTypeID;constraint:OnDelete:CASCADE" json:"ticketType,omitempty"`
-	Quantity        uint                              `json:"quantity"`
-	PriceEach       int64                             `gorm:"type:bigint" json:"priceEach"`
-	Currency        OrderCurrency                     `gorm:"type:varchar(8)" json:"currency"`
-	RefundedAmount  int64                             `gorm:"type:bigint;default:0" json:"refundedAmount"`
-	PriceCurrency   *OrderCurrency                    `gorm:"type:varchar(10)" json:"priceCurrency"`
-	PriceAmount     *int64                            `json:"priceAmount"`
-	Status          OrderStatus                       `gorm:"type:varchar(32);default:'pending'" json:"status"`
-	PromotionID     *uint                             `gorm:"index" json:"promotionId,omitempty"`
-	Promotion       *CalendarEventTicketTypePromotion `gorm:"foreignKey:PromotionID;constraint:OnDelete:SET NULL" json:"promotion,omitempty"`
-	OriginalPrice   *int64                            `gorm:"type:bigint" json:"originalPrice,omitempty"`
-	DiscountPercent *uint                             `json:"discountPercent,omitempty"`
-	CreatedAt       time.Time                         `json:"-"`
-	UpdatedAt       time.Time                         `json:"-"`
-	DeletedAt       gorm.DeletedAt                    `gorm:"index" json:"-"`
+	ID                    uint                              `gorm:"primaryKey" json:"id"`
+	OrderID               uint                              `gorm:"not null;index" json:"orderId"`
+	Order                 *CalendarEventTicketOrder         `gorm:"foreignKey:OrderID;constraint:OnDelete:CASCADE" json:"order,omitempty"`
+	TicketTypeID          uint                              `gorm:"not null;index" json:"ticketTypeId"`
+	TicketType            *CalendarEventTicketType          `gorm:"foreignKey:TicketTypeID;constraint:OnDelete:CASCADE" json:"ticketType,omitempty"`
+	Quantity              uint                              `json:"quantity"`
+	PriceEach             int64                             `gorm:"type:bigint" json:"priceEach"`
+	Currency              OrderCurrency                     `gorm:"type:varchar(8)" json:"currency"`
+	RefundedAmount        int64                             `gorm:"type:bigint;default:0" json:"refundedAmount"`
+	PriceCurrency         *OrderCurrency                    `gorm:"type:varchar(10)" json:"priceCurrency"`
+	PriceAmount           *int64                            `json:"priceAmount"`
+	Status                OrderStatus                       `gorm:"type:varchar(32);default:'pending'" json:"status"`
+	PromotionID           *uint                             `gorm:"index" json:"promotionId,omitempty"`
+	Promotion             *CalendarEventTicketTypePromotion `gorm:"foreignKey:PromotionID;constraint:OnDelete:SET NULL" json:"promotion,omitempty"`
+	OriginalPrice         *int64                            `gorm:"type:bigint" json:"originalPrice,omitempty"`
+	DiscountPercent       *uint                             `json:"discountPercent,omitempty"`
+	CouponID              *uint                             `gorm:"index" json:"couponId,omitempty"`
+	CouponDiscountAmount  *int64                            `gorm:"type:bigint" json:"couponDiscountAmount,omitempty"`
+	CouponDiscountPercent *uint                             `json:"couponDiscountPercent,omitempty"`
+	CreatedAt             time.Time                         `json:"-"`
+	UpdatedAt             time.Time                         `json:"-"`
+	DeletedAt             gorm.DeletedAt                    `gorm:"index" json:"-"`
 }
 
 type CalendarEventTicket struct {
