@@ -16,10 +16,10 @@ const (
 type CommunityMembershipApplicationStatus string
 
 const (
-	CommunityMembershipApplicationStatusPending  CommunityMembershipApplicationStatus = "pending"
-	CommunityMembershipApplicationStatusApproved CommunityMembershipApplicationStatus = "approved"
-	CommunityMembershipApplicationStatusRejected CommunityMembershipApplicationStatus = "rejected"
-	CommunityMembershipApplicationStatusCanceled CommunityMembershipApplicationStatus = "canceled"
+	CommunityMembershipApplicationStatusPending   CommunityMembershipApplicationStatus = "pending"
+	CommunityMembershipApplicationStatusApproved  CommunityMembershipApplicationStatus = "approved"
+	CommunityMembershipApplicationStatusRejected  CommunityMembershipApplicationStatus = "rejected"
+	CommunityMembershipApplicationStatusCancelled CommunityMembershipApplicationStatus = "cancelled"
 )
 
 type CommunityMembershipApplication struct {

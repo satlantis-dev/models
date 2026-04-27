@@ -21,10 +21,10 @@ var (
 type OrderStatus string
 
 var (
-	OrderPending  OrderStatus = "pending"
-	OrderPaid     OrderStatus = "paid"
-	OrderCanceled OrderStatus = "cancelled"
-	OrderRefunded OrderStatus = "refunded"
+	OrderPending   OrderStatus = "pending"
+	OrderPaid      OrderStatus = "paid"
+	OrderCancelled OrderStatus = "cancelled"
+	OrderRefunded  OrderStatus = "refunded"
 )
 
 type TicketStatus string

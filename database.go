@@ -53,6 +53,7 @@ var DatabaseModels = []interface{}{
 	Community{},
 	CommunityGalleryImage{},
 	CommunityMembershipTier{},
+	CommunityMembershipApplication{},
 	CommunityMember{},
 	CommunityNewsletter{},
 	Continent{},
