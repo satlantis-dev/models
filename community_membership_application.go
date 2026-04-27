@@ -9,15 +9,17 @@ import (
 type CommunityMembershipApplicationType string
 
 const (
-	CommunityMembershipApplicationTypeNew     CommunityMembershipApplicationType = "new"
-	CommunityMembershipApplicationTypeUpgrade CommunityMembershipApplicationType = "upgrade"
+	CommunityMembershipApplicationTypeNew       CommunityMembershipApplicationType = "new"
+	CommunityMembershipApplicationTypeUpgrade   CommunityMembershipApplicationType = "upgrade"
+	CommunityMembershipApplicationTypeDowngrade CommunityMembershipApplicationType = "downgrade"
+	CommunityMembershipApplicationTypeExtend    CommunityMembershipApplicationType = "extend"
 )
 
 type CommunityMembershipApplicationStatus string
 
 const (
 	CommunityMembershipApplicationStatusPending   CommunityMembershipApplicationStatus = "pending"
-	CommunityMembershipApplicationStatusApproved  CommunityMembershipApplicationStatus = "approved"
+	CommunityMembershipApplicationStatusAccepted  CommunityMembershipApplicationStatus = "accepted"
 	CommunityMembershipApplicationStatusRejected  CommunityMembershipApplicationStatus = "rejected"
 	CommunityMembershipApplicationStatusCancelled CommunityMembershipApplicationStatus = "cancelled"
 )
@@ -34,6 +36,7 @@ type CommunityMembershipApplication struct {
 	CurrentTier         *CommunityMembershipTier             `gorm:"foreignKey:CurrentTierID;constraint:OnDelete:SET NULL;" json:"currentTier,omitempty"`
 	RequestedTierID     uint                                 `gorm:"not null;index;uniqueIndex:idx_community_membership_pending_unique,where:status = 'pending' AND deleted_at IS NULL" json:"requestedTierId"`
 	RequestedTier       *CommunityMembershipTier             `gorm:"foreignKey:RequestedTierID;constraint:OnDelete:RESTRICT;" json:"requestedTier,omitempty"`
+	Payment             *CommunityMembershipPayment          `gorm:"foreignKey:ApplicationID;references:ID;constraint:OnDelete:CASCADE;" json:"payment,omitempty"`
 	RegistrationAnswers *map[string]interface{}              `gorm:"type:jsonb;serializer:json" json:"registrationAnswers,omitempty"`
 	ReviewedByAccountID *uint                                `gorm:"index" json:"reviewedByAccountId,omitempty"`
 	ReviewedByAccount   *AccountDTO                          `gorm:"foreignKey:ReviewedByAccountID;constraint:OnDelete:SET NULL;" json:"reviewedByAccount,omitempty"`
