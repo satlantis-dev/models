@@ -24,6 +24,13 @@ const (
 	CommunityMembershipApplicationStatusCancelled CommunityMembershipApplicationStatus = "cancelled"
 )
 
+type CommunityMembershipPeriod string
+
+const (
+	CommunityMembershipPeriodMonthly CommunityMembershipPeriod = "monthly"
+	CommunityMembershipPeriodAnnual  CommunityMembershipPeriod = "annual"
+)
+
 type CommunityMembershipApplication struct {
 	ID                  uint                                 `gorm:"primaryKey;autoIncrement" json:"id"`
 	CommunityID         uint                                 `gorm:"not null;index:idx_community_membership_application_lookup;uniqueIndex:idx_community_membership_pending_unique,where:status = 'pending' AND deleted_at IS NULL" json:"communityId"`
@@ -36,6 +43,7 @@ type CommunityMembershipApplication struct {
 	CurrentTier         *CommunityMembershipTier             `gorm:"foreignKey:CurrentTierID;constraint:OnDelete:SET NULL;" json:"currentTier,omitempty"`
 	RequestedTierID     uint                                 `gorm:"not null;index;uniqueIndex:idx_community_membership_pending_unique,where:status = 'pending' AND deleted_at IS NULL" json:"requestedTierId"`
 	RequestedTier       *CommunityMembershipTier             `gorm:"foreignKey:RequestedTierID;constraint:OnDelete:RESTRICT;" json:"requestedTier,omitempty"`
+	Period              *CommunityMembershipPeriod           `gorm:"type:varchar(16)" json:"period,omitempty"`
 	Payment             *CommunityMembershipPayment          `gorm:"foreignKey:ApplicationID;references:ID;constraint:OnDelete:CASCADE;" json:"payment,omitempty"`
 	RegistrationAnswers *map[string]interface{}              `gorm:"type:jsonb;serializer:json" json:"registrationAnswers,omitempty"`
 	ReviewedByAccountID *uint                                `gorm:"index" json:"reviewedByAccountId,omitempty"`
