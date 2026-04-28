@@ -37,11 +37,11 @@ type CommunityMembershipApplication struct {
 	Community           *Community                           `gorm:"foreignKey:CommunityID;constraint:OnDelete:CASCADE;" json:"community,omitempty"`
 	AccountID           uint                                 `gorm:"not null;index:idx_community_membership_application_lookup;uniqueIndex:idx_community_membership_pending_unique,where:status = 'pending' AND deleted_at IS NULL" json:"accountId"`
 	Account             *AccountDTO                          `gorm:"foreignKey:AccountID;constraint:OnDelete:CASCADE;" json:"account,omitempty"`
-	Type                CommunityMembershipApplicationType   `gorm:"type:varchar(32);not null;default:'new';index;uniqueIndex:idx_community_membership_pending_unique,where:status = 'pending' AND deleted_at IS NULL" json:"type"`
+	Type                CommunityMembershipApplicationType   `gorm:"type:varchar(32);not null;default:'new';index" json:"type"`
 	Status              CommunityMembershipApplicationStatus `gorm:"type:varchar(32);not null;default:'pending';index" json:"status"`
 	CurrentTierID       *uint                                `gorm:"index" json:"currentTierId,omitempty"`
 	CurrentTier         *CommunityMembershipTier             `gorm:"foreignKey:CurrentTierID;constraint:OnDelete:SET NULL;" json:"currentTier,omitempty"`
-	RequestedTierID     uint                                 `gorm:"not null;index;uniqueIndex:idx_community_membership_pending_unique,where:status = 'pending' AND deleted_at IS NULL" json:"requestedTierId"`
+	RequestedTierID     uint                                 `gorm:"not null;index" json:"requestedTierId"`
 	RequestedTier       *CommunityMembershipTier             `gorm:"foreignKey:RequestedTierID;constraint:OnDelete:RESTRICT;" json:"requestedTier,omitempty"`
 	Period              *CommunityMembershipPeriod           `gorm:"type:varchar(16)" json:"period,omitempty"`
 	Payment             *CommunityMembershipPayment          `gorm:"foreignKey:ApplicationID;references:ID;constraint:OnDelete:CASCADE;" json:"payment,omitempty"`
