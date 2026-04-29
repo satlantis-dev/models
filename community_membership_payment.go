@@ -11,8 +11,6 @@ type CommunityMembershipPayment struct {
 	ID                       uint                             `gorm:"primaryKey" json:"id"`
 	SubscriptionID           uint                             `gorm:"not null;index" json:"subscriptionId"`
 	Subscription             *CommunityMembershipSubscription `gorm:"foreignKey:SubscriptionID;constraint:OnDelete:CASCADE" json:"subscription,omitempty"`
-	ApplicationID            *uint                            `gorm:"index" json:"applicationId,omitempty"`
-	Application              *CommunityMembershipRequest      `gorm:"foreignKey:ApplicationID;constraint:OnDelete:SET NULL" json:"application,omitempty"`
 	Refunds                  []CommunityMembershipRefund      `gorm:"foreignKey:PaymentID" json:"refunds,omitempty"`
 	PaymentMethod            PaymentMethod                    `gorm:"type:varchar(32);not null" json:"paymentMethod"`
 	Status                   PaymentStatus                    `gorm:"type:varchar(32);default:'pending';index" json:"status"`
