@@ -10,16 +10,17 @@ import (
 type CommunityMembershipSubscriptionStatus string
 
 const (
-	CommunityMembershipSubscriptionStatusActive     CommunityMembershipSubscriptionStatus = "active"
-	CommunityMembershipSubscriptionStatusCancelled  CommunityMembershipSubscriptionStatus = "cancelled"
-	CommunityMembershipSubscriptionStatusIncomplete CommunityMembershipSubscriptionStatus = "incomplete"
+	CommunityMembershipSubscriptionStatusActive          CommunityMembershipSubscriptionStatus = "active"
+	CommunityMembershipSubscriptionStatusCancelled       CommunityMembershipSubscriptionStatus = "cancelled"
+	CommunityMembershipSubscriptionStatusPendingApproval CommunityMembershipSubscriptionStatus = "pending_approval"
+	CommunityMembershipSubscriptionStatusPendingPayment  CommunityMembershipSubscriptionStatus = "pending_payment"
 )
 
 type CommunityMembershipSubscription struct {
 	ID                     uint                                  `gorm:"primaryKey;autoIncrement" json:"id"`
-	AccountID              uint                                  `gorm:"not null;index;uniqueIndex:idx_community_membership_subscription_one_active_per_account_community,where:status IN ('active','incomplete') AND deleted_at IS NULL" json:"accountId"`
+	AccountID              uint                                  `gorm:"not null;index;uniqueIndex:idx_community_membership_subscription_one_active_per_account_community,where:status IN ('active','pending_approval','pending_payment') AND deleted_at IS NULL" json:"accountId"`
 	Account                *AccountDTO                           `gorm:"foreignKey:AccountID;constraint:OnDelete:CASCADE;" json:"account,omitempty"`
-	CommunityID            uint                                  `gorm:"not null;index;uniqueIndex:idx_community_membership_subscription_one_active_per_account_community,where:status IN ('active','incomplete') AND deleted_at IS NULL" json:"communityId"`
+	CommunityID            uint                                  `gorm:"not null;index;uniqueIndex:idx_community_membership_subscription_one_active_per_account_community,where:status IN ('active','pending_approval','pending_payment') AND deleted_at IS NULL" json:"communityId"`
 	Community              *Community                            `gorm:"foreignKey:CommunityID;constraint:OnDelete:CASCADE;" json:"community,omitempty"`
 	MemberID               *uint                                 `gorm:"index" json:"memberId,omitempty"`
 	Member                 *CommunityMember                      `gorm:"foreignKey:MemberID;constraint:OnDelete:SET NULL;" json:"member,omitempty"`
