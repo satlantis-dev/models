@@ -14,7 +14,7 @@ type CommunityMembershipRefund struct {
 	Payment   *CommunityMembershipPayment `gorm:"foreignKey:PaymentID;constraint:OnDelete:CASCADE" json:"payment,omitempty"`
 	Amount    int64                       `gorm:"not null" json:"amount"`
 	Fee       int64                       `gorm:"type:bigint;default:0" json:"fee"`
-	Currency  OrderCurrency               `gorm:"not null" json:"currency"`
+	Currency  OrderCurrency               `gorm:"type:varchar(8);not null" json:"currency"`
 	Status    RefundStatus                `gorm:"not null;default:'pending'" json:"status"`
 
 	// Supported values include "lightning" and "stripe".
