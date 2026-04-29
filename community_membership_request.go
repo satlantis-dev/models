@@ -12,7 +12,6 @@ const (
 	CommunityMembershipRequestTypeNew       CommunityMembershipRequestType = "new"
 	CommunityMembershipRequestTypeUpgrade   CommunityMembershipRequestType = "upgrade"
 	CommunityMembershipRequestTypeDowngrade CommunityMembershipRequestType = "downgrade"
-	CommunityMembershipRequestTypeExtend    CommunityMembershipRequestType = "extend"
 )
 
 type CommunityMembershipRequestStatus string
