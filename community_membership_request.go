@@ -42,7 +42,6 @@ type CommunityMembershipRequest struct {
 	CurrentTier         *CommunityMembershipTier         `gorm:"foreignKey:CurrentTierID;constraint:OnDelete:SET NULL;" json:"currentTier,omitempty"`
 	RequestedTierID     uint                             `gorm:"not null;index" json:"requestedTierId"`
 	RequestedTier       *CommunityMembershipTier         `gorm:"foreignKey:RequestedTierID;constraint:OnDelete:RESTRICT;" json:"requestedTier,omitempty"`
-	Period              *CommunityMembershipPeriod       `gorm:"type:varchar(16)" json:"period,omitempty"`
 	SubscriptionID      *uint                            `gorm:"index" json:"subscriptionId,omitempty"`
 	Subscription        *CommunityMembershipSubscription `gorm:"foreignKey:SubscriptionID;references:ID;-:migration" json:"subscription,omitempty"`
 	RegistrationAnswers *map[string]interface{}          `gorm:"type:jsonb;serializer:json" json:"registrationAnswers,omitempty"`
