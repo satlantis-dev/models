@@ -12,7 +12,6 @@ type CommunityMembershipSubscriptionChangeType string
 const (
 	CommunityMembershipSubscriptionChangeTypeTierChange   CommunityMembershipSubscriptionChangeType = "tier_change"
 	CommunityMembershipSubscriptionChangeTypePeriodChange CommunityMembershipSubscriptionChangeType = "period_change"
-	CommunityMembershipSubscriptionChangeTypeCancel       CommunityMembershipSubscriptionChangeType = "cancel"
 )
 
 type CommunityMembershipSubscriptionChangeStatus string
@@ -38,11 +37,6 @@ type CommunityMembershipSubscriptionChange struct {
 	NewTier            *CommunityMembershipTier                    `gorm:"foreignKey:NewTierID;constraint:OnDelete:SET NULL;" json:"newTier,omitempty"`
 	OldPeriod          *CommunityMembershipPeriod                  `gorm:"type:varchar(16)" json:"oldPeriod,omitempty"`
 	NewPeriod          *CommunityMembershipPeriod                  `gorm:"type:varchar(16)" json:"newPeriod,omitempty"`
-	OldAmount          *int64                                      `gorm:"type:bigint" json:"oldAmount,omitempty"`
-	OldCurrency        *OrderCurrency                              `gorm:"type:varchar(8)" json:"oldCurrency,omitempty"`
-	NewAmount          *int64                                      `gorm:"type:bigint" json:"newAmount,omitempty"`
-	NewCurrency        *OrderCurrency                              `gorm:"type:varchar(8)" json:"newCurrency,omitempty"`
-	EffectiveAt        time.Time                                   `gorm:"type:timestamptz;not null;index" json:"effectiveAt"`
 	AppliedAt          *time.Time                                  `gorm:"type:timestamptz" json:"appliedAt,omitempty"`
 	CreatedByAccountID *uint                                       `gorm:"index" json:"createdByAccountId,omitempty"`
 	Metadata           *datatypes.JSON                             `gorm:"type:jsonb" json:"metadata,omitempty"`
