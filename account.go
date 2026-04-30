@@ -59,6 +59,7 @@ type Account struct {
 	FollowersCount              *int64                `gorm:"index:,sort:desc,option:NULLS LAST" json:"followersCount"`
 	AppleID                     *string               `gorm:"uniqueIndex" json:"appleId"`
 	GoogleID                    *string               `gorm:"uniqueIndex" json:"googleId"`
+	WhopID                      *string               `gorm:"uniqueIndex" json:"whopId"`
 	VertexRank                  decimal.Decimal       `gorm:"type:numeric;index" json:"vertexRank"`
 	WithdrawalDisabledAt        *time.Time            `gorm:"default:NULL" json:"-"`
 }
