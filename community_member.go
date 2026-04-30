@@ -19,6 +19,7 @@ type CommunityMember struct {
 	RegistrationAnswers *map[string]interface{}            `gorm:"type:jsonb;serializer:json" json:"registrationAnswers,omitempty"`
 	StartDate           *time.Time                         `gorm:"type:timestamptz" json:"startDate,omitempty"`
 	ExpiryDate          *time.Time                         `gorm:"type:timestamptz;index" json:"expiryDate,omitempty"`
+	IsExpired           bool                               `gorm:"-" json:"isExpired"`
 	IsCommunityAdmin    bool                               `gorm:"not null;default:false" json:"isCommunityAdmin"`
 	CreatedAt           time.Time                          `gorm:"autoCreateTime" json:"createdAt"`
 	UpdatedAt           time.Time                          `gorm:"autoUpdateTime" json:"updatedAt"`
