@@ -17,10 +17,11 @@ const (
 type CommunityMembershipRequestStatus string
 
 const (
-	CommunityMembershipRequestStatusPending   CommunityMembershipRequestStatus = "pending"
-	CommunityMembershipRequestStatusAccepted  CommunityMembershipRequestStatus = "accepted"
-	CommunityMembershipRequestStatusRejected  CommunityMembershipRequestStatus = "rejected"
-	CommunityMembershipRequestStatusCancelled CommunityMembershipRequestStatus = "cancelled"
+	CommunityMembershipRequestStatusPending     CommunityMembershipRequestStatus = "pending"
+	CommunityMembershipRequestStatusAccepted    CommunityMembershipRequestStatus = "accepted"
+	CommunityMembershipRequestStatusRejected    CommunityMembershipRequestStatus = "rejected"
+	CommunityMembershipRequestStatusCancelled   CommunityMembershipRequestStatus = "cancelled"
+	CommunityMembershipRequestStatusImplemented CommunityMembershipRequestStatus = "implemented"
 )
 
 type CommunityMembershipPeriod string
