@@ -22,6 +22,7 @@ const (
 	CommunityMembershipSubscriptionCancellationReasonRequestCancelled    CommunityMembershipSubscriptionCancellationReason = "user_initiated"
 	CommunityMembershipSubscriptionCancellationReasonRequestRejected     CommunityMembershipSubscriptionCancellationReason = "request_rejected"
 	CommunityMembershipSubscriptionCancellationReasonSubscriptionExpired CommunityMembershipSubscriptionCancellationReason = "subscription_expired"
+	CommunityMembershipSubscriptionCancellationReasonMemberRemoved       CommunityMembershipSubscriptionCancellationReason = "member_removed"
 )
 
 type CommunityMembershipSubscription struct {
