@@ -41,7 +41,8 @@ type CommunityMembershipSubscription struct {
 	CurrentPeriodStart     *time.Time                              `gorm:"type:timestamptz" json:"currentPeriodStart,omitempty"`
 	CurrentPeriodEnd       *time.Time                              `gorm:"type:timestamptz;index" json:"currentPeriodEnd,omitempty"`
 	CancelAtPeriodEnd      bool                                    `gorm:"not null;default:false" json:"cancelAtPeriodEnd"`
-	CanceledAt             *time.Time                              `gorm:"type:timestamptz" json:"canceledAt,omitempty"`
+	CancelledAt            *time.Time                              `gorm:"type:timestamptz" json:"cancelledAt,omitempty"`
+	CancelledReason        *string                                 `gorm:"type:varchar(256)" json:"cancelledReason,omitempty"`
 	EndedAt                *time.Time                              `gorm:"type:timestamptz" json:"endedAt,omitempty"`
 	Metadata               *datatypes.JSON                         `gorm:"type:jsonb" json:"metadata,omitempty"`
 	Payments               []CommunityMembershipPayment            `gorm:"foreignKey:SubscriptionID" json:"payments,omitempty"`
