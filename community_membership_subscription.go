@@ -20,7 +20,7 @@ const (
 type CommunityMembershipSubscriptionCancellationReason string
 
 const (
-	CommunityMembershipSubscriptionCancellationReasonRequestCancelled    CommunityMembershipSubscriptionCancellationReason = "user_initiated"
+	CommunityMembershipSubscriptionCancellationReasonRequestCancelled    CommunityMembershipSubscriptionCancellationReason = "request_cancelled"
 	CommunityMembershipSubscriptionCancellationReasonRequestRejected     CommunityMembershipSubscriptionCancellationReason = "request_rejected"
 	CommunityMembershipSubscriptionCancellationReasonSubscriptionExpired CommunityMembershipSubscriptionCancellationReason = "subscription_expired"
 	CommunityMembershipSubscriptionCancellationReasonMemberRemoved       CommunityMembershipSubscriptionCancellationReason = "member_removed"
