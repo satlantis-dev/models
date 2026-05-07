@@ -14,6 +14,7 @@ const (
 	CommunityMembershipSubscriptionStatusCancelled       CommunityMembershipSubscriptionStatus = "cancelled"
 	CommunityMembershipSubscriptionStatusPendingApproval CommunityMembershipSubscriptionStatus = "pending_approval"
 	CommunityMembershipSubscriptionStatusPendingPayment  CommunityMembershipSubscriptionStatus = "pending_payment"
+	CommunityMembershipSubscriptionStatusExpired         CommunityMembershipSubscriptionStatus = "expired"
 )
 
 type CommunityMembershipSubscription struct {

@@ -9,9 +9,10 @@ import (
 type CommunityMembershipRequestType string
 
 const (
-	CommunityMembershipRequestTypeNew       CommunityMembershipRequestType = "new"
-	CommunityMembershipRequestTypeUpgrade   CommunityMembershipRequestType = "upgrade"
-	CommunityMembershipRequestTypeDowngrade CommunityMembershipRequestType = "downgrade"
+	CommunityMembershipRequestTypeNew          CommunityMembershipRequestType = "new"
+	CommunityMembershipRequestTypeUpgrade      CommunityMembershipRequestType = "upgrade"
+	CommunityMembershipRequestTypeDowngrade    CommunityMembershipRequestType = "downgrade"
+	CommunityMembershipRequestTypePeriodChange CommunityMembershipRequestType = "period_change"
 )
 
 type CommunityMembershipRequestStatus string
