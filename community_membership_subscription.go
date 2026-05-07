@@ -11,6 +11,7 @@ type CommunityMembershipSubscriptionStatus string
 
 const (
 	CommunityMembershipSubscriptionStatusActive          CommunityMembershipSubscriptionStatus = "active"
+	CommunityMembershipSubscriptionStatusPastDue         CommunityMembershipSubscriptionStatus = "past_due"
 	CommunityMembershipSubscriptionStatusCancelled       CommunityMembershipSubscriptionStatus = "cancelled"
 	CommunityMembershipSubscriptionStatusPendingApproval CommunityMembershipSubscriptionStatus = "pending_approval"
 	CommunityMembershipSubscriptionStatusPendingPayment  CommunityMembershipSubscriptionStatus = "pending_payment"
@@ -27,13 +28,13 @@ const (
 
 type CommunityMembershipSubscription struct {
 	ID                     uint                                               `gorm:"primaryKey;autoIncrement" json:"id"`
-	AccountID              uint                                               `gorm:"not null;index;uniqueIndex:idx_cms_one_active_per_account_community,where:status = 'active' AND deleted_at IS NULL;uniqueIndex:idx_community_membership_subscription_one_open_per_account_tier,where:(status = 'active' OR status = 'pending_approval' OR status = 'pending_payment') AND deleted_at IS NULL" json:"accountId"`
+	AccountID              uint                                               `gorm:"not null;index;uniqueIndex:idx_cms_one_active_per_account_community,where:(status = 'active' OR status = 'past_due') AND deleted_at IS NULL;uniqueIndex:idx_community_membership_subscription_one_open_per_account_tier,where:status != 'cancelled' AND deleted_at IS NULL" json:"accountId"`
 	Account                *AccountDTO                                        `gorm:"foreignKey:AccountID;constraint:OnDelete:CASCADE;" json:"account,omitempty"`
-	CommunityID            uint                                               `gorm:"not null;index;uniqueIndex:idx_cms_one_active_per_account_community,where:status = 'active' AND deleted_at IS NULL" json:"communityId"`
+	CommunityID            uint                                               `gorm:"not null;index;uniqueIndex:idx_cms_one_active_per_account_community,where:(status = 'active' OR status = 'past_due') AND deleted_at IS NULL" json:"communityId"`
 	Community              *Community                                         `gorm:"foreignKey:CommunityID;constraint:OnDelete:CASCADE;" json:"community,omitempty"`
 	MemberID               *uint                                              `gorm:"index" json:"memberId,omitempty"`
 	Member                 *CommunityMember                                   `gorm:"foreignKey:MemberID;constraint:OnDelete:SET NULL;" json:"member,omitempty"`
-	TierID                 uint                                               `gorm:"not null;index;uniqueIndex:idx_community_membership_subscription_one_open_per_account_tier,where:(status = 'active' OR status = 'pending_approval' OR status = 'pending_payment') AND deleted_at IS NULL" json:"tierId"`
+	TierID                 uint                                               `gorm:"not null;index;uniqueIndex:idx_community_membership_subscription_one_open_per_account_tier,where:status != 'cancelled' AND deleted_at IS NULL" json:"tierId"`
 	Tier                   *CommunityMembershipTier                           `gorm:"foreignKey:TierID;constraint:OnDelete:RESTRICT;" json:"tier,omitempty"`
 	Period                 CommunityMembershipPeriod                          `gorm:"type:varchar(16);not null" json:"period"`
 	Amount                 *int64                                             `gorm:"type:bigint;check:chk_community_membership_subscription_amount_currency,((amount IS NULL AND currency IS NULL) OR (amount IS NOT NULL AND currency IS NOT NULL))" json:"amount,omitempty"`
