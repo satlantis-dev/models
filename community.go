@@ -44,3 +44,35 @@ type CommunityFAQ struct {
 func (Community) TableName() string {
 	return "communities"
 }
+
+type CommunityDTO struct {
+	ID          uint        `json:"id"`
+	AccountID   uint        `json:"accountId"`
+	Name        string      `json:"name"`
+	Bio         *string     `json:"bio,omitempty"`
+	Description *string     `json:"description,omitempty"`
+	Banner      *string     `json:"banner,omitempty"`
+	Logo        *string     `json:"logo,omitempty"`
+	MemberCount *int        `json:"memberCount"`
+	Calendars   *[]Calendar `json:"calendars,omitempty"`
+	WhopID      *string     `json:"whopId,omitempty"`
+}
+
+func (CommunityDTO) TableName() string {
+	return "communities"
+}
+
+func (c *Community) ToDTO() *CommunityDTO {
+	return &CommunityDTO{
+		ID:          c.ID,
+		AccountID:   c.AccountID,
+		Name:        c.Name,
+		Bio:         c.Bio,
+		Description: c.Description,
+		Banner:      c.Banner,
+		Logo:        c.Logo,
+		MemberCount: c.MemberCount,
+		Calendars:   c.Calendars,
+		WhopID:      c.WhopID,
+	}
+}
