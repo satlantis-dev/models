@@ -33,7 +33,7 @@ type Community struct {
 	ChatLinks   *datatypes.JSON               `gorm:"type:jsonb" json:"chatLinks,omitempty"`
 	ThemeID     *uint                         `gorm:"index" json:"themeId,omitempty"`
 	Theme       *Theme                        `gorm:"foreignKey:ThemeID;constraint:OnDelete:SET NULL;" json:"theme,omitempty"`
-	WhopID      *string                       `gorm:"type:varchar(20);index" json:"whopId,omitempty"`
+	WhopID      *string                       `gorm:"type:varchar(20);uniqueIndex" json:"whopId,omitempty"`
 }
 
 type CommunityFAQ struct {
