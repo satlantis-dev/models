@@ -164,6 +164,7 @@ type CalendarEventTicketOrderItem struct {
 	OriginalPrice         *int64                            `gorm:"type:bigint" json:"originalPrice,omitempty"`
 	DiscountPercent       *uint                             `json:"discountPercent,omitempty"`
 	CouponID              *uint                             `gorm:"index" json:"couponId,omitempty"`
+	Coupon                *CalendarEventCoupon              `gorm:"foreignKey:CouponID;constraint:OnDelete:SET NULL" json:"coupon,omitempty"`
 	CouponDiscountAmount  *int64                            `gorm:"type:bigint" json:"couponDiscountAmount,omitempty"`
 	CouponDiscountPercent *uint                             `json:"couponDiscountPercent,omitempty"`
 	CreatedAt             time.Time                         `json:"-"`
