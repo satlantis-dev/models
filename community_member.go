@@ -20,6 +20,7 @@ type CommunityMember struct {
 	StartDate                 *time.Time                         `gorm:"type:timestamptz" json:"startDate,omitempty"`
 	ExpiryDate                *time.Time                         `gorm:"type:timestamptz;index" json:"expiryDate,omitempty"`
 	IsExpired                 bool                               `gorm:"-" json:"isExpired"`
+	IsInvited                 bool                               `gorm:"not null;default:false" json:"isInvited"`
 	IsBanned                  bool                               `gorm:"not null;default:false" json:"isBanned"`
 	IsCommunityAdmin          bool                               `gorm:"not null;default:false" json:"isCommunityAdmin"`
 	AdminInvitationReceivedAt *time.Time                         `json:"adminInvitationReceivedAt"`
