@@ -235,9 +235,11 @@ type AccountPortable struct {
 	FollowersCount       *int64                `json:"followersCount"`
 	AppleID              *string               `json:"appleId"`
 	GoogleID             *string               `json:"googleId"`
+	WhopID               *string               `json:"whopId"`
 }
 
 func (a *Account) ToPortableProfile(db *gorm.DB) (*AccountPortable, error) {
+
 	// Get following accounts
 	following, err := a.GetFollowingAccounts(db, a.ID)
 	if err != nil {
@@ -288,6 +290,9 @@ func (a *Account) ToPortableProfile(db *gorm.DB) (*AccountPortable, error) {
 		FollowedBy:           followedBy,
 		FollowingCount:       &followingCountTotal,
 		FollowersCount:       a.FollowersCount,
+		GoogleID:             a.GoogleID,
+		AppleID:              a.AppleID,
+		WhopID:               a.WhopID,
 	}, nil
 }
 
@@ -327,6 +332,9 @@ func (a *Account) ToPortableProfileMin(db *gorm.DB) (*AccountPortable, error) {
 		SocialLinks:          a.SocialLinks,
 		FollowingCount:       &followingCountTotal,
 		FollowersCount:       a.FollowersCount,
+		WhopID:               a.WhopID,
+		GoogleID:             a.GoogleID,
+		AppleID:              a.AppleID,
 	}, nil
 }
 
