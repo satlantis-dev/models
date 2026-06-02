@@ -6,6 +6,35 @@ import (
 	"gorm.io/gorm"
 )
 
+type RegistrationAnswerType string
+
+const (
+	RegistrationAnswerTypeText         RegistrationAnswerType = "text"
+	RegistrationAnswerTypeLongText     RegistrationAnswerType = "long-text"
+	RegistrationAnswerTypeEmail        RegistrationAnswerType = "email"
+	RegistrationAnswerTypePhone        RegistrationAnswerType = "phone"
+	RegistrationAnswerTypeURL          RegistrationAnswerType = "url"
+	RegistrationAnswerTypeNpub         RegistrationAnswerType = "npub"
+	RegistrationAnswerTypeAgreeCheck   RegistrationAnswerType = "agree-check"
+	RegistrationAnswerTypeFacebook     RegistrationAnswerType = "facebook"
+	RegistrationAnswerTypeX            RegistrationAnswerType = "x"
+	RegistrationAnswerTypeInsta        RegistrationAnswerType = "insta"
+	RegistrationAnswerTypeLinkedIn     RegistrationAnswerType = "linkedin"
+	RegistrationAnswerTypeSingleSelect RegistrationAnswerType = "single-select"
+	RegistrationAnswerTypeMultiSelect  RegistrationAnswerType = "multi-select"
+)
+
+type RegistrationQuestion struct {
+	Label      string                 `json:"label"`
+	Required   bool                   `json:"required"`
+	AnswerType RegistrationAnswerType `json:"answerType"`
+	Options    []string               `json:"options,omitempty"`
+}
+
+type RegistrationQuestionsPayload struct {
+	Questions []RegistrationQuestion `json:"questions"`
+}
+
 type CalendarEventType struct {
 	ID          uint   `gorm:"primaryKey" json:"id"`
 	Name        string `json:"name"`
@@ -19,63 +48,63 @@ type RsvpConfirmationMessage struct {
 }
 
 type CalendarEvent struct {
-	ID                               uint                        `gorm:"primaryKey" json:"id"`
-	AccountID                        uint                        `gorm:"index;not null" json:"accountId"`
-	Account                          *AccountDTO                 `gorm:"foreignKey:AccountID" json:"account,omitempty"`
-	ContactEmail                     *string                     `gorm:"type:text" json:"contactEmail"`
-	NostrID                          string                      `gorm:"index" json:"nostrId"`
-	EventID                          *uint                       `gorm:"index" json:"eventId"`
-	Event                            *Event                      `gorm:"foreignKey:EventID;constraint:OnDelete:SET NULL" json:"event,omitempty"`
-	Kind                             uint                        `gorm:"index" json:"kind"`
-	Content                          *string                     `gorm:"type:text" json:"content"`
-	Tags                             string                      `gorm:"type:jsonb" json:"tags"`
-	ATag                             string                      `json:"atag"`
-	DTag                             string                      `json:"dtag"`
-	Sig                              string                      `gorm:"type:text" json:"sig"`
-	CreatedAt                        *time.Time                  `json:"createdAt"`
-	UpdatedAt                        *time.Time                  `json:"updatedAt"`
-	DeletedAt                        gorm.DeletedAt              `gorm:"index" json:"-"`
-	Announcements                    []CalendarEventAnnouncement `gorm:"foreignKey:CalendarEventID;constraint:OnDelete:CASCADE;" json:"announcements"`
-	CalendarEventRSVPs               []CalendarEventRSVP         `json:"calendarEventRsvps"`
-	Cohosts                          []CalendarEventCohost       `json:"cohosts"`
-	End                              time.Time                   `json:"end"`
-	EndTzId                          string                      `gorm:"not null" json:"endTzId"`
-	Featured                         bool                        `gorm:"default:false" json:"featured"`
-	Geohash                          string                      `json:"geohash"`
-	GoogleID                         *string                     `json:"googleId,omitempty"`
-	Image                            string                      `json:"image"`
-	CalendarEventTags                []CalendarEventTag          `gorm:"many2many:calendar_event_calendar_event_tags;constraint:OnDelete:CASCADE" json:"calendarEventTags"`
-	IsSatlantisCreated               bool                        `gorm:"default:false" json:"isSatlantisCreated"`
-	IsUnlisted                       bool                        `gorm:"default:false;index" json:"isUnlisted"`
-	IsHidingAttendees                bool                        `gorm:"default:false" json:"isHidingAttendees"`
-	IsHidingLocation                 bool                        `gorm:"default:false" json:"isHidingLocation"`
-	IsOnline                         bool                        `gorm:"default:false" json:"isOnline"`
-	Location                         string                      `json:"location"`
-	LocationClarification            *string                     `json:"locationClarification,omitempty"`
-	Notes                            []CalendarEventNote         `gorm:"foreignKey:CalendarEventID;constraint:OnDelete:CASCADE;" json:"notes"`
-	OwnershipChangedAt               *time.Time                  `json:"ownershipChangedAt"`
-	PlaceID                          *uint                       `gorm:"index" json:"placeId"`
-	Place                            *PlaceDTO                   `gorm:"foreignKey:PlaceID" json:"place,omitempty"`
-	PubKey                           string                      `gorm:"type:text;index" json:"pubkey"`
-	RsvpLimit                        *int64                      `json:"rsvpLimit"`
-	RsvpWaitlistEnabledAt            *time.Time                  `json:"rsvpWaitlistEnabledAt"`
-	RsvpGatedEnabledAt               *time.Time                  `json:"rsvpGatedEnabledAt"`
-	RsvpConfirmationMessage          *RsvpConfirmationMessage    `gorm:"type:jsonb;serializer:json" json:"rsvpConfirmationMessage,omitempty"`
-	Start                            time.Time                   `json:"start"`
-	StartTzId                        string                      `gorm:"not null" json:"startTzId"`
-	Summary                          string                      `json:"summary"`
-	Title                            string                      `json:"title"`
-	TypeID                           uint                        `gorm:"index;not null;default:1" json:"typeId"`
-	Type                             *CalendarEventType          `gorm:"foreignKey:TypeID" json:"type,omitempty"`
-	URL                              string                      `json:"url"`
-	Venue                            *LocationDTO                `gorm:"-" json:"venue,omitempty"`
-	Website                          string                      `json:"website"`
-	RegistrationQuestions            *map[string]interface{}     `gorm:"type:jsonb;serializer:json" json:"registrationQuestions,omitempty"`
-	OfficialCalendarID               *uint                       `gorm:"index" json:"officialCalendarId,omitempty"`
-	OfficialCalendar                 *Calendar                   `gorm:"foreignKey:OfficialCalendarID" json:"officialCalendar,omitempty"`
-	AccountStripeConnectID           *uint                       `gorm:"index" json:"accountStripeConnectId,omitempty"`
-	AccountStripeConnect             *AccountStripeConnect       `gorm:"foreignKey:AccountStripeConnectID" json:"accountStripeConnect,omitempty"`
-	MultipleTicketsPurchaseAllowedAt *time.Time                  `json:"multipleTicketsPurchaseAllowedAt"`
+	ID                               uint                          `gorm:"primaryKey" json:"id"`
+	AccountID                        uint                          `gorm:"index;not null" json:"accountId"`
+	Account                          *AccountDTO                   `gorm:"foreignKey:AccountID" json:"account,omitempty"`
+	ContactEmail                     *string                       `gorm:"type:text" json:"contactEmail"`
+	NostrID                          string                        `gorm:"index" json:"nostrId"`
+	EventID                          *uint                         `gorm:"index" json:"eventId"`
+	Event                            *Event                        `gorm:"foreignKey:EventID;constraint:OnDelete:SET NULL" json:"event,omitempty"`
+	Kind                             uint                          `gorm:"index" json:"kind"`
+	Content                          *string                       `gorm:"type:text" json:"content"`
+	Tags                             string                        `gorm:"type:jsonb" json:"tags"`
+	ATag                             string                        `json:"atag"`
+	DTag                             string                        `json:"dtag"`
+	Sig                              string                        `gorm:"type:text" json:"sig"`
+	CreatedAt                        *time.Time                    `json:"createdAt"`
+	UpdatedAt                        *time.Time                    `json:"updatedAt"`
+	DeletedAt                        gorm.DeletedAt                `gorm:"index" json:"-"`
+	Announcements                    []CalendarEventAnnouncement   `gorm:"foreignKey:CalendarEventID;constraint:OnDelete:CASCADE;" json:"announcements"`
+	CalendarEventRSVPs               []CalendarEventRSVP           `json:"calendarEventRsvps"`
+	Cohosts                          []CalendarEventCohost         `json:"cohosts"`
+	End                              time.Time                     `json:"end"`
+	EndTzId                          string                        `gorm:"not null" json:"endTzId"`
+	Featured                         bool                          `gorm:"default:false" json:"featured"`
+	Geohash                          string                        `json:"geohash"`
+	GoogleID                         *string                       `json:"googleId,omitempty"`
+	Image                            string                        `json:"image"`
+	CalendarEventTags                []CalendarEventTag            `gorm:"many2many:calendar_event_calendar_event_tags;constraint:OnDelete:CASCADE" json:"calendarEventTags"`
+	IsSatlantisCreated               bool                          `gorm:"default:false" json:"isSatlantisCreated"`
+	IsUnlisted                       bool                          `gorm:"default:false;index" json:"isUnlisted"`
+	IsHidingAttendees                bool                          `gorm:"default:false" json:"isHidingAttendees"`
+	IsHidingLocation                 bool                          `gorm:"default:false" json:"isHidingLocation"`
+	IsOnline                         bool                          `gorm:"default:false" json:"isOnline"`
+	Location                         string                        `json:"location"`
+	LocationClarification            *string                       `json:"locationClarification,omitempty"`
+	Notes                            []CalendarEventNote           `gorm:"foreignKey:CalendarEventID;constraint:OnDelete:CASCADE;" json:"notes"`
+	OwnershipChangedAt               *time.Time                    `json:"ownershipChangedAt"`
+	PlaceID                          *uint                         `gorm:"index" json:"placeId"`
+	Place                            *PlaceDTO                     `gorm:"foreignKey:PlaceID" json:"place,omitempty"`
+	PubKey                           string                        `gorm:"type:text;index" json:"pubkey"`
+	RsvpLimit                        *int64                        `json:"rsvpLimit"`
+	RsvpWaitlistEnabledAt            *time.Time                    `json:"rsvpWaitlistEnabledAt"`
+	RsvpGatedEnabledAt               *time.Time                    `json:"rsvpGatedEnabledAt"`
+	RsvpConfirmationMessage          *RsvpConfirmationMessage      `gorm:"type:jsonb;serializer:json" json:"rsvpConfirmationMessage,omitempty"`
+	Start                            time.Time                     `json:"start"`
+	StartTzId                        string                        `gorm:"not null" json:"startTzId"`
+	Summary                          string                        `json:"summary"`
+	Title                            string                        `json:"title"`
+	TypeID                           uint                          `gorm:"index;not null;default:1" json:"typeId"`
+	Type                             *CalendarEventType            `gorm:"foreignKey:TypeID" json:"type,omitempty"`
+	URL                              string                        `json:"url"`
+	Venue                            *LocationDTO                  `gorm:"-" json:"venue,omitempty"`
+	Website                          string                        `json:"website"`
+	RegistrationQuestions            *RegistrationQuestionsPayload `gorm:"type:jsonb;serializer:json" json:"registrationQuestions,omitempty"`
+	OfficialCalendarID               *uint                         `gorm:"index" json:"officialCalendarId,omitempty"`
+	OfficialCalendar                 *Calendar                     `gorm:"foreignKey:OfficialCalendarID" json:"officialCalendar,omitempty"`
+	AccountStripeConnectID           *uint                         `gorm:"index" json:"accountStripeConnectId,omitempty"`
+	AccountStripeConnect             *AccountStripeConnect         `gorm:"foreignKey:AccountStripeConnectID" json:"accountStripeConnect,omitempty"`
+	MultipleTicketsPurchaseAllowedAt *time.Time                    `json:"multipleTicketsPurchaseAllowedAt"`
 }
 
 type CalendarEventDTO struct {
