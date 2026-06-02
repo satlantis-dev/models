@@ -127,6 +127,7 @@ var DatabaseModels = []interface{}{
 	AccountWallet{},
 	AccountWalletTransaction{},
 	AccountStripeConnect{},
+	LightningContact{},
 }
 
 func SetupDatabase(dbHost, dbUser, dbPassword, dbName string) (*gorm.DB, error) {
