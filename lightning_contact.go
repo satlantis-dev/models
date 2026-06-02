@@ -26,6 +26,7 @@ type LightningContactDTO struct {
 	Name             string          `json:"name"`
 	LightningAddress string          `json:"lightningAddress"`
 	ContactAccountID *uint           `json:"contactAccountId,omitempty"`
+	ContactAccount   *AccountMiniDTO `json:"contactAccount,omitempty"`
 	Metadata         *datatypes.JSON `json:"metadata,omitempty"`
 	CreatedAt        time.Time       `json:"createdAt"`
 	UpdatedAt        time.Time       `json:"updatedAt"`
