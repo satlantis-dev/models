@@ -14,16 +14,6 @@ var (
 	RsvpInvited    RsvpStatus = "invited"
 )
 
-type RegistrationAnswer struct {
-	Label      string                 `json:"label"`
-	Answer     any                    `json:"answer"`
-	AnswerType RegistrationAnswerType `json:"answerType"`
-}
-
-type RegistrationAnswersPayload struct {
-	Answers []RegistrationAnswer `json:"answers"`
-}
-
 type CalendarEventRSVP struct {
 	ID                  uint                        `gorm:"primaryKey" json:"id"`
 	AccountID           uint                        `json:"accountId"`
