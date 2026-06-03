@@ -16,7 +16,7 @@ type CommunityMember struct {
 	Tier                      *CommunityMembershipTier           `gorm:"foreignKey:TierID;constraint:OnDelete:SET NULL;" json:"tier,omitempty"`
 	OpenSubscriptions         *[]CommunityMembershipSubscription `gorm:"-" json:"openSubscriptions,omitempty"`
 	OpenRequests              *[]CommunityMembershipRequest      `gorm:"-" json:"openRequests,omitempty"`
-	RegistrationAnswers       *map[string]interface{}            `gorm:"type:jsonb;serializer:json" json:"registrationAnswers,omitempty"`
+	RegistrationAnswers       *RegistrationAnswersPayload        `gorm:"type:jsonb;serializer:json" json:"registrationAnswers,omitempty"`
 	StartDate                 *time.Time                         `gorm:"type:timestamptz" json:"startDate,omitempty"`
 	ExpiryDate                *time.Time                         `gorm:"type:timestamptz;index" json:"expiryDate,omitempty"`
 	IsExpired                 bool                               `gorm:"-" json:"isExpired"`
