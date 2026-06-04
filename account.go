@@ -60,6 +60,7 @@ type Account struct {
 	AppleID                     *string               `gorm:"uniqueIndex" json:"appleId"`
 	GoogleID                    *string               `gorm:"uniqueIndex" json:"googleId"`
 	WhopID                      *string               `gorm:"uniqueIndex" json:"whopId"`
+	WhopRefreshToken            *string               `gorm:"type:text" json:"-"`
 	VertexRank                  decimal.Decimal       `gorm:"type:numeric;index" json:"vertexRank"`
 	WithdrawalDisabledAt        *time.Time            `gorm:"default:NULL" json:"-"`
 }
