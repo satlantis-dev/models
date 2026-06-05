@@ -57,6 +57,8 @@ type CommunityMembershipSubscription struct {
 	Metadata               *datatypes.JSON                                    `gorm:"type:jsonb" json:"metadata,omitempty"`
 	Payments               []CommunityMembershipPayment                       `gorm:"foreignKey:SubscriptionID" json:"payments,omitempty"`
 	ScheduledChanges       []CommunityMembershipSubscriptionChange            `gorm:"foreignKey:SubscriptionID" json:"scheduledChanges,omitempty"`
+	StripeConnectAccountID *string                                            `gorm:"type:varchar(128);index" json:"stripeConnectAccountId,omitempty"`
+	PastDueSince           *time.Time                                         `gorm:"type:timestamptz;index" json:"pastDueSince,omitempty"`
 	CreatedAt              time.Time                                          `gorm:"autoCreateTime" json:"createdAt"`
 	UpdatedAt              time.Time                                          `gorm:"autoUpdateTime" json:"updatedAt"`
 	DeletedAt              *gorm.DeletedAt                                    `gorm:"index" json:"-"`
