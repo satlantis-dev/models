@@ -63,6 +63,7 @@ type Account struct {
 	WhopRefreshToken            *string               `gorm:"type:text" json:"-"`
 	VertexRank                  decimal.Decimal       `gorm:"type:numeric;index" json:"vertexRank"`
 	WithdrawalDisabledAt        *time.Time            `gorm:"default:NULL" json:"-"`
+	WelcomeEmailSentAt          *time.Time            `gorm:"default:NULL" json:"-"`
 }
 
 // AccountMiniDTO
