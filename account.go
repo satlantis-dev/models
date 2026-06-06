@@ -62,6 +62,7 @@ type Account struct {
 	WhopID                      *string               `gorm:"uniqueIndex" json:"whopId"`
 	VertexRank                  decimal.Decimal       `gorm:"type:numeric;index" json:"vertexRank"`
 	WithdrawalDisabledAt        *time.Time            `gorm:"default:NULL" json:"-"`
+	WelcomeEmailSentAt          *time.Time            `gorm:"default:NULL" json:"-"`
 }
 
 // AccountMiniDTO
