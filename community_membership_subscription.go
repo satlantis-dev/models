@@ -59,6 +59,10 @@ type CommunityMembershipSubscription struct {
 	ScheduledChanges       []CommunityMembershipSubscriptionChange            `gorm:"foreignKey:SubscriptionID" json:"scheduledChanges,omitempty"`
 	StripeConnectAccountID *string                                            `gorm:"type:varchar(128);index" json:"stripeConnectAccountId,omitempty"`
 	PastDueSince           *time.Time                                         `gorm:"type:timestamptz;index" json:"pastDueSince,omitempty"`
+	// NextChargeAmountOverride, if set, is used instead of Amount for the next
+	// Stripe charge and then cleared. Used to apply a prorated first-charge amount
+	// (e.g. upgrade credit) without permanently changing the recurring Amount.
+	NextChargeAmountOverride *int64 `gorm:"type:bigint" json:"nextChargeAmountOverride,omitempty"`
 	CreatedAt              time.Time                                          `gorm:"autoCreateTime" json:"createdAt"`
 	UpdatedAt              time.Time                                          `gorm:"autoUpdateTime" json:"updatedAt"`
 	DeletedAt              *gorm.DeletedAt                                    `gorm:"index" json:"-"`
