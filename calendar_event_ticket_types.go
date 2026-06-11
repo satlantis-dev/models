@@ -29,7 +29,7 @@ type CalendarEventTicketType struct {
 	DeletedAt         gorm.DeletedAt `gorm:"index" json:"-"`
 	IsHidden          bool           `gorm:"default:false" json:"isHidden"`
 	PayWhatYouWant    bool           `gorm:"default:false" json:"payWhatYouWant"`
-	Rank              uint           `gorm:"default:0" json:"rank"`
+	Rank              uint           `gorm:"not null;default:0" json:"rank"`
 }
 
 type CalendarEventTicketTypePromotion struct {
