@@ -23,6 +23,7 @@ type Community struct {
 	Logo                   *string                       `gorm:"type:text" json:"logo,omitempty"`
 	Notice                 *string                       `gorm:"type:text" json:"notice,omitempty"`
 	Newsletters            *[]CommunityNewsletter        `gorm:"foreignKey:CommunityID;constraint:OnDelete:CASCADE;" json:"newsletters,omitempty"`
+	Admins                 *[]AccountMiniDTO             `gorm:"-" json:"admins,omitempty"`
 	Members                *[]CommunityMember            `gorm:"foreignKey:CommunityID;constraint:OnDelete:CASCADE;" json:"members,omitempty"`
 	Requests               *[]CommunityMembershipRequest `gorm:"foreignKey:CommunityID;constraint:OnDelete:CASCADE;" json:"requests,omitempty"`
 	MemberCount            *int                          `gorm:"-" json:"memberCount,omitempty"`

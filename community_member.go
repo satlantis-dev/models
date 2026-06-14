@@ -22,10 +22,6 @@ type CommunityMember struct {
 	IsExpired                 bool                               `gorm:"-" json:"isExpired"`
 	IsInvited                 bool                               `gorm:"not null;default:false" json:"isInvited"`
 	IsBanned                  bool                               `gorm:"not null;default:false" json:"isBanned"`
-	IsCommunityAdmin          bool                               `gorm:"not null;default:false" json:"isCommunityAdmin"`
-	AdminInvitationReceivedAt *time.Time                         `json:"adminInvitationReceivedAt"`
-	AdminInvitationAcceptedAt *time.Time                         `json:"adminInvitationAcceptedAt"`
-	AdminInvitationDeclinedAt *time.Time                         `json:"adminInvitationDeclinedAt"`
 	CreatedAt                 time.Time                          `gorm:"autoCreateTime" json:"createdAt"`
 	UpdatedAt                 time.Time                          `gorm:"autoUpdateTime" json:"updatedAt"`
 	DeletedAt                 *gorm.DeletedAt                    `gorm:"index" json:"-"`
