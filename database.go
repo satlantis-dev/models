@@ -53,6 +53,7 @@ var DatabaseModels = []interface{}{
 	CollectionLocation{},
 	CollectionSave{},
 	Community{},
+	AccountCommunityRole{},
 	CommunityGalleryImage{},
 	CommunityMembershipTier{},
 	CommunityMembershipRequest{},
