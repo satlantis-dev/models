@@ -13,9 +13,9 @@ const (
 
 type CalendarEventCohost struct {
 	ID                   uint                        `gorm:"primaryKey" json:"id"`
-	CalendarEventID      uint                        `gorm:"not null;index:idx_cohost_event_role" json:"calendarEventId"`
+	CalendarEventID      uint                        `gorm:"not null;index;index:idx_cohost_event_role" json:"calendarEventId"`
 	CalendarEvent        *CalendarEvent              `gorm:"foreignKey:CalendarEventID" json:"calendarEvent,omitempty"`
-	AccountID            uint                        `gorm:"not null;index:idx_cohost_event_role" json:"accountId"`
+	AccountID            uint                        `gorm:"not null;index;index:idx_cohost_event_role" json:"accountId"`
 	Account              *AccountDTO                 `gorm:"foreignKey:AccountID" json:"account"`
 	Type                 CalendarEventCohostRoleType `gorm:"type:varchar(32);not null;default:'admin';index:idx_cohost_event_role" json:"type"`
 	InvitationReceivedAt *time.Time                  `gorm:"type:timestamptz" json:"invitationReceivedAt,omitempty"`
