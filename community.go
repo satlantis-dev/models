@@ -38,6 +38,7 @@ type Community struct {
 	WhopID                 *string                       `gorm:"type:varchar(20);uniqueIndex" json:"whopId,omitempty"`
 	AccountStripeConnectID *uint                         `gorm:"index" json:"accountStripeConnectId,omitempty"`
 	AccountStripeConnect   *AccountStripeConnect         `gorm:"foreignKey:AccountStripeConnectID;constraint:OnDelete:SET NULL;" json:"accountStripeConnect,omitempty"`
+	Currency               OrderCurrency                 `gorm:"type:varchar(8);default:'USD'" json:"currency,omitempty"`
 }
 
 type CommunityFAQ struct {

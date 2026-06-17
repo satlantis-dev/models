@@ -18,7 +18,7 @@ type CommunityMembershipTier struct {
 	IsGated               bool                          `gorm:"not null;default:false" json:"isGated"`
 	IsPaid                bool                          `gorm:"not null;default:false" json:"isPaid"`
 	IsRecommended         bool                          `gorm:"not null;default:false" json:"isRecommended"`
-	Currency              *OrderCurrency                `gorm:"type:varchar(8)" json:"currency,omitempty"`
+	Currency              *OrderCurrency                `gorm:"-" json:"currency,omitempty"`
 	MonthlyAmount         *int64                        `gorm:"type:bigint" json:"monthlyAmount,omitempty"`
 	YearlyAmount          *int64                        `gorm:"type:bigint" json:"yearlyAmount,omitempty"`
 	Rank                  int                           `gorm:"not null;default:0" json:"rank"`
