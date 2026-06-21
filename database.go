@@ -56,6 +56,9 @@ var DatabaseModels = []interface{}{
 	CommunityMembershipSubscriptionChange{},
 	CommunityMembershipPayment{},
 	CommunityMembershipRefund{},
+	CommunityWallet{},
+	CommunityWalletWithdrawal{},
+	CommunityWalletTransaction{},
 	CommunityNewsletter{},
 	AccountCommunityRole{},
 	// Collection related:
