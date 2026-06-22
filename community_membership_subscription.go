@@ -60,6 +60,10 @@ type CommunityMembershipSubscription struct {
 	StripeConnectAccountID   *string                                            `gorm:"type:varchar(128);index" json:"stripeConnectAccountId,omitempty"`
 	PastDueSince             *time.Time                                         `gorm:"type:timestamptz;index" json:"pastDueSince,omitempty"`
 	NextChargeAmountOverride *int64                                             `gorm:"type:bigint" json:"nextChargeAmountOverride,omitempty"`
+	CardLast4                *string                                            `gorm:"type:varchar(4)" json:"cardLast4,omitempty"`
+	CardBrand                *string                                            `gorm:"type:varchar(32)" json:"cardBrand,omitempty"`
+	CardExpMonth             *int64                                             `gorm:"type:smallint" json:"cardExpMonth,omitempty"`
+	CardExpYear              *int64                                             `gorm:"type:smallint" json:"cardExpYear,omitempty"`
 	CreatedAt                time.Time                                          `gorm:"autoCreateTime" json:"createdAt"`
 	UpdatedAt                time.Time                                          `gorm:"autoUpdateTime" json:"updatedAt"`
 	DeletedAt                *gorm.DeletedAt                                    `gorm:"index" json:"-"`
