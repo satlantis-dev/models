@@ -38,6 +38,7 @@ type CalendarEvent struct {
 	Announcements                    []CalendarEventAnnouncement   `gorm:"foreignKey:CalendarEventID;constraint:OnDelete:CASCADE;" json:"announcements"`
 	CalendarEventRSVPs               []CalendarEventRSVP           `json:"calendarEventRsvps"`
 	Cohosts                          []CalendarEventCohost         `json:"cohosts"`
+	Speakers                         []CalendarEventSpeaker        `json:"speakers"`
 	End                              time.Time                     `json:"end"`
 	EndTzId                          string                        `gorm:"not null" json:"endTzId"`
 	Featured                         bool                          `gorm:"default:false" json:"featured"`
