@@ -39,7 +39,7 @@ type Community struct {
 	AccountStripeConnectID *uint                         `gorm:"index" json:"accountStripeConnectId,omitempty"`
 	AccountStripeConnect   *AccountStripeConnect         `gorm:"foreignKey:AccountStripeConnectID;constraint:OnDelete:SET NULL;" json:"accountStripeConnect,omitempty"`
 	Currency               OrderCurrency                 `gorm:"type:varchar(8);default:'USD'" json:"currency,omitempty"`
-	PaymentMethods         []PaymentMethod               `gorm:"type:jsonb;serializer:json;not null;default:'["stripe"]'" json:"paymentMethods"`
+	PaymentMethods         []PaymentMethod               `gorm:"type:jsonb;serializer:json;not null;default:'[\"stripe\"]'" json:"paymentMethods"`
 }
 
 type CommunityFAQ struct {
