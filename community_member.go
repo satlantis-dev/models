@@ -79,12 +79,16 @@ type CommunityMemberMiniDTO struct {
 }
 
 func (m CommunityMember) ToMiniDTO() CommunityMemberMiniDTO {
-	searchAccountDTO := m.Account.ToSearchAccountDTO()
+	var searchAccountDTO *SearchAccountDTO
+	if m.Account != nil {
+		dto := m.Account.ToSearchAccountDTO()
+		searchAccountDTO = &dto
+	}
 	return CommunityMemberMiniDTO{
 		ID:          m.ID,
 		CommunityID: m.CommunityID,
 		AccountID:   m.AccountID,
-		Account:     &searchAccountDTO,
+		Account:     searchAccountDTO,
 		TierID:      m.TierID,
 		Tier:        m.Tier,
 	}
