@@ -95,16 +95,17 @@ func (a *Account) ToMiniDTO() AccountMiniDTO {
 // SearchAccountDTO
 
 type SearchAccountDTO struct {
-	ID             uint   `json:"id"`
-	Username       string `json:"username"`
-	DisplayName    string `json:"display_name"`
-	FollowersCount *int64 `json:"followers_count"`
-	FollowingCount *int64 `json:"following_count"`
-	Name           string `json:"name"`
-	Nip05          string `json:"nip05"`
-	About          string `json:"about"`
-	Picture        string `json:"picture"`
-	Npub           string `json:"npub"`
+	ID               uint    `json:"id"`
+	Username         string  `json:"username"`
+	DisplayName      string  `json:"display_name"`
+	FollowersCount   *int64  `json:"followers_count"`
+	FollowingCount   *int64  `json:"following_count"`
+	Name             string  `json:"name"`
+	Nip05            string  `json:"nip05"`
+	About            string  `json:"about"`
+	Picture          string  `json:"picture"`
+	Npub             string  `json:"npub"`
+	LightningAddress *string `gorm:"-" json:"lightningAddress,omitempty"`
 }
 
 func (a *Account) ToSearchAccountDTO() SearchAccountDTO {
@@ -166,6 +167,7 @@ type AccountDTO struct {
 	Username           string         `json:"username"`
 	Website            string         `json:"website"`
 	SocialLinks        datatypes.JSON `json:"socialLinks"`
+	LightningAddress   *string        `gorm:"-" json:"lightningAddress,omitempty"`
 }
 
 func (a *Account) ToDTO() AccountDTO {
@@ -238,6 +240,7 @@ type AccountPortable struct {
 	AppleID              *string               `json:"appleId"`
 	GoogleID             *string               `json:"googleId"`
 	WhopID               *string               `json:"whopId"`
+	LightningAddress     *string               `gorm:"-" json:"lightningAddress,omitempty"`
 }
 
 func (a *Account) ToPortableProfile(db *gorm.DB) (*AccountPortable, error) {
