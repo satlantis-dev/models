@@ -6,7 +6,7 @@ type PlacePublicChatChannel struct {
 	ID                  uint              `gorm:"primaryKey" json:"id"`
 	CreatedAt           time.Time         `json:"-"`
 	UpdatedAt           time.Time         `json:"-"`
-	DeletedAt           *time.Time        `gorm:"index" json:"-,omitempty"`
+	DeletedAt           *time.Time        `gorm:"index" json:"-"`
 	PlaceID             uint              `gorm:"index" json:"placeId"`
 	PublicChatChannelID uint              `gorm:"index" json:"publicChatChannelId"`
 	PublicChatChannel   PublicChatChannel `json:"publicChatChannel"`

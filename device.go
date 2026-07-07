@@ -22,5 +22,5 @@ type Device struct {
 	Platform   Platform   `json:"platform"`
 	AppVersion *string    `json:"appVersion,omitempty"`
 	CreatedAt  time.Time  `json:"createdAt"`
-	DeletedAt  *time.Time `gorm:"index" json:"-,omitempty"`
+	DeletedAt  *time.Time `gorm:"index" json:"-"`
 }

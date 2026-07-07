@@ -9,7 +9,7 @@ type Region struct {
 	Code      string     `gorm:"type:text" json:"code"`
 	CreatedAt time.Time  `json:"-"`
 	UpdatedAt time.Time  `json:"-"`
-	DeletedAt *time.Time `gorm:"index" json:"-,omitempty"`
+	DeletedAt *time.Time `gorm:"index" json:"-"`
 	CountryID uint       `gorm:"index" json:"countryId"`
 	Country   *Country   `json:"country,omitempty"`
 	Name      string     `gorm:"index;type:text" json:"name"`

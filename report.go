@@ -18,5 +18,5 @@ type ContentReport struct {
 	Device         *string                 `json:"device"`
 	AppVersion     *string                 `json:"appVersion"`
 	CreatedAt      time.Time               `json:"-"`
-	DeletedAt      *time.Time              `json:"-,omitempty"`
+	DeletedAt      *time.Time              `json:"-"`
 }

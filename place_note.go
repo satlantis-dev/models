@@ -8,7 +8,7 @@ type PlaceNote struct {
 	ID          uint       `gorm:"primaryKey" json:"id"`
 	CreatedAt   time.Time  `json:"-"`
 	UpdatedAt   time.Time  `json:"-"`
-	DeletedAt   *time.Time `gorm:"index" json:"-,omitempty"`
+	DeletedAt   *time.Time `gorm:"index" json:"-"`
 	PlaceID     uint       `gorm:"index" json:"placeId"`
 	Place       Place      `gorm:"constraint:OnDelete:CASCADE;" json:"place"`
 	NoteID      uint       `gorm:"index" json:"noteId"`

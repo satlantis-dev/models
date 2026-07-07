@@ -41,7 +41,7 @@ type Place struct {
 	ID                 uint                  `gorm:"primaryKey" json:"id"`
 	CreatedAt          time.Time             `json:"-"`
 	UpdatedAt          time.Time             `json:"-"`
-	DeletedAt          *time.Time            `gorm:"index" json:"-,omitempty"`
+	DeletedAt          *time.Time            `gorm:"index" json:"-"`
 	AccountRoles       *[]AccountPlaceRole   `gorm:"foreignKey:PlaceID;constraint:OnDelete:CASCADE;" json:"accountRoles,omitempty"`
 	Active             bool                  `json:"active"`
 	Banner             string                `gorm:"type:text" json:"banner"`

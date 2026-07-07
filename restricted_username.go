@@ -9,5 +9,5 @@ type RestrictedUsername struct {
 	Username  string     `gorm:"type:text" json:"username"`
 	CreatedAt time.Time  `json:"-"`
 	UpdatedAt time.Time  `json:"-"`
-	DeletedAt *time.Time `gorm:"index" json:"-,omitempty"`
+	DeletedAt *time.Time `gorm:"index" json:"-"`
 }

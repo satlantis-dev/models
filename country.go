@@ -10,7 +10,7 @@ type Country struct {
 	ID          uint       `gorm:"primaryKey" json:"id"`
 	CreatedAt   time.Time  `json:"-"`
 	UpdatedAt   time.Time  `json:"-"`
-	DeletedAt   *time.Time `gorm:"index" json:"-,omitempty"`
+	DeletedAt   *time.Time `gorm:"index" json:"-"`
 	Code        string     `gorm:"type:char(2);uniqueIndex" json:"code"`
 	Code_3      string     `gorm:"type:char(3);uniqueIndex" json:"code3"`
 	Name        string     `gorm:"type:text" json:"name"`

@@ -12,5 +12,5 @@ type Conversation struct {
 	ToAccountReadAt   *time.Time `json:"toAccountReadAt"`
 	BlockedAt         *time.Time `json:"blockedAt"`
 	CreatedAt         time.Time  `json:"-"`
-	DeletedAt         *time.Time `json:"-,omitempty"`
+	DeletedAt         *time.Time `json:"-"`
 }
