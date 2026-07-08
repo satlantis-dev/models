@@ -54,6 +54,14 @@ type AccountStripeConnectDTO struct {
 	ConnectedAt      time.Time           `json:"connectedAt"`
 }
 
+// IsActive reports whether the connected account can accept charges. Status
+// is only ever set to StripeAccountActive when ChargesEnabled is also true,
+// so this single check replaces the equivalent (and previously duplicated)
+// `Status == StripeAccountActive && ChargesEnabled` condition.
+func (a *AccountStripeConnect) IsActive() bool {
+	return a.Status == StripeAccountActive
+}
+
 // ToDTO converts AccountStripeConnect to its DTO representation
 func (a *AccountStripeConnect) ToDTO() AccountStripeConnectDTO {
 	return AccountStripeConnectDTO{
