@@ -16,7 +16,7 @@ type CalendarCalendarEvent struct {
 	// TierIDsOnly further limits visibility, when MembersOnly is true, to
 	// members of the listed community membership tiers (by ID). Empty/nil means
 	// the event is visible to members of any tier.
-	TierIDsOnly pq.Int64Array `gorm:"type:bigint[]" json:"tierIdsOnly,omitempty"`
+	TierIDsOnly pq.Int32Array `gorm:"type:integer[]" json:"tierIdsOnly,omitempty"`
 }
 
 func (CalendarCalendarEvent) TableName() string {
