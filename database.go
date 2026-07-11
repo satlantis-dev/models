@@ -150,6 +150,7 @@ var DatabaseModels = []interface{}{
 	Theme{},
 	VanityPath{},
 	VerificationToken{},
+	WhopCompany{},
 }
 
 func SetupDatabase(dbHost, dbUser, dbPassword, dbName string) (*gorm.DB, error) {
