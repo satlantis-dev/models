@@ -166,6 +166,14 @@ func SetupDatabase(dbHost, dbUser, dbPassword, dbName string) (*gorm.DB, error) 
 		return nil, err
 	}
 
+	// Register CalendarCalendarEvent as the join model for Calendar.Events.
+	// Without this, GORM treats calendar_calendar_events as a plain many2many
+	// join table and AutoMigrate silently skips the struct's extra columns
+	// (featured, members_only, tier_ids_only).
+	if err := db.SetupJoinTable(&Calendar{}, "Events", &CalendarCalendarEvent{}); err != nil {
+		return nil, err
+	}
+
 	sqlDB, err := db.DB()
 	if err != nil {
 		log.Fatalf("failed to get sqlDB: %v", err)
