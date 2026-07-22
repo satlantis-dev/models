@@ -6,6 +6,16 @@ import (
 	"gorm.io/gorm"
 )
 
+type CommunityMemberEngagementStage string
+
+const (
+	CommunityMemberEngagementStageUnknown            CommunityMemberEngagementStage = "unknown"
+	CommunityMemberEngagementStageImportedContact    CommunityMemberEngagementStage = "imported_contact"
+	CommunityMemberEngagementStageEventAttendee      CommunityMemberEngagementStage = "event_attendee"
+	CommunityMemberEngagementStageCalendarSubscriber CommunityMemberEngagementStage = "calendar_subscriber"
+	CommunityMemberEngagementStageMember             CommunityMemberEngagementStage = "member"
+)
+
 type CommunityMember struct {
 	ID                  uint                               `gorm:"primaryKey;autoIncrement" json:"id"`
 	CommunityID         uint                               `gorm:"not null;index;uniqueIndex:idx_community_account" json:"communityId"`
@@ -22,6 +32,7 @@ type CommunityMember struct {
 	IsExpired           bool                               `gorm:"-" json:"isExpired"`
 	IsInvited           bool                               `gorm:"not null;default:false" json:"isInvited"`
 	IsBanned            bool                               `gorm:"not null;default:false" json:"isBanned"`
+	EngagementStage     CommunityMemberEngagementStage     `gorm:"type:varchar(32);not null;default:'imported_contact';index" json:"engagementStage"`
 	CreatedAt           time.Time                          `gorm:"autoCreateTime" json:"createdAt"`
 	UpdatedAt           time.Time                          `gorm:"autoUpdateTime" json:"updatedAt"`
 	DeletedAt           *gorm.DeletedAt                    `gorm:"index" json:"-"`
@@ -45,6 +56,7 @@ type CommunityMemberDTO struct {
 	ExpiryDate          *time.Time                         `json:"expiryDate,omitempty"`
 	IsExpired           bool                               `json:"isExpired"`
 	IsInvited           bool                               `json:"isInvited"`
+	EngagementStage     CommunityMemberEngagementStage     `json:"engagementStage"`
 }
 
 func (m CommunityMember) ToDTO() CommunityMemberDTO {
@@ -62,6 +74,7 @@ func (m CommunityMember) ToDTO() CommunityMemberDTO {
 		ExpiryDate:          m.ExpiryDate,
 		IsExpired:           m.IsExpired,
 		IsInvited:           m.IsInvited,
+		EngagementStage:     m.EngagementStage,
 	}
 }
 
