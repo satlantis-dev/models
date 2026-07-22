@@ -32,7 +32,7 @@ type CommunityMember struct {
 	IsExpired           bool                               `gorm:"-" json:"isExpired"`
 	IsInvited           bool                               `gorm:"not null;default:false" json:"isInvited"`
 	IsBanned            bool                               `gorm:"not null;default:false" json:"isBanned"`
-	EngagementStage     CommunityMemberEngagementStage     `gorm:"type:varchar(32);not null;default:'imported_contact';index" json:"engagementStage"`
+	EngagementStage     CommunityMemberEngagementStage     `gorm:"type:varchar(32);not null;default:'unknown';index" json:"engagementStage"`
 	CreatedAt           time.Time                          `gorm:"autoCreateTime" json:"createdAt"`
 	UpdatedAt           time.Time                          `gorm:"autoUpdateTime" json:"updatedAt"`
 	DeletedAt           *gorm.DeletedAt                    `gorm:"index" json:"-"`
