@@ -6,6 +6,7 @@ import (
 
 const (
 	NotificationTypeEventAnnouncement                             = "calendar_event_announcement"
+	NotificationTypeEventAttendeeInvitation                       = "calendar_event_attendee_invitation"
 	NotificationTypeEventCohostInvitation                         = "calendar_event_cohost_invitation"
 	NotificationTypeEventCohostInvitationAccepted                 = "calendar_event_cohost_invitation_accepted"
 	NotificationTypeEventCohostInvitationDeclined                 = "calendar_event_cohost_invitation_declined"
