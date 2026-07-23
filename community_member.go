@@ -9,11 +9,12 @@ import (
 type CommunityMemberEngagementStage string
 
 const (
-	CommunityMemberEngagementStageUnknown            CommunityMemberEngagementStage = "unknown"
-	CommunityMemberEngagementStageImportedContact    CommunityMemberEngagementStage = "imported_contact"
-	CommunityMemberEngagementStageEventAttendee      CommunityMemberEngagementStage = "event_attendee"
-	CommunityMemberEngagementStageCalendarSubscriber CommunityMemberEngagementStage = "calendar_subscriber"
-	CommunityMemberEngagementStageMember             CommunityMemberEngagementStage = "member"
+	CommunityMemberEngagementStageUnknown             CommunityMemberEngagementStage = "unknown"
+	CommunityMemberEngagementStageImportedContact     CommunityMemberEngagementStage = "imported_contact"
+	CommunityMemberEngagementStageEventAttendee       CommunityMemberEngagementStage = "event_attendee"
+	CommunityMemberEngagementStageCalendarSubscriber  CommunityMemberEngagementStage = "calendar_subscriber"
+	CommunityMemberEngagementStageMembershipRequested CommunityMemberEngagementStage = "membership_requested"
+	CommunityMemberEngagementStageMember              CommunityMemberEngagementStage = "member"
 )
 
 type CommunityMember struct {
