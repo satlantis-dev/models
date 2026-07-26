@@ -145,6 +145,7 @@ var DatabaseModels = []interface{}{
 	EventAnalytics{},
 	MerchantAnalytics{},
 	// Others:
+	Banner{},
 	Currency{},
 	Notification{},
 	Theme{},
