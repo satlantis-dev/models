@@ -16,10 +16,10 @@ var (
 
 type CalendarEventRSVP struct {
 	ID                  uint                        `gorm:"primaryKey" json:"id"`
-	AccountID           uint                        `json:"accountId"`
+	AccountID           uint                        `gorm:"index:idx_rsvp_account_event,priority:1" json:"accountId"`
 	Account             AccountDTO                  `gorm:"constraint:OnDelete:CASCADE;" json:"account"`
 	CreatedAt           time.Time                   `json:"createdAt"`
-	CalendarEventID     uint                        `json:"calendarEventId"`
+	CalendarEventID     uint                        `gorm:"index:idx_rsvp_account_event,priority:2" json:"calendarEventId"`
 	Status              string                      `json:"status"`
 	AcceptedAt          *time.Time                  `json:"acceptedAt,omitempty"`
 	RejectedAt          *time.Time                  `json:"rejectedAt,omitempty"`
