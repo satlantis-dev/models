@@ -31,6 +31,7 @@ type CommunityMembershipPayment struct {
 	PaymentProviderReference *string                          `gorm:"index" json:"paymentProviderReference"`
 	CardLast4                *string                          `gorm:"type:varchar(4)" json:"cardLast4,omitempty"`
 	CardBrand                *string                          `gorm:"type:varchar(32)" json:"cardBrand,omitempty"`
+	LightningAddress         *string                          `gorm:"type:text" json:"lightningAddress"` // address supplied at purchase; null when none
 	Metadata                 *datatypes.JSON                  `gorm:"type:jsonb" json:"metadata,omitempty"`
 	PaidAt                   *time.Time                       `json:"paidAt,omitempty"`
 	ExpiredAt                *time.Time                       `json:"expiredAt,omitempty"`
