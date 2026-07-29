@@ -54,9 +54,9 @@ func (CalendarEventCoupon) TableName() string {
 
 type CalendarEventCouponRedemption struct {
 	ID             uint                      `gorm:"primaryKey" json:"id"`
-	CouponID       uint                      `gorm:"not null;index" json:"couponId"`
+	CouponID       uint                      `gorm:"not null;index:idx_coupon_account_redemption,priority:1" json:"couponId"`
 	Coupon         *CalendarEventCoupon      `gorm:"foreignKey:CouponID;constraint:OnDelete:CASCADE" json:"-"`
-	AccountID      uint                      `gorm:"not null;index" json:"accountId"`
+	AccountID      uint                      `gorm:"not null;index:idx_coupon_account_redemption,priority:2" json:"accountId"`
 	Account        *Account                  `gorm:"foreignKey:AccountID;constraint:OnDelete:CASCADE" json:"-"`
 	OrderID        uint                      `gorm:"not null;uniqueIndex" json:"orderId"`
 	Order          *CalendarEventTicketOrder `gorm:"foreignKey:OrderID;constraint:OnDelete:CASCADE" json:"-"`
