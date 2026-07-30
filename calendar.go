@@ -26,7 +26,7 @@ type Calendar struct {
 	PlaceID          *uint               `json:"placeId,omitempty"`
 	Place            *Place              `gorm:"foreignKey:PlaceID;constraint:OnDelete:SET NULL" json:"place,omitempty"`
 	IsPublic         bool                `gorm:"default:true" json:"isPublic"`
-	Featured         bool                `gorm:"default:false" json:"featured"`
+	Featured         bool                `gorm:"default:false;index:idx_calendar_featured,where:featured = true" json:"featured"`
 	CommunityID      *uint               `gorm:"index" json:"communityId,omitempty"`
 	Community        *Community          `gorm:"foreignKey:CommunityID;constraint:OnDelete:SET NULL" json:"community,omitempty"`
 }
