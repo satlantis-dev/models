@@ -82,5 +82,6 @@ func (c *Community) ToDTO() *CommunityDTO {
 		MemberCount: c.MemberCount,
 		Calendars:   c.Calendars,
 		WhopID:      c.WhopID,
+		CreatedAt:   c.CreatedAt,
 	}
 }
