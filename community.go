@@ -11,7 +11,7 @@ type Community struct {
 	ID                     uint                          `gorm:"primaryKey;autoIncrement" json:"id"`
 	AccountID              uint                          `gorm:"index" json:"accountId"`
 	Account                *Account                      `gorm:"foreignKey:AccountID;constraint:OnDelete:CASCADE;" json:"account,omitempty"`
-	CreatedAt              time.Time                     `gorm:"autoCreateTime" json:"-"`
+	CreatedAt              time.Time                     `gorm:"autoCreateTime" json:"createdAt"`
 	UpdatedAt              time.Time                     `gorm:"autoUpdateTime" json:"-"`
 	DeletedAt              *gorm.DeletedAt               `gorm:"index" json:"-"`
 	Name                   string                        `gorm:"type:text;not null" json:"name"`
@@ -63,6 +63,7 @@ type CommunityDTO struct {
 	MemberCount *int        `json:"memberCount"`
 	Calendars   *[]Calendar `json:"calendars,omitempty"`
 	WhopID      *string     `json:"whopId,omitempty"`
+	CreatedAt   time.Time   `json:"createdAt"`
 }
 
 func (CommunityDTO) TableName() string {
