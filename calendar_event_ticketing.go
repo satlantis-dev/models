@@ -43,6 +43,7 @@ type PaymentMethod string
 const (
 	PaymentMethodLightning PaymentMethod = "lightning"
 	PaymentMethodStripe    PaymentMethod = "stripe"
+	PaymentMethodOffline   PaymentMethod = "offline"
 )
 
 type PaymentStatus string
