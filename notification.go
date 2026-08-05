@@ -44,6 +44,7 @@ const (
 	NotificationTypeCommunityMembershipEnded                      = "community_membership_ended"
 	NotificationTypeCommunityMembershipNewMember                  = "community_membership_new_member"
 	NotificationTypeCommunityMembershipLostMember                 = "community_membership_lost_member"
+	NotificationTypeCommunityMembershipRenewalCancelled           = "community_membership_renewal_cancelled"
 	NotificationTypeCommunityMembershipInvitation                 = "community_membership_invitation"
 	NotificationTypeCommunityAdminInvitation                      = "community_admin_invitation"
 	NotificationTypeCommunityAdminInvitationAccepted              = "community_admin_invitation_accepted"
