@@ -54,16 +54,28 @@ type Account struct {
 	Website                     string                `gorm:"type:text" json:"website"`
 	SocialLinks                 datatypes.JSON        `gorm:"type:jsonb" json:"socialLinks"`
 	Username                    string                `gorm:"uniqueIndex;default:NULL;size:30" json:"username"`
-	Level                       int                   `gorm:"index;default:0" json:"level"`
-	FollowingCount              *int64                `json:"followingCount"`
-	FollowersCount              *int64                `gorm:"index:,sort:desc,option:NULLS LAST" json:"followersCount"`
-	AppleID                     *string               `gorm:"uniqueIndex" json:"appleId"`
-	GoogleID                    *string               `gorm:"uniqueIndex" json:"googleId"`
-	WhopID                      *string               `gorm:"uniqueIndex" json:"whopId"`
-	WhopRefreshToken            *string               `gorm:"type:text" json:"-"`
-	VertexRank                  decimal.Decimal       `gorm:"type:numeric;index" json:"vertexRank"`
-	WithdrawalDisabledAt        *time.Time            `gorm:"default:NULL" json:"-"`
-	WelcomeEmailSentAt          *time.Time            `gorm:"default:NULL" json:"-"`
+	// Level is a web-of-trust distance tier:
+	//   0 = unvetted/untrusted (default for new accounts, and the fallback when no account exists).
+	//       Nostr events from level-0 accounts are dropped by the ingestion pipeline.
+	//   1 = signed up or logged in directly with Satlantis/Nostr (a WoT "seed" account).
+	//   2 = followed by a level-1 account (one hop out in the follow graph).
+	//   3 = followed by a level-2 account (two hops out).
+	Level                int             `gorm:"index;default:0" json:"level"`
+	FollowingCount       *int64          `json:"followingCount"`
+	FollowersCount       *int64          `gorm:"index:,sort:desc,option:NULLS LAST" json:"followersCount"`
+	AppleID              *string         `gorm:"uniqueIndex" json:"appleId"`
+	GoogleID             *string         `gorm:"uniqueIndex" json:"googleId"`
+	WhopID               *string         `gorm:"uniqueIndex" json:"whopId"`
+	WhopRefreshToken     *string         `gorm:"type:text" json:"-"`
+	VertexRank           decimal.Decimal `gorm:"type:numeric;index" json:"vertexRank"`
+	WithdrawalDisabledAt *time.Time      `gorm:"default:NULL" json:"-"`
+	WelcomeEmailSentAt   *time.Time      `gorm:"default:NULL" json:"-"`
+	// MetadataCheckedAt is when the account was last checked for a kind-0 (profile
+	// metadata) Nostr event, and MetadataCheckCount is how many consecutive checks found
+	// none. Together they drive the metadata backfill job's retry backoff (see
+	// GetAccountsWithMissingMetadataBatch / RecordAccountMetadataCheck in data-engine).
+	MetadataCheckedAt  *time.Time `gorm:"index" json:"-"`
+	MetadataCheckCount int        `gorm:"default:0" json:"-"`
 }
 
 // AccountMiniDTO
