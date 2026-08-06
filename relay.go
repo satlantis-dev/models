@@ -9,7 +9,6 @@ type Relay struct {
 	Read      bool       `json:"read"`
 	Write     bool       `json:"write"`
 	// AccountCount is the number of distinct accounts that currently list this Address as one
-	// of their relays. Denormalized (duplicated across every row sharing this Address) and
-	// recomputed after writes rather than incremented/decremented in place.
+	// of their relays
 	AccountCount int `gorm:"default:0" json:"accountCount"`
 }
