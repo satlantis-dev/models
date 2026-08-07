@@ -5,13 +5,31 @@ import "time"
 type RsvpStatus string
 
 var (
-	RsvpAccepted   RsvpStatus = "accepted"
-	RsvpTentative  RsvpStatus = "tentative"
-	RsvpDeclined   RsvpStatus = "declined"
+	// RsvpAccepted means the guest is confirmed to attend - set by the guest
+	// accepting (directly, or by accepting an invite), or by an organizer/
+	// admin approving a request or assigning a ticket.
+	RsvpAccepted RsvpStatus = "accepted"
+	// RsvpTentative means the guest might attend - set by the guest.
+	RsvpTentative RsvpStatus = "tentative"
+	// RsvpDeclined means the guest said no - set by the guest, either
+	// declining an invitation (Invited -> Declined) or reversing their own
+	// earlier acceptance (Accepted -> Declined).
+	RsvpDeclined RsvpStatus = "declined"
+	// RsvpWaitlisted means the guest is confirmed but
+	// the event was full when they were accepted (either accepting directly
+	// or via organizer approval of a gated request), so they're first in
+	// line to be promoted to Accepted once a slot frees up.
 	RsvpWaitlisted RsvpStatus = "waitlisted"
-	RsvpRequested  RsvpStatus = "requested"
-	RsvpRejected   RsvpStatus = "rejected"
-	RsvpInvited    RsvpStatus = "invited"
+	// RsvpRequested means the guest is awaiting organizer/admin review - the
+	// initial status for any new RSVP on a gated event.
+	RsvpRequested RsvpStatus = "requested"
+	// RsvpRejected means an organizer/admin said no - either denying a
+	// Requested (gated) submission before it was ever accepted, or actively
+	// revoking an existing RSVP.
+	RsvpRejected RsvpStatus = "rejected"
+	// RsvpInvited means an organizer/admin sent this account an invitation
+	// that hasn't been responded to yet.
+	RsvpInvited RsvpStatus = "invited"
 )
 
 type CalendarEventRSVP struct {
