@@ -11,8 +11,8 @@ type CommunityMemberEngagementStage string
 const (
 	CommunityMemberEngagementStageUnknown             CommunityMemberEngagementStage = "unknown"
 	CommunityMemberEngagementStageImportedContact     CommunityMemberEngagementStage = "imported_contact"
-	CommunityMemberEngagementStageEventAttendee       CommunityMemberEngagementStage = "event_attendee"
 	CommunityMemberEngagementStageCalendarSubscriber  CommunityMemberEngagementStage = "calendar_subscriber"
+	CommunityMemberEngagementStageEventAttendee       CommunityMemberEngagementStage = "event_attendee"
 	CommunityMemberEngagementStageMembershipRequested CommunityMemberEngagementStage = "membership_requested"
 	CommunityMemberEngagementStageMember              CommunityMemberEngagementStage = "member"
 )
