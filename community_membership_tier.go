@@ -16,6 +16,7 @@ type CommunityMembershipTier struct {
 	ButtonText            *string                       `gorm:"type:varchar(20)" json:"buttonText,omitempty"`
 	RegistrationQuestions *RegistrationQuestionsPayload `gorm:"type:jsonb;serializer:json" json:"registrationQuestions,omitempty"`
 	IsGated               bool                          `gorm:"not null;default:false" json:"isGated"`
+	IsHidden              bool                          `gorm:"not null;default:false" json:"isHidden"`
 	IsPaid                bool                          `gorm:"not null;default:false" json:"isPaid"`
 	IsRecommended         bool                          `gorm:"not null;default:false" json:"isRecommended"`
 	Currency              *OrderCurrency                `gorm:"-" json:"currency,omitempty"`
