@@ -9,16 +9,14 @@ import (
 
 // CommunityMembershipRefund represents a refund against a membership payment.
 type CommunityMembershipRefund struct {
-	ID        uint                        `gorm:"primarykey" json:"id"`
-	PaymentID uint                        `gorm:"not null;index" json:"paymentId"`
-	Payment   *CommunityMembershipPayment `gorm:"foreignKey:PaymentID;constraint:OnDelete:CASCADE" json:"payment,omitempty"`
-	Amount    int64                       `gorm:"not null" json:"amount"`
-	Fee       int64                       `gorm:"type:bigint;default:0" json:"fee"`
-	Currency  OrderCurrency               `gorm:"type:varchar(8);not null" json:"currency"`
-	Status    RefundStatus                `gorm:"not null;default:'pending'" json:"status"`
-
-	// Supported values include "lightning", "satlantis_wallet", and "offline".
-	RefundMethod string `gorm:"not null" json:"refundMethod"`
+	ID           uint                        `gorm:"primarykey" json:"id"`
+	PaymentID    uint                        `gorm:"not null;index" json:"paymentId"`
+	Payment      *CommunityMembershipPayment `gorm:"foreignKey:PaymentID;constraint:OnDelete:CASCADE" json:"payment,omitempty"`
+	Amount       int64                       `gorm:"not null" json:"amount"`
+	Fee          int64                       `gorm:"type:bigint;default:0" json:"fee"`
+	Currency     OrderCurrency               `gorm:"type:varchar(8);not null" json:"currency"`
+	Status       RefundStatus                `gorm:"not null;default:'pending'" json:"status"`
+	RefundMethod string                      `gorm:"not null" json:"refundMethod"`
 
 	LightningAddress     *string `json:"lightningAddress,omitempty"`
 	LightningPaymentHash *string `json:"lightningPaymentHash,omitempty"`

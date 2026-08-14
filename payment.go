@@ -41,3 +41,12 @@ const (
 	RefundCompleted  RefundStatus = "completed"
 	RefundFailed     RefundStatus = "failed"
 )
+
+type RefundMethod string
+
+const (
+	RefundMethodLightning  RefundMethod = "lightning"
+	RefundMethodUserWallet RefundMethod = "user_wallet"
+	RefundMethodStripe     RefundMethod = "stripe"
+	RefundMethodOffline    RefundMethod = "offline"
+)
