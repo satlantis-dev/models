@@ -17,7 +17,7 @@ type CommunityMembershipRefund struct {
 	Currency  OrderCurrency               `gorm:"type:varchar(8);not null" json:"currency"`
 	Status    RefundStatus                `gorm:"not null;default:'pending'" json:"status"`
 
-	// Supported values include "lightning" and "stripe".
+	// Supported values include "lightning", "satlantis_wallet", and "offline".
 	RefundMethod string `gorm:"not null" json:"refundMethod"`
 
 	LightningAddress     *string `json:"lightningAddress,omitempty"`
