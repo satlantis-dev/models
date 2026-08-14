@@ -5,6 +5,7 @@ type PaymentMethod string
 const (
 	PaymentMethodLightning PaymentMethod = "lightning"
 	PaymentMethodStripe    PaymentMethod = "stripe"
+	PaymentMethodOnchain   PaymentMethod = "onchain"
 	PaymentMethodOffline   PaymentMethod = "offline"
 )
 
