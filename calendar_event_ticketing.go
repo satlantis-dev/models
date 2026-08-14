@@ -38,35 +38,6 @@ var (
 	TicketReissued TicketStatus = "reissued"
 )
 
-type PaymentMethod string
-
-const (
-	PaymentMethodLightning PaymentMethod = "lightning"
-	PaymentMethodStripe    PaymentMethod = "stripe"
-	PaymentMethodOnchain   PaymentMethod = "onchain"
-)
-
-type PaymentStatus string
-
-const (
-	PaymentPending   PaymentStatus = "pending"
-	PaymentPaid      PaymentStatus = "paid"
-	PaymentExpired   PaymentStatus = "expired"
-	PaymentFailed    PaymentStatus = "failed"
-	PaymentRefunded  PaymentStatus = "refunded"
-	PaymentCancelled PaymentStatus = "cancelled"
-)
-
-// RefundStatus represents the status of a refund
-type RefundStatus string
-
-const (
-	RefundPending    RefundStatus = "pending"
-	RefundProcessing RefundStatus = "processing"
-	RefundCompleted  RefundStatus = "completed"
-	RefundFailed     RefundStatus = "failed"
-)
-
 type CalendarEventTicketOrderPayment struct {
 	ID                       uint                      `gorm:"primaryKey" json:"id"`
 	OrderID                  uint                      `gorm:"uniqueIndex;not null" json:"orderId"`
