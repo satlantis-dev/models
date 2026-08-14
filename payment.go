@@ -45,8 +45,8 @@ const (
 type RefundMethod string
 
 const (
-	RefundMethodLightning  RefundMethod = "lightning"
-	RefundMethodUserWallet RefundMethod = "user_wallet"
-	RefundMethodStripe     RefundMethod = "stripe"
-	RefundMethodOffline    RefundMethod = "offline"
+	RefundMethodLightning     RefundMethod = "lightning"
+	RefundMethodAccountWallet RefundMethod = "account_wallet"
+	RefundMethodStripe        RefundMethod = "stripe"
+	RefundMethodOffline       RefundMethod = "offline"
 )
