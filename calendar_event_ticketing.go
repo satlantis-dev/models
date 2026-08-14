@@ -43,6 +43,7 @@ type PaymentMethod string
 const (
 	PaymentMethodLightning PaymentMethod = "lightning"
 	PaymentMethodStripe    PaymentMethod = "stripe"
+	PaymentMethodOnchain   PaymentMethod = "onchain"
 )
 
 type PaymentStatus string
@@ -81,6 +82,10 @@ type CalendarEventTicketOrderPayment struct {
 	LightningPreimage        *string                   `gorm:"size:64" json:"lightningPreimage,omitempty"`
 	LightningProvider        *string                   `gorm:"size:32" json:"lightningProvider,omitempty"`
 	LightningProviderTxID    *string                   `gorm:"index" json:"lightningProviderTxId,omitempty"`
+	OnchainAddress           *string                   `gorm:"uniqueIndex;size:90" json:"onchainAddress,omitempty"`
+	OnchainTxID              *string                   `gorm:"index;size:64" json:"onchainTxId,omitempty"`
+	OnchainConfirmations     *int                      `json:"onchainConfirmations,omitempty"`
+	OnchainReceivedSats      *int64                    `gorm:"type:bigint" json:"onchainReceivedSats,omitempty"`
 	PaymentProviderReference *string                   `gorm:"index" json:"paymentProviderReference"`
 	Metadata                 *datatypes.JSON           `gorm:"type:jsonb" json:"metadata,omitempty"`
 	PaidAt                   *time.Time                `json:"paidAt,omitempty"`
@@ -201,6 +206,10 @@ type CalendarEventTicketOrderPaymentDTO struct {
 	LightningPreimage        *string                   `json:"lightningPreimage,omitempty"`
 	LightningProvider        *string                   `json:"lightningProvider,omitempty"`
 	LightningProviderTxID    *string                   `json:"lightningProviderTxId,omitempty"`
+	OnchainAddress           *string                   `json:"onchainAddress,omitempty"`
+	OnchainTxID              *string                   `json:"onchainTxId,omitempty"`
+	OnchainConfirmations     *int                      `json:"onchainConfirmations,omitempty"`
+	OnchainReceivedSats      *int64                    `json:"onchainReceivedSats,omitempty"`
 	PaymentProviderReference *string                   `json:"paymentProviderReference"`
 	PaidAt                   *time.Time                `json:"paidAt,omitempty"`
 	ExpiredAt                *time.Time                `json:"expiredAt,omitempty"`
@@ -228,6 +237,10 @@ func (payment CalendarEventTicketOrderPayment) ToDTO() *CalendarEventTicketOrder
 		LightningPreimage:        payment.LightningPreimage,
 		LightningProvider:        payment.LightningProvider,
 		LightningProviderTxID:    payment.LightningProviderTxID,
+		OnchainAddress:           payment.OnchainAddress,
+		OnchainTxID:              payment.OnchainTxID,
+		OnchainConfirmations:     payment.OnchainConfirmations,
+		OnchainReceivedSats:      payment.OnchainReceivedSats,
 		PaymentProviderReference: payment.PaymentProviderReference,
 		PaidAt:                   payment.PaidAt,
 		ExpiredAt:                payment.ExpiredAt,
