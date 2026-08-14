@@ -16,7 +16,7 @@ type CommunityMembershipRefund struct {
 	Fee          int64                       `gorm:"type:bigint;default:0" json:"fee"`
 	Currency     OrderCurrency               `gorm:"type:varchar(8);not null" json:"currency"`
 	Status       RefundStatus                `gorm:"not null;default:'pending'" json:"status"`
-	RefundMethod string                      `gorm:"not null" json:"refundMethod"`
+	RefundMethod RefundMethod                `gorm:"not null" json:"refundMethod"`
 
 	LightningAddress     *string `json:"lightningAddress,omitempty"`
 	LightningPaymentHash *string `json:"lightningPaymentHash,omitempty"`
