@@ -45,6 +45,8 @@ type CommunityMembershipPayment struct {
 	// Offline fields
 	OfflinePaymentMethod *OfflinePaymentMethod `gorm:"type:varchar(32)" json:"offlinePaymentMethod,omitempty"`
 	ReceiptURL           *string               `gorm:"type:text" json:"receiptUrl,omitempty"`
+	SubmitNotes          *string               `gorm:"type:text" json:"submitNotes,omitempty"`
+	ReviewNotes          *string               `gorm:"type:text" json:"reviewNotes,omitempty"`
 }
 
 func (CommunityMembershipPayment) TableName() string {
