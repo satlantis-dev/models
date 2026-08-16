@@ -38,6 +38,24 @@ const (
 	OfflinePaymentMethodOther        OfflinePaymentMethod = "other"
 )
 
+// AllOfflinePaymentMethods lists every recognized OfflinePaymentMethod value,
+// so callers validating user input can check against this instead of
+// duplicating the list (and risking drift as new methods are added above).
+var AllOfflinePaymentMethods = []OfflinePaymentMethod{
+	OfflinePaymentMethodCash,
+	OfflinePaymentMethodCard,
+	OfflinePaymentMethodBankTransfer,
+	OfflinePaymentMethodCheque,
+	OfflinePaymentMethodCrypto,
+	OfflinePaymentMethodPix,
+	OfflinePaymentMethodAppAlipay,
+	OfflinePaymentMethodAppRevolut,
+	OfflinePaymentMethodAppWechat,
+	OfflinePaymentMethodAppWise,
+	OfflinePaymentMethodAppZelle,
+	OfflinePaymentMethodOther,
+}
+
 type PaymentStatus string
 
 const (
