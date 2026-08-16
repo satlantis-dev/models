@@ -18,6 +18,19 @@ const (
 	CommunityMemberEngagementStageMember              CommunityMemberEngagementStage = "member"
 )
 
+// CommunityMemberEngagementStageRank orders CommunityMemberEngagementStage
+// values from least to most engaged, so callers can tell whether a candidate
+// stage is actually a step forward before raising a member to it.
+var CommunityMemberEngagementStageRank = map[CommunityMemberEngagementStage]int{
+	CommunityMemberEngagementStageUnknown:             0,
+	CommunityMemberEngagementStageImportedContact:     1,
+	CommunityMemberEngagementStageInvited:             2,
+	CommunityMemberEngagementStageCalendarSubscriber:  3,
+	CommunityMemberEngagementStageEventAttendee:       4,
+	CommunityMemberEngagementStageMembershipRequested: 5,
+	CommunityMemberEngagementStageMember:              6,
+}
+
 type CommunityMember struct {
 	ID                  uint                               `gorm:"primaryKey;autoIncrement" json:"id"`
 	CommunityID         uint                               `gorm:"not null;index;uniqueIndex:idx_community_account" json:"communityId"`
