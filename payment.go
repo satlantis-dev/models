@@ -24,14 +24,18 @@ const (
 type OfflinePaymentMethod string
 
 const (
-	OfflinePaymentMethodCash    OfflinePaymentMethod = "cash"
-	OfflinePaymentMethodCheck   OfflinePaymentMethod = "check"
-	OfflinePaymentMethodCrypto  OfflinePaymentMethod = "crypto"
-	OfflinePaymentMethodRevolut OfflinePaymentMethod = "revolut"
-	OfflinePaymentMethodAlipay  OfflinePaymentMethod = "alipay"
-	OfflinePaymentMethodWechat  OfflinePaymentMethod = "wechat"
-	OfflinePaymentMethodPix     OfflinePaymentMethod = "pix"
-	OfflinePaymentMethodOther   OfflinePaymentMethod = "other"
+	OfflinePaymentMethodCash         OfflinePaymentMethod = "cash"
+	OfflinePaymentMethodCard         OfflinePaymentMethod = "card"
+	OfflinePaymentMethodBankTransfer OfflinePaymentMethod = "transfer"
+	OfflinePaymentMethodCheque       OfflinePaymentMethod = "cheque"
+	OfflinePaymentMethodCrypto       OfflinePaymentMethod = "crypto"
+	OfflinePaymentMethodPix          OfflinePaymentMethod = "pix"
+	OfflinePaymentMethodAppAlipay    OfflinePaymentMethod = "alipay"
+	OfflinePaymentMethodAppRevolut   OfflinePaymentMethod = "revolut"
+	OfflinePaymentMethodAppWechat    OfflinePaymentMethod = "wechat"
+	OfflinePaymentMethodAppWise      OfflinePaymentMethod = "wise"
+	OfflinePaymentMethodAppZelle     OfflinePaymentMethod = "zelle"
+	OfflinePaymentMethodOther        OfflinePaymentMethod = "other"
 )
 
 type PaymentStatus string
