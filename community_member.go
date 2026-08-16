@@ -18,10 +18,13 @@ const (
 	CommunityMemberEngagementStageMember              CommunityMemberEngagementStage = "member"
 )
 
-// CommunityMemberEngagementStageRank orders CommunityMemberEngagementStage
+// communityMemberEngagementStageRank orders CommunityMemberEngagementStage
 // values from least to most engaged, so callers can tell whether a candidate
-// stage is actually a step forward before raising a member to it.
-var CommunityMemberEngagementStageRank = map[CommunityMemberEngagementStage]int{
+// stage is actually a step forward before raising a member to it. Unexported
+// so it can't be mutated from outside the package - use
+// CommunityMemberEngagementStageRank or CommunityMemberEngagementStageRanks
+// to read it.
+var communityMemberEngagementStageRank = map[CommunityMemberEngagementStage]int{
 	CommunityMemberEngagementStageUnknown:             0,
 	CommunityMemberEngagementStageImportedContact:     1,
 	CommunityMemberEngagementStageInvited:             2,
@@ -29,6 +32,24 @@ var CommunityMemberEngagementStageRank = map[CommunityMemberEngagementStage]int{
 	CommunityMemberEngagementStageEventAttendee:       4,
 	CommunityMemberEngagementStageMembershipRequested: 5,
 	CommunityMemberEngagementStageMember:              6,
+}
+
+// CommunityMemberEngagementStageRank returns stage's rank in the engagement
+// funnel (higher means more engaged), and false if stage isn't recognized.
+func CommunityMemberEngagementStageRank(stage CommunityMemberEngagementStage) (int, bool) {
+	rank, ok := communityMemberEngagementStageRank[stage]
+	return rank, ok
+}
+
+// CommunityMemberEngagementStageRanks returns a copy of the full stage->rank
+// table, safe for callers to range over without risking mutation of the
+// underlying table.
+func CommunityMemberEngagementStageRanks() map[CommunityMemberEngagementStage]int {
+	out := make(map[CommunityMemberEngagementStage]int, len(communityMemberEngagementStageRank))
+	for stage, rank := range communityMemberEngagementStageRank {
+		out[stage] = rank
+	}
+	return out
 }
 
 type CommunityMember struct {
