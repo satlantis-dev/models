@@ -25,11 +25,11 @@ type CommunityMembershipRefund struct {
 	StripeRefundID        *string `json:"stripeRefundId,omitempty"`
 	StripePaymentIntentID *string `json:"stripePaymentIntentId,omitempty"`
 
-	Reason        *string         `gorm:"type:text" json:"reason,omitempty"`
+	Reason        *string         `gorm:"type:varchar(500)" json:"reason,omitempty"`
 	CreatedAt     time.Time       `json:"createdAt"`
 	ProcessedAt   *time.Time      `json:"processedAt,omitempty"`
 	FailedAt      *time.Time      `json:"failedAt,omitempty"`
-	FailureReason *string         `gorm:"type:text" json:"failureReason,omitempty"`
+	FailureReason *string         `gorm:"type:varchar(500)" json:"failureReason,omitempty"`
 	Metadata      *datatypes.JSON `gorm:"type:jsonb" json:"metadata,omitempty"`
 	DeletedAt     gorm.DeletedAt  `gorm:"index" json:"-"`
 }

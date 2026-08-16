@@ -56,7 +56,7 @@ type CalendarEventWalletWithdrawal struct {
 	LightningPreimage     *string                     `gorm:"size:64" json:"lightningPreimage,omitempty"`
 	LightningProvider     *string                     `gorm:"size:32" json:"lightningProvider,omitempty"`
 	LightningProviderTxID *string                     `gorm:"index" json:"lightningProviderTxId,omitempty"`
-	FailureReason         *string                     `gorm:"type:text" json:"failureReason,omitempty"`
+	FailureReason         *string                     `gorm:"type:varchar(500)" json:"failureReason,omitempty"`
 	Metadata              *datatypes.JSON             `gorm:"type:jsonb" json:"metadata,omitempty"`
 	RequestedAt           time.Time                   `json:"requestedAt"`
 	ProcessingStartedAt   *time.Time                  `json:"processingStartedAt,omitempty"`
@@ -116,7 +116,7 @@ type CalendarEventWalletTransaction struct {
 	ProviderName          *string `gorm:"type:varchar(32)" json:"providerName,omitempty"` // IBEX, Stripe, etc.
 
 	// Metadata
-	Memo     *string         `gorm:"type:text" json:"memo,omitempty"`
+	Memo     *string         `gorm:"type:varchar(500)" json:"memo,omitempty"`
 	Metadata *datatypes.JSON `gorm:"type:jsonb" json:"metadata,omitempty"`
 
 	// Timestamps

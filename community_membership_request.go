@@ -47,7 +47,7 @@ type CommunityMembershipRequest struct {
 	RegistrationAnswers *RegistrationAnswersPayload      `gorm:"type:jsonb;serializer:json" json:"registrationAnswers,omitempty"`
 	ReviewedByAccountID *uint                            `gorm:"index" json:"reviewedByAccountId,omitempty"`
 	ReviewedByAccount   *AccountDTO                      `gorm:"foreignKey:ReviewedByAccountID;constraint:OnDelete:SET NULL;" json:"reviewedByAccount,omitempty"`
-	ReviewNotes         *string                          `gorm:"type:text" json:"reviewNotes,omitempty"`
+	ReviewNotes         *string                          `gorm:"type:varchar(500)" json:"reviewNotes,omitempty"`
 	ReviewedAt          *time.Time                       `gorm:"type:timestamptz" json:"reviewedAt,omitempty"`
 	CreatedAt           time.Time                        `gorm:"autoCreateTime" json:"createdAt"`
 	UpdatedAt           time.Time                        `gorm:"autoUpdateTime" json:"updatedAt"`
