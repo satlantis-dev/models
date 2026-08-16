@@ -26,6 +26,7 @@ type PaymentStatus string
 
 const (
 	PaymentPending   PaymentStatus = "pending"
+	PaymentSubmitted PaymentStatus = "submitted"
 	PaymentPaid      PaymentStatus = "paid"
 	PaymentExpired   PaymentStatus = "expired"
 	PaymentFailed    PaymentStatus = "failed"
