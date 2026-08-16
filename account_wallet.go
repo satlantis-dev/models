@@ -88,7 +88,7 @@ type AccountWalletTransaction struct {
 	ProviderName          *string `gorm:"type:varchar(32)" json:"providerName,omitempty"` // IBEX, Stripe, etc.
 
 	// Metadata
-	Memo     *string         `gorm:"type:text" json:"memo,omitempty"`
+	Memo     *string         `gorm:"type:varchar(500)" json:"memo,omitempty"`
 	Metadata *datatypes.JSON `gorm:"type:jsonb" json:"metadata,omitempty"`
 
 	// Timestamps
