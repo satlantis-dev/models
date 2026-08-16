@@ -7,18 +7,6 @@ import (
 	"gorm.io/gorm"
 )
 
-type OrderCurrency string
-
-var (
-	OrderCurrencyBTC OrderCurrency = "BTC"
-	OrderCurrencyUSD OrderCurrency = "USD"
-	OrderCurrencyEUR OrderCurrency = "EUR"
-	OrderCurrencyCAD OrderCurrency = "CAD"
-	OrderCurrencyGBP OrderCurrency = "GBP"
-	OrderCurrencyAUD OrderCurrency = "AUD"
-	OrderCurrencyNZD OrderCurrency = "NZD"
-)
-
 type OrderStatus string
 
 var (

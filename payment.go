@@ -1,5 +1,17 @@
 package models
 
+type OrderCurrency string
+
+const (
+	OrderCurrencyBTC OrderCurrency = "BTC"
+	OrderCurrencyUSD OrderCurrency = "USD"
+	OrderCurrencyEUR OrderCurrency = "EUR"
+	OrderCurrencyCAD OrderCurrency = "CAD"
+	OrderCurrencyGBP OrderCurrency = "GBP"
+	OrderCurrencyAUD OrderCurrency = "AUD"
+	OrderCurrencyNZD OrderCurrency = "NZD"
+)
+
 type PaymentMethod string
 
 const (
@@ -26,6 +38,7 @@ type PaymentStatus string
 
 const (
 	PaymentPending   PaymentStatus = "pending"
+	PaymentSubmitted PaymentStatus = "submitted"
 	PaymentPaid      PaymentStatus = "paid"
 	PaymentExpired   PaymentStatus = "expired"
 	PaymentFailed    PaymentStatus = "failed"
