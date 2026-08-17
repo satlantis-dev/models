@@ -44,7 +44,7 @@ type CommunityMembershipPayment struct {
 	CardBrand                *string `gorm:"type:varchar(32)" json:"cardBrand,omitempty"`
 	// Offline fields
 	OfflinePaymentMethod *OfflinePaymentMethod `gorm:"type:varchar(32)" json:"offlinePaymentMethod,omitempty"`
-	ReceiptURL           *string               `gorm:"type:text" json:"receiptUrl,omitempty"`
+	ProofImageURL        *string               `gorm:"type:text" json:"proofImageUrl,omitempty"`
 	SubmitNotes          *string               `gorm:"type:varchar(500)" json:"submitNotes,omitempty"`
 	ReviewNotes          *string               `gorm:"type:varchar(500)" json:"reviewNotes,omitempty"`
 }
