@@ -3,6 +3,7 @@ package models
 import (
 	"time"
 
+	"github.com/lib/pq"
 	"gorm.io/gorm"
 )
 
@@ -72,6 +73,7 @@ type CommunityMember struct {
 	CreatedAt           time.Time                          `gorm:"autoCreateTime" json:"createdAt"`
 	UpdatedAt           time.Time                          `gorm:"autoUpdateTime" json:"updatedAt"`
 	DeletedAt           *gorm.DeletedAt                    `gorm:"index" json:"-"`
+	InvitedTo           pq.Int32Array                      `gorm:"type:integer[];not null;default:'{}'" json:"invitedTo,omitempty"`
 }
 
 func (CommunityMember) TableName() string {
