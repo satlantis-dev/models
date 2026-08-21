@@ -8,7 +8,4 @@ type Relay struct {
 	Address   string     `gorm:"index" json:"address"`
 	Read      bool       `json:"read"`
 	Write     bool       `json:"write"`
-	// AccountCount is the number of distinct accounts that currently list this Address as one
-	// of their relays
-	AccountCount int `gorm:"default:0" json:"accountCount"`
 }
