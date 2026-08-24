@@ -10,11 +10,12 @@ const (
 	// CommunityMemberAuditActionTierSet covers every admin-driven tier
 	// assignment that doesn't go through the member-facing request flow:
 	// adding a member (with or without a tier) and a bulk tier upgrade.
-	CommunityMemberAuditActionTierSet      CommunityMemberAuditAction = "tier_set"
-	CommunityMemberAuditActionRemoved      CommunityMemberAuditAction = "removed"
-	CommunityMemberAuditActionBanned       CommunityMemberAuditAction = "banned"
-	CommunityMemberAuditActionMadeProspect CommunityMemberAuditAction = "made_prospect"
-	CommunityMemberAuditActionInvited      CommunityMemberAuditAction = "invited"
+	CommunityMemberAuditActionTierSet           CommunityMemberAuditAction = "tier_set"
+	CommunityMemberAuditActionRemoved           CommunityMemberAuditAction = "removed"
+	CommunityMemberAuditActionBanned            CommunityMemberAuditAction = "banned"
+	CommunityMemberAuditActionDemotedToProspect CommunityMemberAuditAction = "demoted_to_prospect"
+	CommunityMemberAuditActionInvited           CommunityMemberAuditAction = "invited"
+	CommunityMemberAuditActionProspectCreated   CommunityMemberAuditAction = "prospect_created"
 )
 
 // CommunityMemberAuditLog records an admin-initiated change to a
@@ -33,7 +34,11 @@ type CommunityMemberAuditLog struct {
 	NewTier              *CommunityMembershipTier   `gorm:"foreignKey:NewTierID;constraint:OnDelete:SET NULL;" json:"newTier,omitempty"`
 	PerformedByAccountID *uint                      `gorm:"index" json:"performedByAccountId,omitempty"`
 	PerformedByAccount   *AccountDTO                `gorm:"foreignKey:PerformedByAccountID;constraint:OnDelete:SET NULL;" json:"performedByAccount,omitempty"`
-	CreatedAt            time.Time                  `gorm:"autoCreateTime;index" json:"createdAt"`
+	// Reason is a short, code-set (never user-supplied) human-readable note -
+	// currently only populated for CommunityMemberAuditActionProspectCreated,
+	// to say why the prospect record was first created.
+	Reason    *string   `gorm:"type:varchar(200)" json:"reason,omitempty"`
+	CreatedAt time.Time `gorm:"autoCreateTime;index" json:"createdAt"`
 }
 
 func (CommunityMemberAuditLog) TableName() string {
