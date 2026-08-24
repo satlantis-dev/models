@@ -14,13 +14,14 @@ const (
 	CommunityMemberAuditActionRemoved      CommunityMemberAuditAction = "removed"
 	CommunityMemberAuditActionBanned       CommunityMemberAuditAction = "banned"
 	CommunityMemberAuditActionMadeProspect CommunityMemberAuditAction = "made_prospect"
+	CommunityMemberAuditActionInvited      CommunityMemberAuditAction = "invited"
 )
 
 // CommunityMemberAuditLog records an admin-initiated change to a
 // CommunityMember that bypasses CommunityMembershipRequest entirely (direct
-// tier assignment, removal, ban, or demotion to prospect) - it's the audit
-// trail for exactly those actions, so they remain reconstructable even
-// though no request/subscription row exists for them.
+// tier assignment, removal, ban, demotion to prospect, or an invitation) -
+// it's the audit trail for exactly those actions, so they remain
+// reconstructable even though no request/subscription row exists for them.
 type CommunityMemberAuditLog struct {
 	ID                   uint                       `gorm:"primaryKey;autoIncrement" json:"id"`
 	CommunityID          uint                       `gorm:"not null;index" json:"communityId"`
