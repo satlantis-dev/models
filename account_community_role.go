@@ -9,7 +9,7 @@ import (
 type AccountCommunityRoleType string
 
 const (
-	AccountCommunityRoleOwner AccountCommunityRoleType = "admin"
+	AccountCommunityRoleOwner AccountCommunityRoleType = "owner"
 	AccountCommunityRoleAdmin AccountCommunityRoleType = "admin"
 )
 
