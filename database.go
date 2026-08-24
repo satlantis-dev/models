@@ -53,6 +53,7 @@ var DatabaseModels = []interface{}{
 	CommunityMembershipTier{},
 	CommunityMembershipRequest{},
 	CommunityMember{},
+	CommunityMemberAuditLog{},
 	CommunityMembershipSubscription{},
 	CommunityMembershipSubscriptionChange{},
 	CommunityMembershipPayment{},
