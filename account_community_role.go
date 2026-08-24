@@ -18,7 +18,7 @@ type AccountCommunityRole struct {
 	Account              *AccountDTO              `gorm:"foreignKey:AccountID;constraint:OnDelete:CASCADE;" json:"account,omitempty"`
 	CommunityID          uint                     `gorm:"not null;index;uniqueIndex:idx_account_community_role" json:"communityId"`
 	Community            *Community               `gorm:"foreignKey:CommunityID;constraint:OnDelete:CASCADE;" json:"community,omitempty"`
-	Type                 AccountCommunityRoleType `gorm:"type:varchar(32);not null;uniqueIndex:idx_account_community_role" json:"type"`
+	Type                 AccountCommunityRoleType `gorm:"type:varchar(32);not null" json:"type"`
 	InvitationReceivedAt *time.Time               `gorm:"type:timestamptz" json:"invitationReceivedAt,omitempty"`
 	InvitationAcceptedAt *time.Time               `gorm:"type:timestamptz" json:"invitationAcceptedAt,omitempty"`
 	InvitationDeclinedAt *time.Time               `gorm:"type:timestamptz" json:"invitationDeclinedAt,omitempty"`
