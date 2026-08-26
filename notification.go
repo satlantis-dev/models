@@ -38,6 +38,7 @@ const (
 	NotificationTypeCommunityRequestAccepted                      = "community_request_accepted"
 	NotificationTypeCommunityRequestRejected                      = "community_request_rejected"
 	NotificationTypeCommunityMembershipStarted                    = "community_membership_started"
+	NotificationTypeCommunityMembershipSubscribed                 = "community_membership_subscribed"
 	NotificationTypeCommunityMembershipSubscriptionNearExpiry     = "community_membership_subscription_near_expiry"
 	NotificationTypeCommunityMembershipSubscriptionPastDue        = "community_membership_subscription_past_due"
 	NotificationTypeCommunityMembershipSubscriptionPendingPayment = "community_membership_subscription_pending_payment"
