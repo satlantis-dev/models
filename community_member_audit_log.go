@@ -25,8 +25,8 @@ const (
 // reconstructable even though no request/subscription row exists for them.
 type CommunityMemberAuditLog struct {
 	ID                   uint                       `gorm:"primaryKey;autoIncrement" json:"id"`
-	CommunityID          uint                       `gorm:"not null;index" json:"communityId"`
-	AccountID            uint                       `gorm:"not null;index" json:"accountId"`
+	CommunityID          uint                       `gorm:"not null;index:idx_community_member_audit_community_account,priority:1" json:"communityId"`
+	AccountID            uint                       `gorm:"not null;index:idx_community_member_audit_community_account,priority:2" json:"accountId"`
 	Action               CommunityMemberAuditAction `gorm:"type:varchar(32);not null;index" json:"action"`
 	OldTierID            *uint                      `gorm:"index" json:"oldTierId,omitempty"`
 	OldTier              *CommunityMembershipTier   `gorm:"foreignKey:OldTierID;constraint:OnDelete:SET NULL;" json:"oldTier,omitempty"`
