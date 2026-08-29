@@ -1,0 +1,46 @@
+package models
+
+import "time"
+
+// CommunityMemberAuditAction identifies what an admin-initiated change to a
+// CommunityMember did.
+type CommunityMemberAuditAction string
+
+const (
+	// CommunityMemberAuditActionTierSet covers every admin-driven tier
+	// assignment that doesn't go through the member-facing request flow:
+	// adding a member (with or without a tier) and a bulk tier upgrade.
+	CommunityMemberAuditActionTierSet           CommunityMemberAuditAction = "tier_set"
+	CommunityMemberAuditActionRemoved           CommunityMemberAuditAction = "removed"
+	CommunityMemberAuditActionBanned            CommunityMemberAuditAction = "banned"
+	CommunityMemberAuditActionDemotedToProspect CommunityMemberAuditAction = "demoted_to_prospect"
+	CommunityMemberAuditActionInvited           CommunityMemberAuditAction = "invited"
+	CommunityMemberAuditActionProspectCreated   CommunityMemberAuditAction = "prospect_created"
+)
+
+// CommunityMemberAuditLog records an admin-initiated change to a
+// CommunityMember that bypasses CommunityMembershipRequest entirely (direct
+// tier assignment, removal, ban, demotion to prospect, or an invitation) -
+// it's the audit trail for exactly those actions, so they remain
+// reconstructable even though no request/subscription row exists for them.
+type CommunityMemberAuditLog struct {
+	ID                   uint                       `gorm:"primaryKey;autoIncrement" json:"id"`
+	CommunityID          uint                       `gorm:"not null;index:idx_community_member_audit_community_account,priority:1" json:"communityId"`
+	AccountID            uint                       `gorm:"not null;index:idx_community_member_audit_community_account,priority:2" json:"accountId"`
+	Action               CommunityMemberAuditAction `gorm:"type:varchar(32);not null;index" json:"action"`
+	OldTierID            *uint                      `gorm:"index" json:"oldTierId,omitempty"`
+	OldTier              *CommunityMembershipTier   `gorm:"foreignKey:OldTierID;constraint:OnDelete:SET NULL;" json:"oldTier,omitempty"`
+	NewTierID            *uint                      `gorm:"index" json:"newTierId,omitempty"`
+	NewTier              *CommunityMembershipTier   `gorm:"foreignKey:NewTierID;constraint:OnDelete:SET NULL;" json:"newTier,omitempty"`
+	PerformedByAccountID *uint                      `gorm:"index" json:"performedByAccountId,omitempty"`
+	PerformedByAccount   *AccountDTO                `gorm:"foreignKey:PerformedByAccountID;constraint:OnDelete:SET NULL;" json:"performedByAccount,omitempty"`
+	// Reason is a short, code-set (never user-supplied) human-readable note -
+	// currently only populated for CommunityMemberAuditActionProspectCreated,
+	// to say why the prospect record was first created.
+	Reason    *string   `gorm:"type:varchar(200)" json:"reason,omitempty"`
+	CreatedAt time.Time `gorm:"autoCreateTime;index" json:"createdAt"`
+}
+
+func (CommunityMemberAuditLog) TableName() string {
+	return "community_member_audit_logs"
+}
