@@ -25,7 +25,7 @@ type Note struct {
 	ID                 uint       `gorm:"primaryKey" json:"id"`
 	AccountID          uint       `gorm:"index" json:"accountId"`
 	Account            AccountDTO `json:"account"`
-	CreatedAt          *time.Time `json:"createdAt"`
+	CreatedAt          *time.Time `gorm:"index:idx_notes_satlantis_created_at,priority:2" json:"createdAt"`
 	Content            *string    `gorm:"type:text" json:"content"`
 	EventID            uint       `gorm:"index;unique" json:"eventId"`
 	Kind               uint       `gorm:"index" json:"kind"`
@@ -36,7 +36,7 @@ type Note struct {
 	Type               NoteType   `json:"type"`
 	RepostedNoteID     *uint      `gorm:"index" json:"repostedNoteId"`
 	RepostedNote       *Note      `json:"reposted_note" swaggerignore:"true"`
-	CreatedOnSatlantis bool       `json:"createdOnSatlantis"`
+	CreatedOnSatlantis bool       `gorm:"index:idx_notes_satlantis_created_at,priority:1" json:"createdOnSatlantis"`
 }
 
 type NoteWithClosure struct {
