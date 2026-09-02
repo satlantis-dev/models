@@ -81,17 +81,17 @@ type CommunityMember struct {
 	// permission. Callers serving a member's own record or a member-facing
 	// listing must use ClearAdminOnlyFields (or a DTO that omits them) before
 	// encoding a response.
-	AltName  string `gorm:"type:varchar(100)" json:"altName,omitempty"`
-	AltEmail string `gorm:"type:varchar(100)" json:"altEmail,omitempty"`
-	AltPhone string `gorm:"type:varchar(20)" json:"altPhone,omitempty"`
-	Memo     string `gorm:"type:varchar(500)" json:"memo,omitempty"`
+	AltName  *string `gorm:"type:varchar(100)" json:"altName,omitempty"`
+	AltEmail *string `gorm:"type:varchar(100)" json:"altEmail,omitempty"`
+	AltPhone *string `gorm:"type:varchar(20)" json:"altPhone,omitempty"`
+	Memo     *string `gorm:"type:varchar(500)" json:"memo,omitempty"`
 }
 
 func (CommunityMember) TableName() string {
 	return "community_members"
 }
 
-// ClearAdminOnlyFields blanks out the admin-only fields (AltName, AltEmail,
+// ClearAdminOnlyFields nils out the admin-only fields (AltName, AltEmail,
 // AltPhone, Memo) in place. Call this before returning a CommunityMember to
 // the member it belongs to, or to any other member - those fields must only
 // reach endpoints gated on community management permission.
@@ -99,10 +99,10 @@ func (m *CommunityMember) ClearAdminOnlyFields() {
 	if m == nil {
 		return
 	}
-	m.AltName = ""
-	m.AltEmail = ""
-	m.AltPhone = ""
-	m.Memo = ""
+	m.AltName = nil
+	m.AltEmail = nil
+	m.AltPhone = nil
+	m.Memo = nil
 }
 
 type CommunityMemberDTO struct {
