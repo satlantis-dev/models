@@ -9,6 +9,7 @@ import (
 // case is never persisted here.
 type AccountPlan struct {
 	AccountID             uint                `gorm:"primaryKey" json:"accountId"`
+	Account               *AccountDTO         `gorm:"foreignKey:AccountID;constraint:OnDelete:CASCADE;" json:"account,omitempty"`
 	PlanID                uint                `gorm:"not null;index" json:"planId"`
 	Plan                  *Plan               `gorm:"foreignKey:PlanID;constraint:OnDelete:RESTRICT;" json:"plan,omitempty"`
 	StartDate             *time.Time          `gorm:"type:timestamptz" json:"startDate,omitempty"`
