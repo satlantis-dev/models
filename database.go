@@ -147,6 +147,8 @@ var DatabaseModels = []interface{}{
 	MerchantAnalytics{},
 	// Plan related:
 	Plan{},
+	AccountPlan{},
+	PlanSubscription{},
 	// Others:
 	Banner{},
 	Currency{},
