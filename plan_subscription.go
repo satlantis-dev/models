@@ -47,6 +47,15 @@ type PlanSubscription struct {
 	PastDueSince       *time.Time `gorm:"type:timestamptz;index" json:"pastDueSince,omitempty"`
 	EndedAt            *time.Time `gorm:"type:timestamptz" json:"endedAt,omitempty"`
 
+	// Stripe fields, set once a card is saved via a SetupIntent.
+	StripeCustomerID      *string `gorm:"type:varchar(128);index" json:"stripeCustomerId,omitempty"`
+	StripePaymentMethodID *string `gorm:"type:varchar(128);index" json:"stripePaymentMethodId,omitempty"`
+	StripeSetupIntentID   *string `gorm:"type:varchar(128);index" json:"stripeSetupIntentId,omitempty"`
+	CardLast4             *string `gorm:"type:varchar(4)" json:"cardLast4,omitempty"`
+	CardBrand             *string `gorm:"type:varchar(32)" json:"cardBrand,omitempty"`
+	CardExpMonth          *int64  `gorm:"type:smallint" json:"cardExpMonth,omitempty"`
+	CardExpYear           *int64  `gorm:"type:smallint" json:"cardExpYear,omitempty"`
+
 	CancelAtPeriodEnd  bool                                `gorm:"not null;default:false" json:"cancelAtPeriodEnd"`
 	CancelledAt        *time.Time                          `gorm:"type:timestamptz" json:"cancelledAt,omitempty"`
 	CancellationReason *PlanSubscriptionCancellationReason `gorm:"type:varchar(256)" json:"cancellationReason,omitempty"`

@@ -149,6 +149,7 @@ var DatabaseModels = []interface{}{
 	Plan{},
 	AccountPlan{},
 	PlanSubscription{},
+	PlanPayment{},
 	// Others:
 	Banner{},
 	Currency{},
