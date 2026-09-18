@@ -32,9 +32,9 @@ const (
 
 type PlanSubscription struct {
 	ID        uint        `gorm:"primaryKey;autoIncrement" json:"id"`
-	AccountID uint        `gorm:"not null;index;uniqueIndex:idx_plan_subscription_one_open_per_account_plan,where:status != 'cancelled' AND deleted_at IS NULL;uniqueIndex:idx_ps_one_active_per_account,where:(status = 'active' OR status = 'past_due') AND deleted_at IS NULL" json:"accountId"`
+	AccountID uint        `gorm:"not null;index;uniqueIndex:idx_plan_subscription_one_open_per_plan_member,where:status != 'cancelled' AND deleted_at IS NULL;uniqueIndex:idx_ps_one_active_per_account,where:(status = 'active' OR status = 'past_due') AND deleted_at IS NULL" json:"accountId"`
 	Account   *AccountDTO `gorm:"foreignKey:AccountID;constraint:OnDelete:CASCADE;" json:"account,omitempty"`
-	PlanID    uint        `gorm:"not null;index;uniqueIndex:idx_plan_subscription_one_open_per_account_plan,where:status != 'cancelled' AND deleted_at IS NULL" json:"planId"`
+	PlanID    uint        `gorm:"not null;index;uniqueIndex:idx_plan_subscription_one_open_per_plan_member,where:status != 'cancelled' AND deleted_at IS NULL" json:"planId"`
 	Plan      *Plan       `gorm:"foreignKey:PlanID;constraint:OnDelete:RESTRICT;" json:"plan,omitempty"`
 
 	Period        PlanPeriod             `gorm:"type:varchar(16);not null" json:"period"`
