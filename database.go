@@ -145,6 +145,11 @@ var DatabaseModels = []interface{}{
 	EngagementAnalytics{},
 	EventAnalytics{},
 	MerchantAnalytics{},
+	// Plan related:
+	Plan{},
+	AccountPlan{},
+	PlanSubscription{},
+	PlanPayment{},
 	// Others:
 	Banner{},
 	Currency{},
