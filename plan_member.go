@@ -4,10 +4,10 @@ import (
 	"time"
 )
 
-// AccountPlan tracks which non-default Plan an account is currently on.
-// Accounts with no AccountPlan row are on the default Starter plan - that
+// PlanMember tracks which non-default Plan an account is currently on.
+// Accounts with no PlanMember row are on the default Starter plan - that
 // case is never persisted here.
-type AccountPlan struct {
+type PlanMember struct {
 	AccountID             uint                `gorm:"primaryKey" json:"accountId"`
 	Account               *AccountDTO         `gorm:"foreignKey:AccountID;constraint:OnDelete:CASCADE;" json:"account,omitempty"`
 	PlanID                uint                `gorm:"not null;index" json:"planId"`
@@ -19,6 +19,6 @@ type AccountPlan struct {
 	OpenPlanSubscriptions *[]PlanSubscription `gorm:"-" json:"openPlanSubscriptions,omitempty"`
 }
 
-func (AccountPlan) TableName() string {
-	return "account_plans"
+func (PlanMember) TableName() string {
+	return "plan_members"
 }
