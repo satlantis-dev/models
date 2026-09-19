@@ -41,6 +41,8 @@ const (
 	NotificationTypeCommunityMembershipSubscriptionPaymentConfirmed = "community_membership_subscription_payment_confirmed"
 	NotificationTypeCommunityMembershipSubscriptionNearExpiry       = "community_membership_subscription_near_expiry"
 	NotificationTypeCommunityMembershipSubscriptionPastDue          = "community_membership_subscription_past_due"
+	NotificationTypeCommunityMembershipSubscriptionPaymentFailed    = "community_membership_subscription_payment_failed"
+	NotificationTypeCommunityMembershipSubscriptionAutoRenewOff     = "community_membership_subscription_auto_renew_off"
 	NotificationTypeCommunityMembershipSubscriptionPendingPayment   = "community_membership_subscription_pending_payment"
 	NotificationTypeCommunityMembershipEnded                        = "community_membership_ended"
 	NotificationTypeCommunityMembershipNewMember                    = "community_membership_new_member"
