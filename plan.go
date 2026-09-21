@@ -17,6 +17,7 @@ type Plan struct {
 	Rank                  int             `gorm:"not null;default:0" json:"rank"`
 	IsPaid                bool            `gorm:"not null;default:false" json:"isPaid"`
 	IsHidden              bool            `gorm:"not null;default:false" json:"isHidden"`
+	IsActive              bool            `gorm:"not null;default:false" json:"isActive"`
 	TrialDays             int             `gorm:"not null;default:0" json:"trialDays"`
 	CreatedAt             time.Time       `gorm:"autoCreateTime" json:"createdAt"`
 	UpdatedAt             time.Time       `gorm:"autoUpdateTime" json:"updatedAt"`

@@ -12,6 +12,8 @@ type PlanMember struct {
 	Account               *AccountDTO         `gorm:"foreignKey:AccountID;constraint:OnDelete:CASCADE;" json:"account,omitempty"`
 	PlanID                uint                `gorm:"not null;index" json:"planId"`
 	Plan                  *Plan               `gorm:"foreignKey:PlanID;constraint:OnDelete:RESTRICT;" json:"plan,omitempty"`
+	InterestedIn          *uint               `gorm:"index" json:"interestedIn,omitempty"`
+	InterestedInPlan      *Plan               `gorm:"foreignKey:InterestedIn;constraint:OnDelete:SET NULL;" json:"interestedInPlan,omitempty"`
 	StartDate             *time.Time          `gorm:"type:timestamptz" json:"startDate,omitempty"`
 	ExpiryDate            *time.Time          `gorm:"type:timestamptz;index" json:"expiryDate,omitempty"`
 	CreatedAt             time.Time           `gorm:"autoCreateTime" json:"createdAt"`
