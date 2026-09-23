@@ -35,8 +35,6 @@ var DatabaseModels = []interface{}{
 	CalendarEventRSVP{},
 	CalendarEventTag{},
 	CalendarEventTicketType{},
-	CalendarEventCoupon{},
-	CalendarEventCouponRedemption{},
 	CalendarEventTicket{},
 	CalendarEventTicketOrder{},
 	CalendarEventTicketOrderItem{},
@@ -150,6 +148,11 @@ var DatabaseModels = []interface{}{
 	PlanMember{},
 	PlanSubscription{},
 	PlanPayment{},
+	// Coupon related:
+	Coupon{},
+	CouponRedemption{},
+	CalendarEventCoupon{},
+	CalendarEventCouponRedemption{},
 	// Others:
 	Banner{},
 	Currency{},
