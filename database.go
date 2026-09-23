@@ -151,8 +151,6 @@ var DatabaseModels = []interface{}{
 	// Coupon related:
 	Coupon{},
 	CouponRedemption{},
-	CalendarEventCoupon{},
-	CalendarEventCouponRedemption{},
 	// Others:
 	Banner{},
 	Currency{},

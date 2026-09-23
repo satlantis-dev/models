@@ -23,10 +23,6 @@ const (
 	CouponScopePlan      CouponScope = "plan"
 )
 
-// Coupon is the generic, scope-agnostic coupon model. It is modeled after
-// CalendarEventCoupon (calendar_event_coupon.go) but is not tied to a single
-// object type: Scope plus exactly one of the *ID fields below determines
-// what the coupon applies to (CalendarEvent, Calendar, Community, or Plan).
 type Coupon struct {
 	ID                 uint               `gorm:"primaryKey" json:"id"`
 	AccountID          uint               `json:"-"`
