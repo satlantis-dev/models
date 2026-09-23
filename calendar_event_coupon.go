@@ -7,22 +7,6 @@ import (
 	"gorm.io/gorm"
 )
 
-type CouponDiscountType string
-
-const (
-	CouponDiscountPercent CouponDiscountType = "percentage"
-	CouponDiscountAmount  CouponDiscountType = "fixed_amount"
-)
-
-type CouponScope string
-
-const (
-	CouponScopeEvent     CouponScope = "event"
-	CouponScopeCalendar  CouponScope = "calendar"
-	CouponScopeCommunity CouponScope = "community"
-	CouponScopePlan      CouponScope = "plan"
-)
-
 type CalendarEventCoupon struct {
 	ID                 uint               `gorm:"primaryKey" json:"id"`
 	AccountID          uint               `json:"-"`

@@ -7,6 +7,22 @@ import (
 	"gorm.io/gorm"
 )
 
+type CouponDiscountType string
+
+const (
+	CouponDiscountPercent CouponDiscountType = "percentage"
+	CouponDiscountAmount  CouponDiscountType = "fixed_amount"
+)
+
+type CouponScope string
+
+const (
+	CouponScopeEvent     CouponScope = "event"
+	CouponScopeCalendar  CouponScope = "calendar"
+	CouponScopeCommunity CouponScope = "community"
+	CouponScopePlan      CouponScope = "plan"
+)
+
 // Coupon is the generic, scope-agnostic coupon model. It is modeled after
 // CalendarEventCoupon (calendar_event_coupon.go) but is not tied to a single
 // object type: Scope plus exactly one of the *ID fields below determines
