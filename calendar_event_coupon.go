@@ -17,8 +17,10 @@ const (
 type CouponScope string
 
 const (
-	CouponScopeEvent    CouponScope = "event"
-	CouponScopeCalendar CouponScope = "calendar"
+	CouponScopeEvent     CouponScope = "event"
+	CouponScopeCalendar  CouponScope = "calendar"
+	CouponScopeCommunity CouponScope = "community"
+	CouponScopePlan      CouponScope = "plan"
 )
 
 type CalendarEventCoupon struct {
