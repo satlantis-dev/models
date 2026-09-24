@@ -37,7 +37,7 @@ type Coupon struct {
 	TicketTypeIDs      pq.Int32Array      `gorm:"type:integer[]" json:"ticketTypeIds,omitempty"` // Optional list of CalendarEventTicketType IDs the coupon applies to; empty/nil applies to all ticket types (event/calendar scope only)
 	TierIDs            pq.Int32Array      `gorm:"type:integer[]" json:"tierIds,omitempty"`       // Optional list of CommunityMembershipTier IDs the coupon applies to; empty/nil applies to all tiers (community scope only)
 	PlanIDs            pq.Int32Array      `gorm:"type:integer[]" json:"planIds,omitempty"`       // Optional list of Plan IDs the coupon applies to; empty/nil applies to all plans (plan scope only, which is platform-wide by default)
-	Code               string             `gorm:"index;uniqueIndex:idx_generic_coupon_code_event;uniqueIndex:idx_generic_coupon_code_calendar;uniqueIndex:idx_generic_coupon_code_community;size:64;not null" json:"code"`
+	Code               string             `gorm:"index;uniqueIndex:idx_generic_coupon_code_event;uniqueIndex:idx_generic_coupon_code_calendar;uniqueIndex:idx_generic_coupon_code_community;uniqueIndex:idx_generic_coupon_code_plan,where:scope = 'plan';size:64;not null" json:"code"`
 	Description        *string            `json:"description,omitempty"`
 	DiscountType       CouponDiscountType `gorm:"type:varchar(16);not null" json:"discountType"`
 	DiscountPercentage *uint              `json:"discountPercentage,omitempty"`
