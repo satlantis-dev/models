@@ -63,7 +63,7 @@ func (Coupon) TableName() string {
 // matching the redeemed Coupon's Scope.
 type CouponRedemption struct {
 	ID                   uint                        `gorm:"primaryKey" json:"id"`
-	CouponID             uint                        `gorm:"not null;index:idx_generic_coupon_account_redemption,priority:1;check:chk_coupon_redemption_exactly_one_target,(calendar_event_order_id IS NOT NULL)::int + (community_payment_id IS NOT NULL)::int + (plan_payment_id IS NOT NULL)::int = 1" json:"couponId"`
+	CouponID             uint                        `gorm:"not null;index:idx_generic_coupon_account_redemption,priority:1;check:chk_coupon_redemption_exactly_one_target,num_nonnulls(calendar_event_order_id, community_payment_id, plan_payment_id) = 1" json:"couponId"`
 	Coupon               *Coupon                     `gorm:"foreignKey:CouponID;constraint:OnDelete:CASCADE" json:"-"`
 	AccountID            uint                        `gorm:"not null;index:idx_generic_coupon_account_redemption,priority:2" json:"accountId"`
 	Account              *Account                    `gorm:"foreignKey:AccountID;constraint:OnDelete:CASCADE" json:"-"`
