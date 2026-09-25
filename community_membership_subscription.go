@@ -64,6 +64,9 @@ type CommunityMembershipSubscription struct {
 	CardBrand                *string                                            `gorm:"type:varchar(32)" json:"cardBrand,omitempty"`
 	CardExpMonth             *int64                                             `gorm:"type:smallint" json:"cardExpMonth,omitempty"`
 	CardExpYear              *int64                                             `gorm:"type:smallint" json:"cardExpYear,omitempty"`
+	CouponID                 *uint                                              `gorm:"index" json:"couponId,omitempty"`
+	Coupon                   *Coupon                                            `gorm:"foreignKey:CouponID;constraint:OnDelete:SET NULL" json:"coupon,omitempty"`
+	CouponDiscountAmount     *int64                                             `gorm:"type:bigint" json:"couponDiscountAmount,omitempty"`
 	CreatedAt                time.Time                                          `gorm:"autoCreateTime" json:"createdAt"`
 	UpdatedAt                time.Time                                          `gorm:"autoUpdateTime" json:"updatedAt"`
 	DeletedAt                *gorm.DeletedAt                                    `gorm:"index" json:"-"`

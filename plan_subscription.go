@@ -61,6 +61,15 @@ type PlanSubscription struct {
 	CancelledAt        *time.Time                          `gorm:"type:timestamptz" json:"cancelledAt,omitempty"`
 	CancellationReason *PlanSubscriptionCancellationReason `gorm:"type:varchar(256)" json:"cancellationReason,omitempty"`
 
+	// NextChargeAmountOverride, when set, is used instead of Amount for the
+	// single next charge (e.g. a coupon-discounted first payment), then
+	// cleared once that charge resolves. Mirrors
+	// CommunityMembershipSubscription.NextChargeAmountOverride.
+	NextChargeAmountOverride *int64  `gorm:"type:bigint" json:"nextChargeAmountOverride,omitempty"`
+	CouponID                 *uint   `gorm:"index" json:"couponId,omitempty"`
+	Coupon                   *Coupon `gorm:"foreignKey:CouponID;constraint:OnDelete:SET NULL" json:"coupon,omitempty"`
+	CouponDiscountAmount     *int64  `gorm:"type:bigint" json:"couponDiscountAmount,omitempty"`
+
 	CreatedAt time.Time       `gorm:"autoCreateTime" json:"createdAt"`
 	UpdatedAt time.Time       `gorm:"autoUpdateTime" json:"updatedAt"`
 	DeletedAt *gorm.DeletedAt `gorm:"index" json:"-"`

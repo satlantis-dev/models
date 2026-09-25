@@ -24,6 +24,10 @@ type PlanPayment struct {
 	ExpiresAt          *time.Time        `gorm:"type:timestamptz" json:"expiresAt,omitempty"`
 	FailedAt           *time.Time        `gorm:"type:timestamptz" json:"failedAt,omitempty"`
 
+	CouponID             *uint   `gorm:"index" json:"couponId,omitempty"`
+	Coupon               *Coupon `gorm:"foreignKey:CouponID;constraint:OnDelete:SET NULL" json:"coupon,omitempty"`
+	CouponDiscountAmount *int64  `gorm:"type:bigint" json:"couponDiscountAmount,omitempty"`
+
 	// Stripe fields
 	StripePaymentIntentID *string `gorm:"type:varchar(128);uniqueIndex" json:"stripePaymentIntentId,omitempty"`
 	StripeChargeID        *string `gorm:"type:varchar(128);index" json:"stripeChargeId,omitempty"`

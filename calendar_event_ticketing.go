@@ -103,7 +103,7 @@ type CalendarEventTicketOrder struct {
 	RsvpData             datatypes.JSON                 `gorm:"type:jsonb" json:"rsvpData,omitempty"`
 	Items                []CalendarEventTicketOrderItem `gorm:"foreignKey:OrderID" json:"items,omitempty"`
 	CouponID             *uint                          `gorm:"index" json:"couponId,omitempty"`
-	Coupon               *CalendarEventCoupon           `gorm:"foreignKey:CouponID;constraint:OnDelete:SET NULL" json:"coupon,omitempty"`
+	Coupon               *Coupon                        `gorm:"foreignKey:CouponID;constraint:OnDelete:SET NULL" json:"coupon,omitempty"`
 	CouponCode           *string                        `gorm:"size:64" json:"couponCode,omitempty"`
 	CouponDiscountAmount *int64                         `gorm:"type:bigint" json:"couponDiscountAmount,omitempty"`
 	CreatedAt            time.Time                      `gorm:"index:idx_ticket_orders_status_created,priority:2" json:"-"`
@@ -129,7 +129,7 @@ type CalendarEventTicketOrderItem struct {
 	OriginalPrice         *int64                            `gorm:"type:bigint" json:"originalPrice,omitempty"`
 	DiscountPercent       *uint                             `json:"discountPercent,omitempty"`
 	CouponID              *uint                             `gorm:"index" json:"couponId,omitempty"`
-	Coupon                *CalendarEventCoupon              `gorm:"foreignKey:CouponID;constraint:OnDelete:SET NULL" json:"coupon,omitempty"`
+	Coupon                *Coupon                           `gorm:"foreignKey:CouponID;constraint:OnDelete:SET NULL" json:"coupon,omitempty"`
 	CouponDiscountAmount  *int64                            `gorm:"type:bigint" json:"couponDiscountAmount,omitempty"`
 	CouponDiscountPercent *uint                             `json:"couponDiscountPercent,omitempty"`
 	CreatedAt             time.Time                         `json:"-"`

@@ -8,26 +8,29 @@ import (
 )
 
 type CommunityMembershipPayment struct {
-	ID                 uint                             `gorm:"primaryKey" json:"id"`
-	SubscriptionID     uint                             `gorm:"not null;index" json:"subscriptionId"`
-	Subscription       *CommunityMembershipSubscription `gorm:"foreignKey:SubscriptionID;constraint:OnDelete:CASCADE" json:"subscription,omitempty"`
-	Refunds            []CommunityMembershipRefund      `gorm:"foreignKey:PaymentID" json:"refunds,omitempty"`
-	PaymentMethod      PaymentMethod                    `gorm:"type:varchar(32);not null" json:"paymentMethod"`
-	Status             PaymentStatus                    `gorm:"type:varchar(32);default:'pending';index" json:"status"`
-	Amount             int64                            `gorm:"not null" json:"amount"`
-	Currency           OrderCurrency                    `gorm:"type:varchar(8);not null" json:"currency"`
-	BillingPeriodStart *time.Time                       `gorm:"type:timestamptz" json:"billingPeriodStart,omitempty"`
-	BillingPeriodEnd   *time.Time                       `gorm:"type:timestamptz;index" json:"billingPeriodEnd,omitempty"`
-	ExchangeRate       *float64                         `json:"exchangeRate"`
-	ExchangeRateSource *string                          `gorm:"type:varchar(50)" json:"exchangeRateSource"`
-	Metadata           *datatypes.JSON                  `gorm:"type:jsonb" json:"metadata,omitempty"`
-	PaidAt             *time.Time                       `json:"paidAt,omitempty"`
-	ExpiresAt          *time.Time                       `json:"expiresAt,omitempty"`
-	FailedAt           *time.Time                       `json:"failedAt,omitempty"`
-	CancelledAt        *time.Time                       `json:"cancelledAt,omitempty"`
-	CreatedAt          time.Time                        `json:"createdAt"`
-	UpdatedAt          time.Time                        `json:"updatedAt"`
-	DeletedAt          gorm.DeletedAt                   `gorm:"index" json:"-"`
+	ID                   uint                             `gorm:"primaryKey" json:"id"`
+	SubscriptionID       uint                             `gorm:"not null;index" json:"subscriptionId"`
+	Subscription         *CommunityMembershipSubscription `gorm:"foreignKey:SubscriptionID;constraint:OnDelete:CASCADE" json:"subscription,omitempty"`
+	Refunds              []CommunityMembershipRefund      `gorm:"foreignKey:PaymentID" json:"refunds,omitempty"`
+	PaymentMethod        PaymentMethod                    `gorm:"type:varchar(32);not null" json:"paymentMethod"`
+	Status               PaymentStatus                    `gorm:"type:varchar(32);default:'pending';index" json:"status"`
+	Amount               int64                            `gorm:"not null" json:"amount"`
+	Currency             OrderCurrency                    `gorm:"type:varchar(8);not null" json:"currency"`
+	BillingPeriodStart   *time.Time                       `gorm:"type:timestamptz" json:"billingPeriodStart,omitempty"`
+	BillingPeriodEnd     *time.Time                       `gorm:"type:timestamptz;index" json:"billingPeriodEnd,omitempty"`
+	ExchangeRate         *float64                         `json:"exchangeRate"`
+	ExchangeRateSource   *string                          `gorm:"type:varchar(50)" json:"exchangeRateSource"`
+	Metadata             *datatypes.JSON                  `gorm:"type:jsonb" json:"metadata,omitempty"`
+	PaidAt               *time.Time                       `json:"paidAt,omitempty"`
+	ExpiresAt            *time.Time                       `json:"expiresAt,omitempty"`
+	FailedAt             *time.Time                       `json:"failedAt,omitempty"`
+	CancelledAt          *time.Time                       `json:"cancelledAt,omitempty"`
+	CouponID             *uint                            `gorm:"index" json:"couponId,omitempty"`
+	Coupon               *Coupon                          `gorm:"foreignKey:CouponID;constraint:OnDelete:SET NULL" json:"coupon,omitempty"`
+	CouponDiscountAmount *int64                           `gorm:"type:bigint" json:"couponDiscountAmount,omitempty"`
+	CreatedAt            time.Time                        `json:"createdAt"`
+	UpdatedAt            time.Time                        `json:"updatedAt"`
+	DeletedAt            gorm.DeletedAt                   `gorm:"index" json:"-"`
 	// Lightning fields
 	LightningPaymentHash    *string `gorm:"uniqueIndex;size:64" json:"lightningPaymentHash,omitempty"`
 	LightningPaymentRequest *string `gorm:"type:text" json:"lightningPaymentRequest,omitempty"`
