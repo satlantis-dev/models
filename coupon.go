@@ -58,27 +58,28 @@ func (Coupon) TableName() string {
 	return "coupons"
 }
 
-// CouponRedemption records a single use of a Coupon. Exactly one of
-// CalendarEventOrderID, CommunityPaymentID, or PlanPaymentID is set,
-// matching the redeemed Coupon's Scope.
+// CouponRedemption records a single use of a Coupon. TargetScope/TargetID
+// identify what was actually paid for - a CalendarEventTicketOrder ID (event
+// or calendar scope), a CommunityMembershipPayment ID (community scope), or
+// a PlanPayment ID (plan scope) - as a generic polymorphic pair rather than
+// one nullable FK per target type, so a new coupon-consuming domain doesn't
+// need its own column added here. There is deliberately no DB-level foreign
+// key to the target row (it lives in a different table depending on scope);
+// callers are responsible for loading the actual target when needed.
 type CouponRedemption struct {
-	ID                   uint                        `gorm:"primaryKey" json:"id"`
-	CouponID             uint                        `gorm:"not null;index:idx_generic_coupon_account_redemption,priority:1;check:chk_coupon_redemption_exactly_one_target,num_nonnulls(calendar_event_order_id, community_payment_id, plan_payment_id) = 1" json:"couponId"`
-	Coupon               *Coupon                     `gorm:"foreignKey:CouponID;constraint:OnDelete:CASCADE" json:"-"`
-	AccountID            uint                        `gorm:"not null;index:idx_generic_coupon_account_redemption,priority:2" json:"accountId"`
-	Account              *Account                    `gorm:"foreignKey:AccountID;constraint:OnDelete:CASCADE" json:"-"`
-	CalendarEventOrderID *uint                       `gorm:"uniqueIndex" json:"calendarEventOrderId,omitempty"`
-	CalendarEventOrder   *CalendarEventTicketOrder   `gorm:"foreignKey:CalendarEventOrderID;constraint:OnDelete:CASCADE" json:"-"`
-	CommunityPaymentID   *uint                       `gorm:"uniqueIndex" json:"communityPaymentId,omitempty"`
-	CommunityPayment     *CommunityMembershipPayment `gorm:"foreignKey:CommunityPaymentID;constraint:OnDelete:CASCADE" json:"-"`
-	PlanPaymentID        *uint                       `gorm:"uniqueIndex" json:"planPaymentId,omitempty"`
-	PlanPayment          *PlanPayment                `gorm:"foreignKey:PlanPaymentID;constraint:OnDelete:CASCADE" json:"-"`
-	DiscountAmount       int64                       `gorm:"type:bigint;not null" json:"discountAmount"`
-	Currency             OrderCurrency               `gorm:"type:varchar(8);not null" json:"currency"`
-	RedeemedAt           time.Time                   `json:"redeemedAt"`
-	CreatedAt            time.Time                   `json:"-"`
-	UpdatedAt            time.Time                   `json:"-"`
-	DeletedAt            gorm.DeletedAt              `gorm:"index" json:"-"`
+	ID             uint           `gorm:"primaryKey" json:"id"`
+	CouponID       uint           `gorm:"not null;index:idx_generic_coupon_account_redemption,priority:1" json:"couponId"`
+	Coupon         *Coupon        `gorm:"foreignKey:CouponID;constraint:OnDelete:CASCADE" json:"-"`
+	AccountID      uint           `gorm:"not null;index:idx_generic_coupon_account_redemption,priority:2" json:"accountId"`
+	Account        *Account       `gorm:"foreignKey:AccountID;constraint:OnDelete:CASCADE" json:"-"`
+	TargetScope    CouponScope    `gorm:"type:varchar(16);not null;uniqueIndex:idx_coupon_redemption_target,priority:2" json:"targetScope"`
+	TargetID       uint           `gorm:"not null;uniqueIndex:idx_coupon_redemption_target,priority:1" json:"targetId"`
+	DiscountAmount int64          `gorm:"type:bigint;not null" json:"discountAmount"`
+	Currency       OrderCurrency  `gorm:"type:varchar(8);not null" json:"currency"`
+	RedeemedAt     time.Time      `json:"redeemedAt"`
+	CreatedAt      time.Time      `json:"-"`
+	UpdatedAt      time.Time      `json:"-"`
+	DeletedAt      gorm.DeletedAt `gorm:"index" json:"-"`
 }
 
 func (CouponRedemption) TableName() string {
