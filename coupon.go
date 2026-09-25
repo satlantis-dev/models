@@ -25,7 +25,7 @@ const (
 
 type Coupon struct {
 	ID                 uint               `gorm:"primaryKey" json:"id"`
-	AccountID          uint               `json:"-"`
+	AccountID          *uint              `gorm:"index" json:"-"`
 	Account            *Account           `gorm:"foreignKey:AccountID;constraint:OnDelete:SET NULL" json:"-"`
 	Scope              CouponScope        `gorm:"type:varchar(16);not null" json:"scope"`
 	CalendarEventID    *uint              `gorm:"index;uniqueIndex:idx_generic_coupon_code_event" json:"calendarEventId,omitempty"`

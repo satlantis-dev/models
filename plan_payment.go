@@ -25,7 +25,7 @@ type PlanPayment struct {
 	FailedAt           *time.Time        `gorm:"type:timestamptz" json:"failedAt,omitempty"`
 
 	CouponID             *uint   `gorm:"index" json:"couponId,omitempty"`
-	Coupon               *Coupon `gorm:"foreignKey:CouponID;constraint:OnDelete:SET NULL" json:"-"`
+	Coupon               *Coupon `gorm:"foreignKey:CouponID;constraint:OnDelete:SET NULL" json:"coupon,omitempty"`
 	CouponDiscountAmount *int64  `gorm:"type:bigint" json:"couponDiscountAmount,omitempty"`
 
 	// Stripe fields

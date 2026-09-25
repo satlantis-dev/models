@@ -67,7 +67,7 @@ type PlanSubscription struct {
 	// CommunityMembershipSubscription.NextChargeAmountOverride.
 	NextChargeAmountOverride *int64  `gorm:"type:bigint" json:"nextChargeAmountOverride,omitempty"`
 	CouponID                 *uint   `gorm:"index" json:"couponId,omitempty"`
-	Coupon                   *Coupon `gorm:"foreignKey:CouponID;constraint:OnDelete:SET NULL" json:"-"`
+	Coupon                   *Coupon `gorm:"foreignKey:CouponID;constraint:OnDelete:SET NULL" json:"coupon,omitempty"`
 	CouponDiscountAmount     *int64  `gorm:"type:bigint" json:"couponDiscountAmount,omitempty"`
 
 	CreatedAt time.Time       `gorm:"autoCreateTime" json:"createdAt"`
