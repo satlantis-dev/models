@@ -7,7 +7,7 @@ import (
 	"gorm.io/gorm"
 )
 
-// PlanPayment tracks each charge attempt (Stripe or Lightning) for a
+// PlanPayment tracks each charge attempt (Stripe, Lightning or onchain) for a
 // PlanSubscription.
 type PlanPayment struct {
 	ID                 uint              `gorm:"primaryKey;autoIncrement" json:"id"`
@@ -39,6 +39,12 @@ type PlanPayment struct {
 	LightningProvider       *string `gorm:"size:32" json:"lightningProvider,omitempty"`
 	LightningProviderTxID   *string `gorm:"index" json:"lightningProviderTxId,omitempty"`
 	LightningAddress        *string `gorm:"type:text" json:"lightningAddress,omitempty"`
+
+	// Onchain fields
+	OnchainAddress       *string `gorm:"uniqueIndex;size:90" json:"onchainAddress,omitempty"`
+	OnchainTxID          *string `gorm:"index;size:64" json:"onchainTxId,omitempty"`
+	OnchainConfirmations *int    `json:"onchainConfirmations,omitempty"`
+	OnchainReceivedSats  *int64  `gorm:"type:bigint" json:"onchainReceivedSats,omitempty"`
 
 	CreatedAt time.Time       `gorm:"autoCreateTime" json:"createdAt"`
 	UpdatedAt time.Time       `gorm:"autoUpdateTime" json:"updatedAt"`
