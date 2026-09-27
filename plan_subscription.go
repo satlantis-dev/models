@@ -70,6 +70,15 @@ type PlanSubscription struct {
 	Coupon                   *Coupon `gorm:"foreignKey:CouponID;constraint:OnDelete:SET NULL" json:"coupon,omitempty"`
 	CouponDiscountAmount     *int64  `gorm:"type:bigint" json:"couponDiscountAmount,omitempty"`
 
+	// ListAmount/ListCurrency is the listed price, in the plan's own
+	// currency, the subscription was taken at. It stays the same for the life
+	// of the subscription; each charge in another currency (sats for Bitcoin,
+	// USD for a BTC-priced plan paid by card) converts it at the current
+	// exchange rate, and Amount/Currency is that conversion as of the last
+	// charge. Nil on subscriptions created before it was recorded.
+	ListAmount   *int64         `gorm:"type:bigint" json:"listAmount,omitempty"`
+	ListCurrency *OrderCurrency `gorm:"type:varchar(8)" json:"listCurrency,omitempty"`
+
 	CreatedAt time.Time       `gorm:"autoCreateTime" json:"createdAt"`
 	UpdatedAt time.Time       `gorm:"autoUpdateTime" json:"updatedAt"`
 	DeletedAt *gorm.DeletedAt `gorm:"index" json:"-"`

@@ -67,6 +67,8 @@ type CommunityMembershipSubscription struct {
 	CouponID                 *uint                                              `gorm:"index" json:"couponId,omitempty"`
 	Coupon                   *Coupon                                            `gorm:"foreignKey:CouponID;constraint:OnDelete:SET NULL" json:"coupon,omitempty"`
 	CouponDiscountAmount     *int64                                             `gorm:"type:bigint" json:"couponDiscountAmount,omitempty"`
+	ListAmount              *int64                                             `gorm:"type:bigint" json:"listAmount,omitempty"`       // listed tier price the subscription was taken at, in ListCurrency; see PlanSubscription.ListAmount
+	ListCurrency            *OrderCurrency                                     `gorm:"type:varchar(8)" json:"listCurrency,omitempty"` // the community's currency when the subscription was taken
 	CreatedAt                time.Time                                          `gorm:"autoCreateTime" json:"createdAt"`
 	UpdatedAt                time.Time                                          `gorm:"autoUpdateTime" json:"updatedAt"`
 	DeletedAt                *gorm.DeletedAt                                    `gorm:"index" json:"-"`
