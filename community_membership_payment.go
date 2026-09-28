@@ -38,6 +38,11 @@ type CommunityMembershipPayment struct {
 	LightningProvider       *string `gorm:"size:32" json:"lightningProvider,omitempty"`
 	LightningProviderTxID   *string `gorm:"index" json:"lightningProviderTxId,omitempty"`
 	LightningAddress        *string `gorm:"type:text" json:"lightningAddress"` // address supplied at purchase; null when none
+	// Onchain fields
+	OnchainAddress       *string `gorm:"uniqueIndex;size:90" json:"onchainAddress,omitempty"`
+	OnchainTxID          *string `gorm:"index;size:64" json:"onchainTxId,omitempty"`
+	OnchainConfirmations *int    `json:"onchainConfirmations,omitempty"`
+	OnchainReceivedSats  *int64  `gorm:"type:bigint" json:"onchainReceivedSats,omitempty"`
 	// Stripe fields
 	StripePaymentIntentID    *string `gorm:"type:varchar(128);uniqueIndex" json:"stripePaymentIntentId,omitempty"`
 	StripeInvoiceID          *string `gorm:"type:varchar(128);index" json:"stripeInvoiceId,omitempty"`
