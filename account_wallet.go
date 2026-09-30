@@ -46,7 +46,7 @@ type AccountWalletTransaction struct {
 	ID                        uint                           `gorm:"primaryKey" json:"id"`
 	AccountWalletID           uint                           `gorm:"not null;index" json:"accountWalletId"`
 	AccountWallet             *AccountWallet                 `gorm:"foreignKey:AccountWalletID;constraint:OnDelete:CASCADE" json:"-"`
-	TransactionType           AccountWalletTransactionType   `gorm:"type:varchar(32);not null" json:"transactionType"`
+	TransactionType           AccountWalletTransactionType   `gorm:"type:varchar(32);not null;uniqueIndex:idx_lightning_hash_type,priority:2" json:"transactionType"`
 	Status                    AccountWalletTransactionStatus `gorm:"type:varchar(32);default:'pending'" json:"status"`
 	CounterpartyTransactionID *uint                          `gorm:"index" json:"counterpartyTransactionId,omitempty"`
 
