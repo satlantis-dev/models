@@ -108,7 +108,7 @@ func (a *Account) ToMiniDTO() AccountMiniDTO {
 
 type SearchAccountDTO struct {
 	ID               uint    `json:"id"`
-	Username         string  `json:"username"`
+	Username         string  `gorm:"default:NULL;size:30" json:"username"`
 	DisplayName      string  `json:"display_name"`
 	FollowersCount   *int64  `json:"followers_count"`
 	FollowingCount   *int64  `json:"following_count"`
@@ -176,7 +176,7 @@ type AccountDTO struct {
 	Picture            string         `json:"picture"`
 	AdditionalPictures datatypes.JSON `json:"additionalPictures"`
 	PubKey             string         `json:"pubKey"`
-	Username           string         `json:"username"`
+	Username           string         `gorm:"default:NULL;size:30" json:"username"`
 	Website            string         `json:"website"`
 	SocialLinks        datatypes.JSON `json:"socialLinks"`
 	LightningAddress   *string        `gorm:"-" json:"lightningAddress,omitempty"`
