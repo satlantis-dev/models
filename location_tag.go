@@ -20,7 +20,7 @@ type LocationTag struct {
 	Locations        []Location       `gorm:"many2many:location_location_tags;constraint:OnDelete:CASCADE;" json:"-"`
 	Interests        []Interest       `gorm:"many2many:interest_location_tags;constraint:OnDelete:CASCADE;" json:"-"`
 	Section          *string          `gorm:"type:text" json:"section"`
-	Hashtags         pq.StringArray   `gorm:"type:varchar[]" json:"hashtags"`
+	Hashtags         pq.StringArray   `gorm:"type:character varying[]" json:"hashtags"`
 }
 
 type WeightedLocationTags map[uint]float64

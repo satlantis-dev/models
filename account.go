@@ -1,6 +1,7 @@
 package models
 
 import (
+	"reflect"
 	"time"
 
 	"github.com/shopspring/decimal"
@@ -53,7 +54,7 @@ type Account struct {
 	ResetPasswordTokenExpiresAt *time.Time            `json:"-"`
 	Website                     string                `gorm:"type:text" json:"website"`
 	SocialLinks                 datatypes.JSON        `gorm:"type:jsonb" json:"socialLinks"`
-	Username                    string                `gorm:"uniqueIndex;default:NULL;size:30" json:"username"`
+	Username                    string                `gorm:"uniqueIndex;size:30" json:"username"`
 	// Level is a web-of-trust distance tier:
 	//   0 = unvetted/untrusted (default for new accounts, and the fallback when no account exists).
 	//       Nostr events from level-0 accounts are dropped by the ingestion pipeline.
@@ -108,7 +109,7 @@ func (a *Account) ToMiniDTO() AccountMiniDTO {
 
 type SearchAccountDTO struct {
 	ID               uint    `json:"id"`
-	Username         string  `gorm:"default:NULL;size:30" json:"username"`
+	Username         string  `gorm:"size:30" json:"username"`
 	DisplayName      string  `json:"display_name"`
 	FollowersCount   *int64  `json:"followers_count"`
 	FollowingCount   *int64  `json:"following_count"`
@@ -176,7 +177,7 @@ type AccountDTO struct {
 	Picture            string         `json:"picture"`
 	AdditionalPictures datatypes.JSON `json:"additionalPictures"`
 	PubKey             string         `json:"pubKey"`
-	Username           string         `gorm:"default:NULL;size:30" json:"username"`
+	Username           string         `gorm:"size:30" json:"username"`
 	Website            string         `json:"website"`
 	SocialLinks        datatypes.JSON `json:"socialLinks"`
 	LightningAddress   *string        `gorm:"-" json:"lightningAddress,omitempty"`
@@ -407,4 +408,37 @@ func (a *Account) GetFollowedByAccounts(db *gorm.DB, followingID uint) ([]Accoun
 	}
 
 	return accountDTOs, nil
+}
+
+// BeforeCreate leaves out an empty username so it's stored as NULL: the
+// unique index on username allows any number of NULLs, but only one "". A
+// default:NULL tag used to do this, but on a varchar(30) column Postgres
+// stores that default as NULL::character varying, which makes every
+// AutoMigrate rewrite the column. As GORM does for defaults, the column is
+// only left out when no account in the insert has a username.
+func (a *Account) BeforeCreate(tx *gorm.DB) error {
+	if a.Username == "" && !anyAccountHasUsername(tx.Statement.ReflectValue) {
+		tx.Statement.Omits = append(tx.Statement.Omits, "Username")
+	}
+	return nil
+}
+
+// anyAccountHasUsername reports whether any account being inserted (one, or
+// a batch) has a username.
+func anyAccountHasUsername(v reflect.Value) bool {
+	v = reflect.Indirect(v)
+	switch v.Kind() {
+	case reflect.Slice, reflect.Array:
+		for i := 0; i < v.Len(); i++ {
+			if anyAccountHasUsername(v.Index(i)) {
+				return true
+			}
+		}
+		return false
+	case reflect.Struct:
+		if account, ok := v.Addr().Interface().(*Account); ok {
+			return account.Username != ""
+		}
+	}
+	return false
 }

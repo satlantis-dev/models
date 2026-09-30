@@ -73,7 +73,7 @@ type CommunityMember struct {
 	CreatedAt           time.Time                          `gorm:"autoCreateTime" json:"createdAt"`
 	UpdatedAt           time.Time                          `gorm:"autoUpdateTime" json:"updatedAt"`
 	DeletedAt           *gorm.DeletedAt                    `gorm:"index" json:"-"`
-	InvitedTo           pq.Int32Array                      `gorm:"type:integer[];not null;default:'{}'" json:"invitedTo,omitempty"`
+	InvitedTo           pq.Int32Array                      `gorm:"type:integer[];not null" json:"invitedTo,omitempty"`
 
 	// AltName, AltEmail, AltPhone, and Memo are admin-only fields: editable by
 	// community admins, but must never be exposed to the member themselves or
@@ -172,4 +172,14 @@ func (m CommunityMember) ToMiniDTO() CommunityMemberMiniDTO {
 
 func (CommunityMemberMiniDTO) TableName() string {
 	return "community_members"
+}
+
+// BeforeCreate defaults InvitedTo to an empty array. It's set here rather
+// than as a column default: GORM can't compare an array default with the
+// tag, so a default:'{}' tag made every AutoMigrate reset it.
+func (m *CommunityMember) BeforeCreate(tx *gorm.DB) error {
+	if m.InvitedTo == nil {
+		m.InvitedTo = pq.Int32Array{}
+	}
+	return nil
 }

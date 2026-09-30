@@ -23,11 +23,11 @@ type Interest struct {
 	UpdatedAt             time.Time          `json:"-"`
 	DeletedAt             *gorm.DeletedAt    `gorm:"index" json:"-"`
 	Description           string             `gorm:"type:text" json:"description"`
-	RecommendationsByNpub pq.StringArray     `gorm:"type:varchar[]" json:"recommendationsByNpub"`
+	RecommendationsByNpub pq.StringArray     `gorm:"type:character varying[]" json:"recommendationsByNpub"`
 	RecommendationsById   pq.Int32Array      `gorm:"type:integer[]" json:"recommendationsById"`
-	AutofollowsByNpub     pq.StringArray     `gorm:"type:varchar[]" json:"autofollowsByNpub"`
+	AutofollowsByNpub     pq.StringArray     `gorm:"type:character varying[]" json:"autofollowsByNpub"`
 	AutofollowsById       pq.Int32Array      `gorm:"type:integer[]" json:"autofollowsById"`
-	Hashtags              pq.StringArray     `gorm:"type:varchar[]" json:"hashtags"`
+	Hashtags              pq.StringArray     `gorm:"type:character varying[]" json:"hashtags"`
 	LocationTags          []LocationTag      `gorm:"many2many:interest_location_tags;constraint:OnDelete:CASCADE;" json:"locationTags"`
 	CalendarEventTags     []CalendarEventTag `gorm:"many2many:interest_calendar_event_tags;constraint:OnDelete:CASCADE;" json:"calendarEventTags"`
 	Category              InterestCategory   `json:"category"`

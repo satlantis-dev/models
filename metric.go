@@ -34,7 +34,7 @@ type Metric struct {
 	Topic           Topic          `json:"topic"`
 	Weight          float64        `json:"weight"`
 	IsScorable      bool           `json:"isScorable"`
-	Tags            pq.StringArray `gorm:"type:varchar[]" json:"tags"`
+	Tags            pq.StringArray `gorm:"type:character varying[]" json:"tags"`
 	Order           uint           `json:"order"`
 }
 
@@ -49,7 +49,7 @@ type MetricDTO struct {
 	Prompt      string       `json:"prompt"`
 	Slug        string       `json:"slug"`
 	Suffix      string       `json:"suffix"`
-	Tags        string       `json:"tags"`
+	Tags        string       `gorm:"type:character varying[]" json:"tags"`
 	TopicID     uint         `json:"topicId"`
 	Topic       Topic        `json:"topic"`
 }

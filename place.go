@@ -70,7 +70,7 @@ type Place struct {
 	Timezone           string                `gorm:"type:text" json:"timezone"`
 	WeatherID          *uint                 `gorm:"index" json:"weatherId"`
 	Weather            *Weather              `gorm:"foreignKey:PlaceID;constraint:OnDelete:CASCADE;" json:"weather,omitempty"`
-	Hashtags           pq.StringArray        `gorm:"type:varchar[]" json:"hashtags"`
+	Hashtags           pq.StringArray        `gorm:"type:character varying[]" json:"hashtags"`
 }
 
 // Place With Closure

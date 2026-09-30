@@ -39,7 +39,7 @@ type Community struct {
 	AccountStripeConnectID *uint                         `gorm:"index" json:"accountStripeConnectId,omitempty"`
 	AccountStripeConnect   *AccountStripeConnect         `gorm:"foreignKey:AccountStripeConnectID;constraint:OnDelete:SET NULL;" json:"accountStripeConnect,omitempty"`
 	Currency               OrderCurrency                 `gorm:"type:varchar(8);default:'USD'" json:"currency,omitempty"`
-	PaymentMethods         []PaymentMethod               `gorm:"type:jsonb;serializer:json;not null;default:'[\"stripe\"]'" json:"paymentMethods"`
+	PaymentMethods         []PaymentMethod               `gorm:"type:jsonb;serializer:json;not null" json:"paymentMethods"`
 	Featured               bool                          `gorm:"default:false;index:idx_community_featured,where:featured = true" json:"featured"`
 }
 
@@ -84,4 +84,14 @@ func (c *Community) ToDTO() *CommunityDTO {
 		WhopID:      c.WhopID,
 		CreatedAt:   c.CreatedAt,
 	}
+}
+
+// BeforeCreate defaults PaymentMethods to Stripe. It's set here rather than
+// as a column default: GORM can't compare a jsonb default with the tag, so a
+// default:'["stripe"]' tag made every AutoMigrate reset it.
+func (c *Community) BeforeCreate(tx *gorm.DB) error {
+	if c.PaymentMethods == nil {
+		c.PaymentMethods = []PaymentMethod{PaymentMethodStripe}
+	}
+	return nil
 }

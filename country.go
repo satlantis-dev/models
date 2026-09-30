@@ -11,8 +11,8 @@ type Country struct {
 	CreatedAt   time.Time  `json:"-"`
 	UpdatedAt   time.Time  `json:"-"`
 	DeletedAt   *time.Time `gorm:"index" json:"-"`
-	Code        string     `gorm:"type:char(2);uniqueIndex" json:"code"`
-	Code_3      string     `gorm:"type:char(3);uniqueIndex" json:"code3"`
+	Code        string     `gorm:"type:bpchar(2);uniqueIndex" json:"code"`
+	Code_3      string     `gorm:"type:bpchar(3);uniqueIndex" json:"code3"`
 	Name        string     `gorm:"type:text" json:"name"`
 	ContinentID uint       `json:"-"`
 	Continent   Continent  `json:"-"`
