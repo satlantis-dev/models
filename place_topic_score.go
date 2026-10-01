@@ -5,7 +5,7 @@ import (
 )
 
 type PlaceTopicScore struct {
-	CategoryID uint      `gorm:"primaryKey;index;autoIncrement:false" json:"categoryId"`
+	CategoryID uint      `gorm:"primaryKey;autoIncrement:false" json:"categoryId"`
 	PlaceID    uint      `gorm:"primaryKey;autoIncrement:false" json:"placeId"`
 	Place      Place     `gorm:"constraint:OnDelete:CASCADE" json:"-"`
 	Score      float64   `json:"score"`

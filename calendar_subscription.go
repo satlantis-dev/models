@@ -3,7 +3,7 @@ package models
 import "time"
 
 type CalendarSubscription struct {
-	AccountID  uint      `gorm:"index;uniqueIndex:idx_calendar_subscription_unique" json:"accountId"`
+	AccountID  uint      `gorm:"uniqueIndex:idx_calendar_subscription_unique" json:"accountId"`
 	Account    *Account  `gorm:"foreignKey:AccountID;constraint:OnDelete:CASCADE;" json:"account,omitempty"`
 	CalendarID uint      `gorm:"index;uniqueIndex:idx_calendar_subscription_unique" json:"calendarId"`
 	Calendar   *Calendar `gorm:"foreignKey:CalendarID;constraint:OnDelete:CASCADE;" json:"calendar,omitempty"`

@@ -9,7 +9,7 @@ import (
 
 type Collection struct {
 	ID           uint                  `gorm:"primaryKey" json:"id"`
-	AccountID    uint                  `gorm:"index;index:idx_accountid_name" json:"accountId"`
+	AccountID    uint                  `gorm:"index:idx_accountid_name" json:"accountId"`
 	Account      *Account              `gorm:"foreignKey:AccountID" json:"account,omitempty"`
 	Name         string                `gorm:"type:text;not null;index:idx_accountid_name" json:"name"`
 	Description  *string               `gorm:"type:text" json:"description,omitempty"`
@@ -32,7 +32,7 @@ func (Collection) TableName() string {
 }
 
 type CollectionLocation struct {
-	CollectionID uint         `gorm:"not null;index;uniqueIndex:idx_collection_location" json:"collectionId"`
+	CollectionID uint         `gorm:"not null;uniqueIndex:idx_collection_location" json:"collectionId"`
 	Collection   *Collection  `gorm:"foreignKey:CollectionID;constraint:OnDelete:CASCADE;" json:"collection,omitempty"`
 	GoogleID     string       `gorm:"type:text;not null;index;uniqueIndex:idx_collection_location" json:"googleId"`
 	Location     *LocationDTO `gorm:"-" json:"location,omitempty"`

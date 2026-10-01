@@ -23,11 +23,11 @@ const (
 
 type Note struct {
 	ID                 uint       `gorm:"primaryKey" json:"id"`
-	AccountID          uint       `gorm:"index;index:idx_notes_account_type_created_at,priority:1;index:notes_created_on_satlantis_type_account_id_created_at_idx,priority:3" json:"accountId"`
+	AccountID          uint       `gorm:"index:idx_notes_account_type_created_at,priority:1;index:notes_created_on_satlantis_type_account_id_created_at_idx,priority:3" json:"accountId"`
 	Account            AccountDTO `json:"account"`
 	CreatedAt          *time.Time `gorm:"index:idx_notes_satlantis_created_at,priority:2;index:idx_notes_account_type_created_at,priority:3,sort:desc;index:notes_created_on_satlantis_type_account_id_created_at_idx,priority:4,sort:desc" json:"createdAt"`
 	Content            *string    `gorm:"type:text" json:"content"`
-	EventID            uint       `gorm:"index;unique" json:"eventId"`
+	EventID            uint       `gorm:"unique" json:"eventId"`
 	Kind               uint       `gorm:"index" json:"kind"`
 	NostrID            string     `gorm:"index" json:"nostrId"`
 	PubKey             string     `gorm:"type:text;index" json:"pubkey"`

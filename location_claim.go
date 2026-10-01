@@ -5,7 +5,7 @@ import (
 )
 
 type LocationClaim struct {
-	LocationID        uint        `gorm:"index;primaryKey;autoIncrement:false" json:"locationId"`
+	LocationID        uint        `gorm:"primaryKey;autoIncrement:false" json:"locationId"`
 	Location          LocationDTO `gorm:"foreignKey:LocationID" json:"location"`
 	OwnerAccountID    uint        `gorm:"index" json:"ownerAccountId"`
 	OwnerAccount      AccountDTO  `gorm:"foreignKey:OwnerAccountID" json:"ownerAccount"`

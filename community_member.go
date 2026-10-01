@@ -55,7 +55,7 @@ func CommunityMemberEngagementStageRanks() map[CommunityMemberEngagementStage]in
 
 type CommunityMember struct {
 	ID                  uint                               `gorm:"primaryKey;autoIncrement" json:"id"`
-	CommunityID         uint                               `gorm:"not null;index;uniqueIndex:idx_community_account" json:"communityId"`
+	CommunityID         uint                               `gorm:"not null;uniqueIndex:idx_community_account" json:"communityId"`
 	Community           *Community                         `gorm:"foreignKey:CommunityID;constraint:OnDelete:CASCADE;" json:"community,omitempty"`
 	AccountID           uint                               `gorm:"not null;index;uniqueIndex:idx_community_account" json:"accountId"`
 	Account             *AccountDTO                        `gorm:"foreignKey:AccountID;constraint:OnDelete:CASCADE;" json:"account,omitempty"`

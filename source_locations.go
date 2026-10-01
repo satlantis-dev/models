@@ -168,7 +168,7 @@ func (SourceLocationsOsm) TableName() string {
 // SourceLocationsAll
 
 type SourceLocationsAll struct {
-	GoogleID           string           `gorm:"primaryKey;index" json:"googleId"`
+	GoogleID           string           `gorm:"primaryKey" json:"googleId"`
 	OSMRef             string           `json:"osmRef"`
 	Name               string           `json:"name"`
 	Lat                float64          `json:"lat"`

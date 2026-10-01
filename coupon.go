@@ -28,11 +28,11 @@ type Coupon struct {
 	AccountID          *uint              `gorm:"index" json:"-"`
 	Account            *Account           `gorm:"foreignKey:AccountID;constraint:OnDelete:SET NULL" json:"-"`
 	Scope              CouponScope        `gorm:"type:varchar(16);not null" json:"scope"`
-	CalendarEventID    *uint              `gorm:"index;uniqueIndex:idx_generic_coupon_code_event" json:"calendarEventId,omitempty"`
+	CalendarEventID    *uint              `gorm:"uniqueIndex:idx_generic_coupon_code_event" json:"calendarEventId,omitempty"`
 	CalendarEvent      *CalendarEvent     `gorm:"foreignKey:CalendarEventID;constraint:OnDelete:CASCADE" json:"-"`
-	CalendarID         *uint              `gorm:"index;uniqueIndex:idx_generic_coupon_code_calendar" json:"calendarId,omitempty"`
+	CalendarID         *uint              `gorm:"uniqueIndex:idx_generic_coupon_code_calendar" json:"calendarId,omitempty"`
 	Calendar           *Calendar          `gorm:"foreignKey:CalendarID;constraint:OnDelete:CASCADE" json:"-"`
-	CommunityID        *uint              `gorm:"index;uniqueIndex:idx_generic_coupon_code_community" json:"communityId,omitempty"`
+	CommunityID        *uint              `gorm:"uniqueIndex:idx_generic_coupon_code_community" json:"communityId,omitempty"`
 	Community          *Community         `gorm:"foreignKey:CommunityID;constraint:OnDelete:CASCADE" json:"-"`
 	TicketTypeIDs      pq.Int32Array      `gorm:"type:integer[]" json:"ticketTypeIds,omitempty"` // Optional list of CalendarEventTicketType IDs the coupon applies to; empty/nil applies to all ticket types (event/calendar scope only)
 	TierIDs            pq.Int32Array      `gorm:"type:integer[]" json:"tierIds,omitempty"`       // Optional list of CommunityMembershipTier IDs the coupon applies to; empty/nil applies to all tiers (community scope only)

@@ -4,7 +4,7 @@ import "time"
 
 type CalendarEventSpeaker struct {
 	ID                   uint           `gorm:"primaryKey" json:"id"`
-	CalendarEventID      uint           `gorm:"not null;index;uniqueIndex:idx_speaker_event_account" json:"calendarEventId"`
+	CalendarEventID      uint           `gorm:"not null;uniqueIndex:idx_speaker_event_account" json:"calendarEventId"`
 	CalendarEvent        *CalendarEvent `gorm:"foreignKey:CalendarEventID" json:"calendarEvent,omitempty"`
 	AccountID            uint           `gorm:"not null;index;uniqueIndex:idx_speaker_event_account" json:"accountId"`
 	Account              *AccountDTO    `gorm:"foreignKey:AccountID" json:"account"`

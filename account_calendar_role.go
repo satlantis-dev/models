@@ -16,7 +16,7 @@ const (
 )
 
 type AccountCalendarRole struct {
-	AccountID  uint                    `gorm:"not null;index;uniqueIndex:idx_account_calendar_role" json:"accountId"`
+	AccountID  uint                    `gorm:"not null;uniqueIndex:idx_account_calendar_role" json:"accountId"`
 	Account    *Account                `gorm:"foreignKey:AccountID;constraint:OnDelete:CASCADE;" json:"account,omitempty"`
 	CalendarID uint                    `gorm:"not null;index;uniqueIndex:idx_account_calendar_role" json:"calendarId"`
 	Calendar   *Calendar               `gorm:"foreignKey:CalendarID;constraint:OnDelete:CASCADE;" json:"calendar,omitempty"`

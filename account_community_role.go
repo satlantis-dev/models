@@ -14,7 +14,7 @@ const (
 )
 
 type AccountCommunityRole struct {
-	AccountID            uint                     `gorm:"not null;index;uniqueIndex:idx_account_community_role" json:"accountId"`
+	AccountID            uint                     `gorm:"not null;uniqueIndex:idx_account_community_role" json:"accountId"`
 	Account              *AccountDTO              `gorm:"foreignKey:AccountID;constraint:OnDelete:CASCADE;" json:"account,omitempty"`
 	CommunityID          uint                     `gorm:"not null;index;uniqueIndex:idx_account_community_role" json:"communityId"`
 	Community            *Community               `gorm:"foreignKey:CommunityID;constraint:OnDelete:CASCADE;" json:"community,omitempty"`
