@@ -81,6 +81,8 @@ type Account struct {
 	// GetAccountsWithMissingMetadataBatch / RecordAccountMetadataCheck in data-engine).
 	MetadataCheckedAt  *time.Time `gorm:"index" json:"-"`
 	MetadataCheckCount int        `gorm:"default:0" json:"-"`
+	LocationSetEventID *uint      `json:"-"`
+	LocationSetEvent   *Event     `gorm:"foreignKey:LocationSetEventID;constraint:OnDelete:CASCADE" json:"-"`
 }
 
 // AccountMiniDTO

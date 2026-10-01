@@ -101,7 +101,7 @@ type CalendarEventTicketOrder struct {
 	PriceAmount          *int64                         `json:"priceAmount"`
 	Status               OrderStatus                    `gorm:"type:varchar(32);default:'pending';index:idx_ticket_orders_status_created,priority:1" json:"status"`
 	RsvpData             datatypes.JSON                 `gorm:"type:jsonb" json:"rsvpData,omitempty"`
-	Items                []CalendarEventTicketOrderItem `gorm:"foreignKey:OrderID" json:"items,omitempty"`
+	Items                []CalendarEventTicketOrderItem `gorm:"foreignKey:OrderID;constraint:OnDelete:CASCADE" json:"items,omitempty"`
 	CouponID             *uint                          `gorm:"index" json:"couponId,omitempty"`
 	Coupon               *Coupon                        `gorm:"foreignKey:CouponID;constraint:OnDelete:SET NULL" json:"coupon,omitempty"`
 	CouponCode           *string                        `gorm:"size:64" json:"couponCode,omitempty"`

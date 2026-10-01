@@ -5,6 +5,7 @@ type Relay struct {
 	AccountID uint       `gorm:"index" json:"accountId"`
 	Account   AccountDTO `json:"account"`
 	EventID   *uint      `gorm:"index" json:"eventId"`
+	Event     *Event     `gorm:"foreignKey:EventID;constraint:OnDelete:CASCADE" json:"-"`
 	Address   string     `gorm:"index" json:"address"`
 	Read      bool       `json:"read"`
 	Write     bool       `json:"write"`

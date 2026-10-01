@@ -28,6 +28,7 @@ type Note struct {
 	CreatedAt          *time.Time `gorm:"index:idx_notes_satlantis_created_at,priority:2;index:idx_notes_account_type_created_at,priority:3,sort:desc;index:notes_created_on_satlantis_type_account_id_created_at_idx,priority:4,sort:desc" json:"createdAt"`
 	Content            *string    `gorm:"type:text" json:"content"`
 	EventID            uint       `gorm:"unique" json:"eventId"`
+	Event              *Event     `gorm:"foreignKey:EventID;constraint:OnDelete:CASCADE" json:"-"`
 	Kind               uint       `gorm:"index" json:"kind"`
 	NostrID            string     `gorm:"index" json:"nostrId"`
 	PubKey             string     `gorm:"type:text;index" json:"pubkey"`
