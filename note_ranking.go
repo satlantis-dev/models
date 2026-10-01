@@ -3,7 +3,7 @@ package models
 import "time"
 
 type NoteRanking struct {
-	NoteId           uint      `gorm:"primaryKey" json:"noteId"`
+	NoteId           uint      `gorm:"primaryKey;autoIncrement:false" json:"noteId"`
 	Note             Note      `gorm:"foreignKey:NoteId;constraint:OnDelete:CASCADE;" json:"note"`
 	OnSatlantis      bool      `json:"onSatlantis"`
 	FromFocusAccount bool      `json:"fromFocusAccount"`

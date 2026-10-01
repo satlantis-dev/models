@@ -237,7 +237,7 @@ type LocationDTO struct {
 	Name            string        `json:"name"`
 	OpeningHours    OpeningHours  `gorm:"type:jsonb;serializer:json" json:"openingHours"`
 	PlaceID         uint          `json:"placeId"`
-	PlaceOSMRef     string        `json:"placeOsmRef"`
+	PlaceOSMRef     string        `gorm:"-:migration" json:"placeOsmRef"`
 	ReviewSummary   string        `json:"reviewSummary"`
 }
 

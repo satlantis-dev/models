@@ -4,7 +4,7 @@ import "github.com/nbd-wtf/go-nostr"
 
 type Event struct {
 	ID         uint       `gorm:"primaryKey" json:"id"`
-	NostrID    string     `gorm:"uniqueIndex" json:"nostrId"`
+	NostrID    string     `gorm:"index" json:"nostrId"`
 	CreatedAt  int64      `json:"createdAt"`
 	Content    string     `gorm:"type:text" json:"content"`
 	Kind       uint       `gorm:"index" json:"kind"`
