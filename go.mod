@@ -5,6 +5,8 @@ go 1.21.5
 require (
 	github.com/lib/pq v1.10.9
 	github.com/nbd-wtf/go-nostr v0.34.5
+	github.com/shopspring/decimal v1.4.0
+	gorm.io/datatypes v1.2.5
 	gorm.io/driver/postgres v1.5.9
 	gorm.io/gorm v1.30.0
 )
@@ -29,7 +31,6 @@ require (
 	github.com/josharian/intern v1.0.0 // indirect
 	github.com/mailru/easyjson v0.7.7 // indirect
 	github.com/puzpuzpuz/xsync/v3 v3.0.2 // indirect
-	github.com/shopspring/decimal v1.4.0 // indirect
 	github.com/tidwall/gjson v1.14.4 // indirect
 	github.com/tidwall/match v1.1.1 // indirect
 	github.com/tidwall/pretty v1.2.0 // indirect
@@ -38,6 +39,5 @@ require (
 	golang.org/x/sync v0.9.0 // indirect
 	golang.org/x/sys v0.20.0 // indirect
 	golang.org/x/text v0.20.0 // indirect
-	gorm.io/datatypes v1.2.5 // indirect
 	gorm.io/driver/mysql v1.5.6 // indirect
 )
