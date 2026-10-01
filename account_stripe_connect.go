@@ -20,9 +20,9 @@ const (
 // AccountStripeConnect stores Stripe Connect account information linked to a user account
 type AccountStripeConnect struct {
 	ID               uint                `gorm:"primaryKey" json:"id"`
-	AccountID        uint                `gorm:"not null;index" json:"accountId"`
+	AccountID        uint                `gorm:"not null;index;uniqueIndex:idx_account_stripe_connects_stripe_account_account,priority:2,where:deleted_at IS NULL" json:"accountId"`
 	Account          *Account            `gorm:"foreignKey:AccountID;constraint:OnDelete:CASCADE" json:"-"`
-	StripeAccountID  string              `gorm:"index;not null;size:64" json:"stripeAccountId"` // acct_xxx
+	StripeAccountID  string              `gorm:"index;not null;size:64;uniqueIndex:idx_account_stripe_connects_stripe_account_account,priority:1,where:deleted_at IS NULL" json:"stripeAccountId"` // acct_xxx
 	IsDefault        bool                `gorm:"default:false" json:"isDefault"`
 	Status           StripeAccountStatus `gorm:"type:varchar(32);default:'pending'" json:"status"`
 	ChargesEnabled   bool                `gorm:"default:false" json:"chargesEnabled"`

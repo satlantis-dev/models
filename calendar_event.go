@@ -20,7 +20,7 @@ type RsvpConfirmationMessage struct {
 
 type CalendarEvent struct {
 	ID                               uint                          `gorm:"primaryKey" json:"id"`
-	AccountID                        uint                          `gorm:"index;not null" json:"accountId"`
+	AccountID                        uint                          `gorm:"index;not null;index:idx_calendar_events_account_end,priority:1,where:deleted_at IS NULL;index:idx_calendar_events_account_start_asc,priority:1,where:deleted_at IS NULL" json:"accountId"`
 	Account                          *AccountDTO                   `gorm:"foreignKey:AccountID" json:"account,omitempty"`
 	ContactEmail                     *string                       `gorm:"type:text" json:"contactEmail"`
 	NostrID                          string                        `gorm:"index" json:"nostrId"`
@@ -39,7 +39,7 @@ type CalendarEvent struct {
 	CalendarEventRSVPs               []CalendarEventRSVP           `json:"calendarEventRsvps"`
 	Cohosts                          []CalendarEventCohost         `json:"cohosts"`
 	Speakers                         []CalendarEventSpeaker        `json:"speakers"`
-	End                              time.Time                     `json:"end"`
+	End                              time.Time                     `gorm:"index:idx_calendar_events_account_end,priority:2,sort:desc,where:deleted_at IS NULL" json:"end"`
 	EndTzId                          string                        `gorm:"not null" json:"endTzId"`
 	Featured                         bool                          `gorm:"default:false" json:"featured"`
 	Geohash                          string                        `json:"geohash"`
@@ -63,7 +63,7 @@ type CalendarEvent struct {
 	RsvpWaitlistEnabledAt            *time.Time                    `json:"rsvpWaitlistEnabledAt"`
 	RsvpGatedEnabledAt               *time.Time                    `json:"rsvpGatedEnabledAt"`
 	RsvpConfirmationMessage          *RsvpConfirmationMessage      `gorm:"type:jsonb;serializer:json" json:"rsvpConfirmationMessage,omitempty"`
-	Start                            time.Time                     `json:"start"`
+	Start                            time.Time                     `gorm:"index:idx_calendar_events_account_start_asc,priority:2,where:deleted_at IS NULL" json:"start"`
 	StartTzId                        string                        `gorm:"not null" json:"startTzId"`
 	Summary                          string                        `json:"summary"`
 	Title                            string                        `json:"title"`

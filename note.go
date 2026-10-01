@@ -23,9 +23,9 @@ const (
 
 type Note struct {
 	ID                 uint       `gorm:"primaryKey" json:"id"`
-	AccountID          uint       `gorm:"index" json:"accountId"`
+	AccountID          uint       `gorm:"index;index:idx_notes_account_type_created_at,priority:1;index:notes_created_on_satlantis_type_account_id_created_at_idx,priority:3" json:"accountId"`
 	Account            AccountDTO `json:"account"`
-	CreatedAt          *time.Time `gorm:"index:idx_notes_satlantis_created_at,priority:2" json:"createdAt"`
+	CreatedAt          *time.Time `gorm:"index:idx_notes_satlantis_created_at,priority:2;index:idx_notes_account_type_created_at,priority:3,sort:desc;index:notes_created_on_satlantis_type_account_id_created_at_idx,priority:4,sort:desc" json:"createdAt"`
 	Content            *string    `gorm:"type:text" json:"content"`
 	EventID            uint       `gorm:"index;unique" json:"eventId"`
 	Kind               uint       `gorm:"index" json:"kind"`
@@ -33,10 +33,10 @@ type Note struct {
 	PubKey             string     `gorm:"type:text;index" json:"pubkey"`
 	Sig                string     `gorm:"type:text" json:"sig"`
 	Tags               *string    `gorm:"type:jsonb" json:"tags"`
-	Type               NoteType   `json:"type"`
+	Type               NoteType   `gorm:"index:idx_notes_account_type_created_at,priority:2;index:notes_created_on_satlantis_type_account_id_created_at_idx,priority:2" json:"type"`
 	RepostedNoteID     *uint      `gorm:"index" json:"repostedNoteId"`
 	RepostedNote       *Note      `json:"reposted_note" swaggerignore:"true"`
-	CreatedOnSatlantis bool       `gorm:"index:idx_notes_satlantis_created_at,priority:1" json:"createdOnSatlantis"`
+	CreatedOnSatlantis bool       `gorm:"index:idx_notes_satlantis_created_at,priority:1;index:notes_created_on_satlantis_type_account_id_created_at_idx,priority:1" json:"createdOnSatlantis"`
 }
 
 type NoteWithClosure struct {

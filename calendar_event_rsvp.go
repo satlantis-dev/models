@@ -34,11 +34,11 @@ var (
 
 type CalendarEventRSVP struct {
 	ID                  uint                        `gorm:"primaryKey" json:"id"`
-	AccountID           uint                        `gorm:"uniqueIndex:idx_rsvp_account_event,priority:1" json:"accountId"`
+	AccountID           uint                        `gorm:"uniqueIndex:idx_rsvp_account_event,priority:1;index:idx_calendar_event_rsvps_event_status,priority:3" json:"accountId"`
 	Account             AccountDTO                  `gorm:"constraint:OnDelete:CASCADE;" json:"account"`
 	CreatedAt           time.Time                   `json:"createdAt"`
-	CalendarEventID     uint                        `gorm:"uniqueIndex:idx_rsvp_account_event,priority:2" json:"calendarEventId"`
-	Status              string                      `json:"status"`
+	CalendarEventID     uint                        `gorm:"uniqueIndex:idx_rsvp_account_event,priority:2;index:idx_calendar_event_rsvps_event_status,priority:1" json:"calendarEventId"`
+	Status              string                      `gorm:"index:idx_calendar_event_rsvps_event_status,priority:2" json:"status"`
 	AcceptedAt          *time.Time                  `json:"acceptedAt,omitempty"`
 	RejectedAt          *time.Time                  `json:"rejectedAt,omitempty"`
 	StatusUpdatedById   *uint                       `json:"-"`
