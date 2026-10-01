@@ -27,8 +27,8 @@ type Account struct {
 	Email                       string                `gorm:"index:idx_unique_verified_email,unique,where:email IS NOT NULL AND email_verified = true,sort:asc,nulls:last;default:NULL" json:"email"`
 	EmailVerified               bool                  `gorm:"index:idx_unique_verified_email" json:"-"`
 	FirstSeen                   *time.Time            `json:"-"`
-	Following                   []Follow              `gorm:"foreignKey:FollowerID" json:"following"`
-	FollowedBy                  []Follow              `gorm:"foreignKey:FollowingID" json:"followedBy"`
+	Following                   []Follow              `gorm:"foreignKey:FollowerID;constraint:OnDelete:CASCADE" json:"following"`
+	FollowedBy                  []Follow              `gorm:"foreignKey:FollowingID;constraint:OnDelete:CASCADE" json:"followedBy"`
 	InfluenceScore              uint                  `json:"influenceScore"`
 	Interests                   []Interest            `gorm:"many2many:account_interests;constraint:OnDelete:CASCADE" json:"interests,omitempty"`
 	IsAdmin                     bool                  `gorm:"default:false" json:"isAdmin"`

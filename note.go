@@ -36,7 +36,7 @@ type Note struct {
 	Tags               *string    `gorm:"type:jsonb" json:"tags"`
 	Type               NoteType   `gorm:"index:idx_notes_account_type_created_at,priority:2;index:notes_created_on_satlantis_type_account_id_created_at_idx,priority:2" json:"type"`
 	RepostedNoteID     *uint      `gorm:"index" json:"repostedNoteId"`
-	RepostedNote       *Note      `json:"reposted_note" swaggerignore:"true"`
+	RepostedNote       *Note      `gorm:"constraint:OnDelete:CASCADE" json:"reposted_note" swaggerignore:"true"`
 	CreatedOnSatlantis bool       `gorm:"index:idx_notes_satlantis_created_at,priority:1;index:notes_created_on_satlantis_type_account_id_created_at_idx,priority:1" json:"createdOnSatlantis"`
 }
 

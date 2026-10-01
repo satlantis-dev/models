@@ -10,7 +10,7 @@ type Event struct {
 	Kind       uint       `gorm:"index" json:"kind"`
 	PubKey     string     `gorm:"type:text;index" json:"pubkey"`
 	Sig        string     `gorm:"type:text" json:"sig"`
-	Tags       []Tag      `gorm:"foreignKey:EventID" json:"tags"`
+	Tags       []Tag      `gorm:"foreignKey:EventID;constraint:OnDelete:CASCADE" json:"tags"`
 	TagsRaw    nostr.Tags `gorm:"type:jsonb;serializer:json" json:"tagsData"`
 	Reconciled bool       `gorm:"default:false" json:"reconciled"`
 }
