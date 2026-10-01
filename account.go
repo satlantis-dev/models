@@ -23,7 +23,7 @@ type Account struct {
 	Collections                 []Collection          `gorm:"foreignKey:AccountID" json:"collections,omitempty"`
 	CurrencyID                  *uint                 `gorm:"index" json:"currencyId"`
 	Currency                    Currency              `json:"currency"`
-	DisplayName                 string                `gorm:"type:text" json:"displayName"`
+	DisplayName                 string                `gorm:"type:text;index:idx_accounts_search_fields,type:gin,expression:display_name gin_trgm_ops,where:is_blacklisted IS NOT TRUE,priority:2" json:"displayName"`
 	Email                       string                `gorm:"index:idx_unique_verified_email,unique,where:email IS NOT NULL AND email_verified = true,sort:asc,nulls:last;default:NULL" json:"email"`
 	EmailVerified               bool                  `gorm:"index:idx_unique_verified_email" json:"-"`
 	FirstSeen                   *time.Time            `json:"-"`
@@ -38,8 +38,8 @@ type Account struct {
 	LocationClaims              []LocationClaim       `gorm:"foreignKey:OwnerAccountID;constraint:OnDelete:CASCADE;" json:"locationClaims,omitempty"`
 	Lud06                       string                `gorm:"default:NULL" json:"lud06"`
 	Lud16                       string                `gorm:"default:NULL" json:"lud16"`
-	Name                        string                `gorm:"type:text" json:"name"`
-	Nip05                       string                `gorm:"default:NULL" json:"nip05"`
+	Name                        string                `gorm:"type:text;index:idx_accounts_search_fields,type:gin,expression:name gin_trgm_ops,where:is_blacklisted IS NOT TRUE,priority:3" json:"name"`
+	Nip05                       string                `gorm:"default:NULL;index:idx_accounts_search_fields,type:gin,expression:nip05 gin_trgm_ops,where:is_blacklisted IS NOT TRUE,priority:4" json:"nip05"`
 	Notes                       []Note                `gorm:"foreignKey:AccountID" json:"notes"`
 	Npub                        string                `gorm:"uniqueIndex;default:NULL" json:"npub"`
 	Password                    string                `gorm:"type:text" json:"-"`
@@ -54,7 +54,11 @@ type Account struct {
 	ResetPasswordTokenExpiresAt *time.Time            `json:"-"`
 	Website                     string                `gorm:"type:text" json:"website"`
 	SocialLinks                 datatypes.JSON        `gorm:"type:jsonb" json:"socialLinks"`
-	Username                    string                `gorm:"uniqueIndex;size:30" json:"username"`
+	// Username, DisplayName, Name and Nip05 share idx_accounts_search_fields, a
+	// trigram GIN index (needs the pg_trgm extension) behind the account
+	// searches' ILIKE filters. Its WHERE must stay "is_blacklisted IS NOT TRUE",
+	// as the searches write it, or Postgres can't use the partial index.
+	Username string `gorm:"uniqueIndex;size:30;index:idx_accounts_search_fields,type:gin,expression:username gin_trgm_ops,where:is_blacklisted IS NOT TRUE,priority:1" json:"username"`
 	// Level is a web-of-trust distance tier:
 	//   0 = unvetted/untrusted (default for new accounts, and the fallback when no account exists).
 	//       Nostr events from level-0 accounts are dropped by the ingestion pipeline.
@@ -63,7 +67,7 @@ type Account struct {
 	//   3 = followed by a level-2 account (two hops out).
 	Level                int             `gorm:"index;default:0" json:"level"`
 	FollowingCount       *int64          `json:"followingCount"`
-	FollowersCount       *int64          `gorm:"index:,sort:desc,option:NULLS LAST" json:"followersCount"`
+	FollowersCount       *int64          `gorm:"index:,sort:desc nulls last" json:"followersCount"`
 	AppleID              *string         `gorm:"uniqueIndex" json:"appleId"`
 	GoogleID             *string         `gorm:"uniqueIndex" json:"googleId"`
 	WhopID               *string         `gorm:"uniqueIndex" json:"whopId"`
