@@ -81,7 +81,7 @@ type PlanSubscription struct {
 
 	// ScheduledChanges are the downgrades and period changes scheduled for
 	// when the current period ends.
-	ScheduledChanges []PlanSubscriptionChange `gorm:"foreignKey:SubscriptionID" json:"scheduledChanges,omitempty"`
+	ScheduledChanges []PlanSubscriptionChange `gorm:"foreignKey:SubscriptionID;constraint:OnDelete:CASCADE;" json:"scheduledChanges,omitempty"`
 
 	CreatedAt time.Time       `gorm:"autoCreateTime" json:"createdAt"`
 	UpdatedAt time.Time       `gorm:"autoUpdateTime" json:"updatedAt"`

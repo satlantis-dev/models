@@ -56,7 +56,7 @@ type CommunityMembershipSubscription struct {
 	EndedAt                  *time.Time                                         `gorm:"type:timestamptz" json:"endedAt,omitempty"`
 	Metadata                 *datatypes.JSON                                    `gorm:"type:jsonb" json:"metadata,omitempty"`
 	Payments                 []CommunityMembershipPayment                       `gorm:"foreignKey:SubscriptionID" json:"payments,omitempty"`
-	ScheduledChanges         []CommunityMembershipSubscriptionChange            `gorm:"foreignKey:SubscriptionID" json:"scheduledChanges,omitempty"`
+	ScheduledChanges         []CommunityMembershipSubscriptionChange            `gorm:"foreignKey:SubscriptionID;constraint:OnDelete:CASCADE;" json:"scheduledChanges,omitempty"`
 	StripeConnectAccountID   *string                                            `gorm:"type:varchar(128);index" json:"stripeConnectAccountId,omitempty"`
 	PastDueSince             *time.Time                                         `gorm:"type:timestamptz;index" json:"pastDueSince,omitempty"`
 	NextChargeAmountOverride *int64                                             `gorm:"type:bigint" json:"nextChargeAmountOverride,omitempty"`
