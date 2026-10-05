@@ -79,6 +79,10 @@ type PlanSubscription struct {
 	ListAmount   *int64         `gorm:"type:bigint" json:"listAmount,omitempty"`
 	ListCurrency *OrderCurrency `gorm:"type:varchar(8)" json:"listCurrency,omitempty"`
 
+	// ScheduledChanges are the downgrades and period changes scheduled for
+	// when the current period ends.
+	ScheduledChanges []PlanSubscriptionChange `gorm:"foreignKey:SubscriptionID" json:"scheduledChanges,omitempty"`
+
 	CreatedAt time.Time       `gorm:"autoCreateTime" json:"createdAt"`
 	UpdatedAt time.Time       `gorm:"autoUpdateTime" json:"updatedAt"`
 	DeletedAt *gorm.DeletedAt `gorm:"index" json:"-"`

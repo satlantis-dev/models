@@ -147,6 +147,7 @@ var DatabaseModels = []interface{}{
 	Plan{},
 	PlanMember{},
 	PlanSubscription{},
+	PlanSubscriptionChange{},
 	PlanPayment{},
 	// Coupon related:
 	Coupon{},
