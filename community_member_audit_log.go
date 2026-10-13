@@ -16,15 +16,18 @@ const (
 	CommunityMemberAuditActionDemotedToProspect CommunityMemberAuditAction = "demoted_to_prospect"
 	CommunityMemberAuditActionInvited           CommunityMemberAuditAction = "invited"
 	CommunityMemberAuditActionProspectCreated   CommunityMemberAuditAction = "prospect_created"
-	// CommunityMemberAuditActionPaymentRequested: an admin created a
+	// CommunityMemberAuditActionPaymentLinkCreated: an admin created a
 	// pending_payment subscription for the account and sent a payment link.
-	CommunityMemberAuditActionPaymentRequested CommunityMemberAuditAction = "payment_requested"
+	CommunityMemberAuditActionPaymentLinkCreated CommunityMemberAuditAction = "payment_link_created"
+	// CommunityMemberAuditActionPaymentLinkCancelled: an admin cancelled an
+	// unpaid payment link (see CommunityMemberAuditActionPaymentLinkCreated).
+	CommunityMemberAuditActionPaymentLinkCancelled CommunityMemberAuditAction = "payment_link_cancelled"
 )
 
 // CommunityMemberAuditLog records an admin-initiated change to a
 // CommunityMember that bypasses CommunityMembershipRequest entirely (direct
 // tier assignment, removal, ban, demotion to prospect, an invitation, or a
-// payment request) - it's the audit trail for exactly those actions, so they
+// payment link) - it's the audit trail for exactly those actions, so they
 // remain reconstructable without a request row (only a payment request has a
 // subscription row).
 type CommunityMemberAuditLog struct {
