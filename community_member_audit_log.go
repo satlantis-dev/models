@@ -16,13 +16,17 @@ const (
 	CommunityMemberAuditActionDemotedToProspect CommunityMemberAuditAction = "demoted_to_prospect"
 	CommunityMemberAuditActionInvited           CommunityMemberAuditAction = "invited"
 	CommunityMemberAuditActionProspectCreated   CommunityMemberAuditAction = "prospect_created"
+	// CommunityMemberAuditActionPaymentRequested: an admin created a
+	// pending_payment subscription for the account and sent a payment link.
+	CommunityMemberAuditActionPaymentRequested CommunityMemberAuditAction = "payment_requested"
 )
 
 // CommunityMemberAuditLog records an admin-initiated change to a
 // CommunityMember that bypasses CommunityMembershipRequest entirely (direct
-// tier assignment, removal, ban, demotion to prospect, or an invitation) -
-// it's the audit trail for exactly those actions, so they remain
-// reconstructable even though no request/subscription row exists for them.
+// tier assignment, removal, ban, demotion to prospect, an invitation, or a
+// payment request) - it's the audit trail for exactly those actions, so they
+// remain reconstructable without a request row (only a payment request has a
+// subscription row).
 type CommunityMemberAuditLog struct {
 	ID                   uint                       `gorm:"primaryKey;autoIncrement" json:"id"`
 	CommunityID          uint                       `gorm:"not null;index:idx_community_member_audit_community_account,priority:1" json:"communityId"`
