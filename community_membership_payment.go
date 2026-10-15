@@ -52,9 +52,14 @@ type CommunityMembershipPayment struct {
 	CardBrand                *string `gorm:"type:varchar(32)" json:"cardBrand,omitempty"`
 	// Offline fields
 	OfflinePaymentMethod *OfflinePaymentMethod `gorm:"type:varchar(32)" json:"offlinePaymentMethod,omitempty"`
-	ProofImageURL        *string               `gorm:"type:text" json:"proofImageUrl,omitempty"`
-	SubmitNotes          *string               `gorm:"type:varchar(500)" json:"submitNotes,omitempty"`
-	ReviewNotes          *string               `gorm:"type:varchar(500)" json:"reviewNotes,omitempty"`
+	// The day the member says they paid, to find the payment in the
+	// community's own records (e.g. a bank statement).
+	OfflinePaymentDate *time.Time `gorm:"type:date" json:"offlinePaymentDate,omitempty"`
+	ProofImageURL      *string    `gorm:"type:text" json:"proofImageUrl,omitempty"`
+	SubmitNotes        *string    `gorm:"type:varchar(500)" json:"submitNotes,omitempty"`
+	// When the member (or an admin for them) submitted the payment for review.
+	SubmittedAt *time.Time `json:"submittedAt,omitempty"`
+	ReviewNotes *string    `gorm:"type:varchar(500)" json:"reviewNotes,omitempty"`
 }
 
 func (CommunityMembershipPayment) TableName() string {
