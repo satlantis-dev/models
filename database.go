@@ -26,6 +26,7 @@ var DatabaseModels = []interface{}{
 	AccountCalendarRole{},
 	CalendarCalendarEvent{},
 	// Event related:
+	CalendarEventType{},
 	CalendarEvent{},
 	CalendarEventAnnouncement{},
 	CalendarEventDraft{},
