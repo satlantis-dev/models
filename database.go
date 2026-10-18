@@ -80,6 +80,7 @@ var DatabaseModels = []interface{}{
 	LocationDirectory{},
 	LocationGalleryImage{},
 	LocationTag{},
+	LocationLocationTag{},
 	AccountLocationRole{},
 	AccountLocationReview{},
 	GoogleType{},
@@ -176,11 +177,7 @@ func SetupDatabase(dbHost, dbUser, dbPassword, dbName string) (*gorm.DB, error) 
 		return nil, err
 	}
 
-	// Register CalendarCalendarEvent as the join model for Calendar.Events.
-	// Without this, GORM treats calendar_calendar_events as a plain many2many
-	// join table and AutoMigrate silently skips the struct's extra columns
-	// (featured, members_only, tier_ids_only).
-	if err := db.SetupJoinTable(&Calendar{}, "Events", &CalendarCalendarEvent{}); err != nil {
+	if err := SetupJoinTables(db); err != nil {
 		return nil, err
 	}
 
@@ -195,4 +192,28 @@ func SetupDatabase(dbHost, dbUser, dbPassword, dbName string) (*gorm.DB, error) 
 	sqlDB.SetMaxIdleConns(5)
 
 	return db, nil
+}
+
+// SetupJoinTables registers the join models of many2many relationships whose join table has
+// more than GORM's default (two key columns): extra columns or indexes. Without it GORM treats
+// the table as a plain join table and AutoMigrate skips the extras. Call it on any *gorm.DB that
+// isn't opened with SetupDatabase (tests, scripts) before AutoMigrate.
+func SetupJoinTables(db *gorm.DB) error {
+	joins := []struct {
+		model     interface{}
+		field     string
+		joinModel interface{}
+	}{
+		// Extra columns: featured, members_only, tier_ids_only.
+		{&Calendar{}, "Events", &CalendarCalendarEvent{}},
+		// Index on location_id.
+		{&Location{}, "LocationTags", &LocationLocationTag{}},
+		{&LocationTag{}, "Locations", &LocationLocationTag{}},
+	}
+	for _, j := range joins {
+		if err := db.SetupJoinTable(j.model, j.field, j.joinModel); err != nil {
+			return err
+		}
+	}
+	return nil
 }
