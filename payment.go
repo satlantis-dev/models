@@ -10,6 +10,7 @@ const (
 	OrderCurrencyGBP OrderCurrency = "GBP"
 	OrderCurrencyAUD OrderCurrency = "AUD"
 	OrderCurrencyNZD OrderCurrency = "NZD"
+	OrderCurrencyPYG OrderCurrency = "PYG" // Paraguayan guaraní: no minor unit, amounts are whole guaraníes
 )
 
 type PaymentMethod string
