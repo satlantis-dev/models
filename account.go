@@ -58,7 +58,9 @@ type Account struct {
 	// trigram GIN index (needs the pg_trgm extension) behind the account
 	// searches' ILIKE filters. Its WHERE must stay "is_blacklisted IS NOT TRUE",
 	// as the searches write it, or Postgres can't use the partial index.
-	Username string `gorm:"uniqueIndex;size:30;index:idx_accounts_search_fields,type:gin,expression:username gin_trgm_ops,where:is_blacklisted IS NOT TRUE,priority:1" json:"username"`
+	// idx_accounts_username_lower makes usernames unique ignoring case ("Jose" and "jose" can't
+	// both exist); the api checks the same before saving one.
+	Username string `gorm:"uniqueIndex;size:30;index:idx_accounts_search_fields,type:gin,expression:username gin_trgm_ops,where:is_blacklisted IS NOT TRUE,priority:1;uniqueIndex:idx_accounts_username_lower,expression:lower(username)" json:"username"`
 	// Level is a web-of-trust distance tier:
 	//   0 = unvetted/untrusted (default for new accounts, and the fallback when no account exists).
 	//       Nostr events from level-0 accounts are dropped by the ingestion pipeline.
