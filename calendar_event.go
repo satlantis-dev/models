@@ -53,6 +53,7 @@ type CalendarEvent struct {
 	IsHidingLocation                 bool                          `gorm:"default:false" json:"isHidingLocation"`
 	IsOnline                         bool                          `gorm:"default:false" json:"isOnline"`
 	Location                         string                        `json:"location"`
+	CountryCode                      *string                       `gorm:"type:bpchar(2)" json:"countryCode,omitempty"` // countries.code of an in-person event, also without a place; the api sets it from the place or Google place when the location changes (NULL if it can't), then data-pipelines (update_events_country) resolves the NULLs
 	LocationClarification            *string                       `json:"locationClarification,omitempty"`
 	Notes                            []CalendarEventNote           `gorm:"foreignKey:CalendarEventID;constraint:OnDelete:CASCADE;" json:"notes"`
 	OwnershipChangedAt               *time.Time                    `json:"ownershipChangedAt"`
