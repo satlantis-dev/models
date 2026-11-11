@@ -18,6 +18,18 @@ type RsvpConfirmationMessage struct {
 	Links map[string]string `json:"links,omitempty"`
 }
 
+// CalendarEventAutoFollow sets whom a guest automatically follows when they register for an event.
+type CalendarEventAutoFollow string
+
+const (
+	// CalendarEventAutoFollowNone follows nobody.
+	CalendarEventAutoFollowNone CalendarEventAutoFollow = "none"
+	// CalendarEventAutoFollowOwner follows the event owner only (default).
+	CalendarEventAutoFollowOwner CalendarEventAutoFollow = "owner"
+	// CalendarEventAutoFollowOwnerCohostsSpeakers follows the owner, the admin cohosts and the speakers.
+	CalendarEventAutoFollowOwnerCohostsSpeakers CalendarEventAutoFollow = "owner_cohosts_speakers"
+)
+
 type CalendarEvent struct {
 	ID                               uint                          `gorm:"primaryKey" json:"id"`
 	AccountID                        uint                          `gorm:"index;not null;index:idx_calendar_events_account_end,priority:1,where:deleted_at IS NULL;index:idx_calendar_events_account_start_asc,priority:1,where:deleted_at IS NULL" json:"accountId"`
@@ -79,6 +91,7 @@ type CalendarEvent struct {
 	AccountStripeConnectID           *uint                         `gorm:"index" json:"accountStripeConnectId,omitempty"`
 	AccountStripeConnect             *AccountStripeConnect         `gorm:"foreignKey:AccountStripeConnectID" json:"accountStripeConnect,omitempty"`
 	MultipleTicketsPurchaseAllowedAt *time.Time                    `json:"multipleTicketsPurchaseAllowedAt"`
+	AutoFollow                       CalendarEventAutoFollow       `gorm:"type:varchar(32);not null;default:'owner'" json:"autoFollow"`
 }
 
 type CalendarEventDTO struct {
