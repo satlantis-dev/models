@@ -53,14 +53,16 @@ func (Community) TableName() string {
 }
 
 type CommunityDTO struct {
-	ID          uint    `json:"id"`
-	AccountID   uint    `json:"accountId"`
-	Name        string  `json:"name"`
-	Bio         *string `json:"bio,omitempty"`
-	Description *string `json:"description,omitempty"`
-	Banner      *string `json:"banner,omitempty"`
-	Logo        *string `json:"logo,omitempty"`
-	MemberCount *int    `json:"memberCount"`
+	ID        uint `json:"id"`
+	AccountID uint `json:"accountId"`
+	// Account is the community owner; filled by the api, not stored.
+	Account     *AccountMiniDTO `gorm:"-" json:"account,omitempty"`
+	Name        string          `json:"name"`
+	Bio         *string         `json:"bio,omitempty"`
+	Description *string         `json:"description,omitempty"`
+	Banner      *string         `json:"banner,omitempty"`
+	Logo        *string         `json:"logo,omitempty"`
+	MemberCount *int            `json:"memberCount"`
 	// EventCount and UpcomingEventCount count the distinct events listed in the
 	// community's calendars; they are filled by the api, not stored.
 	EventCount         *int        `gorm:"-" json:"eventCount,omitempty"`
