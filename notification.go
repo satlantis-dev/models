@@ -19,6 +19,7 @@ const (
 	NotificationTypeEventRSVP                                       = "calendar_event_rsvp"
 	NotificationTypeEventUpdate                                     = "calendar_event_update"
 	NotificationTypeEventRsvpGatedRejected                          = "calendar_event_rsvp_gated_rejected"
+	NotificationTypeEventTicketPaymentUnderpaid                     = "calendar_event_ticket_payment_underpaid"
 	NotificationTypeCalendarInvitation                              = "calendar_invitation"
 	NotificationTypeCalendarInvitationAccepted                      = "calendar_invitation_accepted"
 	NotificationTypeCalendarInvitationDeclined                      = "calendar_invitation_declined"
