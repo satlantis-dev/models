@@ -166,9 +166,9 @@ type CalendarEventCalendarEventTag struct {
 
 type CalendarEventResponse struct {
 	*CalendarEventDTO
-	// LocationName is the name of the Location whose GoogleID matches the event's; filled by the
+	// VenueName is the name of the location whose GoogleID matches the event's; filled by the
 	// api in event lists, and left out when there is none or the event hides its location.
-	LocationName    *string                `json:"locationName,omitempty"`
+	VenueName       *string                `json:"venueName,omitempty"`
 	Country         map[string]interface{} `json:"country,omitempty"`
 	AttendeeCount   int                    `json:"attendeeCount"`
 	SampleAttendees *[]AccountDTO          `json:"sampleAttendees,omitempty"`
