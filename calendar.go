@@ -45,6 +45,7 @@ type CalendarDTO struct {
 	Slug               string              `json:"slug"`
 	Banner             string              `json:"banner"`
 	CreatedAt          time.Time           `json:"createdAt"`
+	UpdatedAt          time.Time           `json:"updatedAt"`
 	EventCount         int                 `json:"eventCount"`
 	UpcomingEventCount int                 `json:"upcomingEventCount"`
 	EventTags          *[]CalendarEventTag `json:"eventTags,omitempty"`
@@ -69,6 +70,7 @@ func (c *Calendar) ToDTO() CalendarDTO {
 		Slug:               c.Slug,
 		Banner:             c.Banner,
 		CreatedAt:          c.CreatedAt,
+		UpdatedAt:          c.UpdatedAt,
 		EventCount:         c.EventCount,
 		UpcomingEventCount: c.UpcomingEventCount,
 		EventTags:          c.EventTags,
