@@ -70,6 +70,7 @@ type CommunityDTO struct {
 	Calendars          *[]Calendar `json:"calendars,omitempty"`
 	WhopID             *string     `json:"whopId,omitempty"`
 	CreatedAt          time.Time   `json:"createdAt"`
+	UpdatedAt          time.Time   `json:"updatedAt"`
 }
 
 func (CommunityDTO) TableName() string {
@@ -89,6 +90,7 @@ func (c *Community) ToDTO() *CommunityDTO {
 		Calendars:   c.Calendars,
 		WhopID:      c.WhopID,
 		CreatedAt:   c.CreatedAt,
+		UpdatedAt:   c.UpdatedAt,
 	}
 }
 
