@@ -12,6 +12,7 @@ import (
 type Account struct {
 	ID                          uint                  `gorm:"primaryKey" json:"id"`
 	CreatedAt                   time.Time             `json:"-"`
+	UpdatedAt                   time.Time             `json:"-"` // set by GORM on every Save/Updates; NULL (zero) for rows untouched since the column was added
 	DeletedAt                   gorm.DeletedAt        `gorm:"index" json:"-"`
 	About                       string                `gorm:"type:text" json:"about"`
 	AccountPlaceRoles           []AccountPlaceRole    `gorm:"foreignKey:AccountID;constraint:OnDelete:CASCADE;" json:"accountPlaceRoles,omitempty" swaggerignore:"true"`
