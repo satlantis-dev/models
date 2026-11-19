@@ -21,6 +21,7 @@ type CommunityMembershipTier struct {
 	IsRecommended         bool                          `gorm:"not null;default:false" json:"isRecommended"`
 	Currency              *OrderCurrency                `gorm:"-" json:"currency,omitempty"`
 	MonthlyAmount         *int64                        `gorm:"type:bigint" json:"monthlyAmount,omitempty"`
+	QuarterlyAmount       *int64                        `gorm:"type:bigint" json:"quarterlyAmount,omitempty"`
 	YearlyAmount          *int64                        `gorm:"type:bigint" json:"yearlyAmount,omitempty"`
 	Rank                  int                           `gorm:"not null;default:0" json:"rank"`
 	TrialDays             int                           `gorm:"not null;default:0" json:"trialDays"`

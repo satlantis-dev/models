@@ -28,8 +28,9 @@ const (
 type CommunityMembershipPeriod string
 
 const (
-	CommunityMembershipPeriodMonthly CommunityMembershipPeriod = "monthly"
-	CommunityMembershipPeriodAnnual  CommunityMembershipPeriod = "annual"
+	CommunityMembershipPeriodMonthly   CommunityMembershipPeriod = "monthly"
+	CommunityMembershipPeriodQuarterly CommunityMembershipPeriod = "quarterly"
+	CommunityMembershipPeriodAnnual    CommunityMembershipPeriod = "annual"
 )
 
 type CommunityMembershipRequest struct {
