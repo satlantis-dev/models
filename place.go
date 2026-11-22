@@ -67,6 +67,7 @@ type Place struct {
 	PlaceGalleryImages *[]PlaceGalleryImage  `gorm:"foreignKey:PlaceID;constraint:OnDelete:CASCADE;" json:"placeGalleryImages,omitempty"`
 	RegionID           *uint                 `gorm:"index" json:"regionId"`
 	Region             *Region               `gorm:"foreignKey:RegionID" json:"region,omitempty"`
+	Tier               *uint                 `json:"tier"` // Destination tier (1, 2, 3...); nil when it has none
 	Timezone           string                `gorm:"type:text" json:"timezone"`
 	WeatherID          *uint                 `gorm:"index" json:"weatherId"`
 	Weather            *Weather              `gorm:"foreignKey:PlaceID;constraint:OnDelete:CASCADE;" json:"weather,omitempty"`
