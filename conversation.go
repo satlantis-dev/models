@@ -10,7 +10,10 @@ type Conversation struct {
 	ToAccountID       string     `gorm:"uniqueIndex:idx_from_account_to_account" json:"toAccountID"`
 	FromAccountReadAt *time.Time `json:"fromAccountReadAt"`
 	ToAccountReadAt   *time.Time `json:"toAccountReadAt"`
-	BlockedAt         *time.Time `json:"blockedAt"`
-	CreatedAt         time.Time  `json:"-"`
-	DeletedAt         *time.Time `json:"-"`
+	// When each side deleted (hid) the conversation; it shows again for that side once a newer
+	// message arrives.
+	FromAccountHiddenAt *time.Time `json:"fromAccountHiddenAt"`
+	ToAccountHiddenAt   *time.Time `json:"toAccountHiddenAt"`
+	CreatedAt           time.Time  `json:"-"`
+	DeletedAt           *time.Time `json:"-"`
 }
