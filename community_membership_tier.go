@@ -13,6 +13,7 @@ type CommunityMembershipTier struct {
 	Name                  string                        `gorm:"type:text;not null;uniqueIndex:idx_community_tier_name" json:"name"`
 	Blurb                 *string                       `gorm:"type:varchar(100)" json:"blurb,omitempty"`
 	Description           *string                       `gorm:"type:text" json:"description,omitempty"`
+	MemberGreeting        *string                       `gorm:"type:text" json:"memberGreeting,omitempty"` // Overrides the community's member greeting (Community.Blurb) for members of this tier
 	ButtonText            *string                       `gorm:"type:varchar(20)" json:"buttonText,omitempty"`
 	RegistrationQuestions *RegistrationQuestionsPayload `gorm:"type:jsonb;serializer:json" json:"registrationQuestions,omitempty"`
 	IsGated               bool                          `gorm:"not null;default:false" json:"isGated"`
