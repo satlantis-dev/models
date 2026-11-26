@@ -46,13 +46,16 @@ type CommunityMembershipRequest struct {
 	RequestedTierID     uint                             `gorm:"not null;index" json:"requestedTierId"`
 	RequestedTier       *CommunityMembershipTier         `gorm:"foreignKey:RequestedTierID;constraint:OnDelete:RESTRICT;" json:"requestedTier,omitempty"`
 	RegistrationAnswers *RegistrationAnswersPayload      `gorm:"type:jsonb;serializer:json" json:"registrationAnswers,omitempty"`
-	ReviewedByAccountID *uint                            `gorm:"index" json:"reviewedByAccountId,omitempty"`
-	ReviewedByAccount   *AccountDTO                      `gorm:"foreignKey:ReviewedByAccountID;constraint:OnDelete:SET NULL;" json:"reviewedByAccount,omitempty"`
-	ReviewNotes         *string                          `gorm:"type:varchar(500)" json:"reviewNotes,omitempty"`
-	ReviewedAt          *time.Time                       `gorm:"type:timestamptz" json:"reviewedAt,omitempty"`
-	CreatedAt           time.Time                        `gorm:"autoCreateTime" json:"createdAt"`
-	UpdatedAt           time.Time                        `gorm:"autoUpdateTime" json:"updatedAt"`
-	DeletedAt           *gorm.DeletedAt                  `gorm:"index" json:"-"`
+	// TermsAcceptedAt is when the requester accepted the community's terms and
+	// conditions; nil when the community had none at the time.
+	TermsAcceptedAt     *time.Time      `gorm:"type:timestamptz" json:"termsAcceptedAt,omitempty"`
+	ReviewedByAccountID *uint           `gorm:"index" json:"reviewedByAccountId,omitempty"`
+	ReviewedByAccount   *AccountDTO     `gorm:"foreignKey:ReviewedByAccountID;constraint:OnDelete:SET NULL;" json:"reviewedByAccount,omitempty"`
+	ReviewNotes         *string         `gorm:"type:varchar(500)" json:"reviewNotes,omitempty"`
+	ReviewedAt          *time.Time      `gorm:"type:timestamptz" json:"reviewedAt,omitempty"`
+	CreatedAt           time.Time       `gorm:"autoCreateTime" json:"createdAt"`
+	UpdatedAt           time.Time       `gorm:"autoUpdateTime" json:"updatedAt"`
+	DeletedAt           *gorm.DeletedAt `gorm:"index" json:"-"`
 }
 
 func (CommunityMembershipRequest) TableName() string {

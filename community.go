@@ -8,20 +8,23 @@ import (
 )
 
 type Community struct {
-	ID                     uint                          `gorm:"primaryKey;autoIncrement" json:"id"`
-	AccountID              uint                          `gorm:"index" json:"accountId"`
-	Account                *Account                      `gorm:"foreignKey:AccountID;constraint:OnDelete:CASCADE;" json:"account,omitempty"`
-	CreatedAt              time.Time                     `gorm:"autoCreateTime" json:"createdAt"`
-	UpdatedAt              time.Time                     `gorm:"autoUpdateTime" json:"-"`
-	DeletedAt              *gorm.DeletedAt               `gorm:"index" json:"-"`
-	Name                   string                        `gorm:"type:text;not null" json:"name"`
-	Bio                    *string                       `gorm:"type:text" json:"bio,omitempty"`
-	Blurb                  *string                       `gorm:"type:text" json:"blurb,omitempty"`
-	Description            *string                       `gorm:"type:text" json:"description,omitempty"`
-	Banner                 *string                       `gorm:"type:text" json:"banner,omitempty"`
-	ContactEmail           *string                       `gorm:"type:text" json:"contactEmail"`
-	Logo                   *string                       `gorm:"type:text" json:"logo,omitempty"`
-	Notice                 *string                       `gorm:"type:text" json:"notice,omitempty"`
+	ID           uint            `gorm:"primaryKey;autoIncrement" json:"id"`
+	AccountID    uint            `gorm:"index" json:"accountId"`
+	Account      *Account        `gorm:"foreignKey:AccountID;constraint:OnDelete:CASCADE;" json:"account,omitempty"`
+	CreatedAt    time.Time       `gorm:"autoCreateTime" json:"createdAt"`
+	UpdatedAt    time.Time       `gorm:"autoUpdateTime" json:"-"`
+	DeletedAt    *gorm.DeletedAt `gorm:"index" json:"-"`
+	Name         string          `gorm:"type:text;not null" json:"name"`
+	Bio          *string         `gorm:"type:text" json:"bio,omitempty"`
+	Blurb        *string         `gorm:"type:text" json:"blurb,omitempty"`
+	Description  *string         `gorm:"type:text" json:"description,omitempty"`
+	Banner       *string         `gorm:"type:text" json:"banner,omitempty"`
+	ContactEmail *string         `gorm:"type:text" json:"contactEmail"`
+	Logo         *string         `gorm:"type:text" json:"logo,omitempty"`
+	Notice       *string         `gorm:"type:text" json:"notice,omitempty"`
+	// TermsAndConditions is the community's terms and conditions text. When set,
+	// a membership request must accept them (CommunityMembershipRequest.TermsAcceptedAt).
+	TermsAndConditions     *string                       `gorm:"type:text" json:"termsAndConditions,omitempty"`
 	Newsletters            *[]CommunityNewsletter        `gorm:"foreignKey:CommunityID;constraint:OnDelete:CASCADE;" json:"newsletters,omitempty"`
 	Admins                 *[]AccountMiniDTO             `gorm:"-" json:"admins,omitempty"`
 	Members                *[]CommunityMember            `gorm:"foreignKey:CommunityID;constraint:OnDelete:CASCADE;" json:"members,omitempty"`
