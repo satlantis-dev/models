@@ -53,8 +53,12 @@ type Account struct {
 	Relays                      []Relay               `gorm:"foreignKey:AccountID" json:"relays"`
 	ResetPasswordToken          *string               `gorm:"type:text" json:"-"`
 	ResetPasswordTokenExpiresAt *time.Time            `json:"-"`
-	Website                     string                `gorm:"type:text" json:"website"`
-	SocialLinks                 datatypes.JSON        `gorm:"type:jsonb" json:"socialLinks"`
+	// TokensValidAfter revokes the account's session JWTs: the api refuses any
+	// token issued (iat) before it. NULL means no revocation. Set by "log out
+	// everywhere" and by a password reset.
+	TokensValidAfter *time.Time     `gorm:"default:NULL" json:"-"`
+	Website          string         `gorm:"type:text" json:"website"`
+	SocialLinks      datatypes.JSON `gorm:"type:jsonb" json:"socialLinks"`
 	// Username, DisplayName, Name and Nip05 share idx_accounts_search_fields, a
 	// trigram GIN index (needs the pg_trgm extension) behind the account
 	// searches' ILIKE filters. Its WHERE must stay "is_blacklisted IS NOT TRUE",
