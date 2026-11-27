@@ -15,6 +15,7 @@ type CommunityMembershipTier struct {
 	Description           *string                       `gorm:"type:text" json:"description,omitempty"`
 	MemberGreeting        *string                       `gorm:"type:text" json:"memberGreeting,omitempty"` // Overrides the community's member greeting (Community.Blurb) for members of this tier
 	ButtonText            *string                       `gorm:"type:varchar(20)" json:"buttonText,omitempty"`
+	ChatLinks             map[string]string             `gorm:"type:jsonb;serializer:json" json:"chatLinks,omitempty"` // Overrides the community's chat links (Community.ChatLinks) for members of this tier when not empty
 	RegistrationQuestions *RegistrationQuestionsPayload `gorm:"type:jsonb;serializer:json" json:"registrationQuestions,omitempty"`
 	IsGated               bool                          `gorm:"not null;default:false" json:"isGated"`
 	IsHidden              bool                          `gorm:"not null;default:false" json:"isHidden"`
