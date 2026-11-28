@@ -30,6 +30,9 @@ type CalendarEventTicketType struct {
 	IsHidden          bool           `gorm:"default:false" json:"isHidden"`
 	PayWhatYouWant    bool           `gorm:"default:false" json:"payWhatYouWant"`
 	Rank              uint           `gorm:"not null;default:0" json:"rank"`
+	// RsvpConfirmationMessage, when set, replaces the event's RsvpConfirmationMessage for
+	// guests who register with this ticket type.
+	RsvpConfirmationMessage *RsvpConfirmationMessage `gorm:"type:jsonb;serializer:json" json:"rsvpConfirmationMessage,omitempty"`
 }
 
 type CalendarEventTicketTypePromotion struct {
