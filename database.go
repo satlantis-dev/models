@@ -151,6 +151,10 @@ var DatabaseModels = []interface{}{
 	PlanSubscription{},
 	PlanSubscriptionChange{},
 	PlanPayment{},
+	// OAuth (MCP clients):
+	OAuthClient{},
+	OAuthGrant{},
+	OAuthToken{},
 	// Coupon related:
 	Coupon{},
 	CouponRedemption{},
