@@ -34,7 +34,7 @@ type OAuthGrant struct {
 	UpdatedAt     time.Time    `json:"-"`
 	AccountID     uint         `gorm:"not null;index" json:"accountId"`
 	Account       *AccountDTO  `gorm:"foreignKey:AccountID;constraint:OnDelete:CASCADE;" json:"-"`
-	OAuthClientID uint         `gorm:"not null;index" json:"oauthClientId"`
+	OAuthClientID uint         `gorm:"column:oauth_client_id;not null;index" json:"oauthClientId"`
 	OAuthClient   *OAuthClient `gorm:"foreignKey:OAuthClientID;constraint:OnDelete:CASCADE;" json:"client,omitempty"`
 	// Scopes is space-separated, as in OAuth (e.g. "events:read").
 	Scopes string `gorm:"type:varchar(255);not null;default:''" json:"scopes"`
@@ -61,7 +61,7 @@ const (
 type OAuthToken struct {
 	ID           uint           `gorm:"primaryKey" json:"id"`
 	CreatedAt    time.Time      `json:"createdAt"`
-	OAuthGrantID uint           `gorm:"not null;index" json:"oauthGrantId"`
+	OAuthGrantID uint           `gorm:"column:oauth_grant_id;not null;index" json:"oauthGrantId"`
 	OAuthGrant   *OAuthGrant    `gorm:"foreignKey:OAuthGrantID;constraint:OnDelete:CASCADE;" json:"-"`
 	Kind         OAuthTokenKind `gorm:"type:varchar(32);not null" json:"kind"`
 	TokenHash    string         `gorm:"type:varchar(64);not null;uniqueIndex" json:"-"`
